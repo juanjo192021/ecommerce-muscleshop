@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>Ecomus - Ultimate HTML</title>
+
+  <meta name="author" content="themesflat.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- font -->
+  <link rel="stylesheet" th:href="@{/assets/fonts/fonts.css}">
+  <!-- Icons -->
+  <link rel="stylesheet" th:href="@{/assets/fonts/font-icons.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/swiper-bundle.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/animate.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}"/>
+
+  <!-- Favicon and Touch Icons  -->
+  <link rel="shortcut icon" th:href="@{/images/logo/favicon.png}">
+  <link rel="apple-touch-icon-precomposed" th:href="@{/images/logo/favicon.png}">
+  <script src="https://kit.fontawesome.com/98270ba09b.js" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body class="preload-wrapper">
+  <!-- preload -->
+  <div class="preload preload-container">
+    <div class="preload-logo">
+      <div class="spinner"></div>
+    </div>
+  </div>
+  <!-- /preload -->
+  <div id="wrapper">
+    <!-- Top bar -->
+    <div th:replace="~{shared/components/top-bar :: top-bar}"></div>
+    <!-- /Top bar -->
+    <!-- Header -->
+    <div th:replace="~{shared/components/header :: header}"></div>
+    <!-- /Header -->
+    <!-- page-title -->
+    <div class="tf-page-title style-2">
+      <div class="container-full">
+        <div class="heading text-center">Brands v2</div>
+      </div>
+    </div>
+    <!-- /page-title -->
+    <!-- filter -->
+    <section class="flat-spacing-1">
+      <div class="container">
+        <div class="tf-brands-filter">
+          <button class="tf-btns-filter tf-tab-link tf-tab-link_all is--active" id="all">
+            <span>Show all</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_123">
+            <span>123</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_a">
+            <span>A</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_b">
+            <span>B</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_c">
+            <span>C</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link is-disable" id="tf_filter_d">
+            <span>D</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_e">
+            <span>E</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_f">
+            <span>F</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link is-disable" id="tf_filter_g">
+            <span>G</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_h">
+            <span>H</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_i">
+            <span>I</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_j">
+            <span>J</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link is-disable" id="tf_filter_k">
+            <span>K</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_l">
+            <span>L</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_n">
+            <span>N</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_o">
+            <span>O</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_p">
+            <span>P</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link is-disable" id="tf_filter_q">
+            <span>Q</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_r">
+            <span>R</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_s">
+            <span>S</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_t">
+            <span>T</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link is-disable" id="tf_filter_u">
+            <span>U</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_v">
+            <span>V</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link is-disable" id="tf_filter_w">
+            <span>W</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link is-disable" id="tf_filter_x">
+            <span>X</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link is-disable" id="tf_filter_y">
+            <span>Y</span>
+          </button>
+          <button class="tf-btns-filter tf-tab-link" id="tf_filter_z">
+            <span>Z</span>
+          </button>
+        </div>
+        <div id="parent" class="tf-brands-source-linklist style-row">
+          <div class="tf_filter_123 tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">123</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/7-chanel.png" alt="">
+                  </a>
+                  <a href="shop-default.html" target="_blank">7 Chanel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_a tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">A</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/asos.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Asos</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/armani.png" alt="">
+                  </a>
+                  <a href="#">Armani</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/asics.png" alt="">
+                  </a>
+                  <a href="#">Asics</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_b tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">B</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/burberry.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Burberry</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/bogner.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Bogner</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_c tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">C</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/christian-dior.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Christian Dior</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/chopard-1-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Chopard</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/cartier-2-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Catier</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/calvin-klein-1-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Calvin Klein</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_d tf-filter-item tf-tab-content is-disable">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">D</h4>
+              </div>
+              <div class="tf-content-brands"></div>
+            </div>
+          </div>
+          <div class="tf_filter_e tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">E</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/escada-beaute-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Escada Beaute</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_f tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">F</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/furla-logo-png.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Furla</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/fendi-logo.png" alt="">
+                  </a>
+                  <a href="#">Fendi</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/foot-locker-1.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Foot Locker</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_g tf-filter-item tf-tab-content is-disable">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">G</h4>
+              </div>
+              <div class="tf-content-brands"></div>
+            </div>
+          </div>
+          <div class="tf_filter_h tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">H</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/hugo-boss-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Hugo Boss</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/hermes-logo.png" alt="">
+                  </a>
+                  <a href="#">Hermes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_i tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">I</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/iwc-schaffhausen-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Iwc Schaffhausen</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_j tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">J</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/jaeger-le-coultre-logo-png.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Jaeger Le Coultre</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/just-cavalli-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Just Cavalli</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_k tf-filter-item tf-tab-content is-disable">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">K</h4>
+              </div>
+              <div class="tf-content-brands"></div>
+            </div>
+          </div>
+          <div class="tf_filter_l tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">L</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/longines-1-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Longines</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_n tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">N</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/nine-west-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Nice West</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_o tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">O</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/old-navy-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Old Navy</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/oakley-1-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Oakley</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_p tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">P</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/prada-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Parda</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/patek-philippe.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Patek philippe</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/patagonia-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Patagonia</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_q tf-filter-item tf-tab-content is-disable">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">Q</h4>
+              </div>
+              <div class="tf-content-brands"></div>
+            </div>
+          </div>
+          <div class="tf_filter_r tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">R</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/ray-ban-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Ray Ban</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/roberto-cavalli-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Roberto Cavalli</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_s tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">S</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/steve-madden-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Steve Madden</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_t tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">T</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/topshop-1-logo-png.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Topshop</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/the-north-face-1-logo.png" alt="">
+                  </a>
+                  <a href="shop-default.html">The North Face</a>
+                </div>
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/ted-baker-logo-png.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Ted Baker</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_u tf-filter-item tf-tab-content is-disable">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">U</h4>
+              </div>
+              <div class="tf-content-brands"></div>
+            </div>
+          </div>
+          <div class="tf_filter_v tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">V</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/valentino-logo-png.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Valentino</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tf_filter_w tf-filter-item tf-tab-content is-disable">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">W</h4>
+              </div>
+              <div class="tf-content-brands"></div>
+            </div>
+          </div>
+          <div class="tf_filter_x tf-filter-item tf-tab-content is-disable">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">X</h4>
+              </div>
+              <div class="tf-content-brands"></div>
+            </div>
+          </div>
+          <div class="tf_filter_y tf-filter-item tf-tab-content is-disable">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">Y</h4>
+              </div>
+              <div class="tf-content-brands"></div>
+            </div>
+          </div>
+          <div class="tf_filter_z tf-filter-item tf-tab-content">
+            <div class="tf-filter-item-inner">
+              <div class="tf-titles-filter">
+                <h4 class="tf-font-normal">Z</h4>
+              </div>
+              <div class="tf-content-brands">
+                <div class="tf-item-inner">
+                  <a href="shop-default.html">
+                    <img src="https://themesflat.co/html/ecomus/images/brand/zara-1-logo-png.png" alt="">
+                  </a>
+                  <a href="shop-default.html">Zara</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /filter -->
+    <!-- Footer -->
+    <div th:replace="~{shared/components/footer :: footer}"></div>
+    <!-- /Footer -->
+  </div>
+
+  <!-- gotop: Componente que hace dirigirte a lo más alto de la página web-->
+  <div th:replace="~{shared/components/gotop :: gotop}"></div>
+  <!-- /gotop -->
+
+  <!-- toolbar-bottom: Componente inferior cuando es mobile similar a un toolbar-->
+  <div th:replace="~{shared/components/toolbar-bottom :: toolbar-bottom}"></div>
+  <!-- /toolbar-bottom -->
+
+  <!-- all-modals: Todos los modales -->
+  <div th:replace="~{shared/modals/all-modals :: all-modals}"></div>
+  <!-- /all-modals -->
+
+  <!-- Javascript -->
+  <script type="text/javascript" th:src="@{/assets/js/bootstrap.min.js}"></script>
+  <script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/assets/js/swiper-bundle.min.js}"></script>
+  <script type="text/javascript" th:src="@{/assets/js/carousel.js}"></script>
+  <script type="text/javascript" th:src="@{/assets/js/bootstrap-select.min.js}"></script>
+  <script type="text/javascript" th:src="@{/assets/js/lazysize.min.js}"></script>
+  <script type="text/javascript" th:src="@{/assets/js/count-down.js}"></script>
+  <script type="text/javascript" th:src="@{/assets/js/wow.min.js}"></script>
+  <script type="text/javascript" th:src="@{/assets/js/multiple-modal.js}"></script>
+  <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+</body>
+
+</html>

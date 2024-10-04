@@ -1,0 +1,124 @@
+<div th:fragment="userLogin">
+    <div class="modal modalCentered fade form-sign-in modal-part-content" id="login">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="header">
+                    <div class="demo-title">Inicio de sesión</div>
+                    <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
+                </div>
+                <div class="tf-login-form">
+                    <form class=""
+                          accept-charset="utf-8"
+                          th:action="@{/login}"
+                          th:object="${usuario}"
+                          method="POST">
+                        <div class="tf-field style-1">
+                            <input class="tf-field-input tf-input" placeholder=" " type="email"  id="username" name="username" required>
+                            <label class="tf-field-label" for="username">Correo *</label>
+                        </div>
+                        <div class="tf-field style-1">
+                            <input class="tf-field-input tf-input" placeholder=" " type="password"  id="password" name="password" required >
+                            <label class="tf-field-label" for="password">Contraseña *</label>
+                        </div>
+                        <div class="d-flex column-gap-5">
+                            <a href="#forgotPassword" data-bs-toggle="modal" class="btn-link link">¿Olvidaste tu contraseña?</a>
+                            <div>
+                                <a href="#forgotPassword" data-bs-toggle="modal" class="btn-link link pe-2">
+                                    <img th:src="@{/images/logo/google.svg}" style="width:25px;">
+                                </a>
+                                <a href="#forgotPassword" data-bs-toggle="modal" class="btn-link link">
+                                    <img th:src="@{/images/logo/facebook.svg}" style="width:25px;">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="w-100">
+                                <button type="submit" class="tf-btn btn-fill animate-hover-btn radius-3 w-100 justify-content-center">
+                                    <span>Iniciar Sesión</span>
+                                </button>
+                            </div>
+                            <div class="w-100">
+                                <a href="#register" data-bs-toggle="modal" class="btn-link fw-6 w-100 link">
+                                    ¿Eres nuevo?. Crea tu cuenta aquí
+                                    <i class="icon icon-arrow1-top-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modalCentered fade form-sign-in modal-part-content" id="forgotPassword">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="header">
+                    <div class="demo-title">Recuperar Contraseña</div>
+                    <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
+                </div>
+                <div class="tf-login-form">
+                    <form class="">
+                        <div>
+                            <p>Te enviaremos un link para recuperar tu contraseña.</p>
+                        </div>
+                        <div class="tf-field style-1">
+                            <input class="tf-field-input tf-input" placeholder=" " type="email"  name="">
+                            <label class="tf-field-label" for="">Correo *</label>
+                        </div>
+                        <div>
+                            <a href="#login" data-bs-toggle="modal" class="btn-link link">Cancelar</a>
+                        </div>
+                        <div class="bottom">
+                            <div class="w-100">
+                                <button type="submit" class="tf-btn btn-fill animate-hover-btn radius-3 w-100 justify-content-center"><span>Recuperar Contraseña</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modalCentered fade form-sign-in modal-part-content" id="register">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="header">
+                    <div class="demo-title">Regístrate</div>
+                    <span class="icon-close icon-close-popup" data-bs-dismiss="modal"></span>
+                </div>
+                <div class="tf-login-form">
+                    <form class="">
+                        <div class="tf-field style-1">
+                            <input class="tf-field-input tf-input" placeholder=" " type="text"  name="">
+                            <label class="tf-field-label" for="">Nombres</label>
+                        </div>
+                        <div class="tf-field style-1">
+                            <input class="tf-field-input tf-input" placeholder=" " type="text"  name="">
+                            <label class="tf-field-label" for="">Apellidos</label>
+                        </div>
+                        <div class="tf-field style-1">
+                            <input class="tf-field-input tf-input" placeholder=" " type="email"  name="">
+                            <label class="tf-field-label" for="">Correo *</label>
+                        </div>
+                        <div class="tf-field style-1">
+                            <input class="tf-field-input tf-input" placeholder=" " type="password"  name="">
+                            <label class="tf-field-label" for="">Contraseña *</label>
+                        </div>
+                        <div class="bottom">
+                            <div class="w-100">
+                                <a href="register.html" class="tf-btn btn-fill animate-hover-btn radius-3 w-100 justify-content-center">
+                                    <span>Registrarse</span>
+                                </a>
+                            </div>
+                            <div class="w-100">
+                                <a href="#login" data-bs-toggle="modal" class="btn-link fw-6 w-100 link">
+                                    ¿Ya tienes una cuenta?. Ingresa aquí
+                                    <i class="icon icon-arrow1-top-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

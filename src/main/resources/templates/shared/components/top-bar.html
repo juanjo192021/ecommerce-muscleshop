@@ -1,0 +1,67 @@
+<div class="tf-top-bar bg_white line"
+	 th:fragment="top-bar">
+	<div class="px_15 lg-px_40">
+		<div class="tf-top-bar_wrap grid-3 gap-30 align-items-center">
+			<ul class="tf-top-bar_item tf-social-icon d-flex gap-10">
+				<li>
+					<a href="https://www.facebook.com/" class="box-icon w_28 round social-facebook bg_line">
+						<i class="icon fs-12 icon-fb"></i>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.instagram.com/" class="box-icon w_28 round social-instagram bg_line">
+						<i class="icon fs-12 icon-instagram"></i>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.tiktok.com/" class="box-icon w_28 round social-tiktok bg_line">
+						<i class="icon fs-12 icon-tiktok"></i>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.youtube.com/" class="box-icon w_28 round social-youtube bg_line">
+						<i class="icon fs-12 icon-youtube"></i>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.whatsapp.com/" class="box-icon w_28 round social-whatsapp bg_line">
+						<i class="icon fs-12 icon-whatsapp"></i>
+					</a>
+				</li>
+			</ul>
+			<div class="text-center overflow-hidden">
+				<div class="swiper tf-sw-top_bar" data-preview="1" data-space="0" data-loop="true" data-speed="1000" data-delay="2000">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"
+							 style="cursor: pointer;"
+							 th:each="header:${headers}">
+							<p class="top-bar-text fw-5" th:text="${header.nombre}"></p>
+							<!--<p class="top-bar-text fw-5">Spring Fashion Sale
+								<a href="shop-default.html" title="all collection" class="tf-btn btn-line">
+									Shop now<i class="icon icon-arrow1-top-left"></i>
+								</a>
+							</p>-->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="top-bar-language tf-cur justify-content-end">
+
+
+				<div class="tf-currencies">
+					<select class="image-select center style-default type-currencies">
+						<option th:data-thumbnail="@{/images/country/Peru.svg}">PEN <span>S/ | Perú</span></option>
+					</select>
+				</div>
+				<div class="tf-languages">
+					<select class="image-select center style-default type-languages">
+						<option>Español</option>
+						<option>English</option>
+						<option>French</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

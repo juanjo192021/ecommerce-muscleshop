@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ecomus - Ultimate HTML</title>
+
+    <meta name="author" content="themesflat.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- font -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/fonts.css}">
+    <!-- Icons -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/font-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/swiper-bundle.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}"/>
+
+    <!-- Favicon and Touch Icons  -->
+    <link rel="shortcut icon" th:href="@{/images/logo/favicon.png}">
+    <link rel="apple-touch-icon-precomposed" th:href="@{/images/logo/favicon.png}">
+    <script src="https://kit.fontawesome.com/98270ba09b.js" crossorigin="anonymous"></script>
+</head>
+<body class="preload-wrapper">
+<!-- preload -->
+<div class="preload preload-container">
+    <div class="preload-logo">
+        <div class="spinner"></div>
+    </div>
+</div>
+<!-- /preload -->
+<div id="wrapper">
+    <!-- Top bar -->
+    <div th:replace="~{shared/components/top-bar :: top-bar}"></div>
+    <!-- /Top bar -->
+    <!-- Header -->
+    <div th:replace="~{shared/components/header :: header}"></div>
+    <!-- /Header -->
+
+    <!-- page-title -->
+    <div class="tf-page-title">
+        <div class="container-full">
+            <div class="heading text-center">Check Out</div>
+        </div>
+    </div>
+    <!-- /page-title -->
+
+    <!-- page-cart -->
+    <section class="flat-spacing-11">
+        <div class="container">
+            <div class="tf-page-cart-wrap layout-2">
+                <div class="tf-page-cart-item">
+                    <div class="row m-0 p-0 row-gap-5">
+                        <div class="rounded border border-black border-opacity-25 py-3">
+                            <div class="row mx-0 p-0 mb_20">
+                                <div class="col-1 rounded-circle bg-danger p-0" style="width: 40px;">
+                                    <h5 class="fw-5 text-center text-white">1</h5>
+                                </div>
+                                <div class="col-11">
+                                    <h5 class="fw-5">Identificación</h5>
+                                </div>
+                            </div>
+                            <form class="form-checkout">
+                                <div class="box grid-2">
+                                    <fieldset class="fieldset">
+                                        <label for="first-name">Nombres</label>
+                                        <input type="text" id="first-name" placeholder="Ingrese sus Nombres">
+                                    </fieldset>
+                                    <fieldset class="fieldset">
+                                        <label for="last-name">Apellidos</label>
+                                        <input type="text" id="last-name" placeholder="Ingrese sus Apellidos">
+                                    </fieldset>
+                                </div>
+                                <div class="box grid-2">
+                                    <fieldset class="fieldset">
+                                        <label for="first-name">Correo Electrónico</label>
+                                        <input type="email" id="first-name" placeholder="Ingrese su Correo Electrónico">
+                                    </fieldset>
+                                    <fieldset class="box fieldset">
+                                        <label for="phone">Celular</label>
+                                        <input type="tel" id="phone">
+                                    </fieldset>
+                                </div>
+                                <div class="box grid-2">
+                                    <fieldset class="box fieldset mb-0">
+                                        <label for="country">Tipo de Documento</label>
+                                        <div class="select-custom">
+                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
+                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
+                                                <option value="DNI"
+                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
+                                                    DNI
+                                                </option>
+                                                <option value="RUC" data-provinces="[]">RUC</option>
+                                                <option value="CE" data-provinces="[]">CE</option>
+                                                <option value="Canada" data-provinces="[['Alberta','Alberta'],['British Columbia','British Columbia'],['Manitoba','Manitoba'],['New Brunswick','New Brunswick'],['Newfoundland and Labrador','Newfoundland and Labrador'],['Northwest Territories','Northwest Territories'],['Nova Scotia','Nova Scotia'],['Nunavut','Nunavut'],['Ontario','Ontario'],['Prince Edward Island','Prince Edward Island'],['Quebec','Quebec'],['Saskatchewan','Saskatchewan'],['Yukon','Yukon']]">Canada</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="fieldset">
+                                        <label for="first-name">Número de Documento</label>
+                                        <input type="text" id="first-name" placeholder="Ingrese su Número de Documento">
+                                    </fieldset>
+                                </div>
+                                <div class="box grid-2">
+                                    <fieldset class="fieldset">
+                                        <label for="first-name">Fecha de Nacimiento</label>
+                                        <input type="date" id="first-name">
+                                    </fieldset>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="rounded border border-black border-opacity-25 py-3">
+                            <div class="row mx-0 p-0 mb_20">
+                                <div class="col-1 rounded-circle bg-danger p-0" style="width: 40px;">
+                                    <h5 class="fw-5 text-center text-white">2</h5>
+                                </div>
+                                <div class="col-11">
+                                    <h5 class="fw-5">Seleccionar Comprobante de Pago</h5>
+                                </div>
+                            </div>
+                            <form class="form-checkout">
+                                <div class="box grid-2">
+                                    <fieldset class="box fieldset mb-0">
+                                        <label for="country">Comprobante de Pago</label>
+                                        <div class="select-custom">
+                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
+                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
+                                                <option value="Boleta"
+                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
+                                                    Boleta
+                                                </option>
+                                                <option value="Factura" data-provinces="[]">Factura</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="fieldset">
+                                        <label for="first-name">Razón Social</label>
+                                        <input type="text" id="first-name" placeholder="Ingrese su Razón Social">
+                                    </fieldset>
+                                </div>
+                                <div class="box grid-2">
+                                    <fieldset class="fieldset">
+                                        <label for="first-name">RUC</label>
+                                        <input type="text" id="first-name" placeholder="Ingrese su RUC">
+                                    </fieldset>
+                                    <fieldset class="fieldset">
+                                        <label for="last-name">Dirección de Facturación</label>
+                                        <input type="text" id="last-name" placeholder="Ingrese su Dirección de Facturación">
+                                    </fieldset>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="rounded border border-black border-opacity-25 py-3">
+                            <div class="row mx-0 p-0 mb_20">
+                                <div class="col-1 rounded-circle bg-danger p-0" style="width: 40px;">
+                                    <h5 class="fw-5 text-center text-white">3</h5>
+                                </div>
+                                <div class="col-11">
+                                    <h5 class="fw-5">Envío</h5>
+                                </div>
+                            </div>
+                            <form class="form-checkout">
+
+                                <div class="box grid-2">
+                                    <fieldset class="fieldset">
+                                        <label for="first-name">Dirección</label>
+                                        <input type="text" id="first-name" placeholder="Ingrese su Dirección">
+                                    </fieldset>
+                                    <fieldset class="fieldset">
+                                        <label for="first-name">Número</label>
+                                        <input type="text" id="first-name" placeholder="Dpto. / Interior / Piso / Lote / Bloque (opcional)">
+                                    </fieldset>
+                                </div>
+                                <div class="box grid-2">
+                                    <fieldset class="fieldset">
+                                        <label for="first-name">Referencia</label>
+                                        <input type="text" id="first-name" placeholder="Ingrese su Referencia">
+                                    </fieldset>
+                                    <fieldset class="box fieldset mb-0">
+                                        <label for="country">Departamento</label>
+                                        <div class="select-custom">
+                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
+                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
+                                                <option value="Boleta"
+                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
+                                                    Boleta
+                                                </option>
+                                                <option value="Factura" data-provinces="[]">Factura</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="box grid-2">
+                                    <fieldset class="box fieldset mb-0">
+                                        <label for="country">Provincia</label>
+                                        <div class="select-custom">
+                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
+                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
+                                                <option value="Boleta"
+                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
+                                                    Boleta
+                                                </option>
+                                                <option value="Factura" data-provinces="[]">Factura</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="box fieldset mb-0">
+                                        <label for="country">Distrito</label>
+                                        <div class="select-custom">
+                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
+                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
+                                                <option value="Boleta"
+                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
+                                                    Boleta
+                                                </option>
+                                                <option value="Factura" data-provinces="[]">Factura</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="box">
+                                    <!--<div class="btn-group w-100 pb-3">
+                                        <a href="#" class="btn btn-danger active" aria-current="page">Enviar a la dirección</a>
+                                        <a href="#" class="btn btn-white text-secondary border border-black border-opacity-25">Recoger en la tienda</a>
+                                    </div>-->
+                                    <p class="pb-4">SI TU DIRECCIÓN ES DIFICIL, POR FAVOR AYÚDANOS MARCANDO EN EL MAPA</p>
+                                    <div class="bo">
+                                        <!-- map -->
+                                        <div class="w-100">
+                                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d317859.6089702069!2d-0.075949!3d51.508112!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760349331f38dd%3A0xa8bf49dde1d56467!2sTower%20of%20London!5e0!3m2!1sen!2sus!4v1719221598456!5m2!1sen!2sus"
+                                                    width="100%"
+                                                    height="250"
+                                                    style="border:0;"
+                                                    allowfullscreen=""
+                                                    loading="lazy"
+                                                    referrerpolicy="no-referrer-when-downgrade">
+                                            </iframe>
+                                        </div>
+                                        <!-- /map -->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="rounded border border-black border-opacity-25 py-3">
+                            <div class="row mx-0 p-0 mb_20">
+                                <div class="col-1 rounded-circle bg-danger p-0" style="width: 40px;">
+                                    <h5 class="fw-5 text-center text-white">4</h5>
+                                </div>
+                                <div class="col-11">
+                                    <h5 class="fw-5">Pago</h5>
+                                </div>
+                            </div>
+                            <form class="form-checkout">
+                                <fieldset class="box fieldset">
+                                    <label for="city" class="d-none visually-hidden">Town/City</label>
+                                    <input type="text" id="city" placeholder="Utiliza un cupón de regalo">
+                                </fieldset>
+                                <div class="box">
+                                    <div class="btn-group w-100 pb-3">
+                                       <a href="#" class="btn btn-danger active" aria-current="page">Tarjeta de Crédito</a>
+                                       <a href="#" class="btn btn-white text-secondary border border-black border-opacity-25">Tarjeta de Débito</a>
+                                       <a href="#" class="btn btn-white text-secondary border border-black border-opacity-25">Yape / Plin</a>
+                                   </div>
+                                    <div class="footer-bottom-wrap d-flex gap-20 flex-wrap justify-content-end align-items-center">
+                                        <div class="tf-payment">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/visa.png" alt="">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/img-1.png" alt="">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/img-2.png" alt="">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/img-3.png" alt="">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/img-4.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <fieldset class="box fieldset">
+                                    <label for="city">Número</label>
+                                    <input type="text" id="city">
+                                </fieldset>
+                                <div class="box grid-2">
+                                    <fieldset class="box fieldset mb-0">
+                                        <label for="country">Cuotas Disponibles</label>
+                                        <div class="select-custom">
+                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
+                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
+                                                <option value="1"
+                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
+                                                    01
+                                                </option>
+                                                <option value="2" data-provinces="[]">02</option>
+                                                <option value="3" data-provinces="[]">03</option>
+                                                <option value="4" data-provinces="[]">04</option>
+                                                <option value="5" data-provinces="[]">05</option>
+                                                <option value="6" data-provinces="[]">06</option>
+                                                <option value="7" data-provinces="[]">07</option>
+                                                <option value="8" data-provinces="[]">08</option>
+                                                <option value="9" data-provinces="[]">09</option>
+                                                <option value="10" data-provinces="[]">10</option>
+                                                <option value="11" data-provinces="[]">11</option>
+                                                <option value="12" data-provinces="[]">12</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <fieldset class="box fieldset">
+                                    <label for="city">Nombres y Apellidos como figura en la tarjeta</label>
+                                    <input type="text" id="city">
+                                </fieldset>
+                                <div class="box grid-2">
+                                    <fieldset class="box fieldset mb-0">
+                                        <label for="country">Fecha de Vencimiento</label>
+                                        <div class="d-flex align-items-center column-gap-3">
+                                            <div class="select-custom" style="width: min-content;">
+                                                <select class="tf-select" id="country" name="address[country]" data-default="">
+                                                    <option value="---" data-provinces="[]" disabled selected>MM</option>
+                                                    <option value="1"
+                                                            data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
+                                                        01
+                                                    </option>
+                                                    <option value="2" data-provinces="[]">02</option>
+                                                    <option value="3" data-provinces="[]">03</option>
+                                                    <option value="4" data-provinces="[]">04</option>
+                                                    <option value="5" data-provinces="[]">05</option>
+                                                    <option value="6" data-provinces="[]">06</option>
+                                                    <option value="7" data-provinces="[]">07</option>
+                                                    <option value="8" data-provinces="[]">08</option>
+                                                    <option value="9" data-provinces="[]">09</option>
+                                                    <option value="10" data-provinces="[]">10</option>
+                                                    <option value="11" data-provinces="[]">11</option>
+                                                    <option value="12" data-provinces="[]">12</option>
+                                                </select>
+                                            </div>
+                                            <div>/</div>
+                                            <div class="select-custom" style="width: min-content;">
+                                                <select class="tf-select" id="country" name="address[country]" data-default="">
+                                                    <option value="---" data-provinces="[]" disabled selected>AA</option>
+                                                    <option value="1"
+                                                            data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
+                                                        01
+                                                    </option>
+                                                    <option value="2" data-provinces="[]">02</option>
+                                                    <option value="3" data-provinces="[]">03</option>
+                                                    <option value="4" data-provinces="[]">04</option>
+                                                    <option value="5" data-provinces="[]">05</option>
+                                                    <option value="6" data-provinces="[]">06</option>
+                                                    <option value="7" data-provinces="[]">07</option>
+                                                    <option value="8" data-provinces="[]">08</option>
+                                                    <option value="9" data-provinces="[]">09</option>
+                                                    <option value="10" data-provinces="[]">10</option>
+                                                    <option value="11" data-provinces="[]">11</option>
+                                                    <option value="12" data-provinces="[]">12</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="box fieldset mb-0">
+                                        <label for="country">Codigo de Seguridad</label>
+                                        <input type="text" id="city">
+                                    </fieldset>
+                                </div>
+                                <!--<div class="box widget-wrap-checkout">
+                                    <div class="wd-check-payment">
+                                        <div class="fieldset-radio mb_20">
+                                            <input type="radio" name="payment" id="bank" class="tf-check">
+                                            <label for="bank" class="mb-0">
+                                                La dirección de la factura de la tarjeta es
+                                                <strong>Jorge Chavez 631</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="tf-page-cart-footer">
+                    <div class="tf-cart-footer-inner">
+                        <h5 class="fw-5 mb_20">Your order</h5>
+                        <form class="tf-page-cart-checkout widget-wrap-checkout">
+                            <ul class="wrap-checkout-product">
+                                <li class="checkout-product-item">
+                                    <figure class="img-product">
+                                        <img src="https://themesflat.co/html/ecomus/images/products/brown.jpg" alt="product">
+                                        <span class="quantity">1</span>
+                                    </figure>
+                                    <div class="content">
+                                        <div class="info">
+                                            <p class="name">Ribbed modal T-shirt</p>
+                                            <span class="variant">Brown / M</span>
+                                        </div>
+                                        <span class="price">$25.00</span>
+                                    </div>
+                                </li>
+                                <li class="checkout-product-item">
+                                    <figure class="img-product">
+                                        <img src="https://themesflat.co/html/ecomus/images/products/kid-12.jpg" alt="product">
+                                        <span class="quantity">1</span>
+                                    </figure>
+                                    <div class="content">
+                                        <div class="info">
+                                            <p class="name">Vanilla White</p>
+                                        </div>
+                                        <span class="price">$35.00</span>
+                                    </div>
+                                </li>
+                                <li class="checkout-product-item">
+                                    <figure class="img-product">
+                                        <img src="https://themesflat.co/html/ecomus/images/products/beige-2.jpg" alt="product">
+                                        <span class="quantity">1</span>
+                                    </figure>
+                                    <div class="content">
+                                        <div class="info">
+                                            <p class="name">Cotton jersey top</p>
+                                            <span class="variant">Beige / S</span>
+                                        </div>
+                                        <span class="price">$8.00</span>
+                                    </div>
+                                </li>
+                                <li class="checkout-product-item">
+                                    <figure class="img-product">
+                                        <img src="https://themesflat.co/html/ecomus/images/products/orange-1.jpg" alt="product">
+                                        <span class="quantity">3</span>
+                                    </figure>
+                                    <div class="content">
+                                        <div class="info">
+                                            <p class="name">Ribbed Tank Top</p>
+                                            <span class="variant">Orange / S</span>
+                                        </div>
+                                        <span class="price">$54.00</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="coupon-box">
+                                <input type="text" placeholder="Discount code">
+                                <a href="#" class="tf-btn btn-sm radius-3 btn-fill btn-icon animate-hover-btn">Apply</a>
+                            </div>
+                            <div class="d-flex justify-content-between line pb_20">
+                                <h6 class="fw-5">Total</h6>
+                                <h6 class="total fw-5">$122.00</h6>
+                            </div>
+                            <div class="wd-check-payment">
+                                <div class="fieldset-radio mb_20">
+                                    <input type="radio" name="payment" id="bank" class="tf-check" checked>
+                                    <label for="bank">Direct bank transfer</label>
+                                </div>
+                                <div class="fieldset-radio mb_20">
+                                    <input type="radio" name="payment" id="delivery" class="tf-check">
+                                    <label for="delivery">Cash on delivery</label>
+                                </div>
+                                <p class="text_black-2 mb_20">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="privacy-policy.html" class="text-decoration-underline">privacy policy</a>.</p>
+                                <div class="box-checkbox fieldset-radio mb_20">
+                                    <input type="checkbox" id="check-agree" class="tf-check">
+                                    <label for="check-agree" class="text_black-2">I have read and agree to the website <a href="terms-conditions.html" class="text-decoration-underline">terms and conditions</a>.</label>
+                                </div>
+                            </div>
+                            <button class="tf-btn radius-3 btn-fill btn-icon animate-hover-btn justify-content-center">Place order</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page-cart -->
+
+    <!-- Footer -->
+    <div th:replace="~{shared/components/footer :: footer}"></div>
+    <!-- /Footer -->
+
+</div>
+
+<!-- gotop: Componente que hace dirigirte a lo más alto de la página web-->
+<div th:replace="~{shared/components/gotop :: gotop}"></div>
+<!-- /gotop -->
+
+<!-- toolbar-bottom: Componente inferior cuando es mobile similar a un toolbar-->
+<div th:replace="~{shared/components/toolbar-bottom :: toolbar-bottom}"></div>
+<!-- /toolbar-bottom -->
+
+<!-- all-modals: Todos los modales -->
+<div th:replace="~{shared/modals/all-modals :: all-modals}"></div>
+<!-- /all-modals -->
+
+<!-- Javascript -->
+<script type="text/javascript" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/swiper-bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/carousel.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/bootstrap-select.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/lazysize.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/count-down.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/wow.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/multiple-modal.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<section class="tf-slideshow slider-effect-fade slider-home-5 position-relative"
+         th:fragment="slider">
+    <div class="swiper tf-sw-slideshow" data-preview="1" data-tablet="1" data-mobile="1" data-centered="false" data-space="0" data-loop="true" data-auto-play="true" data-delay="2000" data-speed="1000">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"
+                 lazy="true"
+                 th:each="bannerLaptopPc : ${bannerLaptopPc}">
+                <div class="wrap-slider">
+                    <img class="lazyload"
+                         th:data-src="@{'/images/slider/'+ ${bannerLaptopPc.nombre}}"
+                         th:src="@{'/images/slider/'+${bannerLaptopPc.nombre}}"
+                         alt="phonecase-01">
+                    <!--<div class="box-content text-center">
+                        <div class="container">
+                            <p class="fade-item fade-item-1 sale_off mb_15 text-white radius-60 fw-7">SALE UP TO 30% OFF</p>
+                            <h1 class="fade-item fade-item-2 mb_38 text-white heading">Premium eco tech <br> accessories</h1>
+                            <div class="fade-item fade-item-3 d-flex gap-20 justify-content-center">
+                                <a href="shop-collection-list.html" class="tf-btn btn-light-icon animate-hover-btn btn-xl radius-3"><span>Phone case</span><i class="icon icon-arrow-right"></i></a>
+                                <a href="shop-collection-list.html" class="tf-btn btn-light-icon animate-hover-btn btn-xl radius-3"><span>Accessories</span><i class="icon icon-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-pagination">
+        <div class="sw-dots style-2 dots-white sw-pagination-slider justify-content-center"></div>
+    </div>
+</section>

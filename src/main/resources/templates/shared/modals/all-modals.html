@@ -1,0 +1,36 @@
+<div th:fragment="all-modals">
+    <!-- mobile menu: Modal del menú en versión mobile -->
+    <div th:replace="~{shared/modals/menu-mobile :: menu-mobile}"></div>
+    <!-- /mobile menu -->
+
+    <!-- canvasSearch: Modal para buscar productos -->
+    <div th:replace="~{shared/modals/search-canvas :: canvasSearch}"></div>
+    <!-- /canvasSearch -->
+
+    <!-- modal login: Modal para autenticación del usuario -->
+    <div th:replace="~{shared/modals/login-modal ::  userLogin}"></div>
+    <!-- /modal login -->
+
+    <!-- shoppingCart: Modal para ver el carrito de compras -->
+    <div th:replace="~{shared/modals/shopping-cart-modal :: shoppingCart}"></div>
+    <!-- /shoppingCart -->
+
+    <!-- modal quick_add: Modal para añadir rápido al carrito -->
+    <div th:replace="~{shared/modals/quick-add :: quick-add}"></div>
+    <!-- /modal quick_add -->
+
+    <!-- modal quick_view: Modal para ver los detalles del producto -->
+    <div th:replace="~{shared/modals/quick-view :: quick-view}"></div>
+    <!-- /modal quick_view -->
+
+    <!-- modal find_size: Modal dentro de quick-view  -->
+    <div th:replace="~{shared/modals/find-size :: findSize}"></div>
+    <!-- /modal find_size -->
+
+    <!-- modalDemo -->
+    <!-- /modalDemo -->
+    <!-- toolbarShopmb -->
+    <!-- /toolbarShopmb -->
+    <!-- modal compare -->
+    <!-- /modal compare -->
+</div>

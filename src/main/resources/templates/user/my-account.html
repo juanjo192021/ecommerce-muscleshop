@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+
+<head>
+	<meta charset="utf-8">
+	<title>Ecomus - Ultimate HTML</title>
+
+	<meta name="author" content="themesflat.com">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- font -->
+	<link rel="stylesheet" th:href="@{/assets/fonts/fonts.css}">
+	<!-- Icons -->
+	<link rel="stylesheet" th:href="@{/assets/fonts/font-icons.css}">
+	<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/assets/css/swiper-bundle.min.css}">
+	<link rel="stylesheet" th:href="@{/assets/css/animate.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}"/>
+
+	<!-- Favicon and Touch Icons  -->
+	<link rel="shortcut icon" th:href="@{/images/logo/favicon.png}">
+	<link rel="apple-touch-icon-precomposed" th:href="@{/images/logo/favicon.png}">
+	<script src="https://kit.fontawesome.com/98270ba09b.js" crossorigin="anonymous"></script>
+</head>
+<body class="preload-wrapper">
+	<div id="wrapper">
+		<!-- Top bar -->
+		<div th:replace="~{shared/components/top-bar :: top-bar}"></div>
+		<!-- /Top bar -->
+		<!-- Header -->
+		<div th:replace="~{shared/components/header :: header}"></div>
+		<!-- /Header -->
+
+		<!-- page-title -->
+		<div class="tf-page-title">
+			<div class="container-full">
+				<div class="heading text-center">My Account</div>
+			</div>
+		</div>
+		<!-- /page-title -->
+
+		<!-- page-cart -->
+		<section class="flat-spacing-11">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3">
+						<ul class="my-account-nav">
+							<li><span class="my-account-nav-item active">Dashboard</span></li>
+							<li><a href="my-account-orders.html" class="my-account-nav-item">Orders</a></li>
+							<li><a href="my-account-address.html" class="my-account-nav-item">Address</a></li>
+							<li><a href="my-account-edit.html" class="my-account-nav-item">Account Details</a></li>
+							<li><a href="my-account-wishlist.html" class="my-account-nav-item">Wishlist</a></li>
+							<li>
+								<a class="my-account-nav-item">
+									<form th:action="@{/logout}" method="post">
+										<button type="submit" class="bg-transparent border-0 fw-5">Cerrar Sesión</button>
+									</form>
+								</a>
+							</li>
+
+						</ul>
+					</div>
+					<div class="col-lg-9">
+						<div class="my-account-content account-dashboard">
+							<div class="mb_60">
+								<h5 class="fw-5 mb_20">Hello Themesflat</h5>
+								<p>
+									From your account dashboard you can view your <a class="text_primary" href="my-account-orders.html">recent orders</a>, manage your <a class="text_primary" href="my-account-address.html">shipping and billing address</a>, and <a class="text_primary" href="my-account-edit.html">edit your password and account details</a>.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- page-cart -->
+
+		<!-- Footer -->
+		<div th:replace="~{shared/components/footer :: footer}"></div>
+		<!-- /Footer -->
+
+	</div>
+
+	<!-- gotop: Componente que hace dirigirte a lo más alto de la página web-->
+	<div th:replace="~{shared/components/gotop :: gotop}"></div>
+	<!-- /gotop -->
+
+	<!-- toolbar-bottom: Componente inferior cuando es mobile similar a un toolbar-->
+	<div th:replace="~{shared/components/toolbar-bottom :: toolbar-bottom}"></div>
+	<!-- /toolbar-bottom -->
+
+	<!-- all-modals: Todos los modales -->
+	<div th:replace="~{shared/modals/all-modals :: all-modals}"></div>
+	<!-- /all-modals -->
+
+	<!-- Javascript -->
+	<script type="text/javascript" th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/swiper-bundle.min.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/carousel.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/bootstrap-select.min.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/lazysize.min.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/bootstrap-select.min.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/count-down.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/wow.min.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/multiple-modal.js}"></script>
+	<script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+</body>
+
+
+</html>
+<!--
+<div class="page-wrapper">
+	<main class="main">
+		<div class="container perfil-container my-5 pt-5 px-5">
+			<h2 class="text-center">Perfil de Usuario</h2>
+			<hr class="large-divider my-3">
+
+			<div class="container pb-5">
+				<div class="row">
+					<div class="col-md-4 mb-3">
+						<label for="login-email">Nombres</label>
+						<input type="text" class="form-input form-wide" id="login-email" disabled
+							th:placeholder="${session.usuarioPerfil.nombres}" />
+					</div>
+
+					<div class="col-md-4 mb-3">
+						<label for="login-password3">Apellidos</label>
+						<input type="text" class="form-input form-wide" id="login-password37" disabled
+							th:placeholder="${session.usuarioPerfil.apellidos}" />
+					</div>
+
+					<div class="col-md-4 mb-3">
+						<label for="login-password3">Teléfono</label>
+						<input type="text" class="form-input form-wide" id="login-password7" disabled
+							th:placeholder="${session.usuarioPerfil.telefono}" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="login-password3">Correo electrónico</label>
+						<input type="text" class="form-input form-wide" id="login-password3" disabled
+							th:placeholder="${session.usuarioPerfil.usuario.correo}" />
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="login-password4">Rol Perfil</label>
+						<input type="text" class="form-input form-wide" id="login-password4" disabled
+							th:placeholder="${session.usuarioPerfil.usuario.rolPerfil.nombre}" />
+					</div>
+				</div>
+
+				<div class="row pt-5 justify-content-center">
+					<div class="col-md-6 text-center">
+						<form th:action="@{/logout}" method="post" class="d-inline-block mb-3 mr-md-3">
+							<button type="submit" class="btn btn-dark btn-md">Cerrar Sesión</button>
+						</form>
+
+						<button type="button" class="btn btn-success btn-md d-inline-block" data-toggle="modal"
+							data-target="#exampleModal">
+							Editar </button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</div>
+
+
+
+
+<div class="modal fade modal-editar-perfil" id="exampleModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Editar información del Perfil</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body pb-5 mb-3">
+				<form th:action="@{/templates/user/mi-cuenta/editar-perfil}" th:object="${usuarioPerfil}"
+					  method="post">
+					<input type="hidden" th:field="*{id}" />
+					<div class="form-group">
+						<label for="nombres">Nombres</label>
+						<input type="text" class="form-control" id="nombres" th:field="*{nombres}" />
+					</div>
+					<div class="form-group">
+						<label for="apellidos">Apellidos</label>
+						<input type="text" class="form-control" id="apellidos" th:field="*{apellidos}" />
+					</div>
+					<div class="form-group">
+						<label for="telefono">Teléfono</label>
+						<input type="text" class="form-control" id="telefono" th:field="*{telefono}" />
+					</div>
+					<button type="submit" class="btn btn-primary mt-2 guardar">Guardar información</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>-->
+

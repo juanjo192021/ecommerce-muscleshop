@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="components/head"></head>
+
+<body>
+	<div class="page-wrapper pb-0 mb-0">
+
+		<!-- NOTICE -->
+		<div th:replace="components/top-bar"></div>
+
+		<!-- HEADER -->
+		<header th:replace="components/header"></header>
+
+		<!-- MAIN-->
+		<main class="main" style="background-color: #f8f8f8;">
+
+			<div class="container">
+				<div th:each="productos:${productos}">
+					<h1 th:text="${productos.getProductoHijo().getNombre()}"></h1>
+				</div>
+			</div>
+
+		</main>
+		<!-- FOOTER-->
+		<footer th:replace="components/footer"></footer>
+	</div>
+
+
+	<div class="loading-overlay">
+		<div class="bounce-loader">
+			<div class="bounce1"></div>
+			<div class="bounce2"></div>
+			<div class="bounce3"></div>
+		</div>
+	</div>
+
+	<div class="mobile-menu-overlay"></div>
+	<!-- End .mobil-menu-overlay -->
+
+	<!-- MENU MOBILE -->
+	<div th:replace="components/menu-mobile"></div>
+
+	<!-- MENU INFERIOR MOBILE-->
+	<div th:replace="components/menu-inferior-mobile"></div>
+
+	<!-- POPUP -->
+	<div th:replace="components/popup"></div>
+
+	<a id="scroll-top" href="demo4.html#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+	<div class="button align-items-center d-flex">
+		<a class="button-img ms-lg-2 ms-1" href="#" target="_blank"><img th:src="@{/images/whatsapp.png}" alt=""></a>
+	</div>
+
+	<!-- Plugins JS File -->
+	<script data-cfasync="false"
+		th:src="@{../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.min.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/assets/js/optional/isotope.pkgd.min.js}"></script>
+	<script th:src="@{/assets/js/plugins.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.appear.min.js}"></script>
+
+	<!-- Main JS File -->
+	<script th:src="@{/assets/js/main.min.js}"></script>
+	<script>
+		function alternarMensajes() {
+			var message1 = document.getElementById('message1');
+			var message2 = document.getElementById('message2');
+
+			setInterval(function () {
+				fadeOut(message1, function () {
+					message1.style.display = 'none';
+					message2.style.display = 'block';
+					fadeIn(message2);
+					var temp = message1;
+					message1 = message2;
+					message2 = temp;
+				});
+			}, 5000);
+		}
+
+		function fadeOut(element, callback) {
+			var opacity = 1;
+			var intervalID = setInterval(function () {
+				if (opacity > 0) {
+					opacity -= 0.1;
+					element.style.opacity = opacity;
+				} else {
+					clearInterval(intervalID);
+					if (callback) {
+						callback();
+					}
+				}
+			}, 50);
+		}
+
+		function fadeIn(element) {
+			var opacity = 0;
+			element.style.opacity = opacity;
+			element.style.display = 'block';
+			var intervalID = setInterval(function () {
+				if (opacity < 1) {
+					opacity += 0.1;
+					element.style.opacity = opacity;
+				} else {
+					clearInterval(intervalID);
+				}
+			}, 50);
+		}
+
+		alternarMensajes();
+	</script>
+
+	<script>
+		document.querySelectorAll('.config-size-list a').forEach((option) => {
+			option.addEventListener('click', function () {
+				var idPresentacion = option.getAttribute('data-id');
+				document.getElementById('idPresentacion').value = idPresentacion;
+				console.log('Respuesta del servidor:', idPresentacion);
+
+			});
+		});
+
+	</script>
+
+	<script th:inline="javascript">
+		const enlacesPresentacion = document.querySelectorAll('.config-size-list a');
+		const precioProductoSpan = document.getElementById('precioProducto');
+
+		enlacesPresentacion.forEach(enlace => {
+			enlace.addEventListener('click', evento => {
+				evento.preventDefault();
+
+				const idPresentacion = enlace.dataset.id;
+
+				fetch(`/index/precioPresentacion?idPresentacion=${idPresentacion}`)
+					.then(respuesta => respuesta.json())
+					.then(data => {
+						console.log('Respuesta del servidor:', data);
+						if (typeof data === 'number' && !isNaN(data)) {
+							const nuevoPrecio = data;
+							console.log('Nuevo precio:', nuevoPrecio);
+							precioProductoSpan.innerText = 'S/. ' + nuevoPrecio.toFixed(2);
+						} else {
+							console.error('La respuesta del servidor no es un número válido:', data);
+						}
+					})
+					.catch(error => console.error('Error al obtener el precio:', error));
+			});
+		});
+	</script>
+
+</body>
+
+</html>
