@@ -5,6 +5,7 @@ import java.util.*;
 import com.muscleshop.web.models.*;
 import com.muscleshop.web.models.dto.*;
 import com.muscleshop.web.services.*;
+import com.muscleshop.web.services.implementation.MenuService;
 import com.muscleshop.web.services.implementation.MenuSubService;
 import com.muscleshop.web.services.implementation.ProductoCategoriaService;
 import com.muscleshop.web.services.implementation.ProductoPropiedadDetalleService;
@@ -32,7 +33,7 @@ public class HomeController {
 	IPopupService popupService;
 
 	@Autowired
-	MenuService menuService;
+	IMenuService menuService;
 
 	@Autowired
 	IArticuloService articuloService;
@@ -105,7 +106,7 @@ public class HomeController {
 	//Modelos para el menu de la barra Header Bottom
 	@ModelAttribute("menusHeader")
 	public List<Menu> menus() {
-		return menuService.listarMenu();
+		return menuService.obtenerMenus();
 	}
 
 /*	@ModelAttribute("productos")
@@ -161,31 +162,75 @@ public class HomeController {
     }*/
 
 	@Autowired
-	IPropiedadesService iPropiedadesService;
+	IProductoVariacionService iProductoVariacionService;
 
-	@GetMapping("/prueba")
+	@GetMapping("/prueba/{q}")
 	@ResponseBody
-	public ResponseEntity<List<ProductoCategoria>> resp() {
-		/*[{1,normal},{2,bestsellers},{3,ofertas}]*/
-		int menuId = 2;
-		List<ProductoCategoria> productoCategorias = productoCategoriaService.obtenerProductoCategoriaPorMenuId(menuId);
-
-		return ResponseEntity.ok(productoCategorias);
+	public ResponseEntity<List<VariacionDto>> resp(@PathVariable String q) {
+		List<VariacionDto> productoVariacions = iProductoVariacionService.obtenerProductoVariacion(Integer.parseInt(q));
+		return ResponseEntity.ok(productoVariacions);
 	}
 
 	@GetMapping("/prueba2")
 	@ResponseBody
-	public ResponseEntity<MenuSub> respta() {
-		MenuSub a = menuSubService.obtenerMenuSubID(1);
-		return ResponseEntity.ok(a);
-	}
-/*	@GetMapping("/prueba3")
-	@ResponseBody
-	public ResponseEntity<List<ProductoItemsDto>> respues() {
-		List<ProductoItemsDto> productoPropiedadesDetalles= productoPropiedadesDetallesService.obtenerProductoPropiedadesDetallesPorForma(2);
+	public ResponseEntity<List<ProductoItemsDto>> respta() {
+		/*[{1,normal},{2,bestsellers},{3,ofertas}]*/
+		int productoFormaId = 2;
+		List<ProductoItemsDto> productoPropiedadesDetalles = productoPropiedadesDetallesService.obtenerProductoPropiedadesDetallesPorForma(productoFormaId);
 
 		return ResponseEntity.ok(productoPropiedadesDetalles);
+	}
+	@GetMapping("/prueba3")
+	@ResponseBody
+	public ResponseEntity<List<PedidoProductoComentario>> respues() {
+		List<PedidoProductoComentario> comentariosProductos = pedProComService.comentariosMostrables(1);
+		return ResponseEntity.ok(comentariosProductos);
+	}
+
+	@Autowired
+	IProductoMenuSubService iProductoMenuSubService;
+
+	@GetMapping("/prueba4")
+	@ResponseBody
+	public ResponseEntity<List<ProductoMenuSub>> prueba4() {
+		List<ProductoMenuSub> productoMenuSubs = iProductoMenuSubService.obtenerProductoMenuSubs();
+		return ResponseEntity.ok(productoMenuSubs);
+	}
+
+	@GetMapping("/prueba8")
+	@ResponseBody
+	public ResponseEntity<List<ProductoDto>> prueba8() {
+		List<ProductoDto> productos = productoService.obtenerProductosItemsIndividualesPorForma();
+		return ResponseEntity.ok(productos);
+	}
+
+/*	@GetMapping("/prueba5")
+	@ResponseBody
+	public ResponseEntity<List<ProductoPropiedadesDetalles>> prueba5() {
+		List<ProductoPropiedadesDetalles> productoMenuSubs = iProductoPropiedadesDetallesService.pruebasProductosPropiedadesDetalles();
+		return ResponseEntity.ok(productoMenuSubs);
 	}*/
+
+	@Autowired
+	IProductoPropiedadesDetallesVariacionService iProductoPropiedadesDetallesVariacionService;
+
+/*
+	@GetMapping("/prueba6")
+	@ResponseBody
+	public ResponseEntity<List<ProductoPropiedadesDetallesVariacion>> prueba6() {
+		List<ProductoPropiedadesDetallesVariacion> productoMenuSubs = iProductoPropiedadesDetallesVariacionService.pruebasProductosPropiedadesDetallesVariacion();
+		return ResponseEntity.ok(productoMenuSubs);
+	}
+
+	@GetMapping("/prueba7")
+	@ResponseBody
+	public ResponseEntity<List<ProductoVariacion>> prueba7() {
+		List<ProductoVariacion> productoMenuSubs = iProductoVariacionService.pruebasProductoVariaciones();
+		return ResponseEntity.ok(productoMenuSubs);
+	}
+*/
+
+
 
 	// MENÚS
 	@SuppressWarnings("unchecked")
@@ -222,12 +267,13 @@ public class HomeController {
 
 		/*[{1,normal},{2,bestsellers},{3,ofertas}]*/
 		int productoFormaId = 2;
-		List<ProductoItemsDto> productoPropiedadesDetalles = productoPropiedadesDetallesService.obtenerProductoPropiedadesDetallesPorForma(productoFormaId);
+		//List<ProductoItemsDto> productoPropiedadesDetalles = productoPropiedadesDetallesService.obtenerProductoPropiedadesDetallesPorForma(productoFormaId);
+		List<ProductoDto> productos = productoService.obtenerProductosItemsIndividualesPorForma();
 
 		Integer cantidadArticulos = 8;
 		List<Articulo> articulosBlog = articuloService.obtenerArticulosPorCantidad(cantidadArticulos);
 
-		List<PedidoProductoComentario> comentariosProductos = pedProComService.comentariosMostrables(1);
+		List<PedidoProductoComentario> pedidoProductoComentarios = pedProComService.comentariosMostrables(1);
 
 		List<Marketplace> marketplaces = iMarketplaceService.listarMarketplaces();
 
@@ -237,9 +283,9 @@ public class HomeController {
 		model.addAttribute("bannerMovilTablet", bannerMovilTablet);
 		model.addAttribute("bannerLaptopPc", bannerLaptopPc);
 		model.addAttribute("articulosBlog", articulosBlog);
-		model.addAttribute("subMenu", subMenus);
-		model.addAttribute("productosPorForma", productoPropiedadesDetalles);
-		model.addAttribute("comentariosProductos", comentariosProductos);
+		model.addAttribute("subMenus", subMenus);
+		model.addAttribute("productos", productos);
+		model.addAttribute("pedidoProductoComentarios", pedidoProductoComentarios);
 		model.addAttribute("marketplaces", marketplaces);
 
 		// LÓGICA CARRITO
@@ -270,66 +316,55 @@ public class HomeController {
 
 	@GetMapping("/about-us")
 	public String AboutUs(Model model, HttpSession session) {
-
 		return "landings-pages/about-us";
 	}
 
 
 	@GetMapping("/brands")
 	public String Brands(Model model, HttpSession session) {
-
 		return "landings-pages/brands";
 	}
 
 	@GetMapping("/contact")
 	public String Contact(Model model, HttpSession session) {
-
 		return "landings-pages/contact";
 	}
 
 	@GetMapping("/faq")
 	public String Faq(Model model, HttpSession session) {
-
 		return "landings-pages/faq";
 	}
 	@GetMapping("/view-cart")
 	public String ViewCart(Model model, HttpSession session) {
-
 		return "pages/view-cart";
 	}
 	@GetMapping("/checkout")
 	public String Checkout(Model model, HttpSession session) {
-
 		return "user/checkout";
 	}
 
 	@GetMapping("/wishlist")
 	public String Wishlist(Model model, HttpSession session) {
-
 		return "user/wishlist";
 	}
 
 	@GetMapping("/blog-grid")
 	public String BlogGrid(Model model, HttpSession session) {
-
 		return "pages/blog-grid";
 	}
 
 	@GetMapping("/blog-detail")
 	public String BlogDetail(Model model, HttpSession session) {
-
 		return "pages/blog-detail";
 	}
 
 	@GetMapping("/product-menu")
 	public String ProductMenu(Model model, HttpSession session) {
-
 		return "pages/product-menu";
 	}
 
 	@GetMapping("/product-detail")
 	public String ProductDetail(Model model, HttpSession session) {
-
 		return "pages/product-detail";
 	}
 
@@ -552,7 +587,12 @@ public class HomeController {
 
 		ProductoCategoria productoCategoria = productoCategoriaService.obtenerProductoCategoriaPorUrl(categoriaUrl);
 
-		List<ProductoItemsDto> productos = iProductoPropiedadesDetallesService.obtenerProductosIndividualesPorCategoriaId(minPrecio, maxPrecio, productoCategoria.getId());
+		List<Producto> productosNews = new ArrayList<>() ;
+		for(ProductoMenuSub productoMenuSub: productoCategoria.getProductoMenuSubs()){
+			productosNews.add(productoMenuSub.getProducto());
+		}
+
+		//List<ProductoItemsDto> productos = iProductoPropiedadesDetallesService.obtenerProductosIndividualesPorCategoriaId(minPrecio, maxPrecio, productoCategoria.getId());
 
 		model.addAttribute("nombreMenuSub", menuSub.getNombre());
 		//model.addAttribute("bannerMenuSub", menuSub.getBanner());
@@ -560,10 +600,10 @@ public class HomeController {
 		model.addAttribute("otrasCategoriasMenuSubs", otrasCategoriasDto);
 		model.addAttribute("porObjetivos", porObjetivosDto);
 		model.addAttribute("porMarcas", porMarcasDto);
-		model.addAttribute("productos", productos);
+		model.addAttribute("productos", productosNews);
 
 		/*return "porProductos/categoriaPro";*/
-		return "pages/product-menu";
+		return "pages/products-categories";
 	}
 
 	@GetMapping("/{menuUrl}/{menuSubUrl}/{categoriaUrl}/{productoUrl}")

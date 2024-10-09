@@ -20,7 +20,9 @@
         height: 40px;
         font-size: 16px;
         padding: 0px 14px;
-        background-color: var(--white);
+        //background-color: var(--white);
+        background-color: var(--main);
+        color: var(--white);
         border-radius: 3px;
         overflow: hidden;
         white-space: nowrap;
@@ -30,7 +32,7 @@
             margin: 0;
         }
         &:hover {
-            background-color: var(--main);
+            background-color: var(--text);
             color: var(--white);
         }
     }

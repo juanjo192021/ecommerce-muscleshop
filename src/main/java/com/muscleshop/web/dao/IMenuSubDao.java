@@ -16,6 +16,9 @@ public interface IMenuSubDao extends JpaRepository<MenuSub, Integer> {
 
 	List<MenuSub> findByMenu_Url(String menuUrl);
 
+	@Query("SELECT ms FROM MenuSub ms WHERE ms.menu.id IN :menuIds AND ms.estado.id = :estadoId")
+	List<MenuSub> findActiveMenuSubs(@Param("menuIds") List<Integer> menuIds, @Param("estadoId") int estadoId);
+
 
 	/*@Query("SELECT ms FROM MenuSub ms " +
 			"join ProductoCategoria pc on ms.id = pc.menuSub.id " +

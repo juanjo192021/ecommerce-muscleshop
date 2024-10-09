@@ -13,4 +13,5 @@ public interface IProductoPropiedadesDetallesService {
     List<ProductoItemsDto> obtenerProductosIndividualesPorCategoriaId (Double minPrecio, Double maxPrecio,Integer categoriaId);
     ProductoPropiedadesDetalles obtenerProductoPropiedadDetallesPorVariaciones(int productoId, String variacion1, String variacion2);
     ProductoCarritoDto obtenerProductoPropiedadDetallePorId(Integer id);
+    List<ProductoPropiedadesDetalles> pruebasProductosPropiedadesDetalles();
 }

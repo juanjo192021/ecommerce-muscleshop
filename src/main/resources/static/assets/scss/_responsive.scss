@@ -491,8 +491,10 @@
         }
         &.style-left {
             .collection-content {
-                bottom: 30px;
-                left: 15px;
+                bottom: 0;
+                min-width: 100%;
+                //bottom: 30px;
+                //left: 15px;
             }
         }
     }
@@ -2089,6 +2091,10 @@
             height: 46px;
             padding: 0 30px;
             font-size: 18px;
+            /*ADD STYLES SPECIFIC*/
+            justify-content: center;
+            min-width: 100%;
+            /*ADD STYLES SPECIFIC*/
             &.px-16 {
                 padding: 0 16px;
             }
@@ -4362,6 +4368,7 @@
                 margin-bottom: 15px;
                 display: block;
                 position: relative;
+                cursor: pointer;
                 &::after {
                     position: absolute;
                     content: "";

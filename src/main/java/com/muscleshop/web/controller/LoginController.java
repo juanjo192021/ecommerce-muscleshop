@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.muscleshop.web.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,16 +29,7 @@ import com.muscleshop.web.models.RolPerfil;
 import com.muscleshop.web.models.Roles;
 import com.muscleshop.web.models.Usuario;
 import com.muscleshop.web.models.UsuarioPerfil;
-import com.muscleshop.web.services.EstadoService;
-import com.muscleshop.web.services.FooterService;
-import com.muscleshop.web.services.HeaderService;
-import com.muscleshop.web.services.LogosService;
-import com.muscleshop.web.services.MenuService;
-import com.muscleshop.web.services.RedesSocialesService;
-import com.muscleshop.web.services.RolPerfilService;
-import com.muscleshop.web.services.RolesService;
-import com.muscleshop.web.services.UsuarioPerfilService;
-import com.muscleshop.web.services.UsuarioService;
+import com.muscleshop.web.services.implementation.MenuService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -50,7 +42,10 @@ public class LoginController {
 	
 	@Autowired
 	RolPerfilService rolPerfilService;
-	
+
+	@Autowired
+	LogosService logosService;
+
 	@Autowired
 	RolesService rolesService;
 	
@@ -70,39 +65,38 @@ public class LoginController {
 	HeaderService headerService;
 	
 	@Autowired
-	MenuService menuService;
-	
-	@ModelAttribute("footer")
-	public List<Footer> footer() {
-		return footerService.listarFooter();
-	}
-	
-	@ModelAttribute("redesSociales")
-	public List<RedesSociales> obtenerRedes() {
-		return redesSocialesService.listarRedes();
-	}
+	IMenuService menuService;
 
-	@ModelAttribute("header")
-	public Map<Integer, Header> obtenerHeader() {
-		Map<Integer, Header> header = new HashMap<>();
-		for (int i = 1; i <= 5; i++) {
-			Header hea = headerService.listarHeaderID(i);
-			header.put(i, hea);
-		}
-		return header;
-	}
-	
-	@Autowired
-	LogosService logosService;
-	
-	@ModelAttribute("logos")
-	public List<Logos> obtenerLogos() {
+	//Modelo para el logo de la tienda
+	@ModelAttribute("logosTienda")
+	public List<Logos> logos() {
 		return logosService.listarLogos();
 	}
-	
-	@ModelAttribute("menu")
-	public List<Menu> categorias() {
-		return menuService.listarMenu();
+
+	@ModelAttribute("headers")
+	public List<Header> headers() {
+		return headerService.listarHeader();
+	}
+
+	//Modelos para el menu de la barra Header Bottom
+	@ModelAttribute("menusHeader")
+	public List<Menu> menus() {
+		return menuService.obtenerMenus();
+	}
+
+/*	@ModelAttribute("productos")
+	public List<Producto> productos() {
+		return productoService.listarProducto();
+	}*/
+
+	@ModelAttribute("footer")
+	public List<Footer> footers() {
+		return footerService.listarFooter();
+	}
+
+	@ModelAttribute("redesSociales")
+	public List<RedesSociales> redesSociales() {
+		return redesSocialesService.listarRedes();
 	}
 	
 	@GetMapping("/login")

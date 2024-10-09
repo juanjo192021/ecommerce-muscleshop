@@ -25,7 +25,7 @@ public class ProductoMenuSub{
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
-    @JsonIgnore
+    //@JsonIgnore
     private ProductoCategoria productoCategoria;
 
     @ManyToOne

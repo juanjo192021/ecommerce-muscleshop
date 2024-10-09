@@ -25,7 +25,7 @@ public class ProductoCategoria {
 	private MenuSub menuSub;
 
 	@OneToMany(mappedBy = "productoCategoria")
-	//@JsonIgnore
+	@JsonIgnore
 	private List<ProductoMenuSub> productoMenuSubs;
 
 	public Integer getId() {

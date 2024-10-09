@@ -329,7 +329,7 @@
                                         <img class="lazyload img-hover"
                                              th:data-src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}"
                                              th:src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}"
-                                             th:alt="'img-'+${producto.nombre}">
+                                             th:alt="${producto.nombre}">
                                     </a>
                                     <div class="list-product-btn absolute-2">
                                         <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">

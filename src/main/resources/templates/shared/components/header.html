@@ -22,13 +22,15 @@
 							</a>
 							<div class="sub-menu mega-menu" th:if="${menu.menuSubs != null and menu.menuSubs.size() > 0}">
 								<div class="container">
-									<div class="row">
-										<div class="col-lg-8 row">
-											<div class="col-lg-3" th:each="submenu : ${menu.menuSubs}">
+									<div class="row p-0 m-0">
+										<div class="col-lg-8 row p-0 m-0 justify-content-evenly">
+											<!--class="col-lg-3"-->
+											<div style="flex: 0 0 auto; width: 20%;"
+												 th:each="submenu : ${menu.menuSubs}">
 												<div class="mega-menu-item">
 													<div class="menu-heading">
 														<a th:href="@{'/index/'+${menu.url}+'/'+${submenu.url}}"
-														   class="menu-link-text link"
+														   class="menu-link-text link text-capitalize"
 														   th:text="${submenu.nombre}">
 															Product default
 														</a>
@@ -37,7 +39,7 @@
 														<li th:each="productoCategorias : ${submenu.productoCategorias}">
 															<!--@{'/index/'+${productoCate.url}}-->
 															<a th:href="@{'/index/'+${menu.url}+'/'+${submenu.url}+'/'+${productoCategorias.url}}"
-															   class="menu-link-text link"
+															   class="menu-link-text link text-capitalize"
 															   th:text="${productoCategorias.nombre}">
 																Product default
 															</a>
@@ -56,15 +58,15 @@
 																<div class="card-product-wrapper">
 																	<a href="#" class="product-img">
 																		<img class="lazyload img-product"
-																			 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607950/ISO-XP_-_CHOCOLATE_-_1KG_ibttgu.png"
-																			 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607950/ISO-XP_-_CHOCOLATE_-_1KG_ibttgu.png"
+																			 data-src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
+																			 src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
 																			 alt="image-product">
 																		<img class="lazyload img-hover"
-																			 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607950/ISO-XP_-_CHOCOLATE_-_1KG_ibttgu.png"
-																			 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607950/ISO-XP_-_CHOCOLATE_-_1KG_ibttgu.png"
+																			 data-src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
+																			 src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
 																			 alt="image-product">
 																	</a>
-																	<div class="list-product-btn absolute-2">
+																	<!--<div class="list-product-btn absolute-2">
 																		<a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
 																			<span class="icon icon-bag"></span>
 																			<span class="tooltip">Quick Add</span>
@@ -83,9 +85,10 @@
 																			<span class="icon icon-view"></span>
 																			<span class="tooltip">Quick View</span>
 																		</a>
-																	</div>
+																	</div>-->
 																</div>
-																<div class="card-product-info">
+
+																<!--<div class="card-product-info">
 																	<a href="#" class="title link">Ribbed Tank Top</a>
 																	<span class="price">$16.95</span>
 																	<ul class="list-color-product">
@@ -93,39 +96,40 @@
 																			<span class="tooltip">Orange</span>
 																			<span class="swatch-value bg_orange-3"></span>
 																			<img class="lazyload"
-																				 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607942/BCAA_AMINO_HYDRATE_-_FRUIT_BURST_-_450_GR._eutoa1.png"
-																				 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607942/BCAA_AMINO_HYDRATE_-_FRUIT_BURST_-_450_GR._eutoa1.png" alt="image-product">
+																				 data-src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
+																				 src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg" alt="image-product">
 																		</li>
 																		<li class="list-color-item color-swatch">
 																			<span class="tooltip">Black</span>
 																			<span class="swatch-value bg_dark"></span>
 																			<img class="lazyload"
-																				 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607950/ISO-XP_-_CHOCOLATE_-_1KG_ibttgu.png"
-																				 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607950/ISO-XP_-_CHOCOLATE_-_1KG_ibttgu.png"
+																				 data-src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
+																				 src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
 																				 alt="image-product">
 																		</li>
 																		<li class="list-color-item color-swatch">
 																			<span class="tooltip">White</span>
 																			<span class="swatch-value bg_white"></span>
 																			<img class="lazyload"
-																				 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607947/BCAA_AMINO_HYDRATE_-_ICY_BLUE_RAZ_-_450_GR._gxpeup.png"
-																				 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607947/BCAA_AMINO_HYDRATE_-_ICY_BLUE_RAZ_-_450_GR._gxpeup.png"
+																				 data-src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
+																				 src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
 																				 alt="image-product">
 																		</li>
 																	</ul>
-																</div>
+																</div>-->
+
 															</div>
 														</div>
 														<div class="swiper-slide" lazy="true">
 															<div class="card-product">
 																<div class="card-product-wrapper">
 																	<div class="product-img">
-																		<img class="lazyload img-product" data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607945/BCAA_AMINO_HYDRATE_-_ICY_BLUE_RAZ_-_1.4_KG_q5cpqf.png"
-																			 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607945/BCAA_AMINO_HYDRATE_-_ICY_BLUE_RAZ_-_1.4_KG_q5cpqf.png" alt="image-product">
-																		<img class="lazyload img-hover" data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607945/BCAA_AMINO_HYDRATE_-_ICY_BLUE_RAZ_-_1.4_KG_q5cpqf.png"
-																			 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607945/BCAA_AMINO_HYDRATE_-_ICY_BLUE_RAZ_-_1.4_KG_q5cpqf.png" alt="image-product">
+																		<img class="lazyload img-product" data-src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
+																			 src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg" alt="image-product">
+																		<img class="lazyload img-hover" data-src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg"
+																			 src="https://res.cloudinary.com/dhgkb17i4/image/upload/v1728345374/PRECIO%20UNO/s6yysxtcnnis4x67b6nn.jpg" alt="image-product">
 																	</div>
-																	<div class="list-product-btn absolute-2">
+																	<!--<div class="list-product-btn absolute-2">
 																		<a href="#shoppingCart" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
 																			<span class="icon icon-bag"></span>
 																			<span class="tooltip">Add to cart</span>
@@ -144,12 +148,12 @@
 																			<span class="icon icon-view"></span>
 																			<span class="tooltip">Quick View</span>
 																		</a>
-																	</div>
+																	</div>-->
 																</div>
-																<div class="card-product-info">
+																<!--<div class="card-product-info">
 																	<a href="#" class="title link">Oversized Printed T-shirt</a>
 																	<span class="price">$10.00</span>
-																</div>
+																</div>-->
 															</div>
 														</div>
 														<div class="swiper-slide" lazy="true">

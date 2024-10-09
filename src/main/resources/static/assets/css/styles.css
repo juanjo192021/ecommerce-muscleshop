@@ -974,6 +974,7 @@ label {
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  font-size: 15px;
 }
 .link:hover {
   color: var(--primary) !important;
@@ -7291,7 +7292,8 @@ header.header-bg {
   height: 40px;
   font-size: 16px;
   padding: 0px 14px;
-  background-color: var(--white);
+  background-color: var(--main);
+  color: var(--white);
   border-radius: 3px;
   overflow: hidden;
   white-space: nowrap;
@@ -7302,7 +7304,7 @@ header.header-bg {
   margin: 0;
 }
 .collection-item .collection-title:hover {
-  background-color: var(--main);
+  background-color: var(--text);
   color: var(--white);
 }
 .collection-item.style-left .collection-content {
@@ -14511,8 +14513,8 @@ blockquote .text {
     bottom: 25px;
   }
   .collection-item.style-left .collection-content {
-    bottom: 30px;
-    left: 15px;
+    bottom: 0;
+    min-width: 100%;
   }
   .collection-item-v2 .collection-content .heading {
     font-size: 20px;
@@ -15698,6 +15700,10 @@ blockquote .text {
     height: 46px;
     padding: 0 30px;
     font-size: 18px;
+    /*ADD STYLES SPECIFIC*/
+    justify-content: center;
+    min-width: 100%;
+    /*ADD STYLES SPECIFIC*/
   }
   .collection-item .collection-title.px-16 {
     padding: 0 16px;
@@ -17427,6 +17433,7 @@ blockquote .text {
     margin-bottom: 15px;
     display: block;
     position: relative;
+    cursor: pointer;
   }
   .footer .footer-col-block .footer-heading-moblie::after {
     position: absolute;

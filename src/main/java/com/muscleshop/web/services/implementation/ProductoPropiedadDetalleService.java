@@ -109,6 +109,17 @@ public class ProductoPropiedadDetalleService implements IProductoPropiedadesDeta
 		return productoCarritoDto;
 	}
 
+	@Override
+	public List<ProductoPropiedadesDetalles> pruebasProductosPropiedadesDetalles(){
+		List<Integer> lista = new ArrayList<>();
+		lista.add(1);
+		lista.add(2);
+		lista.add(7);
+		lista.add(11);
+
+		return iProductoPropiedadesDetallesDao.findActiveProductoPropiedadesDetalles(lista, 1);
+	}
+
 	public List<ProductoItemsDto> obtenerProductosItemsModificados(List<ProductoPropiedadesDetalles> productoPropiedadesDetalles){
 
 		List<ProductoItemsDto> productosIndividuales = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.muscleshop.web.services.implementation;
 
 import java.util.List;
 
+import com.muscleshop.web.services.IMenuSubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +10,13 @@ import com.muscleshop.web.dao.IMenuSubDao;
 import com.muscleshop.web.models.MenuSub;
 
 @Service
-public class MenuSubService {
+public class MenuSubService implements IMenuSubService {
 
 	@Autowired
 	private IMenuSubDao menuSubDao;
 
 	//Listar todos los submenus
-	public List<MenuSub> listarMenuSub() {
+	public List<MenuSub> obtenerMenuSubs() {
 		return menuSubDao.findAll();
 	}
 

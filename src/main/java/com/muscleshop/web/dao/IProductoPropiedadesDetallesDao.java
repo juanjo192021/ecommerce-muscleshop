@@ -2,6 +2,7 @@ package com.muscleshop.web.dao;
 
 import java.util.List;
 
+import com.muscleshop.web.models.MenuSub;
 import com.muscleshop.web.models.ProductoPropiedadesDetalles;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -75,4 +76,12 @@ public interface IProductoPropiedadesDetallesDao extends JpaRepository<ProductoP
     List<ProductoPropiedadesDetalles> findByProducto_ProductoCategoria_Id(Integer categoriaId);
 
     ProductoPropiedadesDetalles findByProducto_IdAndProductoVariacion1_ValorAndProductoVariacion2_Valor(int productoId, String variacion1, String variacion2);*/
+
+
+
+    @Query("SELECT ppd FROM ProductoPropiedadesDetalles ppd " +
+            "WHERE ppd.producto.id IN :productoIds AND ppd.estado.id = :estadoId")
+    List<ProductoPropiedadesDetalles> findActiveProductoPropiedadesDetalles(@Param("productoIds") List<Integer> productoIds, @Param("estadoId") int estadoId);
+
+    List<ProductoPropiedadesDetalles> findByProducto_IdAndProductoForma_Id(int productoId, int productoFormaId);
 }

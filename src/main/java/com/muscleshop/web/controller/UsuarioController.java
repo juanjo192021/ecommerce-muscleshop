@@ -1,15 +1,10 @@
 package com.muscleshop.web.controller;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.mercadopago.MercadoPagoConfig;
 import com.mercadopago.client.common.AddressRequest;
@@ -21,9 +16,9 @@ import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
 import com.muscleshop.web.models.*;
 import com.muscleshop.web.models.dto.PedidoProductoDto;
+import com.muscleshop.web.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,23 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.muscleshop.web.services.ComprobantePagoService;
-import com.muscleshop.web.services.EstadoService;
-import com.muscleshop.web.services.FooterService;
-import com.muscleshop.web.services.HeaderService;
-import com.muscleshop.web.services.LogosService;
-import com.muscleshop.web.services.MenuService;
-import com.muscleshop.web.services.MetodoPagoService;
-import com.muscleshop.web.services.PedidoProductoService;
-import com.muscleshop.web.services.PedidoService;
-import com.muscleshop.web.services.ProductoService;
-import com.muscleshop.web.services.RedesSocialesService;
-import com.muscleshop.web.services.RolPerfilService;
-import com.muscleshop.web.services.RolesService;
-import com.muscleshop.web.services.UbigeoService;
-import com.muscleshop.web.services.UsuarioDireccionService;
-import com.muscleshop.web.services.UsuarioPerfilService;
-import com.muscleshop.web.services.UsuarioService;
+import com.muscleshop.web.services.implementation.MenuService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -62,7 +41,7 @@ public class UsuarioController {
 	UsuarioService usuarioService;
 
 	@Autowired
-	MenuService menuService;
+	IMenuService menuService;
 
 	@Autowired
 	ProductoService productoService;
@@ -129,7 +108,7 @@ public class UsuarioController {
 	//Modelos para el menu de la barra Header Bottom
 	@ModelAttribute("menusHeader")
 	public List<Menu> menus() {
-		return menuService.listarMenu();
+		return menuService.obtenerMenus();
 	}
 
 	/*@ModelAttribute
