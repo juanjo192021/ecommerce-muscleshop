@@ -7,8 +7,8 @@
                  th:each="bannerLaptopPc : ${bannerLaptopPc}">
                 <div class="wrap-slider">
                     <img class="lazyload"
-                         th:data-src="@{'/images/slider/'+ ${bannerLaptopPc.nombre}}"
-                         th:src="@{'/images/slider/'+${bannerLaptopPc.nombre}}"
+                         th:data-src="'http://104.218.48.244:8080/apirest/api/banner/images/'+${bannerLaptopPc.nombre}"
+                         th:src="'http://104.218.48.244:8080/apirest/api/banner/images/'+${bannerLaptopPc.nombre}"
                          alt="phonecase-01">
                     <!--<div class="box-content text-center">
                         <div class="container">
