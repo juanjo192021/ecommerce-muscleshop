@@ -74,22 +74,16 @@
                             <div class="tf-product-media-wrap thumbs-bottom sticky-top">
                                 <div class="thumbs-slider">
                                     <div class="swiper tf-product-media-main" id="gallery-swiper-started">
-                                        <div class="swiper-wrapper" >
-                                            <div class="swiper-slide">
-                                                <a href="https://themesflat.co/html/ecomus/images/shop/products/p-d1.png" target="_blank" class="item" data-pswp-width="770px" data-pswp-height="1075px">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide" th:each="propiedadDetalleImagen: ${propiedadDetalleImagenes}">
+                                                <a th:href="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                   target="_blank"
+                                                   class="item"
+                                                   data-pswp-width="770px" data-pswp-height="1075px">
                                                     <img class="lazyload"
-                                                         data-src="https://themesflat.co/html/ecomus/images/shop/products/p-d1.png"
-                                                         src="https://themesflat.co/html/ecomus/images/shop/products/p-d1.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <a href="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod.jpg" target="_blank" class="item" data-pswp-width="770px" data-pswp-height="1075px">
-                                                    <img class="lazyload" data-src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod.jpg" src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <a href="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod2.jpg" target="_blank" class="item" data-pswp-width="770px" data-pswp-height="1075px">
-                                                    <img class="lazyload" data-src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod2.jpg" src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod2.jpg" alt="img-compare">
+                                                         th:data-src="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                         th:src="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                         th:alt="${propiedadDetalleImagen.nombre}">
                                                 </a>
                                             </div>
                                         </div>
@@ -99,25 +93,12 @@
 
                                     <div class="swiper tf-product-media-thumbs other-image-zoom" data-direction="horizontal">
                                         <div class="swiper-wrapper stagger-wrap">
-                                            <div class="swiper-slide stagger-item">
+                                            <div class="swiper-slide stagger-item" th:each="propiedadDetalleImagen: ${propiedadDetalleImagenes}">
                                                 <div class="item">
                                                     <img class="lazyload"
-                                                         data-src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod31.jpg"
-                                                         src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod31.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                         data-src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod.jpg"
-                                                         src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide stagger-item">
-                                                <div class="item">
-                                                    <img class="lazyload"
-                                                         data-src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod2.jpg"
-                                                         src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod2.jpg" alt="img-compare">
+                                                         th:data-src="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                         th:src="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                         th:alt="'product-'+${propiedadDetalleImagen.nombre}">
                                                 </div>
                                             </div>
                                         </div>
@@ -128,40 +109,48 @@
                         <div class="col-md-6">
                             <div class="tf-product-info-wrap position-relative">
                                 <div class="tf-zoom-main"></div>
-                                <div class="tf-product-info-list other-image-zoom">
+                                <div class="tf-product-info-list other-image-zoom" >
                                     <div class="tf-product-info-title">
-                                        <h5>Cotton jersey top</h5>
+                                        <h5 th:text="${presentacion.nombreProducto}">Cotton jersey top</h5>
                                     </div>
                                     <div class="tf-product-info-price">
-                                        <div class="price-on-sale">$8.00</div>
-                                        <div class="compare-at-price">$10.00</div>
-                                        <div class="badges-on-sale"><span>20</span>% OFF</div>
+                                        <div class="price-on-sale" th:text="${presentacion.precioReducido}">S/8.00</div>
+                                        <div class="compare-at-price" th:text="${presentacion.precio}">S/10.00</div>
+                                        <!--<div class="badges-on-sale"><span>20</span>% OFF</div>-->
                                     </div>
-                                    <div class="tf-product-info-liveview">
+                                    <!--<div class="tf-product-info-liveview">
                                         <div class="liveview-count">20</div>
                                         <p class="fw-6">People are viewing this right now</p>
-                                    </div>
-                                    <div class="tf-product-info-variant-picker">
+                                    </div>-->
+                                    <div class="tf-product-info-variant-picker" th:each="variacion , varIndex : ${variaciones} ">
                                         <div class="variant-picker-item">
-                                            <div class="variant-picker-label">
+                                            <div class="variant-picker-label" th:text="${variacion.nombreVariacion}">
                                                 Color: <span class="fw-6 variant-picker-label-value">Brown</span>
                                             </div>
                                             <div class="variant-picker-values">
-                                                <input type="radio" name="color1" id="values-brown" checked>
-                                                <label class="style-text" for="values-brown" data-value="Brown">
-                                                    <p>Brown</p>
-                                                </label>
-                                                <input type="radio" name="color1" id="values-light-purple">
+                                                <div th:each="atributo : ${variacion.atributosDto}">
+                                                    <input type="radio"
+                                                           th:name="'name-'+${variacion.idPropiedad}"
+                                                           th:id="'values-'+${atributo.nombreAtributo}"
+                                                           th:value="${atributo.id}"
+                                                           th:attr="checked=${auxiliar['variacion' + (varIndex.index + 1)] == atributo.nombreAtributo ? 'checked' : null}">
+                                                    <label class="style-text"
+                                                           th:for="'values-'+${atributo.nombreAtributo}"
+                                                           th:data-value="${atributo.nombreAtributo}">
+                                                        <p th:text="${atributo.nombreAtributo}"></p>
+                                                    </label>
+                                                </div>
+                                                <!--<input type="radio" name="color1" id="values-light-purple">
                                                 <label class="style-text" for="values-light-purple" data-value="Light Purple">
                                                     <p>Light Purple</p>
                                                 </label>
                                                 <input type="radio" name="color1" id="values-light-green">
                                                 <label class="style-text" for="values-light-green" data-value="Light Green">
                                                     <p>Light Green</p>
-                                                </label>
+                                                </label>-->
                                             </div>
                                         </div>
-                                        <div class="variant-picker-item">
+                                        <!--<div class="variant-picker-item">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="variant-picker-label">
                                                     Size: <span class="fw-6 variant-picker-label-value">S</span>
@@ -186,10 +175,10 @@
                                                     <p>XL</p>
                                                 </label>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <div class="tf-product-info-quantity">
-                                        <div class="quantity-title fw-6">Quantity</div>
+                                        <div class="quantity-title fw-6">Cantidad</div>
                                         <div class="wg-quantity">
                                             <span class="btn-quantity minus-btn">-</span>
                                             <input type="text" name="number" value="1">
@@ -198,7 +187,11 @@
                                     </div>
                                     <div class="tf-product-info-buy-button">
                                         <form class="">
-                                            <a href="javascript:void(0);" class="tf-btn btn-fill justify-content-center fw-6 fs-16 flex-grow-1 animate-hover-btn btn-add-to-cart"><span>Add to cart -&nbsp;</span><span class="tf-qty-price">$8.00</span></a>
+                                            <a href="javascript:void(0);"
+                                               class="tf-btn btn-fill justify-content-center fw-6 fs-16 flex-grow-1 animate-hover-btn btn-add-to-cart">
+                                                <span>Añadir al carrito</span>
+                                                <!--<span class="tf-qty-price">$8.00</span>-->
+                                            </a>
                                             <a href="javascript:void(0);" class="tf-product-btn-wishlist hover-tooltip box-icon bg_white wishlist btn-icon-action">
                                                 <span class="icon icon-heart"></span>
                                                 <span class="tooltip">Add to Wishlist</span>
@@ -218,7 +211,7 @@
                                     <div class="tf-product-info-extra-link">
                                         <a href="#compare_color" data-bs-toggle="modal" class="tf-product-extra-icon">
                                             <div class="icon">
-                                                <img src="images/item/compare.svg" alt="">
+                                                <img src="https://themesflat.co/html/ecomus/images/item/compare.svg" alt="">
                                             </div>
                                             <div class="text fw-6">Compare color</div>
                                         </a>
@@ -267,11 +260,11 @@
                                             <p class="fw-6">Guarantee Safe <br> Checkout</p>
                                         </div>
                                         <div class="tf-payment">
-                                            <img src="images/payments/visa.png" alt="">
-                                            <img src="images/payments/img-1.png" alt="">
-                                            <img src="images/payments/img-2.png" alt="">
-                                            <img src="images/payments/img-3.png" alt="">
-                                            <img src="images/payments/img-4.png" alt="">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/visa.png" alt="">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/img-1.png" alt="">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/img-2.png" alt="">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/img-3.png" alt="">
+                                            <img src="https://themesflat.co/html/ecomus/images/payments/img-4.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -442,15 +435,18 @@
                     </form>
                 </div>
             </div>
-            <div class="tf-sticky-btn-atc">
+
+            <!--Nav product-->
+            <!--<div class="tf-sticky-btn-atc">
                 <div class="container">
                     <div class="tf-height-observer w-100 d-flex align-items-center">
                         <div class="tf-sticky-atc-product d-flex align-items-center">
                             <div class="tf-sticky-atc-img">
+                                &lt;!&ndash;https://themesflat.co/html/ecomus/images/shop/products/p-d1.png&ndash;&gt;
                                 <img class="lazyloaded"
-                                     data-src="https://themesflat.co/html/ecomus/images/shop/products/p-d1.png"
+                                     th:data-src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}"
                                      alt=""
-                                     src="https://themesflat.co/html/ecomus/images/shop/products/p-d1.png">
+                                     th:src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}">
                             </div>
                             <div class="tf-sticky-atc-title fw-5 d-xl-block d-none">Cotton jersey top</div>
                         </div>
@@ -490,7 +486,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
+            <!--/Nav product-->
         </section>
         <!-- /default -->
         <!-- tabs -->
@@ -1506,7 +1503,7 @@
                         <div class="tf-compare-color-item">
                             <div class="tf-compare-color-top">
                                 <label for="remove-compare-color-beige-1" class="tf-compare-color-remove">Remove</label>
-                                <img class="lazyload" data-src="images/shop/products/hmgoepprod2.jpg" src="images/shop/products/hmgoepprod2.jpg" alt="img-compare">
+                                <img class="lazyload" data-src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod2.jpg" src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod2.jpg" alt="img-compare">
                             </div>
                             <div class="tf-compare-color-bottom">
                                 <div class="tf-compare-color-color">
@@ -1529,7 +1526,7 @@
                         <div class="tf-compare-color-item">
                             <div class="tf-compare-color-top">
                                 <label for="remove-compare-color-beige-2" class="tf-compare-color-remove">Remove</label>
-                                <img class="lazyload" data-src="images/shop/products/hmgoepprod12.jpg" src="images/shop/products/hmgoepprod12.jpg" alt="">
+                                <img class="lazyload" data-src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod12.jpg" src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod12.jpg" alt="">
                             </div>
                             <div class="tf-compare-color-bottom">
                                 <div class="tf-compare-color-color">
@@ -1552,7 +1549,7 @@
                         <div class="tf-compare-color-item">
                             <div class="tf-compare-color-top">
                                 <label for="remove-compare-color-beige-3" class="tf-compare-color-remove">Remove</label>
-                                <img class="lazyload" data-src="images/shop/products/hmgoepprod7.jpg" src="images/shop/products/hmgoepprod7.jpg" alt="">
+                                <img class="lazyload" data-src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod7.jpg" src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod7.jpg" alt="">
                             </div>
                             <div class="tf-compare-color-bottom">
                                 <div class="tf-compare-color-color">
@@ -1575,7 +1572,8 @@
                         <div class="tf-compare-color-item">
                             <div class="tf-compare-color-top">
                                 <label for="remove-compare-color-beige-4" class="tf-compare-color-remove">Remove</label>
-                                <img class="lazyload" data-src="images/shop/products/hmgoepprod14.jpg" src="images/shop/products/hmgoepprod14.jpg" alt="">
+                                <img class="lazyload" data-src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod14.jpg"
+                                     src="https://themesflat.co/html/ecomus/images/shop/products/hmgoepprod14.jpg" alt="">
                             </div>
                             <div class="tf-compare-color-bottom">
                                 <div class="tf-compare-color-color">
@@ -1734,6 +1732,81 @@
 
     <script type="module" th:src="@{/assets/js/model-viewer.min.js}"></script>
     <script type="module" th:src="@{/assets/js/zoom.js}"></script>
+    <script th:inline="javascript">
 
+        let auxiliar = [[${auxiliar}]];
+        let productoUrl = [[${productoUrl}]];
+        let allParams = [[${allParams}]];
+        let atributos = [];
+
+        $(document).ready(function () {
+            //Los maps son objetos literales en js
+            console.log(Object.keys(auxiliar).length)
+            for(let i=0; i <Object.keys(auxiliar).length; i++){
+                // Usamos la notación de corchetes para acceder dinámicamente a las propiedades
+                let variacionKey = 'variacion' + (i + 1); // Construimos el nombre de la propiedad.
+                let valorVariacion = auxiliar[variacionKey]; // Obtenemos el valor de esa propiedad.
+                atributos.push(valorVariacion);
+
+                // Imprimimos el valor de la variación
+                console.log(`Valor de ${variacionKey}: `, valorVariacion);
+            }
+            console.log({auxiliar});
+
+            buscarProductoPorUrl(productoUrl)
+        })
+
+        function buscarProductoPorUrl(productoUrl){
+            $.ajax({
+                type: "GET",
+                url: '/producto/buscarPorUrlProducto',
+                dataType: "json",
+                data: { productoUrl: productoUrl},
+                success: function (response) {
+                    console.log({response});
+                    //mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
+                    console.log({atributos});
+                    buscarPresentacionPorProductoIdAndValorVariaciones(response.id,atributos)
+                },
+                error: function() {
+                    console.log('Error al obtener producto');
+                }
+            });
+        }
+        function buscarPresentacionPorProductoIdAndValorVariaciones(productoId, variaciones){
+            // Serializamos la lista de variaciones en un string separado por comas
+            let variacionesStr = variaciones.join(',');
+            $.ajax({
+                type: "GET",
+                url: '/productoPropiedadesDetalles/buscarPorProductoIdAndVariaciones',
+                dataType: "json",
+                data:{ productoId: parseInt(productoId), variaciones:variacionesStr},
+                success: function (response) {
+                    console.log({response});
+                    //mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
+                    buscarImagenesPresentacionPorProductoPropiedadesDetallesId(response.id)
+                },
+                error: function() {
+                    console.log('Error al obtener producto');
+                }
+            });
+        }
+
+        function buscarImagenesPresentacionPorProductoPropiedadesDetallesId(productoPropiedadesDetallesId){
+            $.ajax({
+                type: "GET",
+                url: '/propiedadDetalleImagen/buscarPropiedadDetalleImagenesPorProductoPropiedadesDetallesId',
+                dataType: "json",
+                data:{ productoPropiedadesDetallesId: parseInt(productoPropiedadesDetallesId)},
+                success: function (response) {
+                    console.log({imagenesPresentacion: response});
+                    //mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
+                },
+                error: function() {
+                    console.log('Error al obtener producto');
+                }
+            });
+        }
+    </script>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.muscleshop.web.services.implementation;
 
 import java.util.List;
 
+import com.muscleshop.web.models.dto.ProductoCategoriaDto;
 import com.muscleshop.web.services.IProductoCategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,30 +14,32 @@ import com.muscleshop.web.models.ProductoCategoria;
 public class ProductoCategoriaService implements IProductoCategoriaService {
 
 	@Autowired
-	private IProductoCategoriaDao proCateDao;
+	private IProductoCategoriaDao iProductoCategoriaDao;
 
-	//Listar todos los productos categorías
+	private final int estadoId = 1;
+
+	//Obtener el listado de todas las categorías de productos
 	public List<ProductoCategoria> listarProductoCategoria() {
-		return proCateDao.findAll();
+		return iProductoCategoriaDao.findByEstado_Id(estadoId);
 	}
 
-	//Obtener producto categoría basado en su ID
+	//Obtener una categoría de producto por su id
 	public ProductoCategoria obtenerProductoCategoriaPorId(Integer id) {
-		return proCateDao.findById(id).orElse(null);
+		return iProductoCategoriaDao.findByIdAndEstado_Id(id, estadoId);
 	}
 
-	//Obtener producto categoría basado en su Url
+	//Obtener una categoría de producto por su url
 	public ProductoCategoria obtenerProductoCategoriaPorUrl(String categoriaUrl) {
-		return proCateDao.findByUrl(categoriaUrl);
+		return iProductoCategoriaDao.findByUrlAndEstado_Id(categoriaUrl, estadoId);
 	}
 
-	//Obtener producto categoría basado en el ID del submenú
-	public List<ProductoCategoria> listarPorMenuSubId(int menuSubId) {
-        return proCateDao.findByMenuSub_Id(menuSubId);
+	//Obtener el listado de categorías de productos por su ID del submenú
+	public List<ProductoCategoriaDto> obtenerProductoCategoriasPorMenuSubId(int menuSubId) {
+        return iProductoCategoriaDao.findByMenuSub_IdAndEstado_Id(menuSubId, estadoId);
     }
 
-	//Obtener producto categoría basado en el ID del submenú
+	//Obtener el listado de categorías de productos por su ID del menú
 	public List<ProductoCategoria> obtenerProductoCategoriaPorMenuId(int menuId) {
-        return proCateDao.findByMenuSub_Menu_Id(menuId);
+        return iProductoCategoriaDao.findByMenuSub_Menu_IdAndEstado_Id(menuId, estadoId);
     }
 }

@@ -690,8 +690,11 @@ video {
     line-height: 24px;
 }
 .text-3 {
-    font-size: 16px;
-    line-height: 19.2px;
+    //font-size: 16px;
+    //line-height: 19.2px;
+    font-size: 20px;
+    line-height: 0.5px;
+
 }
 .letter-2{
     letter-spacing: 2px;
@@ -729,7 +732,7 @@ label {
         color: var(--primary) !important;
     }
     //09/10
-    font-size: 15px;
+    font-size: 14px;
 }
 
 // grid
@@ -937,6 +940,9 @@ label {
 }
 .mb_36 {
     margin-bottom: 36px;
+}
+.mb_55{
+    margin-bottom: 55px;
 }
 .mb_60 {
     margin-bottom: 60px;

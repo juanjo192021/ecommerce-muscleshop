@@ -106,21 +106,70 @@
                     <div class="tf-shop-sidebar wrap-sidebar-mobile">
                         <div class="widget-facet wd-categories">
                             <div class="facet-title" data-bs-target="#categories" data-bs-toggle="collapse" aria-expanded="true" aria-controls="categories">
-                                <span>Product categories</span>
+                                <span th:text="${nombreMenuSub}">Product categories</span>
                                 <span class="icon icon-arrow-up"></span>
                             </div>
                             <div id="categories" class="collapse show">
                                 <ul class="list-categoris current-scrollbar mb_36">
-                                    <li class="cate-item current"><a href="#"><span>Fashion</span></a></li>
-                                    <li class="cate-item"><a href="#"><span>Men</span></a></li>
-                                    <li class="cate-item"><a href="#"><span>Women</span></a></li>
-                                    <li class="cate-item"><a href="#"><span>Denim</span></a></li>
-                                    <li class="cate-item"><a href="#"><span>Dress</span></a></li>
+                                    <li class="cate-item" th:each="categoria : ${categorias}">
+                                        <a th:href="@{'/index/'+ ${categoria.urlMenu}+ '/'+ ${categoria.urlMenuSub} + '/' +${categoria.urlCategoria}}">
+                                            <span th:text="${categoria.nombreCategoria}">Dress</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
+
+                        <div class="widget-facet wd-categories">
+                            <div class="facet-title" data-bs-target="#otras-categorias" data-bs-toggle="collapse" aria-expanded="true" aria-controls="otras-categorias">
+                                <span>Otras Categorías</span>
+                                <span class="icon icon-arrow-up"></span>
+                            </div>
+                            <div id="otras-categorias" class="collapse show">
+                                <ul class="list-categoris current-scrollbar mb_36">
+                                    <li class="cate-item" th:each="otraCategoria : ${otrasCategorias}">
+                                        <a th:href="@{'/index/'+ ${otraCategoria.urlMenu}+ '/'+ ${otraCategoria.urlMenuSub}}">
+                                            <span th:text="${otraCategoria.nombreMenuSub}">Dress</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="widget-facet wd-categories">
+                            <div class="facet-title" data-bs-target="#por-objetivos" data-bs-toggle="collapse" aria-expanded="true" aria-controls="por-objetivos">
+                                <span>Por Objetivos</span>
+                                <span class="icon icon-arrow-up"></span>
+                            </div>
+                            <div id="por-objetivos" class="collapse show">
+                                <ul class="list-categoris current-scrollbar mb_36">
+                                    <li class="cate-item" th:each="porObjetivo : ${porObjetivos}">
+                                        <a th:href="@{'/index/'+ ${porObjetivo.urlMenu}+ '/'+ ${porObjetivo.urlMenuSub}}">
+                                            <span th:text="${porObjetivo.nombreMenuSub}">Dress</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="widget-facet wd-categories">
+                            <div class="facet-title" data-bs-target="#por-marcas" data-bs-toggle="collapse" aria-expanded="true" aria-controls="por-marcas">
+                                <span>Por Marcas</span>
+                                <span class="icon icon-arrow-up"></span>
+                            </div>
+                            <div id="por-marcas" class="collapse show">
+                                <ul class="list-categoris current-scrollbar mb_36">
+                                    <li class="cate-item" th:each="porMarca : ${porMarcas}">
+                                        <a th:href="@{'/index/'+ ${porMarca.urlMenu}+ '/'+ ${porMarca.urlMenuSub}}">
+                                            <span th:text="${porMarca.nombreMenuSub}">Dress</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                         <form action="#" id="facet-filter-form" class="facet-filter-form">
-                            <div class="widget-facet">
+                            <!--<div class="widget-facet">
                                 <div class="facet-title" data-bs-target="#availability" data-bs-toggle="collapse" aria-expanded="true" aria-controls="availability">
                                     <span>Availability</span>
                                     <span class="icon icon-arrow-up"></span>
@@ -137,7 +186,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="widget-facet wrap-price">
                                 <div class="facet-title" data-bs-target="#price" data-bs-toggle="collapse" aria-expanded="true" aria-controls="price">
                                     <span>Price</span>
@@ -149,28 +198,35 @@
                                             <div class="progress-price"></div>
                                         </div>
                                         <div class="range-input">
-                                            <input class="range-min" type="range" min="0" max="300" value="0"/>
-                                            <input class="range-max" type="range" min="0" max="300" value="300"/>
+                                            <input class="range-min" type="range" min="0" max="1000" value="0"/>
+                                            <input class="range-max" type="range" min="0" max="1000" value="1000"/>
                                         </div>
                                         <div class="box-title-price">
-                                            <span class="title-price">Price :</span>
+                                            <span class="title-price">Precio :</span>
                                             <div class="caption-price">
                                                 <div>
-                                                    <span>$</span>
+                                                    <span>S/</span>
                                                     <span class="min-price">0</span>
                                                 </div>
                                                 <span>-</span>
                                                 <div>
-                                                    <span>$</span>
-                                                    <span class="max-price">300</span>
+                                                    <span>S/</span>
+                                                    <span class="max-price">1000</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div>
+                                            <button id="btn-aplicar-filtros"
+                                                    class="btn btn-primary"
+                                                    type="button">
+                                                Aplicar Filtros
+                                            </button>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="widget-facet">
+                            <!--<div class="widget-facet">
                                 <div class="facet-title" data-bs-target="#brand" data-bs-toggle="collapse" aria-expanded="true" aria-controls="brand">
                                     <span>Brand</span>
                                     <span class="icon icon-arrow-up"></span>
@@ -187,8 +243,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="widget-facet">
+                            </div>-->
+                            <!--<div class="widget-facet">
                                 <div class="facet-title" data-bs-target="#color" data-bs-toggle="collapse" aria-expanded="true" aria-controls="color">
                                     <span>Color</span>
                                     <span class="icon icon-arrow-up"></span>
@@ -281,8 +337,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="widget-facet">
+                            </div>-->
+                            <!--<div class="widget-facet">
                                 <div class="facet-title" data-bs-target="#size" data-bs-toggle="collapse" aria-expanded="true" aria-controls="size">
                                     <span>Size</span>
                                     <span class="icon icon-arrow-up"></span>
@@ -307,19 +363,22 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>-->
                         </form>
                     </div>
                     <div class="tf-shop-content wrapper-control-shop">
                         <div class="meta-filter-shop"></div>
-                        <div class="grid-layout wrapper-shop" data-grid="grid-3">
+                        <div class="grid-layout wrapper-shop" data-grid="grid-3" id="contenedor-producto">
                             <!-- card product 1 -->
                             <div th:each="producto : ${productos}"
                                  class="card-product"
                                  data-price="16.95"
                                  data-color="orange black white">
                                 <div class="card-product-wrapper">
-                                    <a th:href="@{/index/product-detail}" class="product-img">
+                                    <a th:href="@{'/index/' + ${menuUrl} + '/' + ${menuSubUrl} + '/' + ${producto.urlCategoria} + '/' + ${producto.urlProducto} (sku=${producto.skuProductoPropiedadesDetalles}) }"
+                                       class="product-img product-link"
+                                       th:data-variaciones="${#strings.listJoin(producto.variaciones, ',')}">
+
                                         <!--https://themesflat.co/html/ecomus/images/products/orange-1.jpg-->
                                         <!--https://themesflat.co/html/ecomus/images/products/white-1.jpg-->
                                         <img class="lazyload img-product"
@@ -354,11 +413,32 @@
                                 </div>
                                 <div class="card-product-info">
                                     <a href="product-detail.html"
-                                       class="title link"
+                                       class="title link text-center"
                                        th:text="${producto.nombre}">
                                         Ribbed Tank Top
                                     </a>
-                                    <span class="price">$16.95</span>
+                                    <a href="product-detail.html"
+                                       class="title link text-center"
+                                       th:each="variacion: ${producto.variaciones}"
+                                       th:text="${variacion}">
+                                        Trouble - iPhone Case
+                                    </a>
+                                    <div class="d-flex flex-row justify-content-evenly">
+                                        <p class="d-flex flex-column">
+                                            Precio Regular:
+                                            <span class="price"
+                                                  th:text="'S/. ' + ${#numbers.formatDecimal(producto.precio,3,2,'POINT')}">
+                                                    $30.00
+                                                </span>
+                                        </p>
+                                        <p class="d-flex flex-column">
+                                            Precio Reducido:
+                                            <span class="price"
+                                                  th:text="'S/. ' + ${#numbers.formatDecimal(producto.precioReducido,3,2,'POINT')}">
+                                                    $30.00
+                                                </span>
+                                        </p>
+                                    </div>
                                     <!--<ul class="list-color-product">
                                         <li class="list-color-item color-swatch active">
                                             <span class="tooltip">Orange</span>
@@ -1133,5 +1213,146 @@
     <script type="text/javascript" th:src="@{/assets/js/wow.min.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/multiple-modal.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+    <script th:inline="javascript">
+
+        let menuUrl = [[${menuUrl}]];
+        let menuSubUrl = [[${menuSubUrl}]];
+
+        //var _PaginaActual = 1;
+
+        $(document).ready(function () {
+            //MostrarCategorias();
+            //MostrarProductos(0, 0)
+            //console.log(rutaGeneral+ruta)
+            let precioMinimo = $(".min-price").text();
+            let precioMaximo = $(".max-price").text();
+            buscarMenuSubPorUrl(menuSubUrl, precioMinimo, precioMaximo);
+        })
+
+        function buscarMenuSubPorUrl(menuSubUrl, precioMinimo, precioMaximo){
+            $.ajax({
+                type: "GET",
+                url: '/menuSub/obtenerPorUrl',
+                dataType: "json",
+                data: { menuSubUrl: menuSubUrl},
+                success: function (response) {
+                    console.log({response});
+                    mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
+                },
+                error: function() {
+                    console.log('Error al obtener sub menu');
+                }
+            });
+        }
+
+        function mostrarProductoNuevo(menuSubId, precioMinimo, precioMaximo) {
+
+            //let urlImagenesProductos='http://104.218.48.244:8080/apirest/devadmin/productos/images/';
+            let urlImagenesProductos='http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/';
+
+            console.log(parseFloat(precioMinimo))
+            console.log(parseFloat(precioMaximo))
+
+            $.ajax({
+                type: "GET",
+                url: '/producto/obtenerProductos',
+                dataType: "json",
+                data: { menuSubId: parseInt(menuSubId), minPrecio: parseFloat(precioMinimo), maxPrecio:parseFloat(precioMaximo)},
+                success: function (response) {
+                    console.log({response});
+                    $("#contenedor-producto").html("");
+                    $.each(response, function (i, element) {
+                        // Generar los parámetros de variaciones dinámicamente
+                        let variacionesParams = element.variaciones.map(function (v, i) {
+                            return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
+                        }).join('&');
+
+                        // Creamos el contenedor principal para el producto
+                        let productoCard = $("<div>").addClass("card-product").attr({
+                            "data-price": element.precioReducido,
+                            "data-color": "orange black white"
+                        });
+
+                        // Creamos el wrapper de la imagen
+                        let cardWrapper = $("<div>").addClass("card-product-wrapper").append(
+                            //AQUÍ
+                            $("<a>").addClass("product-img product-link").attr({
+                                "href": "/"+menuUrl+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                    element.urlProducto+"?sku="+element.skuProductoPropiedadesDetalles+"&"+variacionesParams,
+                            }).append(
+                                $("<img>").addClass("lazyload img-product").attr({
+                                    "data-src": urlImagenesProductos + element.imagen,
+                                    "src": urlImagenesProductos + element.imagen,
+                                    "alt": element.nombre
+                                }),
+                                $("<img>").addClass("lazyload img-hover").attr({
+                                    "data-src": urlImagenesProductos + element.imagen,
+                                    "src": urlImagenesProductos + element.imagen,
+                                    "alt": element.nombre
+                                })
+                            )
+                        );
+
+                        // Creamos el contenedor de la información del producto
+                        let cardInfo = $("<div>").addClass("card-product-info").append(
+                            $("<a>").addClass("title link text-center").text(element.nombre)
+                        );
+
+
+                        // Iteramos sobre las variaciones y las agregamos al contenedor
+
+                        $.each(element.variaciones, function (j, variacion) {
+                            // Agregamos cada variación como un enlace o texto
+                            cardInfo.append(
+                                $("<a>").addClass("title link text-center").text(variacion)
+                            );
+                        });
+
+                        let priceProduct = $("<div>").addClass("d-flex flex-row justify-content-evenly").append(
+                            $("<p>").addClass("d-flex flex-column").text("Precio Regular:").append(
+                                $("<span>").addClass("price").text(parseFloat(element.precio).toFixed(2))
+                            ),
+                            $("<p>").addClass("d-flex flex-column").text("Precio Reducido:").append(
+                                $("<span>").addClass("price").text(parseFloat(element.precioReducido).toFixed(2))
+                            )
+                        )
+                        // Agregamos el contenedor de variaciones al contenedor de información del producto
+                        cardInfo.append(priceProduct);
+
+                        // Finalmente, ensamblamos toda la tarjeta del producto
+                        productoCard.append(cardWrapper).append(cardInfo);
+
+                        // Agregamos la tarjeta del producto al contenedor principal
+                        $("#contenedor-producto").append(productoCard);
+                    })
+                },
+                error: function() {
+                    console.log('Error al obtener el productos');
+                }
+            });
+        }
+
+        $("#btn-aplicar-filtros").click(function () {
+            let precioMinimo = $(".min-price").text();
+            let precioMaximo = $(".max-price").text();
+            buscarMenuSubPorUrl(menuSubUrl, precioMinimo, precioMaximo);
+        })
+
+        //NECESITO que esto se agregue dinamicamiente a mi url  unos request params dinamicos
+        document.addEventListener("DOMContentLoaded", function() {
+            var links = document.querySelectorAll('.product-link');
+            links.forEach(function(link) {
+                var variaciones = link.getAttribute('data-variaciones').split(',');
+                if (variaciones.length > 0) {
+                    var queryParams = variaciones.map(function(v, i) {
+                        return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
+                    }).join('&');
+
+                    // Modificar el href con los parámetros de variación
+                    link.href = link.href + '&' + queryParams;
+                }
+            });
+        });
+    </script>
 </body>
 </html>

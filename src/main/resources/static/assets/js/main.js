@@ -256,33 +256,43 @@
     const maxPrice = document.querySelector('.max-price')
 
     let priceGap = 10
+    let timer // Variable para el temporizador
 
     rangeInput.forEach(input => {
         input.addEventListener('input', e => {
-            let minValue = parseInt(rangeInput[0].value, 10)
-            let maxValue = parseInt(rangeInput[1].value, 10)
+          let minValue = parseInt(rangeInput[0].value, 10)
+          let maxValue = parseInt(rangeInput[1].value, 10)
 
-            if (maxValue - minValue < priceGap) {
-                if (e.target.class === 'range-min') {
-                    rangeInput[0].value = maxValue - priceGap
-                } else {
-                    rangeInput[1].value = minValue + priceGap
-                }
-            } else {
-                progress.style.left = (minValue / rangeInput[0].max) * 100 + "%";
-                progress.style.right = 100 - (maxValue / rangeInput[1].max) * 100 + "%";
-            }
+          if (maxValue - minValue < priceGap) {
+              if (e.target.class === 'range-min') {
+                  rangeInput[0].value = maxValue - priceGap
+              } else {
+                  rangeInput[1].value = minValue + priceGap
+              }
+          } else {
+              progress.style.left = (minValue / rangeInput[0].max) * 100 + "%";
+              progress.style.right = 100 - (maxValue / rangeInput[1].max) * 100 + "%";
+          }
 
-            minPrice.innerHTML = minValue
-            maxPrice.innerHTML = maxValue
+          minPrice.innerHTML = minValue
+          maxPrice.innerHTML = maxValue
 
-            if (minValue >= 290) {
-                minPrice.innerHTML = 290
-            }
+          if (minValue >= 290) {
+              minPrice.innerHTML = 290
+          }
 
-            if (maxValue <= 10) {
-                maxPrice.innerHTML = 10
-            }
+          if (maxValue <= 10) {
+              maxPrice.innerHTML = 10
+          }
+
+          // Limpiar cualquier temporizador anterior
+          clearTimeout(timer)
+
+          // Esperar 2 segundos y luego mostrar los valores en el console.log
+          timer = setTimeout(() => {
+            console.log(`Min Price: ${minPrice.innerHTML}, Max Price: ${maxPrice.innerHTML}`)
+            console.log(`Min Price: ${minPrice.innerHTML}, Max Price: ${maxPrice.innerHTML}`)
+          }, 2000) // 2000 ms = 2 segundos
         })
     })
 
@@ -382,6 +392,8 @@
   /* variant picker
   -------------------------------------------------------------------------*/
   var variant_picker = function () {
+
+/*
     if ($(".variant-picker-item").length) {
       $(".variant-picker-item label").on("click", function (e) {
         $(this)
@@ -390,6 +402,70 @@
           .text($(this).data("value"));
       });
     }
+*/
+/*
+    if ($(".variant-picker-item").length) {
+      // Controlador de eventos para los inputs de tipo radio
+      $(".variant-picker-item input[type='radio']").on("change", function (e) {
+        // Obtener el valor seleccionado del radio button
+        var selectedValue = $(this).val();
+        var selectedLabel = $(this).closest(".variant-picker-values").find("label[for='" + $(this).attr("id") + "'] p").text();
+
+        // Actualizar el texto de la etiqueta de variación
+        $(this).closest(".variant-picker-item")
+            .find(".variant-picker-label-value")
+            .text(selectedLabel);
+
+        // Mostrar en el console.log el valor seleccionado y su etiqueta
+        console.log("Selected Value:", selectedValue);
+        console.log("Selected Label:", selectedLabel);
+      });
+    }
+    */
+
+// Crear un objeto para almacenar las selecciones
+    var selectedVariants = {};
+
+// Inicializar el evento de selección de inputs tipo radio
+    if ($(".variant-picker-item").length) {
+      $(".variant-picker-item input[type='radio']").on("change", function (e) {
+        // Obtener el ID de la propiedad (idPropiedad) desde el atributo 'name'
+        var propiedadId = $(this).attr('name').split('-')[1]; // Extrae el ID de la propiedad del 'name'
+        var selectedValue = $(this).val();
+        var selectedLabel = $(this).closest(".variant-picker-values").find("label[for='" + $(this).attr("id") + "'] p").text();
+
+        // Actualizar la etiqueta de la variación en la vista
+        $(this).closest(".variant-picker-item")
+            .find(".variant-picker-label-value")
+            .text(selectedLabel);
+
+        // Almacenar la selección en el objeto selectedVariants
+        selectedVariants[propiedadId] = {
+          value: selectedValue,
+          label: selectedLabel
+        };
+
+        // Verificar si todos los inputs han sido seleccionados
+        var allSelected = true;
+        $(".variant-picker-item").each(function () {
+          // Verificar si hay algún input seleccionado en este bloque de variación
+          var radioChecked = $(this).find('input[type="radio"]:checked');
+          var propiedadIdCheck = $(this).find('input[type="radio"]').attr('name').split('-')[1];
+
+          // Si no hay un input seleccionado, marcar allSelected como falso
+          if (radioChecked.length === 0) {
+            allSelected = false;
+            console.log("No se seleccionó una opción en propiedadIdCheck: " + propiedadIdCheck);
+          }
+        });
+
+        // Si todos los inputs han sido seleccionados, mostrar en el console.log
+        if (allSelected) {
+          console.log("All Variants Selected:", selectedVariants);
+        }
+      });
+    }
+
   };
 
   /* switch layout

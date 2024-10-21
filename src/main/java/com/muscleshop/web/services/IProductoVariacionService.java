@@ -7,7 +7,7 @@ import com.muscleshop.web.models.dto.VariacionDto;
 import java.util.List;
 
 public interface IProductoVariacionService {
-    List<VariacionDto> obtenerProductoVariacion(Integer id);
+    List<VariacionDto> obtenerProductoVariacion(Integer productoId);
 
     List<ProductoVariacion> pruebasProductoVariaciones();
 }

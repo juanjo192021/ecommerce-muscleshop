@@ -55,28 +55,28 @@ public class Security {
 
 		//Quitarle acceso al método login del LoginController "/login"
 		http.authorizeHttpRequests((auth) -> auth
-						.requestMatchers("/index/**", "/usuario/**", "/ejemplo/**").permitAll()
-						.requestMatchers("/index/porProducto").hasAnyAuthority("ROLE_CLIENTE", "ROLE_ADMIN")
+						.requestMatchers("/**", "/usuario/**","/producto/**","/productoPropiedadesDetalles/**", "/ejemplo/**").permitAll()
+						.requestMatchers("/porProducto").hasAnyAuthority("ROLE_CLIENTE", "ROLE_ADMIN")
 						.anyRequest()
 						.authenticated())
 				.formLogin((login) -> login
 						//Pero aquí llamarlo
 						.loginPage("/login")
 						/*.loginProcessingUrl("/sign-in")*/
-						.defaultSuccessUrl("/index/inicio", true)
-						.failureUrl("/index/inicio?error=true")
+						.defaultSuccessUrl("/", true)
+						.failureUrl("/?error=true")
 						.permitAll())
 				.logout((logout) -> logout
 						.invalidateHttpSession(true)
 						.deleteCookies("JSESSIONID")
 						.clearAuthentication(true)
 						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-						.logoutSuccessUrl("/index/inicio"))
+						.logoutSuccessUrl("/"))
 				.exceptionHandling((exceptions) -> exceptions
 						.accessDeniedPage("/403"))
 				.oauth2Login((oauth2Login) -> oauth2Login
 						.loginPage("/login")
-						.defaultSuccessUrl("/index/inicio", true)
+						.defaultSuccessUrl("/", true)
 						.permitAll());
 
 		return http.build();
@@ -108,7 +108,7 @@ public class Security {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080","http://104.218.48.244:8080"));
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080/","http://104.218.48.244:8080"));
 		configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));

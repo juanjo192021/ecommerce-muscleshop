@@ -1,5 +1,6 @@
 package com.muscleshop.web.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -17,13 +18,7 @@ public class ProductoPropiedadesDetalles {
 	@JoinColumn(name = "producto_id")
 	private Producto producto;
 
-/*	@ManyToOne
-	@JoinColumn(name = "variacion_1")
-	private ProductoVariacion productoVariacion1;
-
-	@ManyToOne
-	@JoinColumn(name = "variacion_2")
-	private ProductoVariacion productoVariacion2;*/
+	private String sku;
 	private String imagen;
 	private Integer stock;
 	private Double precio;
@@ -42,6 +37,7 @@ public class ProductoPropiedadesDetalles {
 
 	@OneToMany
 	@JoinColumn(name = "producto_propiedad_detalle_id")
+	@JsonIgnore
 	private List<PropiedadDetalleImagen> propiedadesDetallesImagenes;
 
 	@ManyToOne
@@ -76,21 +72,13 @@ public class ProductoPropiedadesDetalles {
 		this.producto = producto;
 	}
 
-/*	public ProductoVariacion getProductoVariacion1() {
-		return productoVariacion1;
+	public String getSku() {
+		return sku;
 	}
 
-	public void setProductoVariacion1(ProductoVariacion productoVariacion1) {
-		this.productoVariacion1 = productoVariacion1;
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
-
-	public ProductoVariacion getProductoVariacion2() {
-		return productoVariacion2;
-	}
-
-	public void setProductoVariacion2(ProductoVariacion productoVariacion2) {
-		this.productoVariacion2 = productoVariacion2;
-	}*/
 
 	public Double getPrecio() {
 		return precio;

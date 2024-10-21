@@ -7,6 +7,7 @@ import java.util.List;
 import com.muscleshop.web.models.Producto;
 import com.muscleshop.web.models.ProductoMenuSub;
 import com.muscleshop.web.models.ProductoPropiedadesDetalles;
+import com.muscleshop.web.models.dto.PresentacionDto;
 import com.muscleshop.web.models.dto.ProductoCarritoDto;
 import com.muscleshop.web.models.dto.ProductoItemsDto;
 import com.muscleshop.web.services.IProductoPropiedadesDetallesService;
@@ -28,38 +29,6 @@ public class ProductoPropiedadDetalleService implements IProductoPropiedadesDeta
 		return obtenerProductosItemsModificados(productoPropiedadesDetalles);
 	}
 
-	/*public List<ProductoPropiedadesDetalles> listarProDetPro() {
-		return productoProDetDao.findAll();
-	}
-
-	public ProductoPropiedadesDetalles listarPorID(Integer id) {
-		return productoProDetDao.findById(id).orElse(null);
-	}*/
-	
-/*	public List<ProductoPropiedadesDetalles> obtenerProductosPorIdPresentacion(int idPresentacion) {
-	    return productoProDetDao.findByPropiedadesDetallesId(idPresentacion);
-	}*/
-	
-/*
-	public List<ProductoPropiedadesDetalles> obtenerPorTipoDePropiedad(int productoId, int tipoPropiedadId) {
-        return productoProDetDao.findByProductoIdAndPropiedadesDetalles_Propiedades_Id(productoId, tipoPropiedadId);
-    }
-*/
-
-
-
-/*	public List<ProductoPropiedadesDetalles> findByMenuSubUrl(String menuSubUrl, Integer estado){
-		return productoProDetDao.findByMenuSubUrl(menuSubUrl, estado);
-	}
-
-	public List<ProductoPropiedadesDetalles> findByCategoriaUrl(String categoriaUrl, Integer estado){
-		return productoProDetDao.findByCategoriaUrl(categoriaUrl, estado);
-	}
-
-	public ProductoPropiedadesDetalles obtenerProductoPropiedadDetallePorVariaciones(Integer productoId, Integer propiedadesDetallesId, Integer propiedadesDetallesId2){
-		return productoProDetDao.findByPropiedadesDetallesAndProductoId(productoId, propiedadesDetallesId, propiedadesDetallesId2);
-	}
-*/
 	public List<ProductoItemsDto> obtenerProductosIndividualesPorMenuSubId(Double minPrecio, Double maxPrecio, Integer menuSubId) {
 
 		List<ProductoPropiedadesDetalles> productos = new ArrayList<>();
@@ -73,6 +42,7 @@ public class ProductoPropiedadDetalleService implements IProductoPropiedadesDeta
 		}
 		return obtenerProductosItemsModificados(productos);
 	}
+
 	public List<ProductoItemsDto> obtenerProductosIndividualesPorCategoriaId (Double minPrecio, Double maxPrecio,Integer categoriaId){
 
 		List<ProductoPropiedadesDetalles> productos = new ArrayList<>();
@@ -155,4 +125,17 @@ public class ProductoPropiedadDetalleService implements IProductoPropiedadesDeta
 
 		return productosIndividuales;
 	}
+
+	// Método para obtener una presentacion de un producto por su id de producto,
+	// sku de la presentación y el estado de la presentación del producto
+	public PresentacionDto obtenerPresentacionPorIdProductoAndSkuProductoPropiedadesDetalles(int productoId, String sku ){
+		return iProductoPropiedadesDetallesDao.findPresentacionByIdProductoAndSku(productoId, sku, estadoId);
+	}
+
+	@Override
+	public PresentacionDto obtenerPresentacionPorIdProductoAndVariaciones(int productoId, List<String> variaciones) {
+		return iProductoPropiedadesDetallesDao.findPresentacionByIdProductoAndVariacionesValor(productoId, variaciones, variaciones.size() ,estadoId);
+	}
+
+
 }

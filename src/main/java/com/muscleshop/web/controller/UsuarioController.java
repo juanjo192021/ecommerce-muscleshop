@@ -318,7 +318,7 @@ public class UsuarioController {
 			e.printStackTrace();
 		}
 
-		PreferenceResponse response = new PreferenceResponse(preferenceId);
+		PreferenceResponse response = new PreferenceResponse(preferenceId, 1);
 		return ResponseEntity.ok(response) ;
 	}
 

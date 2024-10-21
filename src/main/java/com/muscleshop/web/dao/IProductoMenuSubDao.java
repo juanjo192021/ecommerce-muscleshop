@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface IProductoMenuSubDao extends JpaRepository<ProductoMenuSub, Integer> {
     List<ProductoMenuSub> findByProductoCategoria_MenuSub_IdAndProductoCategoria_MenuSub_Estado_Id_AndProductoCategoria_Estado_Id(int menuSubId, int menuSubEstadoId, int productoCategoriaEstadoId);
+    List<ProductoMenuSub> findByProductoCategoria_MenuSub_Id(int menuSubId);
+    List<ProductoMenuSub> findByProductoCategoria_Id(int productoCategoriaId);
 }

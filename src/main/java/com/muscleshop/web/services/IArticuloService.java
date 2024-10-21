@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IArticuloService {
     List<Articulo> obtenerArticulos();
-    List<Articulo> obtenerArticulosPorCantidad(Integer cantidad);
+    List<Articulo> obtenerArticulosPorCantidad();
     Articulo obtenerArticuloPorID(Integer id);
 }

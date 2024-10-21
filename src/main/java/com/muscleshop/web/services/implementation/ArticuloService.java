@@ -16,15 +16,16 @@ public class ArticuloService implements IArticuloService {
 	@Autowired
 	private IArticuloDao articuloDao;
 
-	private Integer estadoId = 1;
+	private int estadoId = 1;
+	private int cantidadArticulos = 6;
 
 	public List<Articulo> obtenerArticulos() {
 		return articuloDao.findAll();
 	}
 
-	public List<Articulo> obtenerArticulosPorCantidad(Integer cantidad) {
+	public List<Articulo> obtenerArticulosPorCantidad() {
 		// Crear un Pageable con el tamaño deseado
-		PageRequest pageable = PageRequest.of(0, cantidad);
+		PageRequest pageable = PageRequest.of(0, cantidadArticulos);
 		// Llamar al repositorio con el estado deseado y el Pageable
 		return  articuloDao.findAllByEstado_IdOrderByIdDesc(estadoId, pageable);
 	}

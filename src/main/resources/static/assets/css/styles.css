@@ -40,7 +40,7 @@
 :root {
   --main: #000000;
   --white: #ffffff;
-  --primary: #db1215;
+  --primary: #a8a8a8;
   --red_1: #db1215;
   --backdrop: rgba(0, 0, 0, 0.5);
   --main-rgba-1: rgba(0, 0, 0, 0.16);
@@ -922,8 +922,8 @@ video {
 }
 
 .text-3 {
-  font-size: 16px;
-  line-height: 19.2px;
+  font-size: 20px;
+  line-height: 0.5px;
 }
 
 .letter-2 {
@@ -974,7 +974,7 @@ label {
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  font-size: 15px;
+  font-size: 14px;
 }
 .link:hover {
   color: var(--primary) !important;
@@ -1230,6 +1230,10 @@ label {
 
 .mb_36 {
   margin-bottom: 36px;
+}
+
+.mb_55 {
+  margin-bottom: 55px;
 }
 
 .mb_60 {
@@ -14360,7 +14364,7 @@ blockquote .text {
     line-height: 24px;
   }
   .logo-header img {
-    width: 136px;
+    width: 200px;
   }
   .canvas-mb {
     width: 100% !important;
@@ -15926,7 +15930,7 @@ blockquote .text {
     padding-left: 0;
   }
   .tf-content-wrap .heading {
-    font-size: 52px;
+    font-size: 40px;
     line-height: 62.4px;
   }
   .tf-content-wrap .heading.fs-42 {

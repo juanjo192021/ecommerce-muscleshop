@@ -7,8 +7,7 @@ import com.muscleshop.web.dao.IProductoMenuSubDao;
 import com.muscleshop.web.dao.IProductoPropiedadesDetallesDao;
 import com.muscleshop.web.dao.IProductoPropiedadesDetallesVariacionDao;
 import com.muscleshop.web.models.*;
-import com.muscleshop.web.models.dto.ProductoCarritoDto;
-import com.muscleshop.web.models.dto.ProductoItemsDto;
+import com.muscleshop.web.models.dto.ProductoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,14 +47,52 @@ public class ProductoService {
 		return productoDao.buscarProducto(nombre);
 	}
 
+	public List<ProductoDto> obtenerProductosItemsIndividialesPorMenuSubId(int menuSubId , double minPrecio, double maxPrecio){
 
-	public List<ProductoDto> obtenerProductosItemsIndividualesPorForma() {
 		List<ProductoDto> productosFinales = new ArrayList<>();
+		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductoCategoria_MenuSub_Id(menuSubId);
 
-		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductoCategoria_MenuSub_IdAndProductoCategoria_MenuSub_Estado_Id_AndProductoCategoria_Estado_Id(4,1,1);
 		for (ProductoMenuSub productoMenuSub : productos) {
 			ProductoCategoria categoria = productoMenuSub.getProductoCategoria();
-			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProducto_IdAndProductoForma_Id(productoMenuSub.getProducto().getId(),2);
+			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(),minPrecio,maxPrecio,2,1);
+
+			for (ProductoPropiedadesDetalles detalle : propiedadesDetalles) {
+				ProductoDto productoDTO = new ProductoDto();
+				productoDTO.setId(productoMenuSub.getProducto().getId());
+				productoDTO.setNombre(productoMenuSub.getProducto().getNombre());
+				productoDTO.setUrlProducto(productoMenuSub.getProducto().getUrl());
+				productoDTO.setImagen(detalle.getImagen());
+				productoDTO.setNombreCategoria(categoria.getNombre());
+				productoDTO.setUrlCategoria(categoria.getUrl());
+				productoDTO.setNombreMenuSub(categoria.getMenuSub().getNombre());
+				productoDTO.setUrlMenuSub(categoria.getMenuSub().getUrl());
+				productoDTO.setProductoPropiedadDetalleId(detalle.getId());
+				productoDTO.setSkuProductoPropiedadesDetalles(detalle.getSku());
+				productoDTO.setPrecio(detalle.getPrecio());
+				productoDTO.setPrecioReducido(detalle.getPrecioReducido());
+				productoDTO.setStock(detalle.getStock());
+
+				// Obtener las variaciones respetando el orden de creación
+				List<String> variaciones = obtenerVariaciones(detalle.getId());
+				productoDTO.setVariacion(String.join(" ", variaciones));
+				productoDTO.setVariaciones(variaciones);
+
+				productosFinales.add(productoDTO);
+			}
+		}
+
+		return productosFinales;
+	}
+
+
+	public List<ProductoDto> obtenerProductosItemsIndividialesPorCategoriaId(int productoCategoriaId){
+
+		List<ProductoDto> productosFinales = new ArrayList<>();
+		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductoCategoria_Id(productoCategoriaId);
+
+		for (ProductoMenuSub productoMenuSub : productos) {
+			ProductoCategoria categoria = productoMenuSub.getProductoCategoria();
+			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(),0,1000,2,1);
 
 			for (ProductoPropiedadesDetalles detalle : propiedadesDetalles) {
 				ProductoDto productoDTO = new ProductoDto();
@@ -68,6 +105,7 @@ public class ProductoService {
 				productoDTO.setNombreMenuSub(categoria.getMenuSub().getNombre());
 				productoDTO.setUrlMenuSub(categoria.getMenuSub().getUrl());
 				productoDTO.setProductoPropiedadDetalleId(detalle.getId());
+				productoDTO.setSkuProductoPropiedadesDetalles(detalle.getSku());
 				productoDTO.setPrecio(detalle.getPrecio());
 				productoDTO.setPrecioReducido(detalle.getPrecioReducido());
 				productoDTO.setStock(detalle.getStock());
@@ -75,12 +113,52 @@ public class ProductoService {
 				// Obtener las variaciones respetando el orden de creación
 				List<String> variaciones = obtenerVariaciones(detalle.getId());
 				productoDTO.setVariacion(String.join(" ", variaciones));
+				productoDTO.setVariaciones(variaciones);
+
+				productosFinales.add(productoDTO);
+			}
+		}
+
+		return productosFinales;
+	}
+
+
+	public List<ProductoDto> obtenerProductosItemsIndividualesPorForma() {
+		List<ProductoDto> productosFinales = new ArrayList<>();
+
+		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductoCategoria_MenuSub_IdAndProductoCategoria_MenuSub_Estado_Id_AndProductoCategoria_Estado_Id(4,1,1);
+		for (ProductoMenuSub productoMenuSub : productos) {
+			ProductoCategoria categoria = productoMenuSub.getProductoCategoria();
+			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(),1,100,2,1);
+
+			for (ProductoPropiedadesDetalles detalle : propiedadesDetalles) {
+				ProductoDto productoDTO = new ProductoDto();
+				productoDTO.setId(productoMenuSub.getProducto().getId());
+				productoDTO.setNombre(productoMenuSub.getProducto().getNombre());
+				productoDTO.setUrlProducto(productoMenuSub.getProducto().getUrl());
+				productoDTO.setImagen(productoMenuSub.getProducto().getImagen());
+				productoDTO.setNombreCategoria(categoria.getNombre());
+				productoDTO.setUrlCategoria(categoria.getUrl());
+				productoDTO.setNombreMenuSub(categoria.getMenuSub().getNombre());
+				productoDTO.setUrlMenuSub(categoria.getMenuSub().getUrl());
+				productoDTO.setProductoPropiedadDetalleId(detalle.getId());
+				productoDTO.setSkuProductoPropiedadesDetalles(detalle.getSku());
+				productoDTO.setPrecio(detalle.getPrecio());
+				productoDTO.setPrecioReducido(detalle.getPrecioReducido());
+				productoDTO.setStock(detalle.getStock());
+
+				// Obtener las variaciones respetando el orden de creación
+				List<String> variaciones = obtenerVariaciones(detalle.getId());
+				productoDTO.setVariacion(String.join(" ", variaciones));
+				productoDTO.setVariaciones(variaciones);
 
 				productosFinales.add(productoDTO);
 			}
 		}
 		return productosFinales;
 	}
+
+
 
 	List<String> obtenerVariaciones(Integer detalleId) {
 		List<String> variaciones = new ArrayList<>();

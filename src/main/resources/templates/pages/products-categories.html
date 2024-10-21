@@ -106,16 +106,64 @@
                     <div class="tf-shop-sidebar wrap-sidebar-mobile">
                         <div class="widget-facet wd-categories">
                             <div class="facet-title" data-bs-target="#categories" data-bs-toggle="collapse" aria-expanded="true" aria-controls="categories">
-                                <span>Product categories</span>
+                                <span th:text="${nombreMenuSub}">Product categories</span>
                                 <span class="icon icon-arrow-up"></span>
                             </div>
                             <div id="categories" class="collapse show">
                                 <ul class="list-categoris current-scrollbar mb_36">
-                                    <li class="cate-item current"><a href="#"><span>Fashion</span></a></li>
-                                    <li class="cate-item"><a href="#"><span>Men</span></a></li>
-                                    <li class="cate-item"><a href="#"><span>Women</span></a></li>
-                                    <li class="cate-item"><a href="#"><span>Denim</span></a></li>
-                                    <li class="cate-item"><a href="#"><span>Dress</span></a></li>
+                                    <li class="cate-item" th:each="categoria : ${categorias}">
+                                        <a th:href="@{'/index/'+ ${categoria.urlMenu}+ '/'+ ${categoria.urlMenuSub} + '/' +${categoria.urlCategoria}}">
+                                            <span th:text="${categoria.nombreCategoria}">Dress</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="widget-facet wd-categories">
+                            <div class="facet-title" data-bs-target="#otras-categorias" data-bs-toggle="collapse" aria-expanded="true" aria-controls="otras-categorias">
+                                <span>Otras Categorías</span>
+                                <span class="icon icon-arrow-up"></span>
+                            </div>
+                            <div id="otras-categorias" class="collapse show">
+                                <ul class="list-categoris current-scrollbar mb_36">
+                                    <li class="cate-item" th:each="otraCategoria : ${otrasCategorias}">
+                                        <a th:href="@{'/index/'+ ${otraCategoria.urlMenu}+ '/'+ ${otraCategoria.urlMenuSub}}">
+                                            <span th:text="${otraCategoria.nombreMenuSub}">Dress</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="widget-facet wd-categories">
+                            <div class="facet-title" data-bs-target="#por-objetivos" data-bs-toggle="collapse" aria-expanded="true" aria-controls="por-objetivos">
+                                <span>Por Objetivos</span>
+                                <span class="icon icon-arrow-up"></span>
+                            </div>
+                            <div id="por-objetivos" class="collapse show">
+                                <ul class="list-categoris current-scrollbar mb_36">
+                                    <li class="cate-item" th:each="porObjetivo : ${porObjetivos}">
+                                        <a th:href="@{'/index/'+ ${porObjetivo.urlMenu}+ '/'+ ${porObjetivo.urlMenuSub}}">
+                                            <span th:text="${porObjetivo.nombreMenuSub}">Dress</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="widget-facet wd-categories">
+                            <div class="facet-title" data-bs-target="#por-marcas" data-bs-toggle="collapse" aria-expanded="true" aria-controls="por-marcas">
+                                <span>Por Marcas</span>
+                                <span class="icon icon-arrow-up"></span>
+                            </div>
+                            <div id="por-marcas" class="collapse show">
+                                <ul class="list-categoris current-scrollbar mb_36">
+                                    <li class="cate-item" th:each="porMarca : ${porMarcas}">
+                                        <a th:href="@{'/index/'+ ${porMarca.urlMenu}+ '/'+ ${porMarca.urlMenuSub}}">
+                                            <span th:text="${porMarca.nombreMenuSub}">Dress</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -167,7 +215,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="widget-facet">
@@ -319,7 +366,7 @@
                                  data-price="16.95"
                                  data-color="orange black white">
                                 <div class="card-product-wrapper">
-                                    <a th:href="@{/index/product-detail}" class="product-img">
+                                    <a th:href="@{'/index/'+ ${menuUrl} + '/' + ${menuSubUrl} + '/' + ${categoriaUrl} + '/' + ${producto.urlProducto} }" class="product-img">
                                         <!--https://themesflat.co/html/ecomus/images/products/orange-1.jpg-->
                                         <!--https://themesflat.co/html/ecomus/images/products/white-1.jpg-->
                                         <img class="lazyload img-product"
@@ -358,7 +405,28 @@
                                        th:text="${producto.nombre}">
                                         Ribbed Tank Top
                                     </a>
-                                    <span class="price">$16.95</span>
+                                    <a href="product-detail.html"
+                                       class="title link text-center"
+                                       th:each="variacion: ${producto.variaciones}"
+                                       th:text="${variacion}">
+                                        Trouble - iPhone Case
+                                    </a>
+                                    <div class="d-flex flex-row justify-content-evenly">
+                                        <p class="d-flex flex-column">
+                                            Precio Regular:
+                                            <span class="price"
+                                                  th:text="'S/. ' + ${#numbers.formatDecimal(producto.precio,3,2,'POINT')}">
+                                                    $30.00
+                                                </span>
+                                        </p>
+                                        <p class="d-flex flex-column">
+                                            Precio Reducido:
+                                            <span class="price"
+                                                  th:text="'S/. ' + ${#numbers.formatDecimal(producto.precioReducido,3,2,'POINT')}">
+                                                    $30.00
+                                                </span>
+                                        </p>
+                                    </div>
                                     <!--<ul class="list-color-product">
                                         <li class="list-color-item color-swatch active">
                                             <span class="tooltip">Orange</span>

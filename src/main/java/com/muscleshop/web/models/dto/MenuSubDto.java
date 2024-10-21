@@ -1,53 +1,66 @@
 package com.muscleshop.web.models.dto;
 
 public class MenuSubDto {
-    private int id;
-    private String nombre;
-    private String url;
-    private String imagen;
-    private String banner;
+    private Integer idMenuSub;
+    private String nombreMenuSub;
+    private String urlMenuSub;
+    private String imagenMenuSub;
+    private Integer idMenu;
     private String nombreMenu;
     private String urlMenu;
-    private String estado;
+    private String nombreEstadoMenuSub;
 
-    public int getId() {
-        return id;
+    public MenuSubDto (){}
+
+    public MenuSubDto(Integer idMenuSub, String nombreMenuSub, String urlMenuSub, String imagenMenuSub, Integer idMenu, String nombreMenu, String urlMenu, String nombreEstadoMenuSub) {
+        this.idMenuSub = idMenuSub;
+        this.nombreMenuSub = nombreMenuSub;
+        this.urlMenuSub = urlMenuSub;
+        this.imagenMenuSub = imagenMenuSub;
+        this.idMenu = idMenu;
+        this.nombreMenu = nombreMenu;
+        this.urlMenu = urlMenu;
+        this.nombreEstadoMenuSub = nombreEstadoMenuSub;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Integer getIdMenuSub() {
+        return idMenuSub;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setIdMenuSub(Integer idMenuSub) {
+        this.idMenuSub = idMenuSub;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getNombreMenuSub() {
+        return nombreMenuSub;
     }
 
-    public String getUrl() {
-        return url;
+    public void setNombreMenuSub(String nombreMenuSub) {
+        this.nombreMenuSub = nombreMenuSub;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public String getUrlMenuSub() {
+        return urlMenuSub;
     }
 
-    public String getImagen() {
-        return imagen;
+    public void setUrlMenuSub(String urlMenuSub) {
+        this.urlMenuSub = urlMenuSub;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public String getImagenMenuSub() {
+        return imagenMenuSub;
     }
 
-    public String getBanner() {
-        return banner;
+    public void setImagenMenuSub(String imagenMenuSub) {
+        this.imagenMenuSub = imagenMenuSub;
     }
 
-    public void setBanner(String banner) {
-        this.banner = banner;
+    public Integer getIdMenu() {
+        return idMenu;
+    }
+
+    public void setIdMenu(Integer idMenu) {
+        this.idMenu = idMenu;
     }
 
     public String getNombreMenu() {
@@ -66,11 +79,11 @@ public class MenuSubDto {
         this.urlMenu = urlMenu;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getNombreEstadoMenuSub() {
+        return nombreEstadoMenuSub;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setNombreEstadoMenuSub(String nombreEstadoMenuSub) {
+        this.nombreEstadoMenuSub = nombreEstadoMenuSub;
     }
 }

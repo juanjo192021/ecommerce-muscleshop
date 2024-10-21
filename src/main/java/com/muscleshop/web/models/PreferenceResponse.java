@@ -2,9 +2,13 @@ package com.muscleshop.web.models;
 
 public class PreferenceResponse {
     private String preferenceId;
+    private Integer preferenceValue;
 
-    public PreferenceResponse(String preferenceId) {
+    public PreferenceResponse() {}
+
+    public PreferenceResponse(String preferenceId, Integer preferenceValue) {
         this.preferenceId = preferenceId;
+        this.preferenceValue = preferenceValue;
     }
 
     public String getPreferenceId() {
@@ -13,5 +17,13 @@ public class PreferenceResponse {
 
     public void setPreferenceId(String preferenceId) {
         this.preferenceId = preferenceId;
+    }
+
+    public Integer getPreferenceValue() {
+        return preferenceValue;
+    }
+
+    public void setPreferenceValue(Integer preferenceValue) {
+        this.preferenceValue = preferenceValue;
     }
 }

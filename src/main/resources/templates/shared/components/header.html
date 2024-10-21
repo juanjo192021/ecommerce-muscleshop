@@ -14,7 +14,7 @@
 					<ul class="box-nav-ul d-flex align-items-center gap-30">
 						<li class="menu-item" th:each="menu : ${menusHeader}" th:if="${menu.id != 1 and menu.id != 6 and menu.id != 13}">
 							<!--th:href="@{'/index/'+${ menu.url}}"-->
-							<a th:href="@{'/index/'+${menu.url}}"
+							<a th:href="@{'/'+${menu.url}}"
 							   class="item-link">
 								<span th:text="${menu.nombre}"></span>
 								<i th:if="${menu.menuSubs != null and menu.menuSubs.size() > 0}"
@@ -29,7 +29,7 @@
 												 th:each="submenu : ${menu.menuSubs}">
 												<div class="mega-menu-item">
 													<div class="menu-heading">
-														<a th:href="@{'/index/'+${menu.url}+'/'+${submenu.url}}"
+														<a th:href="@{'/'+${menu.url}+'/'+${submenu.url}}"
 														   class="menu-link-text link text-capitalize"
 														   th:text="${submenu.nombre}">
 															Product default
@@ -38,7 +38,7 @@
 													<ul class="menu-list" th:if="${submenu.productoCategorias != null and submenu.productoCategorias.size() > 0}">
 														<li th:each="productoCategorias : ${submenu.productoCategorias}">
 															<!--@{'/index/'+${productoCate.url}}-->
-															<a th:href="@{'/index/'+${menu.url}+'/'+${submenu.url}+'/'+${productoCategorias.url}}"
+															<a th:href="@{'/'+${menu.url}+'/'+${submenu.url}+'/'+${productoCategorias.url}}"
 															   class="menu-link-text link text-capitalize"
 															   th:text="${productoCategorias.nombre}">
 																Product default
@@ -301,7 +301,7 @@
 			<div class="col-xl-2 col-md-4 col-6 text-center"
 				 th:each="logo:${logosTienda}">
 				<a class="logo-header"
-				   th:href="@{/index/inicio}">
+				   th:href="@{/}">
 					<img th:src="@{'/images/logo/'+${logo.header}}" alt="logo" class="logo">
 				</a>
 			</div>

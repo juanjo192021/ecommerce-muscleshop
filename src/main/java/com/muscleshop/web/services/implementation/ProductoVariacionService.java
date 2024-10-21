@@ -16,8 +16,8 @@ public class ProductoVariacionService implements IProductoVariacionService {
     @Autowired
     IProductoVariacionDao productoVariacionDao;
 
-    public List<VariacionDto> obtenerProductoVariacion(Integer id) {
-        List<ProductoVariacion> productoVariaciones = productoVariacionDao.findByProducto_Id(id);
+    public List<VariacionDto> obtenerProductoVariacion(Integer productoId) {
+        List<ProductoVariacion> productoVariaciones = productoVariacionDao.findByProducto_Id(productoId);
 
         // Usar un LinkedHashMap para mantener el orden de inserción
         Map<Integer, VariacionDto> variacionMap = new LinkedHashMap<>();

@@ -4,22 +4,13 @@ import java.util.List;
 
 import com.muscleshop.web.models.MenuSub;
 import com.muscleshop.web.models.ProductoPropiedadesDetalles;
+import com.muscleshop.web.models.dto.PresentacionDto;
+import com.muscleshop.web.models.dto.ProductoCategoriaDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface IProductoPropiedadesDetallesDao extends JpaRepository<ProductoPropiedadesDetalles, Integer> {
-/*
-    List<ProductoPropiedadesDetalles> findByProductoId(int productoId);
-    
-    List<ProductoPropiedadesDetalles> findByPropiedadesDetallesId(int id);
-    List<ProductoPropiedadesDetalles> findByProductoIdAndPropiedadesDetalles_Propiedades_Id(int productoId, int propiedadId);
-*/
-
-    /*
-     Listar los detalles de las propiedades de un producto por el url del menuSub
-     para poder visualizar los productos con base en sus detalles {presentación, tamaño, sabor, color}
-     */
 
     List<ProductoPropiedadesDetalles> findByProductoForma_IdAndProductoForma_Estado_IdAndEstado_Id(int productoFormaId,int productoFormaEstadoId, int estadoId);
 
@@ -83,5 +74,49 @@ public interface IProductoPropiedadesDetallesDao extends JpaRepository<ProductoP
             "WHERE ppd.producto.id IN :productoIds AND ppd.estado.id = :estadoId")
     List<ProductoPropiedadesDetalles> findActiveProductoPropiedadesDetalles(@Param("productoIds") List<Integer> productoIds, @Param("estadoId") int estadoId);
 
-    List<ProductoPropiedadesDetalles> findByProducto_IdAndProductoForma_Id(int productoId, int productoFormaId);
+    // Método para buscar categorías de productos por su id de submenú y estado activo
+    @Query("SELECT ppd " +
+            "FROM ProductoPropiedadesDetalles ppd " +
+            "WHERE ppd.producto.id =:productoId " +
+            "AND (ppd.precioReducido BETWEEN :minPrecio and :maxPrecio) " +
+            "AND ppd.productoForma.id=:productoFormaId " +
+            "AND ppd.estado.id = :estadoId")
+    List<ProductoPropiedadesDetalles> findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(@Param("productoId") int productoId ,
+                                             @Param("minPrecio") double minPrecio,
+                                             @Param("maxPrecio") double maxPrecio,
+                                             @Param("productoFormaId") double productoFormaId,
+                                             @Param("estadoId") int estadoId);
+
+    // Método para buscar categorías de productos por su id de submenú y estado activo
+    @Query("SELECT new com.muscleshop.web.models.dto.PresentacionDto(ppd.id, ppd.producto.id, ppd.producto.nombre, ppd.producto.url, ppd.producto.estado.nombre,  ppd.producto.imagen, ppd.sku, ppd.stock, ppd.precio, ppd.precioReducido, ppd.precioTeam, ppd.precioTeamVip, ppd.precioFamiliar, ppd.estado.nombre ) " +
+            "FROM ProductoPropiedadesDetalles ppd " +
+            "WHERE ppd.producto.id = :productoId AND ppd.sku =:skuProductoPropiedadesDetalles AND ppd.estado.id = :estadoId")
+    PresentacionDto findPresentacionByIdProductoAndSku(@Param("productoId") int productoId,
+                                                             @Param("skuProductoPropiedadesDetalles") String skuProductoPropiedadesDetalles,
+                                                             @Param("estadoId") int estadoId);
+
+    // Método para buscar categorías de productos por su id de submenú y estado activo
+    @Query("SELECT DISTINCT new com.muscleshop.web.models.dto.PresentacionDto(" +
+                "ppdv.productoPropiedadesDetalles.id, ppdv.productoPropiedadesDetalles.producto.id, " +
+                "ppdv.productoPropiedadesDetalles.producto.nombre, ppdv.productoPropiedadesDetalles.producto.url," +
+                "ppdv.productoPropiedadesDetalles.producto.estado.nombre,  " +
+                "ppdv.productoPropiedadesDetalles.producto.imagen, ppdv.productoPropiedadesDetalles.sku," +
+                "ppdv.productoPropiedadesDetalles.stock, ppdv.productoPropiedadesDetalles.precio, " +
+                "ppdv.productoPropiedadesDetalles.precioReducido, ppdv.productoPropiedadesDetalles.precioTeam, " +
+                "ppdv.productoPropiedadesDetalles.precioTeamVip, ppdv.productoPropiedadesDetalles.precioFamiliar," +
+                "ppdv.productoPropiedadesDetalles.estado.nombre ) " +
+            "FROM ProductoPropiedadesDetallesVariacion ppdv " +
+            "WHERE ppdv.productoVariacion.producto.id = :productoId " +
+            "AND ppdv.productoPropiedadesDetalles.estado.id = :estadoId " +
+            "AND ppdv.productoPropiedadesDetalles.id IN (" +
+                "SELECT ppdv2.productoPropiedadesDetalles.id " +
+                "FROM ProductoPropiedadesDetallesVariacion ppdv2 " +
+                "WHERE ppdv2.productoVariacion.valor IN (:variacionesValor ) " +
+                "GROUP BY ppdv2.productoPropiedadesDetalles.id " +
+                "HAVING COUNT(DISTINCT ppdv2.productoVariacion.valor)=:cantidadVariaciones) " +
+            "ORDER BY ppdv.productoPropiedadesDetalles.id")
+    PresentacionDto findPresentacionByIdProductoAndVariacionesValor(@Param("productoId") int productoId,
+                                                       @Param("variacionesValor") List<String> variacionesValor,
+                                                       @Param("cantidadVariaciones") int cantidadVariaciones,
+                                                       @Param("estadoId") int estadoId);
 }

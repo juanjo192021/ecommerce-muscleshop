@@ -1,6 +1,7 @@
 package com.muscleshop.web.services;
 
 import com.muscleshop.web.models.MenuSub;
+import com.muscleshop.web.models.dto.MenuSubDto;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface IMenuSubService {
     MenuSub obtenerMenuSubID(Integer id);
 
     //Listar Sub Menus por medio del ID del menu
-    List<MenuSub> obtenerMenuSubsPorMenuId(Integer menuID);
+    List<MenuSubDto> obtenerMenuSubsPorMenuId(Integer menuID);
 
     //Obtener Sub Menu por medio de la url del mismo
     MenuSub obtenerMenuSubPorUrl(String url);

@@ -17,4 +17,5 @@ public interface IProductoPropiedadesDetallesVariacionDao extends JpaRepository<
     List<ProductoPropiedadesDetallesVariacion> findActiveProductoPropiedadesDetallesVariaciones(@Param("productoPropiedadesDetallesIds") List<Integer> productoPropiedadesDetallesIds);
 
     List<ProductoPropiedadesDetallesVariacion> findByProductoPropiedadesDetalles_Id(Integer productoPropiedadesDetallesId);
+
 }

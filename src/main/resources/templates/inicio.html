@@ -23,8 +23,8 @@
 
 </head>
 
-
 <body class="preload-wrapper">
+
     <!-- preload -->
     <div class="preload preload-container">
         <div class="preload-logo">
@@ -32,18 +32,23 @@
         </div>
     </div>
     <!-- /preload -->
+
     <div id="wrapper">
+
         <!-- Top bar -->
         <div th:replace="~{shared/components/top-bar :: top-bar}"></div>
         <!-- /Top bar -->
+
         <!-- Header -->
         <div th:replace="~{shared/components/header :: header}"></div>
         <!-- /Header -->
+
         <!-- Slider -->
         <div th:replace="~{shared/components/slider :: slider}"></div>
         <!-- /Slider -->
-        <!-- Categories -->
-        <section class="flat-spacing-10 flat-categorie">
+
+        <!-- Categories flat-spacing-10 -->
+        <section class="flat-spacing-1 flat-categorie">
             <div class="container">
                 <div class="flat-title-v2">
                     <div class="box-sw-navigation">
@@ -63,13 +68,13 @@
                                             <a th:href="@{/index/product-menu}" class="collection-image img-style">
                                                 <!-- th:data-src="@{/images/collections/phonecase-1.jpg}" -->
                                                 <img class="lazyload"
-                                                     th:data-scr="'http://104.218.48.244:8080/apirest/api/menuSub/images/'+${menuSub.imagen}"
-                                                     th:src="'http://104.218.48.244:8080/apirest/api/menuSub/images/'+${menuSub.imagen}"
-                                                     th:alt="'img-'+${menuSub.nombre}">
+                                                     th:data-scr="'http://104.218.48.244:8080/apirest/api/menuSub/images/'+${menuSub.imagenMenuSub}"
+                                                     th:src="'http://104.218.48.244:8080/apirest/api/menuSub/images/'+${menuSub.imagenMenuSub}"
+                                                     th:alt="'img-'+${menuSub.nombreMenuSub}">
                                             </a>
                                             <div class="collection-content">
                                                 <a href="shop-default.html" class="tf-btn collection-title hover-icon fs-15">
-                                                    <span th:text="${menuSub.nombre}">Phone Cases</span><i class="icon icon-arrow1-top-left"></i>
+                                                    <span th:text="${menuSub.nombreMenuSub}">Phone Cases</span><i class="icon icon-arrow1-top-left"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -88,6 +93,7 @@
             </div>
         </section>
         <!-- /Categories -->
+
         <!-- Shop Collection -->
         <section class="flat-spacing-1 pt_0">
             <div class="container">
@@ -115,6 +121,7 @@
             </div>
         </section>
         <!-- /Shop Collection -->
+
         <!-- Trending Now -->
         <section class="flat-spacing-1 pt_0">
             <div class="container">
@@ -148,11 +155,11 @@
                                                 <span class="tooltip">Add to Wishlist</span>
                                                 <span class="icon icon-delete"></span>
                                             </a>
-                                            <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
+                                            <!--<a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
                                                 <span class="icon icon-compare"></span>
                                                 <span class="tooltip">Add to Compare</span>
                                                 <span class="icon icon-check"></span>
-                                            </a>
+                                            </a>-->
                                             <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
                                                 <span class="icon icon-view"></span>
                                                 <span class="tooltip">Quick View</span>
@@ -161,17 +168,27 @@
                                     </div>
                                     <div class="card-product-info">
                                         <a href="product-detail.html"
-                                           class="title link" th:text="${producto.nombre} + ' ' + ${producto.variacion}">Trouble - iPhone Case</a>
-                                        <span class="price"
-                                              style="display: contents;"
-                                              th:text="'S/'+${producto.precio}">
-                                            $30.00
-                                        </span>
-                                        <span class="price"
-                                              style="display: contents;"
-                                              th:text="'S/'+${producto.precioReducido}">
-                                            $30.00
-                                        </span>
+                                           class="title link text-center" th:text="${producto.nombre}">Trouble - iPhone Case</a>
+                                        <a href="product-detail.html"
+                                           class="title link text-center"
+                                           th:each="variacion: ${producto.variaciones}"
+                                           th:text="${variacion}">Trouble - iPhone Case</a>
+                                        <div class="d-flex flex-row justify-content-evenly">
+                                            <p class="d-flex flex-column">
+                                                Precio Regular:
+                                                <span class="price"
+                                                      th:text="'S/. ' + ${#numbers.formatDecimal(producto.precio,3,2,'POINT')}">
+                                                    $30.00
+                                                </span>
+                                            </p>
+                                            <p class="d-flex flex-column">
+                                                Precio Reducido:
+                                                <span class="price"
+                                                      th:text="'S/. ' + ${#numbers.formatDecimal(producto.precioReducido,3,2,'POINT')}">
+                                                    $30.00
+                                                </span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -393,8 +410,9 @@
             </div>
         </section>
         <!-- /Trending Now -->
-        <!-- Shop Collection -->
-        <section class="mb_40">
+
+        <!-- Shop Collection mb_40-->
+        <section class="flat-spacing-1 pt_0">
             <div class="container">
                 <div class="tf-grid-layout md-col-2 bg_yellow-5 tf-img-with-text style-5 style-6">
                     <div class="tf-image-wrap wow fadeInUp" data-wow-delay="0s">
@@ -413,8 +431,9 @@
             </div>
         </section>
         <!-- /Shop Collection -->
-        <!-- Testimonial -->
-        <section class="flat-spacing-5 pt_0 flat-testimonial">
+
+        <!-- Testimonial flat-spacing-5 pt_0 -->
+        <section class="flat-spacing-1 pt_0 flat-testimonial">
             <div class="container">
                 <div class="flat-title wow fadeInUp" data-wow-delay="0s">
                     <span class="title">LO QUE DICEN DE NUESTROS PRODUCTOS</span>
@@ -473,8 +492,9 @@
             </div>
         </section>
         <!-- /Testimonial -->
-        <!-- Icon box -->
-        <section class="flat-spacing-11 pb_0 flat-iconbox wow fadeInUp" data-wow-delay="0s">
+
+        <!-- Icon box flat-spacing-11 pb_0-->
+        <section class="flat-spacing-1 pt_0 flat-iconbox wow fadeInUp" data-wow-delay="0s">
             <div class="container">
                 <div class="wrap-carousel wrap-mobile">
                     <div class="swiper tf-sw-mobile" data-preview="1" data-space="15">
@@ -531,8 +551,9 @@
             </div>
         </section>
         <!-- /Icon box -->
-        <!-- Store -->
-        <section class="flat-spacing-1 pb_0">
+
+        <!-- Store flat-spacing-1 pb_0-->
+        <section class="flat-spacing-1 pt_0">
             <div class="container">
                 <div class="flat-title" >
                     <span class="title wow fadeInUp" data-wow-delay="0s">CONOCE NUESTRAS MARCAS</span>
@@ -559,10 +580,10 @@
                         <div class="tab-pane active show" id="abe" role="tabpanel">
                             <div class="widget-card-store align-items-center tf-grid-layout md-col-2">
                                 <div class="store-item-info">
-                                    <h5 class="store-heading">#APPLYOURSELF</h5>
+                                    <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
+                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
                                             Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
                                             Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
                                         </p>
@@ -579,10 +600,10 @@
                         <div class="tab-pane" id="applied-nutrition" role="tabpanel">
                             <div class="widget-card-store align-items-center tf-grid-layout md-col-2">
                                 <div class="store-item-info">
-                                    <h5 class="store-heading">#APPLYOURSELF</h5>
+                                    <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
+                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
                                             Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
                                             Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
                                         </p>
@@ -598,10 +619,10 @@
                         <div class="tab-pane" id="bioTechUSA" role="tabpanel">
                             <div class="widget-card-store align-items-center tf-grid-layout md-col-2">
                                 <div class="store-item-info">
-                                    <h5 class="store-heading">#APPLYOURSELF</h5>
+                                    <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
+                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
                                             Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
                                             Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
                                         </p>
@@ -617,10 +638,10 @@
                         <div class="tab-pane" id="beauty-glow" role="tabpanel">
                             <div class="widget-card-store align-items-center tf-grid-layout md-col-2">
                                 <div class="store-item-info">
-                                    <h5 class="store-heading">#APPLYOURSELF</h5>
+                                    <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
+                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
                                             Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
                                             Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
                                         </p>
@@ -636,10 +657,10 @@
                         <div class="tab-pane" id="kevin-levrone" role="tabpanel">
                             <div class="widget-card-store align-items-center tf-grid-layout md-col-2">
                                 <div class="store-item-info">
-                                    <h5 class="store-heading">#APPLYOURSELF</h5>
+                                    <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
+                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
                                             Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
                                             Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
                                         </p>
@@ -657,10 +678,10 @@
             </div>
         </section>
         <!-- /Store -->
-        <!-- Blogs post -->
 
-        <!-- Related Articles -->
-        <section class="flat-spacing-14 mb_30">
+        <!-- Blogs post -->
+        <!-- Related Articles flat-spacing-14 mb_30 -->
+        <section class="flat-spacing-1 pt_0">
             <div class="container">
                 <!--<div class="flat-title">
                     <h5 class="">Related Articles</h5>

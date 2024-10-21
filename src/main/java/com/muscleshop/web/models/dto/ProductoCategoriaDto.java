@@ -2,45 +2,62 @@ package com.muscleshop.web.models.dto;
 
 public class ProductoCategoriaDto {
 
-    Integer id;
-    String nombre;
-    String url;
-    String estado;
-    String nombreMenuSub;
-    String urlMenuSub;
-    String nombreMenu;
-    String urlMenu;
+    private Integer idCategoria;
+    private String nombreCategoria;
+    private String urlCategoria;
+    private Integer idMenuSub;
+    private String nombreMenuSub;
+    private String urlMenuSub;
+    private Integer idMenu;
+    private String nombreMenu;
+    private String urlMenu;
+    private String nombreEstadoCategoria;
 
-    public Integer getId() {
-        return id;
+    public ProductoCategoriaDto() {}
+
+    public ProductoCategoriaDto(Integer idCategoria, String nombreCategoria, String urlCategoria, Integer idMenuSub, String nombreMenuSub, String urlMenuSub, Integer idMenu, String nombreMenu, String urlMenu, String nombreEstadoCategoria) {
+        this.idCategoria = idCategoria;
+        this.nombreCategoria = nombreCategoria;
+        this.urlCategoria = urlCategoria;
+        this.idMenuSub = idMenuSub;
+        this.nombreMenuSub = nombreMenuSub;
+        this.urlMenuSub = urlMenuSub;
+        this.idMenu = idMenu;
+        this.nombreMenu = nombreMenu;
+        this.urlMenu = urlMenu;
+        this.nombreEstadoCategoria = nombreEstadoCategoria;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getIdCategoria() {
+        return idCategoria;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getNombreCategoria() {
+        return nombreCategoria;
     }
 
-    public String getUrl() {
-        return url;
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public String getUrlCategoria() {
+        return urlCategoria;
     }
 
-    public String getEstado() {
-        return estado;
+    public void setUrlCategoria(String urlCategoria) {
+        this.urlCategoria = urlCategoria;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public Integer getIdMenuSub() {
+        return idMenuSub;
+    }
+
+    public void setIdMenuSub(Integer idMenuSub) {
+        this.idMenuSub = idMenuSub;
     }
 
     public String getNombreMenuSub() {
@@ -59,6 +76,14 @@ public class ProductoCategoriaDto {
         this.urlMenuSub = urlMenuSub;
     }
 
+    public Integer getIdMenu() {
+        return idMenu;
+    }
+
+    public void setIdMenu(Integer idMenu) {
+        this.idMenu = idMenu;
+    }
+
     public String getNombreMenu() {
         return nombreMenu;
     }
@@ -73,5 +98,13 @@ public class ProductoCategoriaDto {
 
     public void setUrlMenu(String urlMenu) {
         this.urlMenu = urlMenu;
+    }
+
+    public String getNombreEstadoCategoria() {
+        return nombreEstadoCategoria;
+    }
+
+    public void setNombreEstadoCategoria(String nombreEstadoCategoria) {
+        this.nombreEstadoCategoria = nombreEstadoCategoria;
     }
 }

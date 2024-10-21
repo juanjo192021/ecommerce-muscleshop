@@ -15,6 +15,10 @@ public class PropiedadDetalleImagen {
     private String nombre;
 
     @ManyToOne
+    @JoinColumn(name="producto_propiedad_detalle_id")
+    private ProductoPropiedadesDetalles productoPropiedadesDetalles;
+
+    @ManyToOne
     @JoinColumn(name="estado_id")
     private Estado estado;
 
@@ -32,6 +36,14 @@ public class PropiedadDetalleImagen {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public ProductoPropiedadesDetalles getProductoPropiedadesDetalles() {
+        return productoPropiedadesDetalles;
+    }
+
+    public void setProductoPropiedadesDetalles(ProductoPropiedadesDetalles productoPropiedadesDetalles) {
+        this.productoPropiedadesDetalles = productoPropiedadesDetalles;
     }
 
     public Estado getEstado() {
