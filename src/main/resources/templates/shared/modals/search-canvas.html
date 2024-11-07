@@ -11,10 +11,18 @@
             <div class="tf-search-sticky">
                 <form class="tf-mini-search-frm">
                     <fieldset class="text">
-                        <input type="text" placeholder="Buscar" class="" name="text" tabindex="0" value="" aria-required="true" required="">
+                        <input id="input-search-products"
+                               type="text"
+                               placeholder="Buscar"
+                               class="" name="text"
+                               tabindex="0"
+                               value=""
+                               aria-required="true"
+                               required="">
                     </fieldset>
-                    <button class="" type="submit"><i class="icon-search"></i></button>
+                    <!--<button class="" type="submit"><i class="icon-search"></i></button>-->
                 </form>
+                <div id="contenedor-productos-encontrados" class="d-none flex-column"></div>
             </div>
         </header>
         <div class="canvas-body p-0">

@@ -54,8 +54,6 @@ public class ProductoService {
 	public Page<ProductoDto> obtenerProductosItemsIndividialesPorMenuSubId(int menuSubId, double minPrecio, double maxPrecio, Pageable pageable) {
 		List<ProductoDto> productosFinales = new ArrayList<>();
 		List<ProductoMenuSub> productosPage = productoMenuSubDao.findByProductoCategoria_MenuSub_Id(menuSubId);
-		List<ProductoMenuSub> a = productoMenuSubDao.prueba(menuSubId);
-		List<ProductoMenuSub> v= a;
 		for (ProductoMenuSub productoMenuSub : productosPage) {
 			ProductoCategoria categoria = productoMenuSub.getProductoCategoria();
 			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(), minPrecio, maxPrecio, 2,1);
@@ -89,8 +87,6 @@ public class ProductoService {
 		Page<ProductoDto> page = new PageImpl<>(productosFinales.subList(start, end), pageable, productosFinales.size());
 		return page;
 	}
-
-
 
 	public List<ProductoDto> obtenerProductosItemsIndividialesPorCategoriaId(int productoCategoriaId){
 
@@ -136,7 +132,7 @@ public class ProductoService {
 		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductos();
 		for (ProductoMenuSub productoMenuSub : productos) {
 			ProductoCategoria categoria = productoMenuSub.getProductoCategoria();
-			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(),1,100,2,1);
+			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(),1,1000,2,1);
 
 			for (ProductoPropiedadesDetalles detalle : propiedadesDetalles) {
 				ProductoDto productoDTO = new ProductoDto();
@@ -166,6 +162,43 @@ public class ProductoService {
 	}
 
 
+	// Se usa
+	public Page<ProductoDto> obtenerProductosItemsIndividualesPorNombreProducto(String productoNombre,double minPrecio, double maxPrecio, Pageable pageable) {
+		List<ProductoDto> productosFinales = new ArrayList<>();
+		List<ProductoMenuSub> productosPage = productoMenuSubDao.findByNombreProducto(productoNombre);
+		for (ProductoMenuSub productoMenuSub : productosPage) {
+			ProductoCategoria categoria = productoMenuSub.getProductoCategoria();
+			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(), minPrecio, maxPrecio, 2,1);
+
+			for (ProductoPropiedadesDetalles detalle : propiedadesDetalles) {
+				ProductoDto productoDTO = new ProductoDto();
+				productoDTO.setId(productoMenuSub.getProducto().getId());
+				productoDTO.setNombre(productoMenuSub.getProducto().getNombre());
+				productoDTO.setUrlProducto(productoMenuSub.getProducto().getUrl());
+				productoDTO.setImagen(detalle.getImagen());
+				productoDTO.setNombreCategoria(categoria.getNombre());
+				productoDTO.setUrlCategoria(categoria.getUrl());
+				productoDTO.setNombreMenuSub(categoria.getMenuSub().getNombre());
+				productoDTO.setUrlMenuSub(categoria.getMenuSub().getUrl());
+				//productoDTO.setNombreMarca(productoMenuSub.getProducto().getMarca().getNombre());
+				//productoDTO.setUrlMarca(productoMenuSub.getProducto().getMarca().getUrl());
+				productoDTO.setProductoPropiedadDetalleId(detalle.getId());
+				productoDTO.setSkuProductoPropiedadesDetalles(detalle.getSku());
+				productoDTO.setPrecio(detalle.getPrecio());
+				productoDTO.setPrecioReducido(detalle.getPrecioReducido());
+				productoDTO.setStock(detalle.getStock());
+				List<String> variaciones = obtenerVariaciones(detalle.getId());
+				productoDTO.setVariacion(String.join(" ", variaciones));
+				productoDTO.setVariaciones(variaciones);
+				productosFinales.add(productoDTO);
+			}
+		}
+
+		int start = (int) pageable.getOffset();
+		int end = Math.min((start + pageable.getPageSize()), productosFinales.size());
+		Page<ProductoDto> page = new PageImpl<>(productosFinales.subList(start, end), pageable, productosFinales.size());
+		return page;
+	}
 
 	List<String> obtenerVariaciones(Integer detalleId) {
 		List<String> variaciones = new ArrayList<>();

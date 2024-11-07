@@ -20,6 +20,7 @@ public interface IProductoMenuSubDao extends JpaRepository<ProductoMenuSub, Inte
             "    SELECT MIN(innerPms.productoCategoria.id) " +
             "    FROM ProductoMenuSub innerPms " +
             "    WHERE innerPms.producto.estado.nombre = 'Activo' " +
+            "    AND innerPms.productoCategoria.id = pms.productoCategoria.id" +
             "    AND innerPms.producto.mostrar = 'si' " +
             "    AND innerPms.producto.estado.nombre = 'Activo' " +
             ") " +
@@ -45,23 +46,6 @@ public interface IProductoMenuSubDao extends JpaRepository<ProductoMenuSub, Inte
     List<ProductoMenuSub> findByProductoCategoria_MenuSub_Id(int menuSubId);
 
     @Query("SELECT pms FROM ProductoMenuSub pms " +
-            "WHERE pms.productoCategoria.menuSub.id = :menuSubId " +
-            "AND pms.producto.estado.nombre = 'Activo' " +
-            "AND pms.producto.mostrar = 'si' " +
-            "AND pms.producto.estado.nombre = 'Activo' " +
-            "AND pms.productoCategoria.id IN ( " +
-            "    SELECT MIN(innerPms.productoCategoria.id) " +
-            "    FROM ProductoMenuSub innerPms " +
-            "    WHERE innerPms.productoCategoria.menuSub.id = :menuSubId" +
-            "    AND innerPms.productoCategoria.id = pms.productoCategoria.id" +
-            "    AND innerPms.producto.estado.nombre = 'Activo' " +
-            "    AND innerPms.producto.mostrar = 'si' " +
-            "    AND innerPms.producto.estado.nombre = 'Activo' " +
-            ") " +
-            "ORDER BY pms.producto.prioridad asc")
-    List<ProductoMenuSub> prueba(int menuSubId);
-
-    @Query("SELECT pms FROM ProductoMenuSub pms " +
             "WHERE pms.productoCategoria.id =: productoCategoriaId " +
             "AND pms.producto.estado.nombre = 'Activo' " +
             "AND pms.producto.mostrar = 'si' " +
@@ -71,7 +55,9 @@ public interface IProductoMenuSubDao extends JpaRepository<ProductoMenuSub, Inte
 
 
     @Query("SELECT pms FROM ProductoMenuSub pms " +
-            "WHERE pms.producto.estado.nombre = 'Activo' " +
+            "WHERE LOWER(pms.producto.nombre) " +
+            "LIKE LOWER(CONCAT('%', :productoNombre, '%')) " +
+            "AND pms.producto.estado.nombre = 'Activo' " +
             "AND pms.producto.mostrar = 'si' " +
             "AND pms.productoCategoria.estado.nombre = 'Activo' " +
             "AND pms.productoCategoria.id IN ( " +
@@ -83,7 +69,7 @@ public interface IProductoMenuSubDao extends JpaRepository<ProductoMenuSub, Inte
             "    AND innerPms.producto.mostrar = 'si' " +
             "    AND innerPms.productoCategoria.estado.nombre = 'Activo' " +
             ") " +
-            "ORDER BY pms.producto.prioridad DESC")
+            "ORDER BY pms.producto.prioridad ASC")
     List<ProductoMenuSub> findByNombreProducto(String productoNombre);
 
 }

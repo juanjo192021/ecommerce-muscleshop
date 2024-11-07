@@ -51,5 +51,17 @@ public class ProductoController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("obtenerProductosPorNombreProducto")
+    @ResponseBody
+    public ResponseEntity<Page<ProductoDto>> obtenerProductosPorNombreProducto(
+            @RequestParam("productoNombre") String productoNombre,
+            @RequestParam("minPrecio") double minPrecio,
+            @RequestParam("maxPrecio") double maxPrecio,
+            Model model) {
+        Pageable pageable = PageRequest.of(0, 5);
+        Page<ProductoDto> productos = iProductoService.obtenerProductosItemsIndividualesPorNombreProducto(productoNombre, minPrecio, maxPrecio, pageable);
+
+        return ResponseEntity.ok(productos);
+    }
 
 }
