@@ -335,7 +335,7 @@ public class HomeController {
 		List<MenuSubDto> menuSubPorMarcaDtos = menuSubService.obtenerMenuSubsPorMenuId(6);
 
 		//List<ProductoItemsDto> productos = iProductoPropiedadesDetallesService.obtenerProductosIndividualesPorMenuSubId(minPrecio, maxPrecio, menuSub.getId());
-		List<ProductoDto> productos = productoService.obtenerProductosItemsIndividialesPorMenuSubId(menuSub.getId(), 0 ,1000);
+		//List<ProductoDto> productos = productoService.obtenerProductosItemsIndividialesPorMenuSubId(menuSub.getId(), 0 ,1000,);
 
 		//model.addAttribute("nombreMenuSub", menuSub.getNombre());
 		/*model.addAttribute("bannerMenuSubMovilTablet", bannerMovilTablet);
@@ -352,25 +352,8 @@ public class HomeController {
 	}
 
 
-	// Método http para obtener un sub menu por su url
-	@GetMapping("/menuSub/obtenerPorUrl")
-	@ResponseBody
-	public ResponseEntity<MenuSub> obtenerMenuSubPorUrl(@RequestParam("menuSubUrl") String menuSubUrl) {
-
-		MenuSub menuSub = menuSubService.obtenerMenuSubPorUrl(menuSubUrl);
-		return ResponseEntity.ok(menuSub);
-	}
-
 	// Método http para obtener productos por el id del sub menu
-	@GetMapping("/producto/obtenerProductos")
-	@ResponseBody
-	public ResponseEntity<List<ProductoDto>> obtenerProductoPorPrecio(@RequestParam("menuSubId") int menuSubId,
-																	  @RequestParam("minPrecio") double minPrecio,
-																	  @RequestParam("maxPrecio") double maxPrecio) {
 
-		List<ProductoDto> productos = productoService.obtenerProductosItemsIndividialesPorMenuSubId(menuSubId, minPrecio, maxPrecio);
-		return ResponseEntity.ok(productos);
-	}
 
 	@Autowired
 	IPropiedadDetalleImagenService iPropiedadDetalleImagenService;

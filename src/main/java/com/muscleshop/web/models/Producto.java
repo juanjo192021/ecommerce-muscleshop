@@ -19,6 +19,10 @@ public class Producto {
 	private String descripcion;
 
 	@ManyToOne
+	@JoinColumn(name = "marcas_id")
+	private Marcas marca;
+
+	@ManyToOne
 	@JoinColumn(name = "estado_id")
 	private EstadoArticuloProducto estado;
 
@@ -30,10 +34,6 @@ public class Producto {
 	@JoinColumn(name = "producto_id")
 	@JsonIgnore
 	private List<ProductoVariacion> productoVariaciones;
-
-/*	@ManyToOne
-	@JoinColumn(name="agrupacion_id", nullable = false)
-	private Agrupacion agrupacion;*/
 
 	@OneToOne(mappedBy  = "producto")
 	private ProductoInformacion productoInformacion;
@@ -84,6 +84,14 @@ public class Producto {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Marcas getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marcas marca) {
+		this.marca = marca;
 	}
 
 	public LocalDate getFecha() {

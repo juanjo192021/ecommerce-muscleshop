@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/hola/")
+@RequestMapping("/menuSub/")
 public class MenuSubController {
 
     @Autowired
@@ -35,51 +35,12 @@ public class MenuSubController {
     @Autowired
     private ProductoService productoService;
 
-    @GetMapping("/{menuUrl}/{menuSubUrl}")
-    public String menuSubProductos(Model model,
-                                   @PathVariable("menuUrl") String menuUrl,
-                                   @PathVariable("menuSubUrl") String menuSubUrl,
-                                   /*@RequestParam(required = false) Double minPrecio,
-                                   @RequestParam(required = false) Double maxPrecio,*/
-                                   HttpSession session) {
+    // Método http para obtener un sub menu por su url
+    @GetMapping("obtenerPorUrl")
+    @ResponseBody
+    public ResponseEntity<MenuSub> obtenerMenuSubPorUrl(@RequestParam("menuSubUrl") String menuSubUrl) {
 
-        Menu menu = menuService.obtenerMenuPorUrl(menuUrl);
         MenuSub menuSub = menuSubService.obtenerMenuSubPorUrl(menuSubUrl);
-
-        List<BannerMenuSub> bannerMovilTablet = (menuSub.getBannerMenuSubs()).stream()
-                .filter(ban -> "movil_tablet".equals(ban.getTipoDispositivo()))
-                .toList();
-
-        List<BannerMenuSub> bannerLaptopPc = (menuSub.getBannerMenuSubs()).stream()
-                .filter(ban -> "laptop_pc".equals(ban.getTipoDispositivo()))
-                .toList();
-
-        List<ProductoCategoriaDto> productoCategoriaDtos = productoCategoriaService.obtenerProductoCategoriasPorMenuSubId(menuSub.getId());
-        List<MenuSubDto> menuSubDtos = menuSubService.obtenerMenuSubsPorMenuId(menu.getId());
-        List<MenuSubDto> menuSubPorObjetivoDtos = menuSubService.obtenerMenuSubsPorMenuId(5);
-        List<MenuSubDto> menuSubPorMarcaDtos = menuSubService.obtenerMenuSubsPorMenuId(6);
-
-        //List<ProductoItemsDto> productos = iProductoPropiedadesDetallesService.obtenerProductosIndividualesPorMenuSubId(minPrecio, maxPrecio, menuSub.getId());
-        List<ProductoDto> productos = productoService.obtenerProductosItemsIndividialesPorMenuSubId(menuSub.getId(),0,100);
-
-        model.addAttribute("nombreMenuSub", menuSub.getNombre());
-        model.addAttribute("bannerMenuSubMovilTablet", bannerMovilTablet);
-        model.addAttribute("bannerMenuSubLaptopPc", bannerLaptopPc);
-        model.addAttribute("categorias", productoCategoriaDtos);
-        model.addAttribute("otrasCategorias", menuSubDtos);
-        model.addAttribute("porObjetivos", menuSubPorObjetivoDtos);
-        model.addAttribute("porMarcas", menuSubPorMarcaDtos);
-        model.addAttribute("productos", productos);
-
-		model.addAttribute("menuUrl", menuUrl);
-		model.addAttribute("menuSubUrl", menuSubUrl);
-        return "pages/product-menu-sub";
-    }
-
-    @GetMapping("listar")
-    public ResponseEntity<List<ProductoDto>> obtenerProductoPorPrecio(@RequestParam("menuSubId") int menuSubId) {
-
-        List<ProductoDto> productos = iProductoService.obtenerProductosItemsIndividialesPorMenuSubId(menuSubId,1,100);
-        return ResponseEntity.ok(productos);
+        return ResponseEntity.ok(menuSub);
     }
 }

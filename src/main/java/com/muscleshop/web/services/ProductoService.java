@@ -9,6 +9,9 @@ import com.muscleshop.web.dao.IProductoPropiedadesDetallesVariacionDao;
 import com.muscleshop.web.models.*;
 import com.muscleshop.web.models.dto.ProductoDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.muscleshop.web.dao.IProductoDao;
@@ -47,14 +50,15 @@ public class ProductoService {
 		return productoDao.buscarProducto(nombre);
 	}
 
-	public List<ProductoDto> obtenerProductosItemsIndividialesPorMenuSubId(int menuSubId , double minPrecio, double maxPrecio){
 
+	public Page<ProductoDto> obtenerProductosItemsIndividialesPorMenuSubId(int menuSubId, double minPrecio, double maxPrecio, Pageable pageable) {
 		List<ProductoDto> productosFinales = new ArrayList<>();
-		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductoCategoria_MenuSub_Id(menuSubId);
-
-		for (ProductoMenuSub productoMenuSub : productos) {
+		List<ProductoMenuSub> productosPage = productoMenuSubDao.findByProductoCategoria_MenuSub_Id(menuSubId);
+		List<ProductoMenuSub> a = productoMenuSubDao.prueba(menuSubId);
+		List<ProductoMenuSub> v= a;
+		for (ProductoMenuSub productoMenuSub : productosPage) {
 			ProductoCategoria categoria = productoMenuSub.getProductoCategoria();
-			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(),minPrecio,maxPrecio,2,1);
+			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(), minPrecio, maxPrecio, 2,1);
 
 			for (ProductoPropiedadesDetalles detalle : propiedadesDetalles) {
 				ProductoDto productoDTO = new ProductoDto();
@@ -66,23 +70,26 @@ public class ProductoService {
 				productoDTO.setUrlCategoria(categoria.getUrl());
 				productoDTO.setNombreMenuSub(categoria.getMenuSub().getNombre());
 				productoDTO.setUrlMenuSub(categoria.getMenuSub().getUrl());
+				//productoDTO.setNombreMarca(productoMenuSub.getProducto().getMarca().getNombre());
+				//productoDTO.setUrlMarca(productoMenuSub.getProducto().getMarca().getUrl());
 				productoDTO.setProductoPropiedadDetalleId(detalle.getId());
 				productoDTO.setSkuProductoPropiedadesDetalles(detalle.getSku());
 				productoDTO.setPrecio(detalle.getPrecio());
 				productoDTO.setPrecioReducido(detalle.getPrecioReducido());
 				productoDTO.setStock(detalle.getStock());
-
-				// Obtener las variaciones respetando el orden de creación
 				List<String> variaciones = obtenerVariaciones(detalle.getId());
 				productoDTO.setVariacion(String.join(" ", variaciones));
 				productoDTO.setVariaciones(variaciones);
-
 				productosFinales.add(productoDTO);
 			}
 		}
 
-		return productosFinales;
+		int start = (int) pageable.getOffset();
+		int end = Math.min((start + pageable.getPageSize()), productosFinales.size());
+		Page<ProductoDto> page = new PageImpl<>(productosFinales.subList(start, end), pageable, productosFinales.size());
+		return page;
 	}
+
 
 
 	public List<ProductoDto> obtenerProductosItemsIndividialesPorCategoriaId(int productoCategoriaId){
@@ -126,7 +133,7 @@ public class ProductoService {
 	public List<ProductoDto> obtenerProductosItemsIndividualesPorForma() {
 		List<ProductoDto> productosFinales = new ArrayList<>();
 
-		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductoCategoria_MenuSub_IdAndProductoCategoria_MenuSub_Estado_Id_AndProductoCategoria_Estado_Id(4,1,1);
+		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductos();
 		for (ProductoMenuSub productoMenuSub : productos) {
 			ProductoCategoria categoria = productoMenuSub.getProductoCategoria();
 			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducidoAndProductoFormaIdAndEstadoId(productoMenuSub.getProducto().getId(),1,100,2,1);

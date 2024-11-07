@@ -8,17 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- font -->
-    <link rel="stylesheet" th:href="@{/assets/fonts/fonts.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/fonts/fonts.css}">
     <!-- Icons -->
-    <link rel="stylesheet" th:href="@{/assets/fonts/font-icons.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/swiper-bundle.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/animate.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/fonts/font-icons.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/swiper-bundle.min.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/animate.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/public/resources/site/general/static/assets/css/styles.css}"/>
 
     <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" th:href="@{/images/logo/favicon.png}">
-    <link rel="apple-touch-icon-precomposed" th:href="@{/images/logo/favicon.png}">
+    <link rel="shortcut icon" th:href="@{/public/resources/site/general/static/images/logo/favicon.png}">
+    <link rel="apple-touch-icon-precomposed" th:href="@{/public/resources/site/general/static/images/logo/favicon.png}">
     <script src="https://kit.fontawesome.com/98270ba09b.js" crossorigin="anonymous"></script>
 
 </head>
@@ -370,805 +370,11 @@
                         <div class="meta-filter-shop"></div>
                         <div class="grid-layout wrapper-shop" data-grid="grid-3" id="contenedor-producto">
                             <!-- card product 1 -->
-                            <div th:each="producto : ${productos}"
-                                 class="card-product"
-                                 data-price="16.95"
-                                 data-color="orange black white">
-                                <div class="card-product-wrapper">
-                                    <a th:href="@{'/index/' + ${menuUrl} + '/' + ${menuSubUrl} + '/' + ${producto.urlCategoria} + '/' + ${producto.urlProducto} (sku=${producto.skuProductoPropiedadesDetalles}) }"
-                                       class="product-img product-link"
-                                       th:data-variaciones="${#strings.listJoin(producto.variaciones, ',')}">
 
-                                        <!--https://themesflat.co/html/ecomus/images/products/orange-1.jpg-->
-                                        <!--https://themesflat.co/html/ecomus/images/products/white-1.jpg-->
-                                        <img class="lazyload img-product"
-                                             th:data-src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}"
-                                             th:src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}"
-                                             th:alt="${producto.nombre}">
-                                        <img class="lazyload img-hover"
-                                             th:data-src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}"
-                                             th:src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}"
-                                             th:alt="'img-'+${producto.nombre}">
-                                    </a>
-                                    <div class="list-product-btn absolute-2">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html"
-                                       class="title link text-center"
-                                       th:text="${producto.nombre}">
-                                        Ribbed Tank Top
-                                    </a>
-                                    <a href="product-detail.html"
-                                       class="title link text-center"
-                                       th:each="variacion: ${producto.variaciones}"
-                                       th:text="${variacion}">
-                                        Trouble - iPhone Case
-                                    </a>
-                                    <div class="d-flex flex-row justify-content-evenly">
-                                        <p class="d-flex flex-column">
-                                            Precio Regular:
-                                            <span class="price"
-                                                  th:text="'S/. ' + ${#numbers.formatDecimal(producto.precio,3,2,'POINT')}">
-                                                    $30.00
-                                                </span>
-                                        </p>
-                                        <p class="d-flex flex-column">
-                                            Precio Reducido:
-                                            <span class="price"
-                                                  th:text="'S/. ' + ${#numbers.formatDecimal(producto.precioReducido,3,2,'POINT')}">
-                                                    $30.00
-                                                </span>
-                                        </p>
-                                    </div>
-                                    <!--<ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">Orange</span>
-                                            <span class="swatch-value bg_orange-3"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/orange-1.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/orange-1.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Black</span>
-                                            <span class="swatch-value bg_dark"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/black-1.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/black-1.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">White</span>
-                                            <span class="swatch-value bg_white"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/white-1.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/white-1.jpg" alt="image-product">
-                                        </li>
-                                    </ul>-->
-                                </div>
-                            </div>
-                            <!--
-                            <div class="card-product" data-price="18.95" data-size="m l xl" data-color="brown light-purple light-green">
-                                <div class="card-product-wrapper">
-                                    <a th:href="@{/index/product-detail}"
-                                       class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/brown.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/brown.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/purple.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/purple.jpg" alt="image-product">
-                                    </a>
-                                    <div class="list-product-btn">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                    <div class="size-list">
-                                        <span>M</span>
-                                        <span>L</span>
-                                        <span>XL</span>
-                                    </div>
-                                    <div class="countdown-box">
-                                        <div class="js-countdown" data-timer="1007500" data-labels="d :,h :,m :,s"></div>
-                                    </div>
-                                    <div class="on-sale-wrap text-end">
-                                        <div class="on-sale-item">-33%</div>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">Ribbed modal T-shirt</a>
-                                    <span class="price">From $18.95</span>
-                                    <ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">Brown</span>
-                                            <span class="swatch-value bg_brown"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/brown.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/brown.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Light Purple</span>
-                                            <span class="swatch-value bg_purple"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/purple.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/purple.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Light Green</span>
-                                            <span class="swatch-value bg_light-green"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/green.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/green.jpg" alt="image-product">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="10">
-                                <div class="card-product-wrapper">
-                                    <a th:href="@{/index/product-detail}" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/white-3.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/white-3.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/white-4.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/white-4.jpg" alt="image-product">
-                                    </a>
-                                    <div class="list-product-btn absolute-2">
-                                        <a href="#shoppingCart" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Add to cart</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">Oversized Printed T-shirt</a>
-                                    <span class="price">$10.00</span>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="16.95" data-size="s m l xl" data-color="white purple black">
-                                <div class="card-product-wrapper">
-                                    <a th:href="@{/index/product-detail}" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/white-2.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/white-2.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/pink-1.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/pink-1.jpg" alt="image-product">
-                                    </a>
-                                    <div class="list-product-btn">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                    <div class="size-list">
-                                        <span>S</span>
-                                        <span>M</span>
-                                        <span>L</span>
-                                        <span>XL</span>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title">Oversized Printed T-shirt</a>
-                                    <span class="price">$16.95</span>
-                                    <ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">White</span>
-                                            <span class="swatch-value bg_white"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/white-2.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/white-2.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Pink</span>
-                                            <span class="swatch-value bg_purple"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/pink-1.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/pink-1.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Black</span>
-                                            <span class="swatch-value bg_dark"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/black-2.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/black-2.jpg" alt="image-product">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="114.95" data-size="s m l xl" data-color="brown white">
-                                <div class="card-product-wrapper">
-                                    <a th:href="@{/index/product-detail}" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/brown-2.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/brown-2.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/brown-3.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/brown-3.jpg" alt="image-product">
-                                    </a>
-                                    <div class="size-list">
-                                        <span>S</span>
-                                        <span>M</span>
-                                        <span>L</span>
-                                        <span>XL</span>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">V-neck linen T-shirt</a>
-                                    <span class="price">$114.95</span>
-                                    <ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">Brown</span>
-                                            <span class="swatch-value bg_brown"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/brown-2.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/brown-2.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">White</span>
-                                            <span class="swatch-value bg_white"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/white-5.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/white-5.jpg" alt="image-product">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="10.00" data-color="light-green black blue dark-blue white light-grey">
-                                <div class="card-product-wrapper">
-                                    <a th:href="@{/index/product-detail}" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/light-green-1.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/light-green-1.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/light-green-2.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/light-green-2.jpg" alt="image-product">
-                                    </a>
-                                    <div class="list-product-btn absolute-2">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">Loose Fit Sweatshirt</a>
-                                    <span class="price">$10.00</span>
-                                    <ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">Light Green</span>
-                                            <span class="swatch-value bg_light-green"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/light-green-1.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/light-green-1.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Black</span>
-                                            <span class="swatch-value bg_dark"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/black-3.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/black-3.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Blue</span>
-                                            <span class="swatch-value bg_blue-2"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/blue.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/blue.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Dark Blue</span>
-                                            <span class="swatch-value bg_dark-blue"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/dark-blue.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/dark-blue.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">White</span>
-                                            <span class="swatch-value bg_white"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/white-6.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/white-6.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Light Grey</span>
-                                            <span class="swatch-value bg_light-grey"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/light-grey.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/light-grey.jpg" alt="image-product">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="10.00" data-size="s m l" data-color="black dark-blue beige light-blue white">
-                                <div class="card-product-wrapper">
-                                    <a th:href="@{/index/product-detail}" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/black-4.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/black-4.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/black-5.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/black-5.jpg" alt="image-product">
-                                    </a>
-                                    <div class="size-list">
-                                        <span>S</span>
-                                        <span>M</span>
-                                        <span>L</span>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">Regular Fit Oxford Shirt</a>
-                                    <span class="price">$10.00</span>
-                                    <ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">Black</span>
-                                            <span class="swatch-value bg_dark"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/black-4.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/black-4.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Dark Blue</span>
-                                            <span class="swatch-value bg_dark-blue"></span>
-                                            <img class="lazyload"
-                                                 ata-src="https://themesflat.co/html/ecomus/images/products/dark-blue-2.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/dark-blue-2.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Beige</span>
-                                            <span class="swatch-value bg_beige"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/beige.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/beige.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Light Blue</span>
-                                            <span class="swatch-value bg_light-blue"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/light-blue.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/light-blue.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">White</span>
-                                            <span class="swatch-value bg_white"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/white-7.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/white-7.jpg" alt="image-product">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="9.95" data-size="s m l xl" data-color="white black blue">
-                                <div class="card-product-wrapper">
-                                    <a th:href="@{/index/product-detail}" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/white-8.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/white-8.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/black-6.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/black-6.jpg" alt="image-product">
-                                    </a>
-                                    <div class="size-list">
-                                        <span>S</span>
-                                        <span>M</span>
-                                        <span>L</span>
-                                        <span>XL</span>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">Loose Fit Hoodie</a>
-                                    <span class="price">$9.95</span>
-                                    <ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">White</span>
-                                            <span class="swatch-value bg_white"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/white-8.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/white-8.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Black</span>
-                                            <span class="swatch-value bg_dark"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/black-7.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/black-7.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Blue</span>
-                                            <span class="swatch-value bg_blue-2"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/blue-2.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/blue-2.jpg" alt="image-product">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="14.95" data-size="m l xl" data-color="brown black">
-                                <div class="card-product-wrapper">
-                                    <a href="product-detail.html" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/brown-4.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/brown-4.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/black-8.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/black-8.jpg" alt="image-product">
-                                    </a>
-                                    <div class="size-list">
-                                        <span>M</span>
-                                        <span>L</span>
-                                        <span>XL</span>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">Patterned scarf</a>
-                                    <span class="price">$14.95</span>
-                                    <ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">Brown</span>
-                                            <span class="swatch-value bg_brown"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/brown-4.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/brown-4.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Black</span>
-                                            <span class="swatch-value bg_dark"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/black-8.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/black-8.jpg" alt="image-product">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="18.95" data-size="s m l" data-color="black white">
-                                <div class="card-product-wrapper">
-                                    <a href="product-detail.html" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/black-9.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/black-9.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/black-10.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/black-10.jpg" alt="image-product">
-                                    </a>
-                                    <div class="size-list">
-                                        <span>S</span>
-                                        <span>M</span>
-                                        <span>L</span>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">Slim Fit Fine-knit Turtleneck Sweater</a>
-                                    <span class="price">$18.95</span>
-                                    <ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">Black</span>
-                                            <span class="swatch-value bg_dark"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/black-9.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/black-9.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">White</span>
-                                            <span class="swatch-value bg_white"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/white-9.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/white-9.jpg" alt="image-product">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="18.95" data-size="s m l" data-color="grey pink light-pink">
-                                <div class="card-product-wrapper">
-                                    <a href="product-detail.html" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/grey-2.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/grey-2.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/grey.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/grey.jpg" alt="image-product">
-                                    </a>
-                                    <div class="size-list">
-                                        <span>S</span>
-                                        <span>M</span>
-                                        <span>L</span>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">Slim Fit Fine-knit Turtleneck Sweater</a>
-                                    <span class="price">$18.95</span>
-                                    <ul class="list-color-product">
-                                        <li class="list-color-item color-swatch active">
-                                            <span class="tooltip">Grey</span>
-                                            <span class="swatch-value bg_grey"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/grey-2.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/grey-2.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Pink</span>
-                                            <span class="swatch-value bg_pink"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/pink-2.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/pink-2.jpg" alt="image-product">
-                                        </li>
-                                        <li class="list-color-item color-swatch">
-                                            <span class="tooltip">Light Pink</span>
-                                            <span class="swatch-value bg_light-pink"></span>
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/products/light-pink.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/products/light-pink.jpg" alt="image-product">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card-product" data-price="18.95" data-size="s m l">
-                                <div class="card-product-wrapper">
-                                    <a href="product-detail.html" class="product-img">
-                                        <img class="lazyload img-product"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/black-11.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/black-11.jpg" alt="image-product">
-                                        <img class="lazyload img-hover"
-                                             data-src="https://themesflat.co/html/ecomus/images/products/black-12.jpg"
-                                             src="https://themesflat.co/html/ecomus/images/products/black-12.jpg" alt="image-product">
-                                    </a>
-                                    <div class="size-list">
-                                        <span>S</span>
-                                        <span>M</span>
-                                        <span>L</span>
-                                    </div>
-                                    <div class="list-product-btn">
-                                        <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                            <span class="icon icon-bag"></span>
-                                            <span class="tooltip">Quick Add</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                            <span class="icon icon-heart"></span>
-                                            <span class="tooltip">Add to Wishlist</span>
-                                            <span class="icon icon-delete"></span>
-                                        </a>
-                                        <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                            <span class="icon icon-compare"></span>
-                                            <span class="tooltip">Add to Compare</span>
-                                            <span class="icon icon-check"></span>
-                                        </a>
-                                        <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                            <span class="icon icon-view"></span>
-                                            <span class="tooltip">Quick View</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-product-info">
-                                    <a href="product-detail.html" class="title link">Slim Fit Fine-knit Turtleneck Sweater</a>
-                                    <span class="price">$18.95</span>
-
-                                </div>
-                            </div>
-                            -->
                         </div>
                         <!-- pagination -->
                         <ul class="tf-pagination-wrap tf-pagination-list tf-pagination-btn">
-                            <li class="active">
-                                <a href="#" class="pagination-link">1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="pagination-link animate-hover-btn">2</a>
-                            </li>
-                            <li>
-                                <a href="#" class="pagination-link animate-hover-btn">3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="pagination-link animate-hover-btn">4</a>
-                            </li>
-                            <li>
-                                <a href="#" class="pagination-link animate-hover-btn">
-                                    <span class="icon icon-arrow-right"></span>
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -1203,33 +409,33 @@
     <!-- /all-modals -->
 
     <!-- Javascript -->
-    <script type="text/javascript" th:src="@{/assets/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/swiper-bundle.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/carousel.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/bootstrap-select.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/lazysize.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/count-down.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/wow.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/multiple-modal.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/swiper-bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/carousel.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/bootstrap-select.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/lazysize.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/count-down.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/wow.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
     <script th:inline="javascript">
 
         let menuUrl = [[${menuUrl}]];
         let menuSubUrl = [[${menuSubUrl}]];
+        let currentPage = 0;
+        let menuSubIdGlobal;
 
-        //var _PaginaActual = 1;
+        $(document).ready(function() {
+            buscarMenuSubPorUrl(menuSubUrl);
+        });
 
-        $(document).ready(function () {
-            //MostrarCategorias();
-            //MostrarProductos(0, 0)
-            //console.log(rutaGeneral+ruta)
-            let precioMinimo = $(".min-price").text();
-            let precioMaximo = $(".max-price").text();
-            buscarMenuSubPorUrl(menuSubUrl, precioMinimo, precioMaximo);
+        $("#btn-aplicar-filtros").click(function () {
+            buscarMenuSubPorUrl(menuSubUrl);
         })
 
-        function buscarMenuSubPorUrl(menuSubUrl, precioMinimo, precioMaximo){
+        function buscarMenuSubPorUrl(menuSubUrl){
+
             $.ajax({
                 type: "GET",
                 url: '/menuSub/obtenerPorUrl',
@@ -1237,7 +443,8 @@
                 data: { menuSubUrl: menuSubUrl},
                 success: function (response) {
                     console.log({response});
-                    mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
+                    menuSubIdGlobal = response.id;
+                    mostrarProductoNuevo(menuSubIdGlobal, currentPage);
                 },
                 error: function() {
                     console.log('Error al obtener sub menu');
@@ -1245,40 +452,44 @@
             });
         }
 
-        function mostrarProductoNuevo(menuSubId, precioMinimo, precioMaximo) {
+        function mostrarProductoNuevo(menuSubId, page) {
+            //let urlImagenesProductos='http://104.218.48.244:8080/apirest/apirest/productos/images/';
+            let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
 
-            //let urlImagenesProductos='http://104.218.48.244:8080/apirest/devadmin/productos/images/';
-            let urlImagenesProductos='http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/';
-
-            console.log(parseFloat(precioMinimo))
-            console.log(parseFloat(precioMaximo))
+            let precioMinimo = $(".range-min").val();
+            let precioMaximo = $(".range-max").val();
+            console.log(parseFloat(precioMinimo));
+            console.log(parseFloat(precioMaximo));
 
             $.ajax({
                 type: "GET",
                 url: '/producto/obtenerProductos',
                 dataType: "json",
-                data: { menuSubId: parseInt(menuSubId), minPrecio: parseFloat(precioMinimo), maxPrecio:parseFloat(precioMaximo)},
+                data: {
+                    menuSubId: parseInt(menuSubId),
+                    minPrecio: parseFloat(precioMinimo),
+                    maxPrecio:parseFloat(precioMaximo),
+                    page: parseInt(page)
+                },
                 success: function (response) {
-                    console.log({response});
+                    console.log(response);
                     $("#contenedor-producto").html("");
-                    $.each(response, function (i, element) {
-                        // Generar los parámetros de variaciones dinámicamente
+                    $.each(response.productos, function (i, element) {
+
+
                         let variacionesParams = element.variaciones.map(function (v, i) {
                             return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
                         }).join('&');
 
-                        // Creamos el contenedor principal para el producto
                         let productoCard = $("<div>").addClass("card-product").attr({
                             "data-price": element.precioReducido,
                             "data-color": "orange black white"
                         });
 
-                        // Creamos el wrapper de la imagen
                         let cardWrapper = $("<div>").addClass("card-product-wrapper").append(
-                            //AQUÍ
                             $("<a>").addClass("product-img product-link").attr({
-                                "href": "/"+menuUrl+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
-                                    element.urlProducto+"?sku="+element.skuProductoPropiedadesDetalles+"&"+variacionesParams,
+                                "href": "/devweb/"+menuUrl+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                    element.urlProducto+"?"+variacionesParams,
                             }).append(
                                 $("<img>").addClass("lazyload img-product").attr({
                                     "data-src": urlImagenesProductos + element.imagen,
@@ -1293,16 +504,11 @@
                             )
                         );
 
-                        // Creamos el contenedor de la información del producto
                         let cardInfo = $("<div>").addClass("card-product-info").append(
                             $("<a>").addClass("title link text-center").text(element.nombre)
                         );
 
-
-                        // Iteramos sobre las variaciones y las agregamos al contenedor
-
                         $.each(element.variaciones, function (j, variacion) {
-                            // Agregamos cada variación como un enlace o texto
                             cardInfo.append(
                                 $("<a>").addClass("title link text-center").text(variacion)
                             );
@@ -1316,43 +522,39 @@
                                 $("<span>").addClass("price").text(parseFloat(element.precioReducido).toFixed(2))
                             )
                         )
-                        // Agregamos el contenedor de variaciones al contenedor de información del producto
                         cardInfo.append(priceProduct);
-
-                        // Finalmente, ensamblamos toda la tarjeta del producto
                         productoCard.append(cardWrapper).append(cardInfo);
-
-                        // Agregamos la tarjeta del producto al contenedor principal
                         $("#contenedor-producto").append(productoCard);
                     })
+                    crearPaginacion(response);
                 },
                 error: function() {
                     console.log('Error al obtener el productos');
                 }
             });
-        }
 
-        $("#btn-aplicar-filtros").click(function () {
-            let precioMinimo = $(".min-price").text();
-            let precioMaximo = $(".max-price").text();
-            buscarMenuSubPorUrl(menuSubUrl, precioMinimo, precioMaximo);
-        })
+            function crearPaginacion(page) {
+                let pagination = $(".tf-pagination-list");
+                pagination.html("");
 
-        //NECESITO que esto se agregue dinamicamiente a mi url  unos request params dinamicos
-        document.addEventListener("DOMContentLoaded", function() {
-            var links = document.querySelectorAll('.product-link');
-            links.forEach(function(link) {
-                var variaciones = link.getAttribute('data-variaciones').split(',');
-                if (variaciones.length > 0) {
-                    var queryParams = variaciones.map(function(v, i) {
-                        return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
-                    }).join('&');
-
-                    // Modificar el href con los parámetros de variación
-                    link.href = link.href + '&' + queryParams;
+                if (page.pagePrevious) {
+                    pagination.append('<li><a href="#" class="pagination-link" data-page="' + (page.pageNumber - 1) + '">&laquo;</a></li>');
                 }
-            });
-        });
+                for (let i = 0; i < page.totalPages; i++) {
+                    let activeClass = (i === page.pageNumber) ? ' active' : '';
+                    pagination.append('<li class="' + activeClass + '"><a href="#" class="pagination-link" data-page="' + i + '">' + (i + 1) + '</a></li>');
+                }
+                if (page.pageNext) {
+                    pagination.append('<li><a href="#" class="pagination-link" data-page="' + (page.pageNumber + 1) + '">&raquo;</a></li>');
+                }
+
+                $(".pagination-link").click(function(e) {
+                    e.preventDefault();
+                    currentPage = $(this).data("page");
+                    mostrarProductoNuevo(menuSubIdGlobal, currentPage);
+                });
+            }
+        }
     </script>
 </body>
 </html>

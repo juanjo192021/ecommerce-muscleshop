@@ -16,6 +16,6 @@ public class ProductoMenuSubService implements IProductoMenuSubService {
 
     @Override
     public List<ProductoMenuSub> obtenerProductoMenuSubs() {
-        return iProductoMenuSubDao.findByProductoCategoria_MenuSub_IdAndProductoCategoria_MenuSub_Estado_Id_AndProductoCategoria_Estado_Id(4,1,1);
+        return iProductoMenuSubDao.findByProductos();
     }
 }
