@@ -3,27 +3,30 @@ package com.muscleshop.web.models.dto;
 import java.util.List;
 
 public class ProductoDto {
-    private Integer id; // id del Producto de ProductoMenuSub
-    private String nombre; // nombre del Producto de ProductoMenuSub
-    private String urlProducto; // url del Producto de ProductoMenuSub
-    private String imagen; // imagen del Producto de ProductoMenuSub
-    private String nombreCategoria; // nombre del ProductoCategoria de ProductoMenuSub
-    private String urlCategoria; // urlCategoria del ProductoCategoria de ProductoMenuSub
-    private String nombreMenuSub; // nombre del MenuSub de ProductoCategoria de ProductoMenuSub
-    private String urlMenuSub; // url del MenuSub de ProductoCategoria de ProductoMenuSub
-    private Integer productoPropiedadDetalleId; // id del ProductoPropiedadesDetalles
+    private Integer id;
+    private String nombre;
+    private String urlProducto;
+    private String imagen;
+    private String nombreCategoria;
+    private String urlCategoria;
+    private String nombreMenuSub;
+    private String urlMenuSub;
+    private String nombreMenu;
+    private String urlMenu;
+    private String nombreMarca;
+    private String urlMarca;
+    private Integer productoPropiedadDetalleId;
     private String skuProductoPropiedadesDetalles;
-    private Double precio; // precio del ProductoPropiedadesDetalles
-    private Double precioReducido; // precioReducido del ProductoPropiedadesDetalles
-    private Integer stock; // stock del ProductoPropiedadesDetalles
-    private String variacion; // variacion del ProductoVariaciones
+    private Double precio;
+    private Double precioReducido;
+    private Integer stock;
+    private String variacion;
     private List<String> variaciones;
 
     public ProductoDto(){}
+
     // Constructor
-
-
-    public ProductoDto(Integer id, String nombre, String urlProducto, String imagen, String nombreCategoria, String urlCategoria, String nombreMenuSub, String urlMenuSub, Integer productoPropiedadDetalleId, String skuProductoPropiedadesDetalles, Double precio, Double precioReducido, Integer stock, String variacion, List<String> variaciones) {
+    public ProductoDto(Integer id, String nombre, String urlProducto, String imagen, String nombreCategoria, String urlCategoria, String nombreMenuSub, String urlMenuSub, String nombreMenu, String urlMenu, String nombreMarca, String urlMarca, Integer productoPropiedadDetalleId, String skuProductoPropiedadesDetalles, Double precio, Double precioReducido, Integer stock, String variacion, List<String> variaciones) {
         this.id = id;
         this.nombre = nombre;
         this.urlProducto = urlProducto;
@@ -32,6 +35,10 @@ public class ProductoDto {
         this.urlCategoria = urlCategoria;
         this.nombreMenuSub = nombreMenuSub;
         this.urlMenuSub = urlMenuSub;
+        this.nombreMenu = nombreMenu;
+        this.urlMenu = urlMenu;
+        this.nombreMarca = nombreMarca;
+        this.urlMarca = urlMarca;
         this.productoPropiedadDetalleId = productoPropiedadDetalleId;
         this.skuProductoPropiedadesDetalles = skuProductoPropiedadesDetalles;
         this.precio = precio;
@@ -104,6 +111,38 @@ public class ProductoDto {
 
     public void setUrlMenuSub(String urlMenuSub) {
         this.urlMenuSub = urlMenuSub;
+    }
+
+    public String getNombreMenu() {
+        return nombreMenu;
+    }
+
+    public void setNombreMenu(String nombreMenu) {
+        this.nombreMenu = nombreMenu;
+    }
+
+    public String getUrlMenu() {
+        return urlMenu;
+    }
+
+    public void setUrlMenu(String urlMenu) {
+        this.urlMenu = urlMenu;
+    }
+
+    public String getNombreMarca() {
+        return nombreMarca;
+    }
+
+    public void setNombreMarca(String nombreMarca) {
+        this.nombreMarca = nombreMarca;
+    }
+
+    public String getUrlMarca() {
+        return urlMarca;
+    }
+
+    public void setUrlMarca(String urlMarca) {
+        this.urlMarca = urlMarca;
     }
 
     public Integer getProductoPropiedadDetalleId() {

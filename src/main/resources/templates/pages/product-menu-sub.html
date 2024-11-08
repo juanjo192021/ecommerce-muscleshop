@@ -419,6 +419,7 @@
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/wow.min.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
+
     <script th:inline="javascript">
 
         let menuUrl = [[${menuUrl}]];
@@ -488,7 +489,7 @@
 
                         let cardWrapper = $("<div>").addClass("card-product-wrapper").append(
                             $("<a>").addClass("product-img product-link").attr({
-                                "href": "/devweb/"+menuUrl+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                "href": "/"+menuUrl+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
                                     element.urlProducto+"?"+variacionesParams,
                             }).append(
                                 $("<img>").addClass("lazyload img-product").attr({

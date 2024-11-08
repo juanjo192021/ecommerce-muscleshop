@@ -1,33 +1,43 @@
 package com.muscleshop.web.controller;
 
-import com.muscleshop.web.models.MenuSub;
 import com.muscleshop.web.models.Producto;
 import com.muscleshop.web.models.dto.ProductoDto;
-import com.muscleshop.web.services.ProductoService;
+import com.muscleshop.web.models.dto.VariacionDto;
+import com.muscleshop.web.services.IProductoService;
+import com.muscleshop.web.services.IProductoVariacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/producto/")
 public class ProductoController {
     @Autowired
-    private ProductoService iProductoService;
+    private IProductoService iProductoService;
 
-    // Método http para obtener un sub menu por su url
+    @GetMapping("obtenerProductoPorForma")
+    @ResponseBody
+    public ResponseEntity<List<ProductoDto>> obtenerProductosPorForma(@RequestParam("formaId") int formaId){
+
+        List<ProductoDto> productoDtos = iProductoService.obtenerProductosItemsIndividualesPorForma(formaId);
+        return ResponseEntity.ok(productoDtos);
+
+    }
+
     @GetMapping("buscarPorUrlProducto")
     @ResponseBody
     public ResponseEntity<Producto> buscarPorUrlProducto(@RequestParam("productoUrl") String productoUrl) {
 
         Producto producto = iProductoService.obtenerProductoPorUrl(productoUrl);
         return ResponseEntity.ok(producto);
+
     }
 
     @GetMapping("obtenerProductos")
@@ -36,8 +46,8 @@ public class ProductoController {
             @RequestParam("menuSubId") int menuSubId,
             @RequestParam("minPrecio") double minPrecio,
             @RequestParam("maxPrecio") double maxPrecio,
-            @RequestParam("page") int page,
-            Model model) {
+            @RequestParam("page") int page) {
+
         Pageable pageable = PageRequest.of(page, 2);
         Page<ProductoDto> productos = iProductoService.obtenerProductosItemsIndividialesPorMenuSubId(menuSubId, minPrecio, maxPrecio, pageable);
 
@@ -49,6 +59,7 @@ public class ProductoController {
         response.put("totalPages", productos.getTotalPages());
 
         return ResponseEntity.ok(response);
+
     }
 
     @GetMapping("obtenerProductosPorNombreProducto")
@@ -56,12 +67,22 @@ public class ProductoController {
     public ResponseEntity<Page<ProductoDto>> obtenerProductosPorNombreProducto(
             @RequestParam("productoNombre") String productoNombre,
             @RequestParam("minPrecio") double minPrecio,
-            @RequestParam("maxPrecio") double maxPrecio,
-            Model model) {
+            @RequestParam("maxPrecio") double maxPrecio) {
+
         Pageable pageable = PageRequest.of(0, 5);
         Page<ProductoDto> productos = iProductoService.obtenerProductosItemsIndividualesPorNombreProducto(productoNombre, minPrecio, maxPrecio, pageable);
 
         return ResponseEntity.ok(productos);
+
     }
 
+    @Autowired
+    IProductoVariacionService iProductoVariacionService;
+
+    @GetMapping("obtenerVariaciones")
+    @ResponseBody
+    public ResponseEntity<List<VariacionDto>> obtenerVariaciones(@RequestParam("productoId") int productoId) {
+        List<VariacionDto> variaciones = iProductoVariacionService.obtenerProductoVariacion(productoId);
+        return ResponseEntity.ok(variaciones);
+    }
 }

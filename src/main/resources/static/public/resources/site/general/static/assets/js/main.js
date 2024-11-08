@@ -61,6 +61,87 @@
     },
   };
 
+  /* searchProduct
+  -------------------------------------------------------------------------------------*/
+
+  const $searchInput = $('#input-search-products');
+  const $productContainer = $('#contenedor-productos-encontrados');
+  let typingTimer;
+
+  $(document).ready(function() {
+
+    // Evento para detectar cuando el usuario está escribiendo
+    $searchInput.on('input', function() {
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(() => {
+        if($searchInput.val().length === 0){
+          $productContainer.empty().removeClass('d-flex pt-4 pb-1').addClass('d-none');
+          return;
+        }
+        mostrarProductoNuevo($searchInput.val());
+      }, 1000);
+    });
+
+    /*
+    $searchInput.on('blur', function() {
+        $productContainer.empty().removeClass('d-flex').addClass('d-none');
+    });*/
+  });
+
+  function mostrarProductoNuevo(productoNombre) {
+    const urlImagenesProductos = 'http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
+    const precioMinimo = '0';
+    const precioMaximo = '1000';
+
+    $.ajax({
+      type: "GET",
+      url: '/producto/obtenerProductosPorNombreProducto',
+      dataType: "json",
+      data: {
+        productoNombre: productoNombre,
+        minPrecio: parseFloat(precioMinimo),
+        maxPrecio: parseFloat(precioMaximo)
+      },
+      success: function(response) {
+        const productos = response.content;
+        console.log(productos);
+
+        $productContainer.empty().removeClass('d-none').addClass('d-flex py-4 pb-1');
+
+        if(productos.length === 0){
+          const mensaje = $("<p>").text("No se encontraron resultados")
+          $productContainer.append(mensaje);
+          return;
+        }
+
+        productos.forEach(element => {
+          const productItem = $("<div>").addClass("tf-loop-item").append(
+              $("<div>").addClass("image").append(
+                  $("<a>").append(
+                      $("<img>").attr({
+                        "src": urlImagenesProductos + element.imagen,
+                        "alt": element.nombre
+                      })
+                  )
+              ),
+              $("<div>").addClass("content").append(
+                  $("<a>").addClass("d-block").text(element.nombre),
+                  $("<a>").addClass("d-block").text(element.variacion),
+                  $("<div>").addClass("tf-product-info-price").append(
+                      $("<div>").addClass("compare-at-price").text(parseFloat(element.precio).toFixed(2)),
+                      $("<div>").addClass("price-on-sale fw-6").text(parseFloat(element.precioReducido).toFixed(2))
+                  )
+              )
+          );
+          $productContainer.append(productItem);
+        });
+      },
+      error: function() {
+        console.log('Error al obtener el productos');
+      }
+    });
+  }
+
   /* selectImages
   -------------------------------------------------------------------------------------*/
   var selectImages = function () {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import com.muscleshop.web.models.Producto;
 import com.muscleshop.web.models.ProductoMenuSub;
 import com.muscleshop.web.models.ProductoPropiedadesDetalles;
 import com.muscleshop.web.models.dto.PresentacionDto;
@@ -24,45 +23,7 @@ public class ProductoPropiedadDetalleService implements IProductoPropiedadesDeta
 
 	private int estadoId=1;
 
-	public List<ProductoItemsDto> obtenerProductoPropiedadesDetallesPorForma(int productoFormaId){
-		List<ProductoPropiedadesDetalles> productoPropiedadesDetalles = iProductoPropiedadesDetallesDao.findByProductoForma_IdAndProductoForma_Estado_IdAndEstado_Id(productoFormaId,estadoId,estadoId);
-		return obtenerProductosItemsModificados(productoPropiedadesDetalles);
-	}
-
-	public List<ProductoItemsDto> obtenerProductosIndividualesPorMenuSubId(Double minPrecio, Double maxPrecio, Integer menuSubId) {
-
-		List<ProductoPropiedadesDetalles> productos = new ArrayList<>();
-		if(minPrecio == null && maxPrecio == null){
-			//productos = iProductoPropiedadesDetallesDao.findByProducto_ProductoCategoria_MenuSub_Id(menuSubId);
-			productos = iProductoPropiedadesDetallesDao.findAll();
-		}
-		if(minPrecio != null && maxPrecio != null){
-			//productos = iProductoPropiedadesDetallesDao.findByPrecioBetweenAndMenuSubId(minPrecio, maxPrecio, menuSubId);
-			productos = iProductoPropiedadesDetallesDao.findAll();
-		}
-		return obtenerProductosItemsModificados(productos);
-	}
-
-	public List<ProductoItemsDto> obtenerProductosIndividualesPorCategoriaId (Double minPrecio, Double maxPrecio,Integer categoriaId){
-
-		List<ProductoPropiedadesDetalles> productos = new ArrayList<>();
-		if(minPrecio == null && maxPrecio == null){
-			//productos = iProductoPropiedadesDetallesDao.findByProducto_ProductoCategoria_Id(categoriaId);
-			productos = iProductoPropiedadesDetallesDao.findAll();
-		}
-		if(minPrecio != null && maxPrecio != null){
-			//productos = iProductoPropiedadesDetallesDao.findByPrecioBetweenAndCategoriaId(minPrecio, maxPrecio, categoriaId);
-			productos = iProductoPropiedadesDetallesDao.findAll();
-		}
-
-		return obtenerProductosItemsModificados(productos);
-	}
-
-	public ProductoPropiedadesDetalles obtenerProductoPropiedadDetallesPorVariaciones(int productoId, String variacion1, String variacion2){
-		//return iProductoPropiedadesDetallesDao.findByProducto_IdAndProductoVariacion1_ValorAndProductoVariacion2_Valor(productoId, variacion1, variacion2);
-		return iProductoPropiedadesDetallesDao.findById(1).orElse(null);
-	}
-
+	//Se usaba en pedidos en la sesión, no se usa
 	public ProductoCarritoDto obtenerProductoPropiedadDetallePorId(Integer id) {
 		ProductoPropiedadesDetalles productoPropiedadesDetalles = iProductoPropiedadesDetallesDao.findById(id).orElse(null);
 		ProductoCarritoDto productoCarritoDto = new ProductoCarritoDto();
@@ -79,17 +40,7 @@ public class ProductoPropiedadDetalleService implements IProductoPropiedadesDeta
 		return productoCarritoDto;
 	}
 
-	@Override
-	public List<ProductoPropiedadesDetalles> pruebasProductosPropiedadesDetalles(){
-		List<Integer> lista = new ArrayList<>();
-		lista.add(1);
-		lista.add(2);
-		lista.add(7);
-		lista.add(11);
-
-		return iProductoPropiedadesDetallesDao.findActiveProductoPropiedadesDetalles(lista, 1);
-	}
-
+	//No se usa
 	public List<ProductoItemsDto> obtenerProductosItemsModificados(List<ProductoPropiedadesDetalles> productoPropiedadesDetalles){
 
 		List<ProductoItemsDto> productosIndividuales = new ArrayList<>();
@@ -124,12 +75,6 @@ public class ProductoPropiedadDetalleService implements IProductoPropiedadesDeta
 		productosIndividuales.sort(Comparator.comparing(ProductoItemsDto::getId));
 
 		return productosIndividuales;
-	}
-
-	// Método para obtener una presentacion de un producto por su id de producto,
-	// sku de la presentación y el estado de la presentación del producto
-	public PresentacionDto obtenerPresentacionPorIdProductoAndSkuProductoPropiedadesDetalles(int productoId, String sku ){
-		return iProductoPropiedadesDetallesDao.findPresentacionByIdProductoAndSku(productoId, sku, estadoId);
 	}
 
 	@Override

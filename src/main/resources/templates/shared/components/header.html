@@ -302,7 +302,7 @@
 				 th:each="logo:${logosTienda}">
 				<a class="logo-header"
 				   th:href="@{/}">
-					<img th:src="@{'/images/logo/'+${logo.header}}" alt="logo" class="logo">
+					<img th:src="@{'/public/resources/site/general/static/assets/images/logo/'+${logo.header}}" alt="logo" class="logo">
 				</a>
 			</div>
 			<div class="col-xl-5 col-md-4 col-3">
@@ -351,7 +351,7 @@
 					<li class="nav-compare">
 						<a th:href="@{/index/product-menu}"
 						   class="nav-icon-item">
-							<img class="icon icon-gift" th:src="@{/images/item/gift.svg}" />
+							<img class="icon icon-gift" th:src="@{/public/resources/site/general/static/assets/images/item/gift.svg}" />
 						</a>
 					</li>
 					<li class="nav-wishlist">

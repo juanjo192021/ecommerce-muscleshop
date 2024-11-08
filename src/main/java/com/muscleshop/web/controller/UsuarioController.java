@@ -17,6 +17,7 @@ import com.mercadopago.resources.preference.Preference;
 import com.muscleshop.web.models.*;
 import com.muscleshop.web.models.dto.PedidoProductoDto;
 import com.muscleshop.web.services.*;
+import com.muscleshop.web.services.implementation.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.muscleshop.web.services.implementation.MenuService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -44,7 +43,7 @@ public class UsuarioController {
 	IMenuService menuService;
 
 	@Autowired
-	ProductoService productoService;
+    ProductoService productoService;
 
 	@Autowired
 	MetodoPagoService metodoService;

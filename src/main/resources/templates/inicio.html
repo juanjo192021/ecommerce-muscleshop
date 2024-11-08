@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
     <meta charset="utf-8">
-    <title>Ecomus - Ultimate HTML</title>
+    <title>Bienvendidos a MuscleShop</title>
 
-    <meta name="author" content="themesflat.com">
+    <meta name="author" content="Muscle">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- font -->
@@ -129,13 +129,21 @@
                     <span class="title wow fadeInUp" data-wow-delay="0s">BEST SELLERS</span>
                 </div>
                 <div class="wrap-carousel wrap-sw-2">
-                    <div class="swiper tf-sw-product-sell-1 wrap-sw-over" data-preview="4" data-tablet="3" data-mobile="2" data-space-lg="30" data-space-md="15" data-pagination="2" data-pagination-md="3" data-pagination-lg="3">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" lazy="true" th:each="producto : ${productos}">
+                    <div class="swiper tf-sw-product-sell-1 wrap-sw-over"
+                         data-preview="4"
+                         data-tablet="3"
+                         data-mobile="2"
+                         data-space-lg="30"
+                         data-space-md="15"
+                         data-pagination="2"
+                         data-pagination-md="3"
+                         data-pagination-lg="3">
+                        <div class="swiper-wrapper" id="contenedor-productos-bestsellers">
+                            <!--<div class="swiper-slide" lazy="true" th:each="producto : ${productos}">
                                 <div class="card-product bg_white radius-20">
                                     <div class="card-product-wrapper border-line">
                                         <a th:href="@{/index/product-detail}" class="product-img">
-                                            <!--th:src="@{/images/products/phonecase-11.jpg}"-->
+                                            &lt;!&ndash;th:src="@{/images/products/phonecase-11.jpg}"&ndash;&gt;
                                             <img class="lazyload img-product"
                                                  th:src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}"
                                                  th:data-src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${producto.imagen}"
@@ -155,11 +163,16 @@
                                                 <span class="tooltip">Add to Wishlist</span>
                                                 <span class="icon icon-delete"></span>
                                             </a>
-                                            <!--<a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
+                                            &lt;!&ndash;<a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
                                                 <span class="icon icon-compare"></span>
                                                 <span class="tooltip">Add to Compare</span>
                                                 <span class="icon icon-check"></span>
-                                            </a>-->
+                                            </a>&ndash;&gt;
+                                            <a class="box-icon bg_white compare btn-icon-action btn-add-cart">
+                                                <span class="icon icon-compare"></span>
+                                                <span class="tooltip">Add to Compare</span>
+                                                <span class="icon icon-check"></span>
+                                            </a>
                                             <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
                                                 <span class="icon icon-view"></span>
                                                 <span class="tooltip">Quick View</span>
@@ -189,215 +202,6 @@
                                                 </span>
                                             </p>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--<div class="swiper-slide" lazy="true">
-                                <div class="card-product bg_white radius-20">
-                                    <div class="card-product-wrapper border-line">
-                                        <a th:href="@{/index/product-detail}" class="product-img">
-                                            <img class="lazyload img-product"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png" alt="image-product">
-                                            <img class="lazyload img-hover"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 alt="image-product">
-                                        </a>
-                                        <div class="list-product-btn absolute-2">
-                                            <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                                <span class="icon icon-bag"></span>
-                                                <span class="tooltip">Quick Add</span>
-                                            </a>
-                                            <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                                <span class="icon icon-heart"></span>
-                                                <span class="tooltip">Add to Wishlist</span>
-                                                <span class="icon icon-delete"></span>
-                                            </a>
-                                            <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                                <span class="icon icon-compare"></span>
-                                                <span class="tooltip">Add to Compare</span>
-                                                <span class="icon icon-check"></span>
-                                            </a>
-                                            <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                                <span class="icon icon-view"></span>
-                                                <span class="tooltip">Quick View</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card-product-info">
-                                        <a href="product-detail.html" class="title link">Cherrybomb - iPhone Case</a>
-                                        <span class="price">
-                                            $30.00
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" lazy="true">
-                                <div class="card-product bg_white radius-20">
-                                    <div class="card-product-wrapper border-line">
-                                        <a th:href="@{/index/product-detail}" class="product-img">
-                                            <img class="lazyload img-product"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 alt="image-product">
-                                            <img class="lazyload img-hover"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 alt="image-product">
-                                        </a>
-                                        <div class="list-product-btn absolute-2">
-                                            <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                                <span class="icon icon-bag"></span>
-                                                <span class="tooltip">Quick Add</span>
-                                            </a>
-                                            <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                                <span class="icon icon-heart"></span>
-                                                <span class="tooltip">Add to Wishlist</span>
-                                                <span class="icon icon-delete"></span>
-                                            </a>
-                                            <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                                <span class="icon icon-compare"></span>
-                                                <span class="tooltip">Add to Compare</span>
-                                                <span class="icon icon-check"></span>
-                                            </a>
-                                            <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                                <span class="icon icon-view"></span>
-                                                <span class="tooltip">Quick View</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card-product-info">
-                                        <a href="product-detail.html" class="title link">Femme Fatale - iPhone Case</a>
-                                        <span class="price">
-                                            $30.00
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" lazy="true">
-                                <div class="card-product bg_white radius-20">
-                                    <div class="card-product-wrapper border-line">
-                                        <a th:href="@{/index/product-detail}" class="product-img">
-                                            <img class="lazyload img-product"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 alt="image-product">
-                                            <img class="lazyload img-hover"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 alt="image-product">
-                                        </a>
-                                        <div class="list-product-btn absolute-2">
-                                            <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                                <span class="icon icon-bag"></span>
-                                                <span class="tooltip">Quick Add</span>
-                                            </a>
-                                            <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                                <span class="icon icon-heart"></span>
-                                                <span class="tooltip">Add to Wishlist</span>
-                                                <span class="icon icon-delete"></span>
-                                            </a>
-                                            <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                                <span class="icon icon-compare"></span>
-                                                <span class="tooltip">Add to Compare</span>
-                                                <span class="icon icon-check"></span>
-                                            </a>
-                                            <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                                <span class="icon icon-view"></span>
-                                                <span class="tooltip">Quick View</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card-product-info">
-                                        <a href="product-detail.html" class="title link">Emerald Pool - Elegant iPhone case</a>
-                                        <span class="price">
-                                            $30.00
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" lazy="true">
-                                <div class="card-product bg_white radius-20">
-                                    <div class="card-product-wrapper border-line">
-                                        <a th:href="@{/index/product-detail}" class="product-img">
-                                            <img class="lazyload img-product"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 alt="image-product">
-                                            <img class="lazyload img-hover"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 alt="image-product">
-                                        </a>
-                                        <div class="list-product-btn absolute-2">
-                                            <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                                <span class="icon icon-bag"></span>
-                                                <span class="tooltip">Quick Add</span>
-                                            </a>
-                                            <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                                <span class="icon icon-heart"></span>
-                                                <span class="tooltip">Add to Wishlist</span>
-                                                <span class="icon icon-delete"></span>
-                                            </a>
-                                            <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                                <span class="icon icon-compare"></span>
-                                                <span class="tooltip">Add to Compare</span>
-                                                <span class="icon icon-check"></span>
-                                            </a>
-                                            <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                                <span class="icon icon-view"></span>
-                                                <span class="tooltip">Quick View</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card-product-info">
-                                        <a href="product-detail.html" class="title link">Full Glam - Beige iPhone Case</a>
-                                        <span class="price">
-                                            $30.00
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" lazy="true">
-                                <div class="card-product bg_white radius-20">
-                                    <div class="card-product-wrapper border-line">
-                                        <a th:href="@{/index/product-detail}" class="product-img">
-                                            <img class="lazyload img-product"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 alt="image-product">
-                                            <img class="lazyload img-hover"
-                                                 src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 data-src="https://res.cloudinary.com/ddtmkkhi4/image/upload/v1725607259/Levro_Whey_Supreme_1.5_kg_qontxc.png"
-                                                 alt="image-product">
-                                        </a>
-                                        <div class="list-product-btn absolute-2">
-                                            <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                                <span class="icon icon-bag"></span>
-                                                <span class="tooltip">Quick Add</span>
-                                            </a>
-                                            <a href="javascript:void(0);" class="box-icon bg_white wishlist btn-icon-action">
-                                                <span class="icon icon-heart"></span>
-                                                <span class="tooltip">Add to Wishlist</span>
-                                                <span class="icon icon-delete"></span>
-                                            </a>
-                                            <a href="#compare" data-bs-toggle="offcanvas" aria-controls="offcanvasLeft" class="box-icon bg_white compare btn-icon-action">
-                                                <span class="icon icon-compare"></span>
-                                                <span class="tooltip">Add to Compare</span>
-                                                <span class="icon icon-check"></span>
-                                            </a>
-                                            <a href="#quick_view" data-bs-toggle="modal" class="box-icon bg_white quickview tf-btn-loading">
-                                                <span class="icon icon-view"></span>
-                                                <span class="tooltip">Quick View</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card-product-info">
-                                        <a href="product-detail.html" class="title link">Almond Latte - Cute iPhone Case</a>
-                                        <span class="price">
-                                            $30.00
-                                        </span>
                                     </div>
                                 </div>
                             </div>-->
@@ -863,85 +667,251 @@
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/wow.min.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
+
     <script th:inline="javascript">
-        const $searchInput = $('#input-search-products');
-        const $productContainer = $('#contenedor-productos-encontrados');
-        let typingTimer;
+        const formaId = 2;
+        let selectedVariants = [];
+        let producto = "";
+        let presentacion ="";
+        let variacionesParams;
 
-        $(document).ready(function() {
+        $(document).ready(function () {
+            let productos = [];
+            mostrarProductosPorForma(formaId);
 
-            // Evento para detectar cuando el usuario está escribiendo
-            $searchInput.on('input', function() {
-                clearTimeout(typingTimer);
-                typingTimer = setTimeout(() => {
-                    if($searchInput.val().length === 0){
-                        $productContainer.empty().removeClass('d-flex pt-4 pb-1').addClass('d-none');
-                        return;
+
+            // Evento click para el modal #quick_add
+            $(document).on("click", ".btn-add-prueba", function () {
+                producto = $(this).data("producto");
+                console.log({productoInicial : producto})
+                variacionesParams = producto.variaciones.map(function (v, i) {
+                    return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
+                }).join('&');
+
+                $("#quick_add .image img").attr("src", "http://104.218.48.244:8080/apirest/api/productos/images/" + producto.imagen);
+                $("#quick_add .content a").text(producto.nombre);
+                $("#quick_add .content a").attr("href", "/"+producto.urlMenu+"/"+producto.urlMenuSub+"/"+producto.urlCategoria+"/"+producto.urlProducto + "?" + variacionesParams);
+                $("#quick_add .tf-product-info-price .price-on-sale").text("S/. " + parseFloat(producto.precioReducido).toFixed(2));
+                $("#quick_add .tf-product-info-price .compare-at-price").text("S/. " + parseFloat(producto.precio).toFixed(2));
+
+                // Realizar llamada AJAX para obtener las variaciones del producto
+                $.ajax({
+                    type: "GET",
+                    url: '/producto/obtenerVariaciones',
+                    dataType: "json",
+                    data: { productoId: producto.id },
+                    success: function (response) {
+                        console.log({response})
+                        const variaciones = response;
+                        const $variantPicker = $("#quick_add .tf-product-info-variant-picker");
+
+                        // Limpiar variaciones anteriores
+                        $variantPicker.empty();
+
+                        $.each(variaciones, function (i, variacion) {
+                            let $variantItem = $("<div>").addClass("variant-picker-item");
+                            let $variantLabel = $("<div>").addClass("variant-picker-label").text(variacion.nombreVariacion);
+                            let $variantValues = $("<div>").addClass("variant-picker-values");
+
+                            $.each(variacion.atributosDto, function (j, atributo) {
+                                let isChecked = producto.variaciones.includes(atributo.nombreAtributo);
+                                $variantValues.append(
+                                    $("<input>").attr({
+                                        type: "radio",
+                                        name: "name-" + variacion.idPropiedad,
+                                        id: "values-" + atributo.nombreAtributo,
+                                        value: atributo.nombreAtributo,
+                                        checked: isChecked
+                                    }),
+                                    $("<label>").addClass("style-text").attr({
+                                        for: "values-" + atributo.nombreAtributo,
+                                        "data-value": atributo.nombreAtributo
+                                    }).append($("<p>").text(atributo.nombreAtributo))
+                                );
+                            });
+
+                            $variantItem.append($variantLabel).append($variantValues);
+                            $variantPicker.append($variantItem);
+                        });
+                        // Función que actualiza las variaciones seleccionadas
+                        function updateSelectedVariants() {
+                            selectedVariants = [];
+                            // Recorrer todos los inputs radio que están seleccionados
+                            $(".variant-picker-item").each(function() {
+                                var selectedRadio = $(this).find('input[type="radio"]:checked');
+                                if (selectedRadio.length > 0) {
+                                    // Obtener el valor correcto del radio y evitar los valores 'on'
+                                    var selectedValue = selectedRadio.val().trim();
+                                    if (selectedValue && selectedValue !== 'on') {
+                                        selectedVariants.push(selectedValue);
+                                    }
+                                }
+                            });
+                            console.log("Variaciones seleccionadas:", selectedVariants);
+                        }
+
+                        // Manejar el evento 'change' cuando se selecciona una nueva variación
+                        $(document).on("change", ".variant-picker-item input[type='radio']", function() {
+                            updateSelectedVariants();
+                            buscarPresentacionPorProductoIdAndValorVariaciones(producto.id, selectedVariants);
+                        });
+
+                        function buscarPresentacionPorProductoIdAndValorVariaciones(productoId, variaciones){
+                            // Serializamos la lista de variaciones en un string separado por comas
+                            let variacionesStr = variaciones.join(',');
+                            $.ajax({
+                                type: "GET",
+                                url: '/productoPropiedadesDetalles/buscarPorProductoIdAndVariaciones',
+                                dataType: "json",
+                                data: { productoId: parseInt(productoId), variaciones: variacionesStr },
+                                success: function (response) {
+                                    console.log({presentacion:response});
+
+
+                                    variacionesParams = variaciones.map(function (v, i) {
+                                        return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
+                                    }).join('&');
+                                    producto.imagen = response.imagen
+                                    producto.skuProductoPropiedadesDetalles= response.skuProductoPropiedadesDetalles
+                                    producto.stock = response.stock
+                                    producto.precio = response.precio;
+                                    producto.precioReducido = response.precioReducido
+                                    producto.variacion = variaciones.join(' ');
+                                    producto.variaciones = variaciones
+
+                                    let productoFinales = producto
+                                    console.log({productoFinal : producto})
+                                    // Actualizar el HTML con los nuevos precios en el modal #quick_add
+
+                                    $("#quick_add .image img").attr("src", "http://104.218.48.244:8080/apirest/api/productos/images/" + response.imagen);
+                                    $("#quick_add .content a").attr("href", "/"+producto.urlMenu+"/"+producto.urlMenuSub+"/"+producto.urlCategoria+"/"+producto.urlProducto + "?" + variacionesParams);
+                                    $('#quick_add .tf-product-info-price .price-on-sale').text(`S/. ${parseFloat(response.precioReducido).toFixed(2)}`);
+                                    $('#quick_add .tf-product-info-price .compare-at-price').text(`S/. ${parseFloat(response.precio).toFixed(2)}`);
+
+                                },
+                                error: function() {
+                                    console.log('Error al obtener producto');
+                                }
+                            });
+                        }
+                    },
+                    error: function () {
+                        console.log('Error al obtener variaciones del producto');
                     }
-                    mostrarProductoNuevo($searchInput.val());
-                }, 1000);
+                });
             });
 
-            /*
-            $searchInput.on('blur', function() {
-                $productContainer.empty().removeClass('d-flex').addClass('d-none');
-            });*/
+
+            $(document).on("click", ".btn-add-pre", function() {
+                // Obtener la lista actual de presentaciones desde localStorage (o inicializar una lista vacía si no existe)
+                let listaPresentaciones = JSON.parse(localStorage.getItem("presentacionesSeleccionadas")) || [];
+
+                // Agregar la nueva `presentacion` a la lista
+                listaPresentaciones.push(producto);
+
+                // Guardar la lista actualizada en localStorage
+                localStorage.setItem("presentacionesSeleccionadas", JSON.stringify(listaPresentaciones));
+
+                console.log("Lista de presentaciones actualizada en localStorage:", listaPresentaciones);
+            });
+
         });
 
-        function mostrarProductoNuevo(productoNombre) {
-            const urlImagenesProductos = 'http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
-            const precioMinimo = '0';
-            const precioMaximo = '1000';
 
+        function mostrarProductosPorForma(formaId){
             $.ajax({
                 type: "GET",
-                url: '/producto/obtenerProductosPorNombreProducto',
+                url: '/producto/obtenerProductoPorForma',
                 dataType: "json",
-                data: {
-                    productoNombre: productoNombre,
-                    minPrecio: parseFloat(precioMinimo),
-                    maxPrecio: parseFloat(precioMaximo)
-                },
-                success: function(response) {
-                    const productos = response.content;
-                    console.log(productos);
+                data: { formaId },
+                success: function (response) {
+                    const urlImagenesProductos = "http://104.218.48.244:8080/apirest/api/productos/images/";
+                    const menuUrl = ""; // Ajusta esto según tu contexto
+                    const $swiperWrapper = $('#contenedor-productos-bestsellers');
 
-                    $productContainer.empty().removeClass('d-none').addClass('d-flex py-4 pb-1');
+                    $.each(response, function (i, element) {
 
-                    if(productos.length === 0){
-                        const mensaje = $("<p>").text("No se encontraron resultados")
-                        $productContainer.append(mensaje);
-                        return;
-                    }
+                        let variacionesParams = element.variaciones.map(function (v, i) {
+                            return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
+                        }).join('&');
 
-                    productos.forEach(element => {
-                        const productItem = $("<div>").addClass("tf-loop-item").append(
-                            $("<div>").addClass("image").append(
-                                $("<a>").append(
-                                    $("<img>").attr({
-                                        "src": urlImagenesProductos + element.imagen,
-                                        "alt": element.nombre
-                                    })
-                                )
-                            ),
-                            $("<div>").addClass("content").append(
-                                $("<a>").addClass("d-block").text(element.nombre),
-                                $("<a>").addClass("d-block").text(element.variacion),
-                                $("<div>").addClass("tf-product-info-price").append(
-                                    $("<div>").addClass("compare-at-price").text(parseFloat(element.precio).toFixed(2)),
-                                    $("<div>").addClass("price-on-sale fw-6").text(parseFloat(element.precioReducido).toFixed(2))
+                        let productoCard = $("<div>").addClass("swiper-slide").attr("lazy", "true").append(
+                            $("<div>").addClass("card-product bg_white radius-20").attr({
+                                "data-price": element.precioReducido,
+                                "data-color": "orange black white"
+                            }).append(
+                                $("<div>").addClass("card-product-wrapper border-line").append(
+                                    $("<a>").addClass("product-img product-link").attr({
+                                        "href": "/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                            element.urlProducto+"?"+variacionesParams,
+                                    }).append(
+                                        $("<img>").addClass("lazyload img-product").attr({
+                                            "data-src": urlImagenesProductos + element.imagen,
+                                            "src": urlImagenesProductos + element.imagen,
+                                            "alt": element.nombre
+                                        }),
+                                        $("<img>").addClass("lazyload img-hover").attr({
+                                            "data-src": urlImagenesProductos + element.imagen,
+                                            "src": urlImagenesProductos + element.imagen,
+                                            "alt": element.nombre
+                                        })
+                                    )
+                                ),
+                                $("<div>").addClass("list-product-btn absolute-2").append(
+                                    $("<a>").attr({"href": "#quick_add", "data-bs-toggle": "modal"}).data("producto", element).addClass("box-icon bg_white quick-add tf-btn-loading btn-add-prueba").append(
+                                        $("<span>").addClass("icon icon-bag"),
+                                        $("<span>").addClass("tooltip").text("Quick Add")
+                                    ),
+                                    $("<a>").attr("href", "javascript:void(0);").addClass("box-icon bg_white wishlist btn-icon-action").append(
+                                        $("<span>").addClass("icon icon-heart"),
+                                        $("<span>").addClass("tooltip").text("Add to Wishlist"),
+                                        $("<span>").addClass("icon icon-delete")
+                                    ),
+                                    $("<a>").addClass("box-icon bg_white compare btn-icon-action btn-add-cart").data("producto", element).append(
+                                        $("<span>").addClass("icon icon-compare"),
+                                        $("<span>").addClass("tooltip").text("Add to Compare"),
+                                        $("<span>").addClass("icon icon-check")
+                                    ),
+                                    $("<a>").attr({"href": "#quick_view", "data-bs-toggle": "modal"}).addClass("box-icon bg_white quickview tf-btn-loading").append(
+                                        $("<span>").addClass("icon icon-view"),
+                                        $("<span>").addClass("tooltip").text("Quick View")
+                                    )
+                                ),
+                                $("<div>").addClass("card-product-info").append(
+                                    $("<a>").addClass("title link text-center").text(element.nombre)
                                 )
                             )
                         );
-                        $productContainer.append(productItem);
+
+                        $.each(element.variaciones, function (j, variacion) {
+                            productoCard.find(".card-product-info").append(
+                                $("<a>").addClass("title link text-center").text(variacion)
+                            );
+                        });
+
+                        let priceProduct = $("<div>").addClass("d-flex flex-row justify-content-evenly").append(
+                            $("<p>").addClass("d-flex flex-column").append(
+                                $("<span>").text("Precio Regular:"),
+                                $("<span>").addClass("price").text("S/. " + parseFloat(element.precio).toFixed(2))
+                            ),
+                            $("<p>").addClass("d-flex flex-column").append(
+                                $("<span>").text("Precio Reducido:"),
+                                $("<span>").addClass("price").text("S/. " + parseFloat(element.precioReducido).toFixed(2))
+                            )
+                        );
+
+                        productoCard.find(".card-product-info").append(priceProduct);
+                        $swiperWrapper.append(productoCard);
                     });
                 },
                 error: function() {
-                    console.log('Error al obtener el productos');
+                    console.log('Error al obtener productos');
                 }
             });
         }
+
     </script>
+
 
 </body>
 

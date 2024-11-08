@@ -20,8 +20,8 @@ public interface IProductoMenuSubDao extends JpaRepository<ProductoMenuSub, Inte
             "    SELECT MIN(innerPms.productoCategoria.id) " +
             "    FROM ProductoMenuSub innerPms " +
             "    WHERE innerPms.producto.estado.nombre = 'Activo' " +
-            "    AND innerPms.productoCategoria.id = pms.productoCategoria.id" +
             "    AND innerPms.producto.mostrar = 'si' " +
+            "    AND innerPms.producto.id = pms.producto.id" +
             "    AND innerPms.producto.estado.nombre = 'Activo' " +
             ") " +
             "ORDER BY pms.producto.prioridad asc")

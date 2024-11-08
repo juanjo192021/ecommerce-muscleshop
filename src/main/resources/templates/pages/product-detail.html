@@ -8,19 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- font -->
-    <link rel="stylesheet" th:href="@{/assets/fonts/fonts.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/fonts/fonts.css}">
     <!-- Icons -->
-    <link rel="stylesheet" th:href="@{/assets/fonts/font-icons.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/drift-basic.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/photoswipe.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/swiper-bundle.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/animate.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/fonts/font-icons.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/swiper-bundle.min.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/animate.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/public/resources/site/general/static/assets/css/styles.css}"/>
 
     <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" th:href="@{/images/logo/favicon.png}">
-    <link rel="apple-touch-icon-precomposed" th:href="@{/images/logo/favicon.png}">
+    <link rel="shortcut icon" th:href="@{/public/resources/site/general/static/images/logo/favicon.png}">
+    <link rel="apple-touch-icon-precomposed" th:href="@{/public/resources/site/general/static/images/logo/favicon.png}">
     <script src="https://kit.fontawesome.com/98270ba09b.js" crossorigin="anonymous"></script>
 </head>
 <body class="preload-wrapper">
@@ -132,7 +130,7 @@
                                                     <input type="radio"
                                                            th:name="'name-'+${variacion.idPropiedad}"
                                                            th:id="'values-'+${atributo.nombreAtributo}"
-                                                           th:value="${atributo.id}"
+                                                           th:value="${atributo.nombreAtributo}"
                                                            th:attr="checked=${auxiliar['variacion' + (varIndex.index + 1)] == atributo.nombreAtributo ? 'checked' : null}">
                                                     <label class="style-text"
                                                            th:for="'values-'+${atributo.nombreAtributo}"
@@ -1719,41 +1717,78 @@
     <!-- /all-modals -->
 
     <!-- Javascript -->
-    <script type="text/javascript" th:src="@{/assets/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/swiper-bundle.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/carousel.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/bootstrap-select.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/lazysize.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/count-down.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/wow.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/multiple-modal.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/main.js}"></script>
+    <!-- Javascript -->
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/swiper-bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/carousel.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/bootstrap-select.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/lazysize.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/count-down.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/wow.min.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
 
-    <script type="module" th:src="@{/assets/js/model-viewer.min.js}"></script>
-    <script type="module" th:src="@{/assets/js/zoom.js}"></script>
+    <script type="module" th:src="@{/public/resources/site/general/static/assets/js/model-viewer.min.js}"></script>
+    <script type="module" th:src="@{/public/resources/site/general/static/assets/js/zoom.js}"></script>
     <script th:inline="javascript">
 
         let auxiliar = [[${auxiliar}]];
         let productoUrl = [[${productoUrl}]];
-        let allParams = [[${allParams}]];
         let atributos = [];
+        let selectedVariants = [];
 
         $(document).ready(function () {
-            //Los maps son objetos literales en js
-            console.log(Object.keys(auxiliar).length)
+
             for(let i=0; i <Object.keys(auxiliar).length; i++){
+
                 // Usamos la notación de corchetes para acceder dinámicamente a las propiedades
+
                 let variacionKey = 'variacion' + (i + 1); // Construimos el nombre de la propiedad.
                 let valorVariacion = auxiliar[variacionKey]; // Obtenemos el valor de esa propiedad.
+
                 atributos.push(valorVariacion);
-
-                // Imprimimos el valor de la variación
-                console.log(`Valor de ${variacionKey}: `, valorVariacion);
             }
-            console.log({auxiliar});
 
-            buscarProductoPorUrl(productoUrl)
+            // Función que actualiza las variaciones seleccionadas
+
+            function updateSelectedVariants() {
+                selectedVariants = [];
+                // Recorrer todos los inputs radio que están seleccionados
+
+                $(".variant-picker-item").each(function() {
+                var selectedRadio = $(this).find('input[type="radio"]:checked');
+
+                if (selectedRadio.length > 0) {
+
+                    // Obtener el valor correcto del radio y evitar los valores 'on'
+
+                    var selectedValue = selectedRadio.val().trim();
+                    if (selectedValue && selectedValue !== 'on') {
+                    selectedVariants.push(selectedValue);
+                    }
+                }
+            });
+
+            // Mostrar en el console.log la lista actualizada de variaciones seleccionadas
+
+            console.log("Variaciones seleccionadas:", selectedVariants);
+        }
+
+            // Ejecutar la actualización al cargar la página para las variaciones pre-seleccionadas
+
+            //updateSelectedVariants();
+
+            // Manejar el evento 'change' cuando se selecciona una nueva variación
+
+            $(".variant-picker-item input[type='radio']").on("change", function() {
+
+                // Actualizar la lista de variaciones seleccionadas cada vez que se cambia una opción
+
+                updateSelectedVariants();
+                buscarProductoPorUrl(productoUrl)
+            });
+            // buscarProductoPorUrl(productoUrl)
         })
 
         function buscarProductoPorUrl(productoUrl){
@@ -1766,7 +1801,8 @@
                     console.log({response});
                     //mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
                     console.log({atributos});
-                    buscarPresentacionPorProductoIdAndValorVariaciones(response.id,atributos)
+                    //buscarPresentacionPorProductoIdAndValorVariaciones(response.id,atributos)
+                    buscarPresentacionPorProductoIdAndValorVariaciones(response.id,selectedVariants)
                 },
                 error: function() {
                     console.log('Error al obtener producto');
@@ -1783,6 +1819,10 @@
                 data:{ productoId: parseInt(productoId), variaciones:variacionesStr},
                 success: function (response) {
                     console.log({response});
+
+                    // Actualizar el HTML con los nuevos precios
+                    $('.price-on-sale').text(`S/${response.precioReducido}`);
+                    $('.compare-at-price').text(`S/${response.precio}`);
                     //mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
                     buscarImagenesPresentacionPorProductoPropiedadesDetallesId(response.id)
                 },
@@ -1807,6 +1847,7 @@
                 }
             });
         }
+
     </script>
 </body>
 </html>
