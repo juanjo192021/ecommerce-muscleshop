@@ -669,14 +669,14 @@
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
 
     <script th:inline="javascript">
+        console.log([[${session.usuario}]])
+        const dataUsuario = [[${session.usuario}]]
         const formaId = 2;
         let selectedVariants = [];
         let producto = "";
-        let presentacion ="";
         let variacionesParams;
 
         $(document).ready(function () {
-            let productos = [];
             mostrarProductosPorForma(formaId);
 
 
@@ -779,7 +779,7 @@
                                     producto.variacion = variaciones.join(' ');
                                     producto.variaciones = variaciones
 
-                                    let productoFinales = producto
+
                                     console.log({productoFinal : producto})
                                     // Actualizar el HTML con los nuevos precios en el modal #quick_add
 
@@ -804,15 +804,17 @@
 
             $(document).on("click", ".btn-add-pre", function() {
                 // Obtener la lista actual de presentaciones desde localStorage (o inicializar una lista vacía si no existe)
-                let listaPresentaciones = JSON.parse(localStorage.getItem("presentacionesSeleccionadas")) || [];
+                let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+                let cantidad = $(".wg-quantity input[name='number']").val();
 
                 // Agregar la nueva `presentacion` a la lista
-                listaPresentaciones.push(producto);
+                carrito.push({producto,cantidad : parseInt(cantidad) });
 
                 // Guardar la lista actualizada en localStorage
-                localStorage.setItem("presentacionesSeleccionadas", JSON.stringify(listaPresentaciones));
+                localStorage.setItem("carrito", JSON.stringify(carrito));
 
-                console.log("Lista de presentaciones actualizada en localStorage:", listaPresentaciones);
+                //console.log("Lista de presentaciones actualizada en localStorage:", listaPresentaciones);
             });
 
         });
@@ -828,6 +830,8 @@
                     const urlImagenesProductos = "http://104.218.48.244:8080/apirest/api/productos/images/";
                     const menuUrl = ""; // Ajusta esto según tu contexto
                     const $swiperWrapper = $('#contenedor-productos-bestsellers');
+
+                    console.log({response})
 
                     $.each(response, function (i, element) {
 
@@ -878,7 +882,13 @@
                                     )
                                 ),
                                 $("<div>").addClass("card-product-info").append(
-                                    $("<a>").addClass("title link text-center").text(element.nombre)
+                                    $("<a>").addClass("title link text-center").text(element.nombreMarca).attr({
+                                        "href": "/marcas/" + element.urlMarca
+                                    }),
+                                    $("<a>").addClass("title link text-center").text(element.nombre).attr({
+                                        "href": "/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                            element.urlProducto+"?"+variacionesParams,
+                                    })
                                 )
                             )
                         );
@@ -889,13 +899,22 @@
                             );
                         });
 
+                        /*const preciosPorRol = {
+                            "Cliente": { regular: "precio", especial: "precioReducido", labelEspecial: "Precio Reducido:" },
+                            "Cliente Team": { regular: element.precio, especial: "precioTeam", labelEspecial: "Precio Team:" },
+                            "Cliente Team Vip": { regular: element.precio , especial: "precioTeamVip", labelEspecial: "Precio VIP Team:" }
+                        };*/
+
+                        // Obtener los precios basados en el rol del usuario
+                        //const precios = preciosPorRol[dataUsuario.nombreRolPerfil];
+
                         let priceProduct = $("<div>").addClass("d-flex flex-row justify-content-evenly").append(
                             $("<p>").addClass("d-flex flex-column").append(
                                 $("<span>").text("Precio Regular:"),
                                 $("<span>").addClass("price").text("S/. " + parseFloat(element.precio).toFixed(2))
                             ),
                             $("<p>").addClass("d-flex flex-column").append(
-                                $("<span>").text("Precio Reducido:"),
+                                $("<span>").text("Precio Oferta:"),
                                 $("<span>").addClass("price").text("S/. " + parseFloat(element.precioReducido).toFixed(2))
                             )
                         );

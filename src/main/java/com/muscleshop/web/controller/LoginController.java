@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.muscleshop.web.models.dto.UsuarioDto;
 import com.muscleshop.web.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -120,7 +121,7 @@ public class LoginController {
 	    if (br.hasErrors()) {
 	        return "registrar";
 	    } else {
-	        Usuario usuExiste = usuarioService.buscarUsuario(usuarioPerfil.getUsuario().getCorreo());
+	        UsuarioDto usuExiste = usuarioService.obtenerUsuarioPorCorreo(usuarioPerfil.getUsuario().getCorreo());
 	        if (usuExiste == null) {
 	        	
 	            Usuario nuevoUsuario = new Usuario();
@@ -160,11 +161,11 @@ public class LoginController {
                                     @RequestParam("nuevaContraseña") String nuevaContraseña,
                                     RedirectAttributes ra, HttpSession session) {
 
-        Usuario usuario = usuarioService.buscarUsuario(correo);
+        UsuarioDto usuario = usuarioService.obtenerUsuarioPorCorreo(correo);
         if (usuario != null) {
             String passwordEncriptada = new BCryptPasswordEncoder().encode(nuevaContraseña);
-            usuario.setPassword(passwordEncriptada);           
-            usuarioService.saveUsuario(usuario);
+            /*usuario.setPassword(passwordEncriptada);
+            usuarioService.saveUsuario(usuario);*/
             
             ra.addFlashAttribute("successMessage", "Contraseña cambiada exitosamente");
             return "redirect:/cambiar-contrasena";

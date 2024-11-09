@@ -46,7 +46,7 @@ public interface IProductoMenuSubDao extends JpaRepository<ProductoMenuSub, Inte
     List<ProductoMenuSub> findByProductoCategoria_MenuSub_Id(int menuSubId);
 
     @Query("SELECT pms FROM ProductoMenuSub pms " +
-            "WHERE pms.productoCategoria.id =: productoCategoriaId " +
+            "WHERE pms.productoCategoria.id = :productoCategoriaId " +
             "AND pms.producto.estado.nombre = 'Activo' " +
             "AND pms.producto.mostrar = 'si' " +
             "AND pms.producto.estado.nombre = 'Activo' " +

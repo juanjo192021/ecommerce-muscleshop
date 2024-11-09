@@ -319,7 +319,7 @@
 						<a class="nav-icon-item"
 						   th:if="${session.usuario != null}"
 						   th:href="@{/usuario/mi-cuenta}">
-							<span th:text="${session.usuario}"></span>
+							<span class="pe-3" th:text="${session.usuario.nombres}"></span>
 							<i class="icon icon-account"></i>
 						</a>
 						<!-- Si el usuario no está autenticado, mostrar un enlace para abrir el modal -->

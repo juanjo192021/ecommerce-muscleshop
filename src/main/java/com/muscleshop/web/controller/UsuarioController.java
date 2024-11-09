@@ -16,6 +16,7 @@ import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
 import com.muscleshop.web.models.*;
 import com.muscleshop.web.models.dto.PedidoProductoDto;
+import com.muscleshop.web.models.dto.UsuarioDto;
 import com.muscleshop.web.services.*;
 import com.muscleshop.web.services.implementation.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,12 +185,12 @@ public class UsuarioController {
 	public String miCuenta(HttpSession session, Model model) {
 		if (session.getAttribute("usuario") != null) {
 			// Recuperar el usuario y el perfil
-			Usuario usuario = usuarioService.buscarUsuario(session.getAttribute("usuario").toString());
-			UsuarioPerfil usuarioPerfil = usuPerfilService.buscarUsuario(usuario);
+			UsuarioDto usuario = usuarioService.obtenerUsuarioPorCorreo(session.getAttribute("usuario").toString());
+			//UsuarioPerfil usuarioPerfil = usuPerfilService.buscarUsuario(usuario);
 
 			// Añadir el perfil al modelo
-			session.setAttribute("usuarioPerfil", usuarioPerfil);
-			model.addAttribute("usuarioPerfil", usuarioPerfil);
+			//session.setAttribute("usuarioPerfil", usuarioPerfil);
+			//model.addAttribute("usuarioPerfil", usuarioPerfil);
 
 			// Redirigir a la vista de Thymeleaf "mi-my-account.html"
 			return "user/my-account";  // Este debe ser el nombre del archivo HTML sin extensión
@@ -203,8 +204,8 @@ public class UsuarioController {
 	public String editarPerfil(@ModelAttribute("usuarioPerfil") UsuarioPerfil usuarioPerfil, HttpSession session) {
 		if (session.getAttribute("usuario") != null) {
 			if (usuarioPerfil != null) {
-				Usuario usuario = usuarioService.buscarUsuario(session.getAttribute("usuario").toString());
-				usuarioPerfil.setUsuario(usuario);
+				UsuarioDto usuario = usuarioService.obtenerUsuarioPorCorreo(session.getAttribute("usuario").toString());
+				//usuarioPerfil.setUsuario(usuario);
 				usuPerfilService.saveUsuPerfil(usuarioPerfil);
 				session.setAttribute("usuarioPerfil", usuarioPerfil);
 				return "redirect:/usuario/mi-cuenta";
@@ -236,12 +237,12 @@ public class UsuarioController {
 	public String pago(Model model, MetodoPago metodoPago, ComprobantePago comprobante, HttpSession session, HttpServletRequest request) {
 
 		if (session.getAttribute("usuario") != null) {
-	        Usuario usuario = usuarioService.buscarUsuario(session.getAttribute("usuario").toString());
+	        UsuarioDto usuario = usuarioService.obtenerUsuarioPorCorreo(session.getAttribute("usuario").toString());
 	        
 	        if (usuario != null) {
 	            model.addAttribute("usuario", usuario);
-	            List<UsuarioDireccion> direcciones = direccionService.listarDireccionxUsu(usuario);
-	            model.addAttribute("direcciones", direcciones);
+	            //List<UsuarioDireccion> direcciones = direccionService.listarDireccionxUsu(usuario);
+	            //model.addAttribute("direcciones", direcciones);
 	        }
 	    }
 		

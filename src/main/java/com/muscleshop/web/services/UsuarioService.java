@@ -2,6 +2,7 @@ package com.muscleshop.web.services;
 
 import java.util.List;
 
+import com.muscleshop.web.models.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +27,7 @@ public class UsuarioService {
 		usuarioDao.save(usuario);
 	}
 
-	public void eliminarUsuario(Integer id) {
-		usuarioDao.deleteById(id);
-	}
-
-	public Usuario buscarUsuario(String correo) {
-		return usuarioDao.findByCorreo(correo);
+	public UsuarioDto obtenerUsuarioPorCorreo(String correo) {
+		return usuarioDao.findByEmail(correo);
 	}
 }

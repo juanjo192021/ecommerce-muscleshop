@@ -12,6 +12,11 @@ import com.muscleshop.web.services.implementation.ProductoPropiedadDetalleServic
 import com.muscleshop.web.services.implementation.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -181,13 +186,6 @@ public class HomeController {
 		return ResponseEntity.ok(productoMenuSubs);
 	}
 
-	@GetMapping("/prueba8")
-	@ResponseBody
-	public ResponseEntity<List<ProductoDto>> prueba8() {
-		List<ProductoDto> productos = productoService.obtenerProductosItemsIndividualesPorForma(2);
-		return ResponseEntity.ok(productos);
-	}
-
 /*	@GetMapping("/prueba5")
 	@ResponseBody
 	public ResponseEntity<List<ProductoPropiedadesDetalles>> prueba5() {
@@ -221,6 +219,28 @@ public class HomeController {
 	@GetMapping("/")
 	public String Inicio(Model model, HttpSession session) {
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		// Verificar si el usuario está autenticado y si la autenticación no es anónima
+		if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
+			// Hacer el cast a OAuth2AuthenticationToken solo si no es anónimo
+			if (authentication instanceof OAuth2AuthenticationToken) {
+				OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
+				OAuth2User oAuth2User = oauthToken.getPrincipal();
+
+				String fullName = (String) oAuth2User.getAttribute("name");
+				String email = (String) oAuth2User.getAttributes().get("email");
+
+				// Guardar la información en la sesión y en el modelo
+				UsuarioDto usuario = usuarioService.obtenerUsuarioPorCorreo(email);
+
+				model.addAttribute("usuario", usuario);
+				model.addAttribute("data", oAuth2User);
+				session.setAttribute("usuario", usuario);
+
+			}
+		}
+
 		List<Banner> banners = bannerService.obtenerBanners();
 
 		List<Banner> bannerMovilTablet = banners.stream()
@@ -237,7 +257,7 @@ public class HomeController {
 		List<MenuSubDto> menuSubDtos = menuSubService.obtenerMenuSubsPorMenuId(menuId);
 
 		int formaId = 2;
-		List<ProductoDto> productos = productoService.obtenerProductosItemsIndividualesPorForma(formaId);
+		//List<ProductoDto> productos = productoService.obtenerProductosItemsIndividualesPorForma(formaId);
 
 		List<Articulo> articulosBlog = articuloService.obtenerArticulosPorCantidad();
 
@@ -252,19 +272,19 @@ public class HomeController {
 		model.addAttribute("bannerLaptopPc", bannerLaptopPc);
 		model.addAttribute("articulosBlog", articulosBlog);
 		model.addAttribute("subMenus", menuSubDtos);
-		model.addAttribute("productos", productos);
+		//model.addAttribute("productos", productos);
 		model.addAttribute("pedidoProductoComentarios", pedidoProductoComentarios);
 		model.addAttribute("marketplaces", marketplaces);
 
 		// LÓGICA CARRITO
 
 		if (session.getAttribute("usuario") != null) {
-			Usuario usuario = usuarioService.buscarUsuario(session.getAttribute("usuario").toString());
+			UsuarioDto usuario = usuarioService.obtenerUsuarioPorCorreo(session.getAttribute("usuario").toString());
 
-			if (usuario != null && usuario.getRolPerfil() != null && usuario.getRolPerfil().getId() == 2) {
+			/*if (usuario != null && usuario.getRolPerfil() != null && usuario.getRolPerfil().getId() == 2) {
 				session.removeAttribute("carrito");
 				session.removeAttribute("totalCarrito");
-			}
+			}*/
 		}
 
 		Object carritoSession = session.getAttribute("carrito");

@@ -3,6 +3,7 @@ package com.muscleshop.web.security;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.muscleshop.web.models.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,7 +32,7 @@ public class FormLogin implements UserDetailsService {
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		Usuario usuar = usuarioService.buscarUsuario(username);
+		UsuarioDto usuar = usuarioService.obtenerUsuarioPorCorreo(username);
 
 		if (usuar == null) {
 			throw new UsernameNotFoundException("No existe el Usuario");
@@ -50,7 +51,7 @@ public class FormLogin implements UserDetailsService {
 			throw new UsernameNotFoundException("No tiene los permisos necesarios para ingresar");
 		}
 
-		return new User(usuar.getCorreo(), usuar.getPassword(), authorities);
+		return new User(usuar.getCorreo(), "dasdasdasdasdasd", authorities);
 	}
 
 }

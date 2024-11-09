@@ -2,9 +2,11 @@ package com.muscleshop.web.controller;
 
 import com.muscleshop.web.models.Producto;
 import com.muscleshop.web.models.dto.ProductoDto;
+import com.muscleshop.web.models.dto.UsuarioDto;
 import com.muscleshop.web.models.dto.VariacionDto;
 import com.muscleshop.web.services.IProductoService;
 import com.muscleshop.web.services.IProductoVariacionService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,9 +26,9 @@ public class ProductoController {
 
     @GetMapping("obtenerProductoPorForma")
     @ResponseBody
-    public ResponseEntity<List<ProductoDto>> obtenerProductosPorForma(@RequestParam("formaId") int formaId){
-
-        List<ProductoDto> productoDtos = iProductoService.obtenerProductosItemsIndividualesPorForma(formaId);
+    public ResponseEntity<List<ProductoDto>> obtenerProductosPorForma(@RequestParam("formaId") int formaId, HttpSession session) {
+        UsuarioDto usuario = (UsuarioDto) session.getAttribute("usuario");
+        List<ProductoDto> productoDtos = iProductoService.obtenerProductosItemsIndividualesPorForma(formaId, usuario);
         return ResponseEntity.ok(productoDtos);
 
     }

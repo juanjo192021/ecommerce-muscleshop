@@ -3,6 +3,7 @@ package com.muscleshop.web.models;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -29,12 +30,14 @@ public class Usuario {
 	private RolPerfil rolPerfil;
 
 	@OneToMany(mappedBy = "usuario")
+	@JsonIgnore
 	private Set<UsuarioRol> usuarioRoles;
 
 	@OneToOne(mappedBy = "usuario")
 	private UsuarioPerfil usuarioPerfil;
 
 	@OneToMany(mappedBy = "usuario")
+	@JsonIgnore
 	private Set<UsuarioDireccion> usuarioDirecciones;
 
 	public Integer getId() {

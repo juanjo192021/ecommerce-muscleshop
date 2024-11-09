@@ -2,14 +2,17 @@ package com.muscleshop.web.services.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.muscleshop.web.dao.IProductoMenuSubDao;
 import com.muscleshop.web.dao.IProductoPropiedadesDetallesDao;
 import com.muscleshop.web.dao.IProductoPropiedadesDetallesVariacionDao;
 import com.muscleshop.web.models.*;
 import com.muscleshop.web.models.dto.ProductoDto;
+import com.muscleshop.web.models.dto.UsuarioDto;
 import com.muscleshop.web.services.IProductoService;
 import com.muscleshop.web.services.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -117,8 +120,19 @@ public class ProductoService implements IProductoService {
 		return productosFinales;
 	}
 
-	public List<ProductoDto> obtenerProductosItemsIndividualesPorForma(int formaId) {
+	public List<ProductoDto> obtenerProductosItemsIndividualesPorForma(int formaId, UsuarioDto usuario) {
 		List<ProductoDto> productosFinales = new ArrayList<>();
+
+		// Mapear los campos de precios para cada rol
+		Map<String, String[]> preciosPorRol = Map.of(
+				"Cliente", new String[]{"getPrecio", "getPrecioReducido"},
+				"Team", new String[]{"getPrecio", "getPrecioTeam"},
+				"Team Vip", new String[]{"getPrecio", "getPrecioTeamVip"},
+				"Familiar", new String[]{"getPrecio", "getPrecioFamiliar"}
+		);
+
+		String nombreRolPerfil = usuario != null ? usuario.getNombreRolPerfil() : "";
+		String[] metodosPrecio = preciosPorRol.getOrDefault(nombreRolPerfil, new String[]{"getPrecio", "getPrecioReducido"});
 
 		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductos();
 		for (ProductoMenuSub productoMenuSub : productos) {
@@ -141,8 +155,19 @@ public class ProductoService implements IProductoService {
 				productoDTO.setUrlMarca(productoMenuSub.getProducto().getMarca().getUrl());
 				productoDTO.setProductoPropiedadDetalleId(detalle.getId());
 				productoDTO.setSkuProductoPropiedadesDetalles(detalle.getSku());
-				productoDTO.setPrecio(detalle.getPrecio());
-				productoDTO.setPrecioReducido(detalle.getPrecioReducido());
+
+				//productoDTO.setPrecio(detalle.getPrecio());
+				//productoDTO.setPrecioReducido(detalle.getPrecioFamiliar());
+
+				try {
+					// Usa reflection para llamar a los métodos de `detalle`
+					productoDTO.setPrecio((Double) ProductoPropiedadesDetalles.class.getMethod(metodosPrecio[0]).invoke(detalle));
+					productoDTO.setPrecioReducido((Double) ProductoPropiedadesDetalles.class.getMethod(metodosPrecio[1]).invoke(detalle));
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException("Error al obtener los precios para el rol " + usuario.getNombreRolPerfil());
+				}
+
 				productoDTO.setStock(detalle.getStock());
 
 				// Obtener las variaciones respetando el orden de creación
