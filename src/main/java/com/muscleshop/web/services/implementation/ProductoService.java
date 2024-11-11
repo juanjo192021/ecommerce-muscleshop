@@ -120,9 +120,10 @@ public class ProductoService implements IProductoService {
 		return productosFinales;
 	}
 
-	public List<ProductoDto> obtenerProductosItemsIndividualesPorForma(int formaId, UsuarioDto usuario) {
+	public List<ProductoDto> obtenerProductosItemsIndividualesPorForma(int formaId) {
 		List<ProductoDto> productosFinales = new ArrayList<>();
 
+/*
 		// Mapear los campos de precios para cada rol
 		Map<String, String[]> preciosPorRol = Map.of(
 				"Cliente", new String[]{"getPrecio", "getPrecioReducido"},
@@ -133,6 +134,7 @@ public class ProductoService implements IProductoService {
 
 		String nombreRolPerfil = usuario != null ? usuario.getNombreRolPerfil() : "";
 		String[] metodosPrecio = preciosPorRol.getOrDefault(nombreRolPerfil, new String[]{"getPrecio", "getPrecioReducido"});
+*/
 
 		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductos();
 		for (ProductoMenuSub productoMenuSub : productos) {
@@ -144,7 +146,7 @@ public class ProductoService implements IProductoService {
 				productoDTO.setId(productoMenuSub.getProducto().getId());
 				productoDTO.setNombre(productoMenuSub.getProducto().getNombre());
 				productoDTO.setUrlProducto(productoMenuSub.getProducto().getUrl());
-				productoDTO.setImagen(productoMenuSub.getProducto().getImagen());
+				productoDTO.setImagen(detalle.getImagen());
 				productoDTO.setNombreCategoria(categoria.getNombre());
 				productoDTO.setUrlCategoria(categoria.getUrl());
 				productoDTO.setNombreMenuSub(categoria.getMenuSub().getNombre());
@@ -156,17 +158,20 @@ public class ProductoService implements IProductoService {
 				productoDTO.setProductoPropiedadDetalleId(detalle.getId());
 				productoDTO.setSkuProductoPropiedadesDetalles(detalle.getSku());
 
-				//productoDTO.setPrecio(detalle.getPrecio());
-				//productoDTO.setPrecioReducido(detalle.getPrecioFamiliar());
+				productoDTO.setPrecio(detalle.getPrecio());
+				productoDTO.setPrecioReducido(detalle.getPrecioReducido());
+				productoDTO.setPrecioTeam(detalle.getPrecioTeam());
+				productoDTO.setPrecioTeamVip(detalle.getPrecioTeamVip());
+				productoDTO.setPrecioFamiliar(detalle.getPrecioFamiliar());
 
-				try {
+				/*try {
 					// Usa reflection para llamar a los métodos de `detalle`
 					productoDTO.setPrecio((Double) ProductoPropiedadesDetalles.class.getMethod(metodosPrecio[0]).invoke(detalle));
 					productoDTO.setPrecioReducido((Double) ProductoPropiedadesDetalles.class.getMethod(metodosPrecio[1]).invoke(detalle));
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException("Error al obtener los precios para el rol " + usuario.getNombreRolPerfil());
-				}
+				}*/
 
 				productoDTO.setStock(detalle.getStock());
 

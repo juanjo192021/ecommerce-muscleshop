@@ -14,6 +14,6 @@ public interface IProductoService {
     Producto obtenerProductoPorUrl(String productoUrl);
     Page<ProductoDto> obtenerProductosItemsIndividialesPorMenuSubId(int menuSubId, double minPrecio, double maxPrecio, Pageable pageable);
     List<ProductoDto> obtenerProductosItemsIndividialesPorCategoriaId(int productoCategoriaId);
-    List<ProductoDto> obtenerProductosItemsIndividualesPorForma(int formaId, UsuarioDto usuario);
+    List<ProductoDto> obtenerProductosItemsIndividualesPorForma(int formaId);
     Page<ProductoDto> obtenerProductosItemsIndividualesPorNombreProducto(String productoNombre,double minPrecio, double maxPrecio, Pageable pageable);
 }

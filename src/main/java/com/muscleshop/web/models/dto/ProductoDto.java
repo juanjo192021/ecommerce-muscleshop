@@ -19,6 +19,9 @@ public class ProductoDto {
     private String skuProductoPropiedadesDetalles;
     private Double precio;
     private Double precioReducido;
+    private Double precioTeam;
+    private Double precioTeamVip;
+    private Double precioFamiliar;
     private Integer stock;
     private String variacion;
     private List<String> variaciones;
@@ -26,7 +29,9 @@ public class ProductoDto {
     public ProductoDto(){}
 
     // Constructor
-    public ProductoDto(Integer id, String nombre, String urlProducto, String imagen, String nombreCategoria, String urlCategoria, String nombreMenuSub, String urlMenuSub, String nombreMenu, String urlMenu, String nombreMarca, String urlMarca, Integer productoPropiedadDetalleId, String skuProductoPropiedadesDetalles, Double precio, Double precioReducido, Integer stock, String variacion, List<String> variaciones) {
+
+
+    public ProductoDto(Integer id, String nombre, String urlProducto, String imagen, String nombreCategoria, String urlCategoria, String nombreMenuSub, String urlMenuSub, String nombreMenu, String urlMenu, String nombreMarca, String urlMarca, Integer productoPropiedadDetalleId, String skuProductoPropiedadesDetalles, Double precio, Double precioReducido, Double precioTeam, Double precioTeamVip, Double precioFamiliar, Integer stock, String variacion, List<String> variaciones) {
         this.id = id;
         this.nombre = nombre;
         this.urlProducto = urlProducto;
@@ -43,6 +48,9 @@ public class ProductoDto {
         this.skuProductoPropiedadesDetalles = skuProductoPropiedadesDetalles;
         this.precio = precio;
         this.precioReducido = precioReducido;
+        this.precioTeam = precioTeam;
+        this.precioTeamVip = precioTeamVip;
+        this.precioFamiliar = precioFamiliar;
         this.stock = stock;
         this.variacion = variacion;
         this.variaciones = variaciones;
@@ -175,6 +183,30 @@ public class ProductoDto {
 
     public void setPrecioReducido(Double precioReducido) {
         this.precioReducido = precioReducido;
+    }
+
+    public Double getPrecioTeam() {
+        return precioTeam;
+    }
+
+    public void setPrecioTeam(Double precioTeam) {
+        this.precioTeam = precioTeam;
+    }
+
+    public Double getPrecioTeamVip() {
+        return precioTeamVip;
+    }
+
+    public void setPrecioTeamVip(Double precioTeamVip) {
+        this.precioTeamVip = precioTeamVip;
+    }
+
+    public Double getPrecioFamiliar() {
+        return precioFamiliar;
+    }
+
+    public void setPrecioFamiliar(Double precioFamiliar) {
+        this.precioFamiliar = precioFamiliar;
     }
 
     public Integer getStock() {

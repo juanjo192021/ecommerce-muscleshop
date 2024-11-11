@@ -669,30 +669,75 @@
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
 
     <script th:inline="javascript">
-        console.log([[${session.usuario}]])
-        const dataUsuario = [[${session.usuario}]]
+        let dataUsuario = [[${session.usuario}]]
         const formaId = 2;
         let selectedVariants = [];
         let producto = "";
         let variacionesParams;
+        let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
+
 
         $(document).ready(function () {
             mostrarProductosPorForma(formaId);
+            cantidadCarrito();
+            mostrarCarrito();
 
+            // Usar delegación de eventos para elementos generados dinámicamente
+            $(document).on("click", ".minus-btn", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                let productoPropiedadDetalleId = $(this).data("ppd-id");
+                var $input = $this.closest("div").find("input");
+                var value = parseInt($input.val());
+
+                if (value > 1) {
+                    value = value - 1;
+                    $input.val(value);
+                    actualizarCantidadProducto(productoPropiedadDetalleId, value)
+                }
+            });
+
+            $(document).on("click", ".plus-btn", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                let productoPropiedadDetalleId = $(this).data("ppd-id");
+                console.log({productoPropiedadDetalleIdPlus : productoPropiedadDetalleId})
+                var $input = $this.closest("div").find("input");
+                var value = parseInt($input.val());
+
+                if (value > -1) {
+                    value = value + 1;
+                    $input.val(value);
+                    actualizarCantidadProducto(productoPropiedadDetalleId, value)
+                }
+            });
 
             // Evento click para el modal #quick_add
-            $(document).on("click", ".btn-add-prueba", function () {
+            $(document).on("click", ".btn-show-detail", function () {
                 producto = $(this).data("producto");
                 console.log({productoInicial : producto})
                 variacionesParams = producto.variaciones.map(function (v, i) {
                     return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
                 }).join('&');
 
-                $("#quick_add .image img").attr("src", "http://104.218.48.244:8080/apirest/api/productos/images/" + producto.imagen);
+
+                // Definir los precios por defecto
+                const preciosDefecto = { regular: producto.precio, especial: producto.precioReducido, labelEspecial: "Precio Reducido:" };
+                // Definir los precios por rol
+                const preciosPorRol = {
+                    "Cliente": { regular: producto.precio, especial: producto.precioReducido, labelEspecial: "Precio Reducido:" },
+                    "Team": { regular: producto.precio, especial: producto.precioTeam, labelEspecial: "Precio Team:" },
+                    "Team Vip": { regular: producto.precio, especial: producto.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                    "Familiar": { regular: producto.precio, especial: producto.precioTeamVip, labelEspecial: "Precio VIP Team:" }
+                };
+                // Obtener los precios basados en el rol del usuario o usar los precios por defecto si el rol es null
+                const precio = (dataUsuario && dataUsuario.nombreRolPerfil) ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto;
+
+                $("#quick_add .image img").attr({"src": urlImagenesProductos +producto.imagen});
                 $("#quick_add .content a").text(producto.nombre);
                 $("#quick_add .content a").attr("href", "/"+producto.urlMenu+"/"+producto.urlMenuSub+"/"+producto.urlCategoria+"/"+producto.urlProducto + "?" + variacionesParams);
-                $("#quick_add .tf-product-info-price .price-on-sale").text("S/. " + parseFloat(producto.precioReducido).toFixed(2));
-                $("#quick_add .tf-product-info-price .compare-at-price").text("S/. " + parseFloat(producto.precio).toFixed(2));
+                $("#quick_add .tf-product-info-price .price-on-sale").text("S/. " + parseFloat(precio.especial).toFixed(2));
+                $("#quick_add .tf-product-info-price .compare-at-price").text("S/. " + parseFloat(precio.regular).toFixed(2));
 
                 // Realizar llamada AJAX para obtener las variaciones del producto
                 $.ajax({
@@ -701,7 +746,7 @@
                     dataType: "json",
                     data: { productoId: producto.id },
                     success: function (response) {
-                        console.log({response})
+                        console.log({responseObtenerVariaciones:response})
                         const variaciones = response;
                         const $variantPicker = $("#quick_add .tf-product-info-variant-picker");
 
@@ -733,67 +778,12 @@
                             $variantItem.append($variantLabel).append($variantValues);
                             $variantPicker.append($variantItem);
                         });
-                        // Función que actualiza las variaciones seleccionadas
-                        function updateSelectedVariants() {
-                            selectedVariants = [];
-                            // Recorrer todos los inputs radio que están seleccionados
-                            $(".variant-picker-item").each(function() {
-                                var selectedRadio = $(this).find('input[type="radio"]:checked');
-                                if (selectedRadio.length > 0) {
-                                    // Obtener el valor correcto del radio y evitar los valores 'on'
-                                    var selectedValue = selectedRadio.val().trim();
-                                    if (selectedValue && selectedValue !== 'on') {
-                                        selectedVariants.push(selectedValue);
-                                    }
-                                }
-                            });
-                            console.log("Variaciones seleccionadas:", selectedVariants);
-                        }
 
                         // Manejar el evento 'change' cuando se selecciona una nueva variación
                         $(document).on("change", ".variant-picker-item input[type='radio']", function() {
                             updateSelectedVariants();
                             buscarPresentacionPorProductoIdAndValorVariaciones(producto.id, selectedVariants);
                         });
-
-                        function buscarPresentacionPorProductoIdAndValorVariaciones(productoId, variaciones){
-                            // Serializamos la lista de variaciones en un string separado por comas
-                            let variacionesStr = variaciones.join(',');
-                            $.ajax({
-                                type: "GET",
-                                url: '/productoPropiedadesDetalles/buscarPorProductoIdAndVariaciones',
-                                dataType: "json",
-                                data: { productoId: parseInt(productoId), variaciones: variacionesStr },
-                                success: function (response) {
-                                    console.log({presentacion:response});
-
-
-                                    variacionesParams = variaciones.map(function (v, i) {
-                                        return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
-                                    }).join('&');
-                                    producto.imagen = response.imagen
-                                    producto.skuProductoPropiedadesDetalles= response.skuProductoPropiedadesDetalles
-                                    producto.stock = response.stock
-                                    producto.precio = response.precio;
-                                    producto.precioReducido = response.precioReducido
-                                    producto.variacion = variaciones.join(' ');
-                                    producto.variaciones = variaciones
-
-
-                                    console.log({productoFinal : producto})
-                                    // Actualizar el HTML con los nuevos precios en el modal #quick_add
-
-                                    $("#quick_add .image img").attr("src", "http://104.218.48.244:8080/apirest/api/productos/images/" + response.imagen);
-                                    $("#quick_add .content a").attr("href", "/"+producto.urlMenu+"/"+producto.urlMenuSub+"/"+producto.urlCategoria+"/"+producto.urlProducto + "?" + variacionesParams);
-                                    $('#quick_add .tf-product-info-price .price-on-sale').text(`S/. ${parseFloat(response.precioReducido).toFixed(2)}`);
-                                    $('#quick_add .tf-product-info-price .compare-at-price').text(`S/. ${parseFloat(response.precio).toFixed(2)}`);
-
-                                },
-                                error: function() {
-                                    console.log('Error al obtener producto');
-                                }
-                            });
-                        }
                     },
                     error: function () {
                         console.log('Error al obtener variaciones del producto');
@@ -801,24 +791,176 @@
                 });
             });
 
-
-            $(document).on("click", ".btn-add-pre", function() {
+            $(document).on("click", ".btn-add-shopping-cart", function() {
                 // Obtener la lista actual de presentaciones desde localStorage (o inicializar una lista vacía si no existe)
                 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+                let cantidad = $(".wg-quantity .cantidad-producto-preview").val();
 
-                let cantidad = $(".wg-quantity input[name='number']").val();
-
-                // Agregar la nueva `presentacion` a la lista
-                carrito.push({producto,cantidad : parseInt(cantidad) });
-
-                // Guardar la lista actualizada en localStorage
+                console.log({cantidad: parseInt(cantidad)})
+                // Verificar si el producto ya está en el carrito
+                let productoExistente = carrito.find(item => item.producto.productoPropiedadDetalleId === producto.productoPropiedadDetalleId);
+                if (productoExistente) {
+                    // Si el producto ya existe, sumar la cantidad
+                    productoExistente.cantidad += parseInt(cantidad);
+                } else {
+                    // Si el producto no existe, agregarlo al carrito
+                    carrito.push({ producto, cantidad: parseInt(cantidad) });
+                }
                 localStorage.setItem("carrito", JSON.stringify(carrito));
-
-                //console.log("Lista de presentaciones actualizada en localStorage:", listaPresentaciones);
+                cantidadCarrito();
             });
 
+            $(document).on("click", "#btn-shopping-cart",function () {
+                mostrarCarrito();
+            })
         });
 
+        function cantidadCarrito(){
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            // Si el carrito no existe o está vacío, se muestra la cantidad como 0
+            let cantidad = carrito.length ? carrito.length : 0;
+            // Actualizar el elemento del DOM con la cantidad
+            $('#btn-shopping-cart .count-box').text(cantidad);
+        }
+
+        function buscarPresentacionPorProductoIdAndValorVariaciones(productoId, variaciones){
+            let variacionesStr = variaciones.join(',');
+            $.ajax({
+                type: "GET",
+                url: '/productoPropiedadesDetalles/buscarPorProductoIdAndVariaciones',
+                dataType: "json",
+                data: { productoId: parseInt(productoId), variaciones: variacionesStr },
+                success: function (response) {
+                    console.log({buscarPorProductoIdAndVariaciones:response})
+                    variacionesParams = variaciones.map(function (v, i) {
+                        return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
+                    }).join('&');
+
+                    producto.imagen = response.imagen
+                    producto.skuProductoPropiedadesDetalles= response.skuProductoPropiedadesDetalles
+                    producto.stock = response.stock
+                    producto.precio = response.precio;
+                    producto.precioReducido = response.precioReducido
+                    producto.precioTeam = response.precioTeam
+                    producto.precioTeamVip = response.precioTeamVip
+                    producto.precioFamiliar = response.precioFamiliar
+                    producto.variacion = variaciones.join(' ');
+                    producto.variaciones = variaciones
+
+                    console.log({productoFinal : producto})
+
+                    // Definir los precios por defecto
+                    const preciosDefecto = { regular: response.precio, especial: response.precioReducido, labelEspecial: "Precio Reducido:" };
+                    // Definir los precios por rol
+                    const preciosPorRol = {
+                        "Cliente": { regular: response.precio, especial: response.precioReducido, labelEspecial: "Precio Reducido:" },
+                        "Team": { regular: response.precio, especial: response.precioTeam, labelEspecial: "Precio Team:" },
+                        "Team Vip": { regular: response.precio, especial: response.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                        "Familiar": { regular: response.precio, especial: response.precioFamiliar, labelEspecial: "Precio VIP Team:" }
+                    };
+                    // Obtener los precios basados en el rol del usuario o usar los precios por defecto si el rol es null
+                    const precio = (dataUsuario && dataUsuario.nombreRolPerfil) ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto
+
+                    $("#quick_add .image img").attr({"src" :urlImagenesProductos +response.imagen});
+                    $("#quick_add .content a").attr("href", "/"+producto.urlMenu+"/"+producto.urlMenuSub+"/"+producto.urlCategoria+"/"+producto.urlProducto + "?" + variacionesParams);
+                    $('#quick_add .tf-product-info-price .price-on-sale').text(`S/. ${parseFloat(precio.especial).toFixed(2)}`);
+                    $('#quick_add .tf-product-info-price .compare-at-price').text(`S/. ${parseFloat(precio.regular).toFixed(2)}`);
+
+                    $('.icon-bag .count-box').text('15')
+                },
+                error: function() {
+                    console.log('Error al obtener producto');
+                }
+            });
+        }
+
+        function updateSelectedVariants() {
+            selectedVariants = [];
+            // Recorrer todos los inputs radio que están seleccionados
+            $(".variant-picker-item").each(function () {
+                var selectedRadio = $(this).find('input[type="radio"]:checked');
+                if (selectedRadio.length > 0) {
+
+                    var selectedValue = selectedRadio.val().trim();
+                    if (selectedValue && selectedValue !== 'on') {
+                        selectedVariants.push(selectedValue);
+                    }
+                }
+            });
+        }
+
+        function actualizarCantidadProducto(productoPropiedadDetalleId, nuevaCantidad) {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            carrito = carrito.map(item => {
+                // Si el producto coincide con el ID, actualizar la cantidad
+                if (item.producto.productoPropiedadDetalleId === productoPropiedadDetalleId) {
+                    item.cantidad = nuevaCantidad;
+                }
+                return item;
+            });
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+
+        function mostrarCarrito(){
+            $("#contenedor-productos-carrito").html("");
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+            // Iterar sobre cada producto en el carrito y generar el HTML
+            carrito.forEach((item,index) => {
+
+                let cartItem = $("<div>").addClass("tf-mini-cart-item");
+
+                let cartImage = $("<div>").addClass("tf-mini-cart-image").append(
+                    $("<a>").attr("href", `/${item.producto.urlProducto}`).append(
+                        $("<img>").attr({"src": urlImagenesProductos + item.producto.imagen}).attr("alt", item.producto.nombre)
+                    )
+                );
+
+                // Definir los precios por defecto
+                const preciosDefecto = { regular: item.producto.precio, especial: item.producto.precioReducido, labelEspecial: "Precio Reducido:" };
+                // Definir los precios por rol
+                const preciosPorRol = {
+                    "Cliente": { regular: item.producto.precio, especial: item.producto.precioReducido, labelEspecial: "Precio Reducido:" },
+                    "Team": { regular: item.producto.precio, especial: item.producto.precioTeam, labelEspecial: "Precio Team:" },
+                    "Team Vip": { regular: item.producto.precio, especial: item.producto.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                    "Familiar": { regular: item.producto.precio, especial: item.producto.precioFamiliar, labelEspecial: "Precio VIP Team:" }
+                };
+                // Obtener los precios basados en el rol del usuario o usar los precios por defecto si el rol es null
+                const precio = (dataUsuario && dataUsuario.nombreRolPerfil) ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto;
+
+
+
+                let cartInfo = $("<div>").addClass("tf-mini-cart-info")
+                    .append(
+                        $("<a>").addClass("title link").attr("href", `/${item.producto.urlProducto}`).text(item.producto.nombre),
+                        $("<div>").addClass("meta-variant").text(item.producto.variacion),
+                        $("<div>").addClass("price fw-6").text(`S/. ${parseFloat(precio.especial).toFixed(2)}`)
+                    );
+
+                let quantityControl = $("<div>").addClass("wg-quantity small")
+                    .append(
+                        $("<span>").addClass("btn-quantity minus-btn").data("ppd-id", item.producto.productoPropiedadDetalleId).text("-"),
+                        $("<input>").attr({"type":"text", "name": "number", "value": item.cantidad+""}).attr("name", "number").val(item.cantidad),
+                        $("<span>").addClass("btn-quantity plus-btn").data("ppd-id", item.producto.productoPropiedadDetalleId).text("+")
+                    );
+
+                let removeButton = $("<div>").addClass("tf-mini-cart-remove").text("Remove").data("index", index);
+                let cartBtns = $("<div>").addClass("tf-mini-cart-btns").append(quantityControl, removeButton);
+
+                cartInfo.append(cartBtns);
+                cartItem.append(cartImage, cartInfo);
+                $("#contenedor-productos-carrito").append(cartItem);
+            });
+
+            // Añadir el evento de clic al botón de eliminación
+            $(".tf-mini-cart-remove").on("click", function () {
+                let index = $(this).data("index");
+                carrito.splice(index, 1);
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+                mostrarCarrito();  // Actualizar el carrito en la interfaz
+                cantidadCarrito();  // Actualizar la cantidad en el carrito
+            });
+        }
 
         function mostrarProductosPorForma(formaId){
             $.ajax({
@@ -827,11 +969,8 @@
                 dataType: "json",
                 data: { formaId },
                 success: function (response) {
-                    const urlImagenesProductos = "http://104.218.48.244:8080/apirest/api/productos/images/";
-                    const menuUrl = ""; // Ajusta esto según tu contexto
-                    const $swiperWrapper = $('#contenedor-productos-bestsellers');
 
-                    console.log({response})
+                    const $swiperWrapper = $('#contenedor-productos-bestsellers');
 
                     $.each(response, function (i, element) {
 
@@ -862,7 +1001,7 @@
                                     )
                                 ),
                                 $("<div>").addClass("list-product-btn absolute-2").append(
-                                    $("<a>").attr({"href": "#quick_add", "data-bs-toggle": "modal"}).data("producto", element).addClass("box-icon bg_white quick-add tf-btn-loading btn-add-prueba").append(
+                                    $("<a>").attr({"href": "#quick_add", "data-bs-toggle": "modal"}).data("producto", element).addClass("box-icon bg_white quick-add tf-btn-loading btn-show-detail").append(
                                         $("<span>").addClass("icon icon-bag"),
                                         $("<span>").addClass("tooltip").text("Quick Add")
                                     ),
@@ -899,23 +1038,27 @@
                             );
                         });
 
-                        /*const preciosPorRol = {
-                            "Cliente": { regular: "precio", especial: "precioReducido", labelEspecial: "Precio Reducido:" },
-                            "Cliente Team": { regular: element.precio, especial: "precioTeam", labelEspecial: "Precio Team:" },
-                            "Cliente Team Vip": { regular: element.precio , especial: "precioTeamVip", labelEspecial: "Precio VIP Team:" }
-                        };*/
+                        const preciosPorRol = {
+                            "Cliente": { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" },
+                            "Team": { regular: element.precio, especial: element.precioTeam, labelEspecial: "Precio Team:" },
+                            "Team Vip": { regular: element.precio , especial: element.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                            "Familiar": { regular: element.precio , especial: element.precioFamiliar, labelEspecial: "Precio Familiar:" }
+                        };
 
-                        // Obtener los precios basados en el rol del usuario
-                        //const precios = preciosPorRol[dataUsuario.nombreRolPerfil];
+                        // Definir los precios por defecto
+                        const preciosDefecto = { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" };
+
+                        // Obtener los precios basados en el rol del usuario o usar los precios por defecto si el rol es null
+                        const precio = dataUsuario && dataUsuario.nombreRolPerfil  ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto
 
                         let priceProduct = $("<div>").addClass("d-flex flex-row justify-content-evenly").append(
                             $("<p>").addClass("d-flex flex-column").append(
                                 $("<span>").text("Precio Regular:"),
-                                $("<span>").addClass("price").text("S/. " + parseFloat(element.precio).toFixed(2))
+                                $("<span>").addClass("price").text("S/. " + parseFloat(precio.regular).toFixed(2))
                             ),
                             $("<p>").addClass("d-flex flex-column").append(
-                                $("<span>").text("Precio Oferta:"),
-                                $("<span>").addClass("price").text("S/. " + parseFloat(element.precioReducido).toFixed(2))
+                                $("<span>").text(precio.labelEspecial),
+                                $("<span>").addClass("price").text("S/. " + parseFloat(precio.especial).toFixed(2))
                             )
                         );
 

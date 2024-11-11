@@ -187,7 +187,7 @@
 
   /* Button Quantity
   -------------------------------------------------------------------------------------*/
-  var btnQuantity = function () {
+  /*var btnQuantity = function () {
     $(".minus-btn").on("click", function (e) {
       e.preventDefault();
       var $this = $(this);
@@ -211,7 +211,59 @@
       }
       $input.val(value);
     });
+  };*/
+
+/*
+  var btnQuantityCart = function () {
+    // Suponiendo que tienes el carrito en localStorage
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // Función para actualizar la cantidad de un producto en el carrito
+    function actualizarCantidadProducto(productoPropiedadDetalleId, nuevaCantidad) {
+      // Buscar el producto en el carrito
+      carrito = carrito.map(item => {
+        // Si el producto coincide con el ID, actualizar la cantidad
+        if (item.producto.productoPropiedadDetalleId === productoPropiedadDetalleId) {
+          item.cantidad = nuevaCantidad;
+        }
+        return item;
+      });
+
+      // Guardar el carrito actualizado en localStorage
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+    }
+    // Usar delegación de eventos para elementos generados dinámicamente
+    $(document).on("click", "#shoppingCart .minus-btn", function (e) {
+      e.preventDefault();
+      var $this = $(this);
+      let productoPropiedadDetalleId = $(this).data("ppd-id");
+      var $input = $this.closest("div").find("input");
+      var value = parseInt($input.val());
+
+      if (value > 1) {
+        value = value - 1;
+        $input.val(value);
+        actualizarCantidadProducto(productoPropiedadDetalleId, value)
+      }
+    });
+
+    $(document).on("click", "#shoppingCart .plus-btn", function (e) {
+      e.preventDefault();
+      var $this = $(this);
+      let productoPropiedadDetalleId = $(this).data("ppd-id");
+      console.log(productoPropiedadDetalleId)
+      var $input = $this.closest("div").find("input");
+      var value = parseInt($input.val());
+
+      if (value > -1) {
+        value = value + 1;
+        $input.val(value);
+        actualizarCantidadProducto(productoPropiedadDetalleId, value)
+      }
+    });
   };
+
+*/
 
   /* Delete file 
   -------------------------------------------------------------------------------------*/
@@ -969,7 +1021,8 @@
   // Dom Ready
   $(function () {
     selectImages();
-    btnQuantity();
+    //btnQuantity();
+    //btnQuantityCart();
     delete_file();
     goTop();
     closeAnnouncement();

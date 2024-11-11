@@ -27,8 +27,8 @@ public class ProductoController {
     @GetMapping("obtenerProductoPorForma")
     @ResponseBody
     public ResponseEntity<List<ProductoDto>> obtenerProductosPorForma(@RequestParam("formaId") int formaId, HttpSession session) {
-        UsuarioDto usuario = (UsuarioDto) session.getAttribute("usuario");
-        List<ProductoDto> productoDtos = iProductoService.obtenerProductosItemsIndividualesPorForma(formaId, usuario);
+        //UsuarioDto usuario = (UsuarioDto) session.getAttribute("usuario");
+        List<ProductoDto> productoDtos = iProductoService.obtenerProductosItemsIndividualesPorForma(formaId);
         return ResponseEntity.ok(productoDtos);
 
     }

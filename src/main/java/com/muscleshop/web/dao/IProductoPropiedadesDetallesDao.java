@@ -36,7 +36,7 @@ public interface IProductoPropiedadesDetallesDao extends JpaRepository<ProductoP
                 "ppdv.productoPropiedadesDetalles.id, ppdv.productoPropiedadesDetalles.producto.id, " +
                 "ppdv.productoPropiedadesDetalles.producto.nombre, ppdv.productoPropiedadesDetalles.producto.url," +
                 "ppdv.productoPropiedadesDetalles.producto.estado.nombre,  " +
-                "ppdv.productoPropiedadesDetalles.producto.imagen, ppdv.productoPropiedadesDetalles.sku," +
+                "ppdv.productoPropiedadesDetalles.imagen, ppdv.productoPropiedadesDetalles.sku," +
                 "ppdv.productoPropiedadesDetalles.stock, ppdv.productoPropiedadesDetalles.precio, " +
                 "ppdv.productoPropiedadesDetalles.precioReducido, ppdv.productoPropiedadesDetalles.precioTeam, " +
                 "ppdv.productoPropiedadesDetalles.precioTeamVip, ppdv.productoPropiedadesDetalles.precioFamiliar," +
