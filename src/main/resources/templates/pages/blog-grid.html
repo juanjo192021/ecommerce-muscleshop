@@ -65,29 +65,35 @@
     <div class="blog-grid-main">
         <div class="container">
             <div class="row">
-                <div class="col-xl-4 col-md-6 col-12">
+                <div class="col-xl-4 col-md-6 col-12" th:each="articulo: ${articulos}">
                     <div class="blog-article-item">
                         <div class="article-thumb">
-                            <a th:href="@{/index/blog-detail}">
+                            <a th:href="@{'/'+${menuUrl}+'/'+${articulo.url}}">
                                 <img class="lazyload"
-                                     data-src="https://themesflat.co/html/ecomus/images/blog/blog-2.jpg"
-                                     src="https://themesflat.co/html/ecomus/images/blog/blog-2.jpg" alt="img-blog">
+                                     th:data-src="'http://104.218.48.244:8080/apirest/api/articulos/images/'+${articulo.imagen}"
+                                     th:src="'http://104.218.48.244:8080/apirest/api/articulos/images/'+${articulo.imagen}" th:alt="'img '+${articulo.titulo}">
                             </a>
-                            <div class="article-label">
+                            <!--<div class="article-label">
                                 <a href="blog-detail.html" class="tf-btn btn-sm radius-3 btn-fill animate-hover-btn">Accessories</a>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="article-content">
                             <div class="article-title">
-                                <a href="blog-detail.html" class="">The next generation of leather alternatives</a>
+                                <a th:href="@{'/'+${menuUrl}+'/'+${articulo.url}}"
+                                   class="" th:text="${articulo.titulo}">
+                                    The next generation of leather alternatives
+                                </a>
                             </div>
                             <div class="article-btn">
-                                <a href="blog-detail.html" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
+                                <a th:href="@{'/'+${menuUrl}+'/'+${articulo.url}}"
+                                   class="tf-btn btn-line fw-6">
+                                    Leer más<i class="icon icon-arrow1-top-left"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-md-6 col-12">
+<!--                <div class="col-xl-4 col-md-6 col-12">
                     <div class="blog-article-item">
                         <div class="article-thumb">
                             <a th:href="@{/index/blog-detail}">
@@ -240,7 +246,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

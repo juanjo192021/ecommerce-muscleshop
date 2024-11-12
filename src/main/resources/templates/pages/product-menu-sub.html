@@ -104,11 +104,11 @@
                 <div class="tf-row-flex">
                     <div class="tf-shop-sidebar wrap-sidebar-mobile">
                         <div class="widget-facet wd-categories">
-                            <div class="facet-title" data-bs-target="#categories" data-bs-toggle="collapse" aria-expanded="true" aria-controls="categories">
+                            <div class="facet-title" data-bs-target="#categories" data-bs-toggle="collapse" aria-expanded="false" aria-controls="categories">
                                 <span th:text="${nombreMenuSub}">Product categories</span>
-                                <span class="icon icon-arrow-up"></span>
+                                <span class="icon icon-arrow-down"></span>
                             </div>
-                            <div id="categories" class="collapse show">
+                            <div id="categories" class="collapse">
                                 <ul class="list-categoris current-scrollbar mb_36">
                                     <li class="cate-item" th:each="categoria : ${categorias}">
                                         <a th:href="@{'/index/'+ ${categoria.urlMenu}+ '/'+ ${categoria.urlMenuSub} + '/' +${categoria.urlCategoria}}">
@@ -120,11 +120,13 @@
                         </div>
 
                         <div class="widget-facet wd-categories">
-                            <div class="facet-title" data-bs-target="#otras-categorias" data-bs-toggle="collapse" aria-expanded="true" aria-controls="otras-categorias">
+                            <!--aria-expanded="true"-->
+                            <div class="facet-title" data-bs-target="#otras-categorias" data-bs-toggle="collapse" aria-expanded="false" aria-controls="otras-categorias">
                                 <span>Otras Categorías</span>
-                                <span class="icon icon-arrow-up"></span>
+                                <span class="icon icon-arrow-down"></span>
                             </div>
-                            <div id="otras-categorias" class="collapse show">
+                            <!--class="collapse show"-->
+                            <div id="otras-categorias" class="collapse">
                                 <ul class="list-categoris current-scrollbar mb_36">
                                     <li class="cate-item" th:each="otraCategoria : ${otrasCategorias}">
                                         <a th:href="@{'/index/'+ ${otraCategoria.urlMenu}+ '/'+ ${otraCategoria.urlMenuSub}}">
@@ -136,15 +138,16 @@
                         </div>
 
                         <div class="widget-facet wd-categories">
-                            <div class="facet-title" data-bs-target="#por-objetivos" data-bs-toggle="collapse" aria-expanded="true" aria-controls="por-objetivos">
+                            <div class="facet-title" data-bs-target="#por-objetivos" data-bs-toggle="collapse" aria-expanded="false" aria-controls="por-objetivos">
                                 <span>Por Objetivos</span>
-                                <span class="icon icon-arrow-up"></span>
+                                <!--class="icon icon-arrow-up"-->
+                                <span class="icon icon-arrow-down"></span>
                             </div>
-                            <div id="por-objetivos" class="collapse show">
+                            <div id="por-objetivos" class="collapse">
                                 <ul class="list-categoris current-scrollbar mb_36">
-                                    <li class="cate-item" th:each="porObjetivo : ${porObjetivos}">
-                                        <a th:href="@{'/index/'+ ${porObjetivo.urlMenu}+ '/'+ ${porObjetivo.urlMenuSub}}">
-                                            <span th:text="${porObjetivo.nombreMenuSub}">Dress</span>
+                                    <li class="cate-item" th:each="objetivo : ${objetivos}">
+                                        <a th:href="@{'/objetivos/'+ ${objetivo.url}}">
+                                            <span th:text="${objetivo.nombre}">Dress</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -152,15 +155,15 @@
                         </div>
 
                         <div class="widget-facet wd-categories">
-                            <div class="facet-title" data-bs-target="#por-marcas" data-bs-toggle="collapse" aria-expanded="true" aria-controls="por-marcas">
+                            <div class="facet-title" data-bs-target="#por-marcas" data-bs-toggle="collapse" aria-expanded="false" aria-controls="por-marcas">
                                 <span>Por Marcas</span>
-                                <span class="icon icon-arrow-up"></span>
+                                <span class="icon icon-arrow-down"></span>
                             </div>
-                            <div id="por-marcas" class="collapse show">
+                            <div id="por-marcas" class="collapse">
                                 <ul class="list-categoris current-scrollbar mb_36">
-                                    <li class="cate-item" th:each="porMarca : ${porMarcas}">
-                                        <a th:href="@{'/index/'+ ${porMarca.urlMenu}+ '/'+ ${porMarca.urlMenuSub}}">
-                                            <span th:text="${porMarca.nombreMenuSub}">Dress</span>
+                                    <li class="cate-item" th:each="marca : ${marcas}">
+                                        <a th:href="@{'/marcas/'+ ${marca.url}}">
+                                            <span th:text="${marca.nombre}">Dress</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -188,7 +191,7 @@
                             </div>-->
                             <div class="widget-facet wrap-price">
                                 <div class="facet-title" data-bs-target="#price" data-bs-toggle="collapse" aria-expanded="true" aria-controls="price">
-                                    <span>Price</span>
+                                    <span>Precio</span>
                                     <span class="icon icon-arrow-up"></span>
                                 </div>
                                 <div id="price" class="collapse show">
@@ -214,9 +217,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div>
+                                        <div class="mt-4">
                                             <button id="btn-aplicar-filtros"
-                                                    class="btn btn-primary"
+                                                    class="btn btn-dark"
                                                     type="button">
                                                 Aplicar Filtros
                                             </button>

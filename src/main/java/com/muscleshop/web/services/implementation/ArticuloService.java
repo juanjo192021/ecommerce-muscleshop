@@ -19,19 +19,16 @@ public class ArticuloService implements IArticuloService {
 	private int estadoId = 1;
 	private int cantidadArticulos = 6;
 
+	@Override
 	public List<Articulo> obtenerArticulos() {
-		return articuloDao.findAll();
+		return articuloDao.findByEstado_Nombre("Activo");
 	}
 
+	@Override
 	public List<Articulo> obtenerArticulosPorCantidad() {
 		// Crear un Pageable con el tamaño deseado
 		PageRequest pageable = PageRequest.of(0, cantidadArticulos);
 		// Llamar al repositorio con el estado deseado y el Pageable
 		return  articuloDao.findAllByEstado_IdOrderByIdDesc(estadoId, pageable);
 	}
-
-	public Articulo obtenerArticuloPorID(Integer id) {
-		return articuloDao.findById(id).orElse(null);
-	}
-
 }

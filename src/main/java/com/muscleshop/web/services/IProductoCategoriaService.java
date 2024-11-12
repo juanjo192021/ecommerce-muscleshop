@@ -7,11 +7,8 @@ import java.util.List;
 
 public interface IProductoCategoriaService {
 
-    List<ProductoCategoria> listarProductoCategoria();
-    ProductoCategoria obtenerProductoCategoriaPorId(Integer id);
-    ProductoCategoria obtenerProductoCategoriaPorUrl(String categoriaUrl);
+    ProductoCategoriaDto obtenerProductoCategoriaPorUrl(String categoriaUrl, int menuSubId);
 
     List<ProductoCategoriaDto> obtenerProductoCategoriasPorMenuSubId(int menuSubId);
-    List<ProductoCategoria> obtenerProductoCategoriaPorMenuId(int menuId);
 
 }

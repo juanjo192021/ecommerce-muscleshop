@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface IArticuloDao extends JpaRepository<Articulo, Integer> {
 
+    List<Articulo> findByEstado_Nombre(String nombreEstado);
+
     List<Articulo> findAllByEstado_IdOrderByIdDesc(Integer estadoId, Pageable pageable);
 }

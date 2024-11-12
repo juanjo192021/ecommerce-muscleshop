@@ -63,8 +63,13 @@ public class ProductoService implements IProductoService {
 				productoDTO.setUrlMarca(productoMenuSub.getProducto().getMarca().getUrl());
 				productoDTO.setProductoPropiedadDetalleId(detalle.getId());
 				productoDTO.setSkuProductoPropiedadesDetalles(detalle.getSku());
+
 				productoDTO.setPrecio(detalle.getPrecio());
 				productoDTO.setPrecioReducido(detalle.getPrecioReducido());
+				productoDTO.setPrecioTeam(detalle.getPrecioTeam());
+				productoDTO.setPrecioTeamVip(detalle.getPrecioTeamVip());
+				productoDTO.setPrecioFamiliar(detalle.getPrecioFamiliar());
+
 				productoDTO.setStock(detalle.getStock());
 				List<String> variaciones = obtenerVariaciones(detalle.getId());
 				productoDTO.setVariacion(String.join(" ", variaciones));
@@ -79,14 +84,14 @@ public class ProductoService implements IProductoService {
 		return page;
 	}
 
-	public List<ProductoDto> obtenerProductosItemsIndividialesPorCategoriaId(int productoCategoriaId){
+	public Page<ProductoDto> obtenerProductosItemsIndividialesPorCategoriaId(int productoCategoriaId, double minPrecio, double maxPrecio, Pageable pageable){
 
 		List<ProductoDto> productosFinales = new ArrayList<>();
 		List<ProductoMenuSub> productos = productoMenuSubDao.findByProductoCategoria_Id(productoCategoriaId);
 
 		for (ProductoMenuSub productoMenuSub : productos) {
 			ProductoCategoria categoria = productoMenuSub.getProductoCategoria();
-			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducido(productoMenuSub.getProducto().getId(),0,1000);
+			List<ProductoPropiedadesDetalles> propiedadesDetalles = productoPropiedadesDetallesDao.findByProductoIdAndPrecioReducido(productoMenuSub.getProducto().getId(),minPrecio,maxPrecio);
 
 			for (ProductoPropiedadesDetalles detalle : propiedadesDetalles) {
 				ProductoDto productoDTO = new ProductoDto();
@@ -104,8 +109,13 @@ public class ProductoService implements IProductoService {
 				productoDTO.setUrlMarca(productoMenuSub.getProducto().getMarca().getUrl());
 				productoDTO.setProductoPropiedadDetalleId(detalle.getId());
 				productoDTO.setSkuProductoPropiedadesDetalles(detalle.getSku());
+
 				productoDTO.setPrecio(detalle.getPrecio());
 				productoDTO.setPrecioReducido(detalle.getPrecioReducido());
+				productoDTO.setPrecioTeam(detalle.getPrecioTeam());
+				productoDTO.setPrecioTeamVip(detalle.getPrecioTeamVip());
+				productoDTO.setPrecioFamiliar(detalle.getPrecioFamiliar());
+
 				productoDTO.setStock(detalle.getStock());
 
 				// Obtener las variaciones respetando el orden de creación
@@ -116,8 +126,10 @@ public class ProductoService implements IProductoService {
 				productosFinales.add(productoDTO);
 			}
 		}
-
-		return productosFinales;
+		int start = (int) pageable.getOffset();
+		int end = Math.min((start + pageable.getPageSize()), productosFinales.size());
+		Page<ProductoDto> page = new PageImpl<>(productosFinales.subList(start, end), pageable, productosFinales.size());
+		return page;
 	}
 
 	public List<ProductoDto> obtenerProductosItemsIndividualesPorForma(int formaId) {

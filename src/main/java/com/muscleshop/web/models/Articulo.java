@@ -13,6 +13,7 @@ public class Articulo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String imagen;
+	private String url;
 	private String titulo;
 	private String descripcion;
 
@@ -38,6 +39,14 @@ public class Articulo {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String getTitulo() {

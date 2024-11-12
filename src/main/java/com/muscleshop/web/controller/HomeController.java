@@ -301,16 +301,49 @@ public class HomeController {
 		return "inicio";
 	}
 
+	@Autowired
+	IMarcasService iMarcasService;
+
+	@Autowired
+	IObjetivosService iObjetivosService;
+
+	@GetMapping("/{menuUrl}")
+	public String menuProducto(@PathVariable("menuUrl") String menuUrl, Model model) {
+
+		Menu menu = menuService.obtenerMenuPorUrl(menuUrl);
+
+		if(menu.getUrl().equals("blogs")) {
+			List<Articulo> articulos = articuloService.obtenerArticulos();
+			model.addAttribute("articulos", articulos);
+			model.addAttribute("menuUrl", menu.getUrl());
+//			return "porBlog/menuBlog";
+			return "pages/blog-grid";
+		}
+
+		List<MenuSubDto> menuSubDtos = menuSubService.obtenerMenuSubsPorMenuId(menu.getId());
+
+		model.addAttribute("menu", menu);
+		model.addAttribute("menuSubs",menuSubDtos );
+		//return "porProductos/menuProducto";
+		return "pages/menu-grid";
+
+	}
+
 	@GetMapping("/{menuUrl}/{menuSubUrl}")
 	public String menuSubProductos(Model model,
 								   @PathVariable("menuUrl") String menuUrl,
-								   @PathVariable("menuSubUrl") String menuSubUrl,
-								   @RequestParam(required = false) Double minPrecio,
-								   @RequestParam(required = false) Double maxPrecio,
-								   HttpSession session) {
+								   @PathVariable("menuSubUrl") String menuSubUrl) {
 
 		Menu menu = menuService.obtenerMenuPorUrl(menuUrl);
 		MenuSub menuSub = menuSubService.obtenerMenuSubPorUrl(menuSubUrl);
+
+		if(menu.getUrl().equals("blogs")) {
+			//List<Articulo> articulos = articuloService.obtenerArticulos();
+			//model.addAttribute("articulos", articulos);
+//			return "porBlog/menuBlog";
+			return "pages/blog-detail";
+		}
+
 
 		/*List<BannerMenuSub> bannerMovilTablet = (menuSub.getBannerMenuSubs()).stream()
 				.filter(ban -> "movil_tablet".equals(ban.getTipoDispositivo()))
@@ -322,29 +355,58 @@ public class HomeController {
 
 		List<ProductoCategoriaDto> productoCategoriaDtos = productoCategoriaService.obtenerProductoCategoriasPorMenuSubId(menuSub.getId());
 		List<MenuSubDto> menuSubDtos = menuSubService.obtenerMenuSubsPorMenuId(menu.getId());
-		List<MenuSubDto> menuSubPorObjetivoDtos = menuSubService.obtenerMenuSubsPorMenuId(5);
-		List<MenuSubDto> menuSubPorMarcaDtos = menuSubService.obtenerMenuSubsPorMenuId(6);
+		List<Objetivos> objetivos = iObjetivosService.obtenerObjetivos();
+		List<Marcas> marcas = iMarcasService.obtenerMarcas();
 
 		//List<ProductoItemsDto> productos = iProductoPropiedadesDetallesService.obtenerProductosIndividualesPorMenuSubId(minPrecio, maxPrecio, menuSub.getId());
 		//List<ProductoDto> productos = productoService.obtenerProductosItemsIndividialesPorMenuSubId(menuSub.getId(), 0 ,1000,);
 
-		//model.addAttribute("nombreMenuSub", menuSub.getNombre());
+		model.addAttribute("nombreMenuSub", menuSub.getNombre());
 		/*model.addAttribute("bannerMenuSubMovilTablet", bannerMovilTablet);
 		model.addAttribute("bannerMenuSubLaptopPc", bannerLaptopPc);*/
-		//model.addAttribute("categorias", productoCategoriaDtos);
-		//model.addAttribute("otrasCategorias", menuSubDtos);
-		//model.addAttribute("porObjetivos", menuSubPorObjetivoDtos);
-		//model.addAttribute("porMarcas", menuSubPorMarcaDtos);
-		//model.addAttribute("productos", productos);
+		model.addAttribute("categorias", productoCategoriaDtos);
+		model.addAttribute("otrasCategorias", menuSubDtos);
+		model.addAttribute("objetivos", objetivos);
+		model.addAttribute("marcas", marcas);
 
 		model.addAttribute("menuUrl", menuUrl);
 		model.addAttribute("menuSubUrl", menuSubUrl);
 		return "pages/product-menu-sub";
 	}
 
+	@GetMapping("/{menuUrl}/{menuSubUrl}/{categoriaUrl}")
+	public String listarProCate(Model model,
+								HttpSession session,
+								@PathVariable String menuUrl,
+								@PathVariable String menuSubUrl,
+								@PathVariable String categoriaUrl) {
 
-	// Método http para obtener productos por el id del sub menu
+		Menu menu = menuService.obtenerMenuPorUrl(menuUrl);
+		MenuSub menuSub = menuSubService.obtenerMenuSubPorUrl(menuSubUrl);
+		ProductoCategoriaDto productoCategoria = productoCategoriaService.obtenerProductoCategoriaPorUrl(categoriaUrl, menuSub.getId());
 
+		List<ProductoCategoriaDto> productoCategoriaDtos = productoCategoriaService.obtenerProductoCategoriasPorMenuSubId(menuSub.getId());
+		List<MenuSubDto> menuSubDtos = menuSubService.obtenerMenuSubsPorMenuId(menu.getId());
+		List<Objetivos> objetivos = iObjetivosService.obtenerObjetivos();
+		List<Marcas> marcas = iMarcasService.obtenerMarcas();
+
+		//List<ProductoDto> productos = productoService.obtenerProductosItemsIndividialesPorCategoriaId(productoCategoria.getId());
+
+		model.addAttribute("nombreMenuSub", menuSub.getNombre());
+		model.addAttribute("categorias", productoCategoriaDtos);
+		model.addAttribute("otrasCategorias", menuSubDtos);
+		model.addAttribute("objetivos", objetivos);
+		model.addAttribute("marcas", marcas);
+		//model.addAttribute("productos", productos);
+
+		model.addAttribute("menuUrl", menuUrl);
+		model.addAttribute("menuSubUrl", menuSubUrl);
+		model.addAttribute("categoriaUrl", categoriaUrl);
+		model.addAttribute("menuSubId", menuSub.getId());
+
+		/*return "porProductos/categoriaPro";*/
+		return "pages/products-categories";
+	}
 
 	@Autowired
 	IPropiedadDetalleImagenService iPropiedadDetalleImagenService;
@@ -381,7 +443,7 @@ public class HomeController {
 		return "pages/product-detail";
 	}
 
-	/*@GetMapping("/about-us")
+	@GetMapping("/about-us")
 	public String AboutUs(Model model, HttpSession session) {
 		return "landings-pages/about-us";
 	}
@@ -415,15 +477,7 @@ public class HomeController {
 		return "user/wishlist";
 	}
 
-	@GetMapping("/blog-grid")
-	public String BlogGrid(Model model, HttpSession session) {
-		return "pages/blog-grid";
-	}
-
-	@GetMapping("/blog-detail")
-	public String BlogDetail(Model model, HttpSession session) {
-		return "pages/blog-detail";
-	}
+	/*
 
 	@GetMapping("/product-menu")
 	public String ProductMenu(Model model, HttpSession session) {
@@ -435,26 +489,7 @@ public class HomeController {
 		return "pages/product-detail";
 	}
 
-	@GetMapping("/{menuUrl}")
-	public String menuProducto(Model model, @PathVariable String menuUrl, HttpSession session) {
 
-		Menu menu = menuService.obtenerMenuPorUrl(menuUrl);
-
-		if(menu.getId()==7) {
-			List<Articulo> arti = articuloService.obtenerArticulos();
-			model.addAttribute("articulo", arti);
-//			return "porBlog/menuBlog";
-			return "pages/blog-grid";
-		}
-		else {
-			List<MenuSubDto> menuSubDtos = menuSubService.obtenerMenuSubsPorMenuId(menu.getId());
-
-			model.addAttribute("menu", menu);
-			model.addAttribute("menuSubs",menuSubDtos );
-			//return "porProductos/menuProducto";
-			return "product-menu-sub";
-		}
-	}
 
 	@GetMapping("/{menuUrl}/{menuSubUrl}")
 	public String menuSubProductos(Model model,
@@ -505,38 +540,8 @@ public class HomeController {
 		return ResponseEntity.ok(productos);
 	}
 
-	@GetMapping("/{menuUrl}/{menuSubUrl}/{categoriaUrl}")
-	public String listarProCate(Model model,
-								HttpSession session,
-								@PathVariable String menuUrl,
-								@PathVariable String menuSubUrl,
-								@PathVariable String categoriaUrl,
-								@RequestParam(required = false) Double minPrecio,
-								@RequestParam(required = false) Double maxPrecio) {
-
-		Menu menu = menuService.obtenerMenuPorUrl(menuUrl);
-		MenuSub menuSub = menuSubService.obtenerMenuSubPorUrl(menuSubUrl);
-		ProductoCategoria productoCategoria = productoCategoriaService.obtenerProductoCategoriaPorUrl(categoriaUrl);
-
-		List<ProductoCategoriaDto> productoCategoriaDtos = productoCategoriaService.obtenerProductoCategoriasPorMenuSubId(menuSub.getId());
-		List<MenuSubDto> menuSubDtos = menuSubService.obtenerMenuSubsPorMenuId(menu.getId());
-		List<MenuSubDto> menuSubPorObjetivoDtos = menuSubService.obtenerMenuSubsPorMenuId(5);
-		List<MenuSubDto> menuSubPorMarcaDtos = menuSubService.obtenerMenuSubsPorMenuId(6);
-
-		List<ProductoDto> productos = productoService.obtenerProductosItemsIndividialesPorCategoriaId(productoCategoria.getId());
-
-		model.addAttribute("nombreMenuSub", menuSub.getNombre());
-		model.addAttribute("categorias", productoCategoriaDtos);
-		model.addAttribute("otrasCategorias", menuSubDtos);
-		model.addAttribute("porObjetivos", menuSubPorObjetivoDtos);
-		model.addAttribute("porMarcas", menuSubPorMarcaDtos);
-		model.addAttribute("productos", productos);
-
-		*//*return "porProductos/categoriaPro";*//*
-		return "pages/products-categories";
-	}
-
-	*//*
+	*/
+	/*
 	@RequestParam(required = false) String detalleNombre,
 	@RequestParam(required = false) String detalleModificado,
 	* HttpSession session

@@ -18,19 +18,9 @@ public class ProductoCategoriaService implements IProductoCategoriaService {
 
 	private final int estadoId = 1;
 
-	//Obtener el listado de todas las categorías de productos
-	public List<ProductoCategoria> listarProductoCategoria() {
-		return iProductoCategoriaDao.findByEstado_Id(estadoId);
-	}
-
-	//Obtener una categoría de producto por su id
-	public ProductoCategoria obtenerProductoCategoriaPorId(Integer id) {
-		return iProductoCategoriaDao.findByIdAndEstado_Id(id, estadoId);
-	}
-
 	//Obtener una categoría de producto por su url
-	public ProductoCategoria obtenerProductoCategoriaPorUrl(String categoriaUrl) {
-		return iProductoCategoriaDao.findByUrlAndEstado_Id(categoriaUrl, estadoId);
+	public ProductoCategoriaDto obtenerProductoCategoriaPorUrl(String categoriaUrl, int menuSubId) {
+		return iProductoCategoriaDao.findByUrlAndMenuSub_Id(categoriaUrl, menuSubId);
 	}
 
 	//Obtener el listado de categorías de productos por su ID del submenú
@@ -38,8 +28,4 @@ public class ProductoCategoriaService implements IProductoCategoriaService {
         return iProductoCategoriaDao.findByMenuSub_IdAndEstado_Id(menuSubId, estadoId);
     }
 
-	//Obtener el listado de categorías de productos por su ID del menú
-	public List<ProductoCategoria> obtenerProductoCategoriaPorMenuId(int menuId) {
-        return iProductoCategoriaDao.findByMenuSub_Menu_IdAndEstado_Id(menuId, estadoId);
-    }
 }

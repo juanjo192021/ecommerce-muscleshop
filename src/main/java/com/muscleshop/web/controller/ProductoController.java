@@ -50,8 +50,31 @@ public class ProductoController {
             @RequestParam("maxPrecio") double maxPrecio,
             @RequestParam("page") int page) {
 
-        Pageable pageable = PageRequest.of(page, 2);
+        Pageable pageable = PageRequest.of(page, 12);
         Page<ProductoDto> productos = iProductoService.obtenerProductosItemsIndividialesPorMenuSubId(menuSubId, minPrecio, maxPrecio, pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("productos", productos.getContent());
+        response.put("pagePrevious", productos.hasPrevious());
+        response.put("pageNext", productos.hasNext());
+        response.put("pageNumber", productos.getNumber());
+        response.put("totalPages", productos.getTotalPages());
+
+        return ResponseEntity.ok(response);
+
+    }
+
+
+    @GetMapping("obtenerProductosPorCategoriaId")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> obtenerProductosPorCategoriaId(
+            @RequestParam("categoriaId") int categoriaId,
+            @RequestParam("minPrecio") double minPrecio,
+            @RequestParam("maxPrecio") double maxPrecio,
+            @RequestParam("page") int page) {
+
+        Pageable pageable = PageRequest.of(page, 12);
+        Page<ProductoDto> productos = iProductoService.obtenerProductosItemsIndividialesPorCategoriaId(categoriaId, minPrecio, maxPrecio, pageable);
 
         Map<String, Object> response = new HashMap<>();
         response.put("productos", productos.getContent());

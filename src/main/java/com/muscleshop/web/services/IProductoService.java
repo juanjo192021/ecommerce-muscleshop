@@ -13,7 +13,7 @@ public interface IProductoService {
 
     Producto obtenerProductoPorUrl(String productoUrl);
     Page<ProductoDto> obtenerProductosItemsIndividialesPorMenuSubId(int menuSubId, double minPrecio, double maxPrecio, Pageable pageable);
-    List<ProductoDto> obtenerProductosItemsIndividialesPorCategoriaId(int productoCategoriaId);
+    Page<ProductoDto> obtenerProductosItemsIndividialesPorCategoriaId(int productoCategoriaId, double minPrecio, double maxPrecio, Pageable pageable);
     List<ProductoDto> obtenerProductosItemsIndividualesPorForma(int formaId);
     Page<ProductoDto> obtenerProductosItemsIndividualesPorNombreProducto(String productoNombre,double minPrecio, double maxPrecio, Pageable pageable);
 }
