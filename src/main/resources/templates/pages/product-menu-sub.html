@@ -146,7 +146,7 @@
                             <div id="por-objetivos" class="collapse">
                                 <ul class="list-categoris current-scrollbar mb_36">
                                     <li class="cate-item" th:each="objetivo : ${objetivos}">
-                                        <a th:href="@{'/objetivos/'+ ${objetivo.url}}">
+                                        <a th:href="@{'/por-objetivos/'+ ${objetivo.url}}">
                                             <span th:text="${objetivo.nombre}">Dress</span>
                                         </a>
                                     </li>
@@ -162,7 +162,7 @@
                             <div id="por-marcas" class="collapse">
                                 <ul class="list-categoris current-scrollbar mb_36">
                                     <li class="cate-item" th:each="marca : ${marcas}">
-                                        <a th:href="@{'/marcas/'+ ${marca.url}}">
+                                        <a th:href="@{'/por-marcas/'+ ${marca.url}}">
                                             <span th:text="${marca.nombre}">Dress</span>
                                         </a>
                                     </li>

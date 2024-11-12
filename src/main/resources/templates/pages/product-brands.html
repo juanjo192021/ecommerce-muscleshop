@@ -66,79 +66,15 @@
                         </li>
 
                     </ul>
-                    <div class="tf-control-sorting d-flex justify-content-end">
-                        <div class="tf-dropdown-sort" data-bs-toggle="dropdown">
-                            <div class="btn-select">
-                                <span class="text-sort-value">Featured</span>
-                                <span class="icon icon-arrow-down"></span>
-                            </div>
-                            <div class="dropdown-menu">
-                                <div class="select-item active">
-                                    <span class="text-value-item">Featured</span>
-                                </div>
-                                <div class="select-item">
-                                    <span class="text-value-item">Best selling</span>
-                                </div>
-                                <div class="select-item">
-                                    <span class="text-value-item">Alphabetically, A-Z</span>
-                                </div>
-                                <div class="select-item">
-                                    <span class="text-value-item">Alphabetically, Z-A</span>
-                                </div>
-                                <div class="select-item">
-                                    <span class="text-value-item">Price, low to high</span>
-                                </div>
-                                <div class="select-item">
-                                    <span class="text-value-item">Price, high to low</span>
-                                </div>
-                                <div class="select-item">
-                                    <span class="text-value-item">Date, old to new</span>
-                                </div>
-                                <div class="select-item">
-                                    <span class="text-value-item">Date, new to old</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="tf-row-flex">
                     <div class="tf-shop-sidebar wrap-sidebar-mobile">
-                        <div class="widget-facet wd-categories">
-                            <div class="facet-title" data-bs-target="#categories" data-bs-toggle="collapse" aria-expanded="true" aria-controls="categories">
-                                <span th:text="${nombreMenuSub}">Product categories</span>
-                                <span class="icon icon-arrow-up"></span>
-                            </div>
-                            <div id="categories" class="collapse show">
-                                <ul class="list-categoris current-scrollbar mb_36">
-                                    <li class="cate-item" th:each="categoria : ${categorias}">
-                                        <a th:href="@{'/index/'+ ${categoria.urlMenu}+ '/'+ ${categoria.urlMenuSub} + '/' +${categoria.urlCategoria}}">
-                                            <span th:text="${categoria.nombreCategoria}">Dress</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
 
-                        <div class="widget-facet wd-categories">
-                            <div class="facet-title" data-bs-target="#otras-categorias" data-bs-toggle="collapse" aria-expanded="true" aria-controls="otras-categorias">
-                                <span>Otras Categorías</span>
-                                <span class="icon icon-arrow-up"></span>
-                            </div>
-                            <div id="otras-categorias" class="collapse show">
-                                <ul class="list-categoris current-scrollbar mb_36">
-                                    <li class="cate-item" th:each="otraCategoria : ${otrasCategorias}">
-                                        <a th:href="@{'/index/'+ ${otraCategoria.urlMenu}+ '/'+ ${otraCategoria.urlMenuSub}}">
-                                            <span th:text="${otraCategoria.nombreMenuSub}">Dress</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                         <div class="widget-facet wd-categories">
                             <div class="facet-title" data-bs-target="#por-objetivos" data-bs-toggle="collapse" aria-expanded="false" aria-controls="por-objetivos">
                                 <span>Por Objetivos</span>
                                 <!--class="icon icon-arrow-up"-->
-                                <span class="icon icon-arrow-up"></span>
+                                <span class="icon icon-arrow-down"></span>
                             </div>
                             <div id="por-objetivos" class="collapse">
                                 <ul class="list-categoris current-scrollbar mb_36">
@@ -154,7 +90,7 @@
                         <div class="widget-facet wd-categories">
                             <div class="facet-title" data-bs-target="#por-marcas" data-bs-toggle="collapse" aria-expanded="false" aria-controls="por-marcas">
                                 <span>Por Marcas</span>
-                                <span class="icon icon-arrow-up"></span>
+                                <span class="icon icon-arrow-down"></span>
                             </div>
                             <div id="por-marcas" class="collapse">
                                 <ul class="list-categoris current-scrollbar mb_36">
@@ -168,6 +104,24 @@
                         </div>
 
                         <form action="#" id="facet-filter-form" class="facet-filter-form">
+                            <!--<div class="widget-facet">
+                                <div class="facet-title" data-bs-target="#availability" data-bs-toggle="collapse" aria-expanded="true" aria-controls="availability">
+                                    <span>Availability</span>
+                                    <span class="icon icon-arrow-up"></span>
+                                </div>
+                                <div id="availability" class="collapse show">
+                                    <ul class="tf-filter-group current-scrollbar mb_36">
+                                        <li class="list-item d-flex gap-12 align-items-center">
+                                            <input type="radio" name="availability" class="tf-check" id="availability-1">
+                                            <label for="availability-1" class="label"><span>In stock</span>&nbsp;<span>(14)</span></label>
+                                        </li>
+                                        <li class="list-item d-flex gap-12 align-items-center">
+                                            <input type="radio" name="availability" class="tf-check" id="availability-2">
+                                            <label for="availability-2" class="label"><span>Out of stock</span>&nbsp;<span>(2)</span></label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>-->
                             <div class="widget-facet wrap-price">
                                 <div class="facet-title" data-bs-target="#price" data-bs-toggle="collapse" aria-expanded="true" aria-controls="price">
                                     <span>Precio</span>
@@ -186,12 +140,12 @@
                                             <span class="title-price">Precio :</span>
                                             <div class="caption-price">
                                                 <div>
-                                                    <span>S/.</span>
+                                                    <span>S/</span>
                                                     <span class="min-price">0</span>
                                                 </div>
                                                 <span>-</span>
                                                 <div>
-                                                    <span>S/.</span>
+                                                    <span>S/</span>
                                                     <span class="max-price">1000</span>
                                                 </div>
                                             </div>
@@ -204,6 +158,7 @@
                                             </button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </form>
@@ -262,44 +217,20 @@
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
 
-
     <script th:inline="javascript">
 
-        let menuUrl = [[${menuUrl}]];
-        let menuSubUrl = [[${menuSubUrl}]];
-        let menuSubId = [[${menuSubId}]];
-        let categoriaUrl = [[${categoriaUrl}]];
         let currentPage = 0;
-        let menuSubIdGlobal;
-        let categoriaIdGlobal;
+        let marcaIdGlobal = [[${marcaId}]];
 
         $(document).ready(function() {
-            buscarCategoriaPorUrlAndMenuSubId(categoriaUrl, menuSubId);
+            mostrarProductoNuevo(marcaIdGlobal,currentPage);
         });
 
         $("#btn-aplicar-filtros").click(function () {
-            buscarCategoriaPorUrlAndMenuSubId(categoriaUrl, menuSubId);
+            mostrarProductoNuevo(marcaIdGlobal,currentPage);
         })
 
-        function buscarCategoriaPorUrlAndMenuSubId(categoriaUrl, menuSubId) {
-
-            $.ajax({
-                type: "GET",
-                url: '/productoCategoria/obtenerCategoriaPorUrlAndMenuSubId',
-                dataType: "json",
-                data: { categoriaUrl: categoriaUrl, menuSubId: parseInt(menuSubId) },
-                success: function (response) {
-                    console.log({respuestaCategoria : response});
-                    categoriaIdGlobal = response.idCategoria;
-                    mostrarProductoNuevo(categoriaIdGlobal, currentPage);
-                },
-                error: function() {
-                    console.log('Error al obtener sub menu');
-                }
-            });
-        }
-
-        function mostrarProductoNuevo(categoriaId, page) {
+        function mostrarProductoNuevo(marcaId, page) {
             //let urlImagenesProductos='http://104.218.48.244:8080/apirest/apirest/productos/images/';
             let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
 
@@ -308,19 +239,18 @@
 
             $.ajax({
                 type: "GET",
-                url: '/producto/obtenerProductosPorCategoriaId',
+                url: '/producto/obtenerProductosPorMarcaId',
                 dataType: "json",
                 data: {
-                    categoriaId: parseInt(categoriaId),
+                    marcaId: parseInt(marcaId),
                     minPrecio: parseFloat(precioMinimo),
                     maxPrecio:parseFloat(precioMaximo),
                     page: parseInt(page)
                 },
                 success: function (response) {
-                    console.log({productos: response});
+                    console.log(response);
                     $("#contenedor-producto").html("");
                     $.each(response.productos, function (i, element) {
-
 
                         let variacionesParams = element.variaciones.map(function (v, i) {
                             return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
@@ -333,7 +263,7 @@
 
                         let cardWrapper = $("<div>").addClass("card-product-wrapper").append(
                             $("<a>").addClass("product-img product-link").attr({
-                                "href": "/"+menuUrl+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                "href": "/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
                                     element.urlProducto+"?"+variacionesParams,
                             }).append(
                                 $("<img>").addClass("lazyload img-product").attr({
@@ -396,7 +326,7 @@
                 $(".pagination-link").click(function(e) {
                     e.preventDefault();
                     currentPage = $(this).data("page");
-                    mostrarProductoNuevo(categoriaIdGlobal, currentPage);
+                    mostrarProductoNuevo(marcaIdGlobal, currentPage);
                 });
             }
         }

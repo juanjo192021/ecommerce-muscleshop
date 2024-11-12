@@ -334,6 +334,40 @@ public class HomeController {
 								   @PathVariable("menuUrl") String menuUrl,
 								   @PathVariable("menuSubUrl") String menuSubUrl) {
 
+
+		if (menuUrl.equals("por-marcas")){
+			//List<ProductoCategoriaDto> productoCategoriaDtos = productoCategoriaService.obtenerProductoCategoriasPorMenuSubId(menuSub.getId());
+			//List<MenuSubDto> menuSubDtos = menuSubService.obtenerMenuSubsPorMenuId(menu.getId());
+			Marcas marca = iMarcasService.obtenerMarcaPorUrl(menuSubUrl);
+			List<Objetivos> objetivos = iObjetivosService.obtenerObjetivos();
+			List<Marcas> marcas = iMarcasService.obtenerMarcas();
+
+			//model.addAttribute("nombreMenuSub", menuSub.getNombre());
+
+			//model.addAttribute("categorias", productoCategoriaDtos);
+			//model.addAttribute("otrasCategorias", menuSubDtos);
+			model.addAttribute("objetivos", objetivos);
+			model.addAttribute("marcas", marcas);
+			model.addAttribute("marcaId", marca.getId());
+
+			//model.addAttribute("menuUrl", menuUrl);
+			//model.addAttribute("menuSubUrl", menuSubUrl);
+
+			return "pages/product-brands";
+		}
+
+		if (menuUrl.equals("por-objetivos")){
+			Objetivos objetivo = iObjetivosService.obtenerObjetivosPorUrl(menuSubUrl);
+			List<Objetivos> objetivos = iObjetivosService.obtenerObjetivos();
+			List<Marcas> marcas = iMarcasService.obtenerMarcas();
+
+			model.addAttribute("objetivos", objetivos);
+			model.addAttribute("marcas", marcas);
+			model.addAttribute("objetivoId", objetivo.getId());
+
+			return "pages/product-goals";
+		}
+
 		Menu menu = menuService.obtenerMenuPorUrl(menuUrl);
 		MenuSub menuSub = menuSubService.obtenerMenuSubPorUrl(menuSubUrl);
 
@@ -343,8 +377,6 @@ public class HomeController {
 //			return "porBlog/menuBlog";
 			return "pages/blog-detail";
 		}
-
-
 		/*List<BannerMenuSub> bannerMovilTablet = (menuSub.getBannerMenuSubs()).stream()
 				.filter(ban -> "movil_tablet".equals(ban.getTipoDispositivo()))
 				.toList();
@@ -357,9 +389,6 @@ public class HomeController {
 		List<MenuSubDto> menuSubDtos = menuSubService.obtenerMenuSubsPorMenuId(menu.getId());
 		List<Objetivos> objetivos = iObjetivosService.obtenerObjetivos();
 		List<Marcas> marcas = iMarcasService.obtenerMarcas();
-
-		//List<ProductoItemsDto> productos = iProductoPropiedadesDetallesService.obtenerProductosIndividualesPorMenuSubId(minPrecio, maxPrecio, menuSub.getId());
-		//List<ProductoDto> productos = productoService.obtenerProductosItemsIndividialesPorMenuSubId(menuSub.getId(), 0 ,1000,);
 
 		model.addAttribute("nombreMenuSub", menuSub.getNombre());
 		/*model.addAttribute("bannerMenuSubMovilTablet", bannerMovilTablet);

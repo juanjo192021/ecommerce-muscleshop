@@ -55,6 +55,42 @@ public interface IProductoMenuSubDao extends JpaRepository<ProductoMenuSub, Inte
 
 
     @Query("SELECT pms FROM ProductoMenuSub pms " +
+            "JOIN ProductoObjetivo po on po.producto.id = pms.producto.id " +
+            "WHERE po.objetivo.id = :objetivoId " +
+            "AND pms.producto.estado.nombre = 'Activo' " +
+            "AND pms.producto.mostrar = 'si' " +
+            "AND pms.producto.estado.nombre = 'Activo' " +
+            "AND pms.productoCategoria.id IN ( " +
+            "    SELECT MIN(innerPms.productoCategoria.id) " +
+            "    FROM ProductoMenuSub innerPms " +
+            "    JOIN ProductoObjetivo innerPo on innerPo.producto.id = innerPms.producto.id" +
+            "    WHERE innerPo.objetivo.id = :objetivoId" +
+            "    AND innerPms.producto.id = pms.producto.id " +
+            "    AND innerPms.producto.estado.nombre = 'Activo' " +
+            "    AND innerPms.producto.mostrar = 'si' " +
+            "    AND innerPms.producto.estado.nombre = 'Activo' " +
+            ") " +
+            "ORDER BY pms.producto.prioridad asc")
+    List<ProductoMenuSub> findByObjetivoId(int objetivoId);
+
+    @Query("SELECT pms FROM ProductoMenuSub pms " +
+            "WHERE pms.producto.marca.id = :marcaId " +
+            "AND pms.producto.estado.nombre = 'Activo' " +
+            "AND pms.producto.mostrar = 'si' " +
+            "AND pms.producto.estado.nombre = 'Activo' " +
+            "AND pms.productoCategoria.id IN ( " +
+            "    SELECT MIN(innerPms.productoCategoria.id) " +
+            "    FROM ProductoMenuSub innerPms " +
+            "    WHERE innerPms.producto.marca.id = :marcaId" +
+            "    AND innerPms.producto.id = pms.producto.id " +
+            "    AND innerPms.producto.estado.nombre = 'Activo' " +
+            "    AND innerPms.producto.mostrar = 'si' " +
+            "    AND innerPms.producto.estado.nombre = 'Activo' " +
+            ") " +
+            "ORDER BY pms.producto.prioridad asc")
+    List<ProductoMenuSub> findByMarcaId(int marcaId);
+
+    @Query("SELECT pms FROM ProductoMenuSub pms " +
             "WHERE LOWER(pms.producto.nombre) " +
             "LIKE LOWER(CONCAT('%', :productoNombre, '%')) " +
             "AND pms.producto.estado.nombre = 'Activo' " +

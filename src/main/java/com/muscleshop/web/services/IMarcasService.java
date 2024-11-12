@@ -7,4 +7,5 @@ import java.util.List;
 public interface IMarcasService {
 
     List<Marcas> obtenerMarcas();
+    Marcas obtenerMarcaPorUrl(String url);
 }

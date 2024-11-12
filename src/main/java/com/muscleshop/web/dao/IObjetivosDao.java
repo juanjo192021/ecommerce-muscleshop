@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IObjetivosDao extends JpaRepository<Objetivos, Integer> {
+
+    Objetivos findByUrl(String url);
 }

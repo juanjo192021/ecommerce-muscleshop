@@ -87,6 +87,50 @@ public class ProductoController {
 
     }
 
+    @GetMapping("obtenerProductosPorObjetivoId")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> obtenerProductosPorObjetivoId(
+            @RequestParam("objetivoId") int objetivoId,
+            @RequestParam("minPrecio") double minPrecio,
+            @RequestParam("maxPrecio") double maxPrecio,
+            @RequestParam("page") int page) {
+
+        Pageable pageable = PageRequest.of(page, 12);
+        Page<ProductoDto> productos = iProductoService.obtenerProductosItemsIndividialesPorObjetivoId(objetivoId, minPrecio, maxPrecio, pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("productos", productos.getContent());
+        response.put("pagePrevious", productos.hasPrevious());
+        response.put("pageNext", productos.hasNext());
+        response.put("pageNumber", productos.getNumber());
+        response.put("totalPages", productos.getTotalPages());
+
+        return ResponseEntity.ok(response);
+
+    }
+
+    @GetMapping("obtenerProductosPorMarcaId")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> obtenerProductosPorMarcaId(
+            @RequestParam("marcaId") int marcaId,
+            @RequestParam("minPrecio") double minPrecio,
+            @RequestParam("maxPrecio") double maxPrecio,
+            @RequestParam("page") int page) {
+
+        Pageable pageable = PageRequest.of(page, 12);
+        Page<ProductoDto> productos = iProductoService.obtenerProductosItemsIndividialesPorMarcaId(marcaId, minPrecio, maxPrecio, pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("productos", productos.getContent());
+        response.put("pagePrevious", productos.hasPrevious());
+        response.put("pageNext", productos.hasNext());
+        response.put("pageNumber", productos.getNumber());
+        response.put("totalPages", productos.getTotalPages());
+
+        return ResponseEntity.ok(response);
+
+    }
+
     @GetMapping("obtenerProductosPorNombreProducto")
     @ResponseBody
     public ResponseEntity<Page<ProductoDto>> obtenerProductosPorNombreProducto(

@@ -7,4 +7,5 @@ import java.util.List;
 public interface IObjetivosService {
 
     List<Objetivos> obtenerObjetivos();
+    Objetivos obtenerObjetivosPorUrl(String url);
 }

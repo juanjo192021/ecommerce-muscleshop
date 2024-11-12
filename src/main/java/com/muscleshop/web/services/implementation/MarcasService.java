@@ -18,4 +18,9 @@ public class MarcasService implements IMarcasService {
     public List<Marcas> obtenerMarcas(){
         return imarcasDao.findAll();
     }
+
+    @Override
+    public Marcas obtenerMarcaPorUrl(String url) {
+        return imarcasDao.findByUrl(url);
+    }
 }

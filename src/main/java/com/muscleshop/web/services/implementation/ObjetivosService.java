@@ -19,4 +19,9 @@ public class ObjetivosService implements IObjetivosService {
     public List<Objetivos> obtenerObjetivos() {
         return iObjetivosDao.findAll();
     }
+
+    @Override
+    public Objetivos obtenerObjetivosPorUrl(String url) {
+        return iObjetivosDao.findByUrl(url);
+    }
 }

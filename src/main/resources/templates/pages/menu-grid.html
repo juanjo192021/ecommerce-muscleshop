@@ -292,6 +292,31 @@
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
 
+<script th:inline="javascript">
+
+    $(document).ready(function () {
+
+        $.ajax({
+            type: "GET",
+            url: '/producto/obtenerProductosPorMarcaId',
+            dataType: "json",
+            data: {
+                marcaId: parseInt('1'),
+                minPrecio: parseFloat('0'),
+                maxPrecio:parseFloat('1000'),
+                page: parseInt('0')
+            },
+            success: function (response) {
+                console.log({productos: response});
+            },
+            error: function() {
+                console.log('Error al obtener el productos');
+            }
+        });
+
+    })
+</script>
+
 </body>
 
 </html>
