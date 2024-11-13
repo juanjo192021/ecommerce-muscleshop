@@ -281,7 +281,16 @@
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/wow.min.js}"></script>
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/carrito.js}"></script>
+
+<script th:inline="javascript">
+    let dataUsuario = [[${session.usuario}]]
+    let selectedVariants = [];
+    let producto = "";
+    let variacionesParams;
+    let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
+
+</script>
 
 </body>
-
 </html>

@@ -17,6 +17,10 @@ public class Ubigeo {
 	@Column(name = "costo_expres")
 	private Double costoExpress;
 
+	@ManyToOne
+	@JoinColumn(name = "estado_id")
+	private Estado estado;
+
 	public Integer getId() {
 		return id;
 	}
@@ -56,5 +60,13 @@ public class Ubigeo {
 
 	public void setCostoExpress(Double costoExpress) {
 		this.costoExpress = costoExpress;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 }

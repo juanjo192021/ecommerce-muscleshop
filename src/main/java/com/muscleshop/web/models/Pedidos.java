@@ -4,14 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pedidos")
@@ -40,7 +33,11 @@ public class Pedidos {
 	private Ubigeo ubigeo;
 
 	private String num_pedido;
-	
+
+	@ManyToOne
+	@JoinColumn(name="estado_id")
+	private EstadoPedido estadoPedido;
+
 	@OneToMany(mappedBy = "pedido")
 	@JsonIgnore
 	private List<PedidosProductos> pedidosProductos;
@@ -115,5 +112,13 @@ public class Pedidos {
 
 	public void setNum_pedido(String num_pedido) {
 		this.num_pedido = num_pedido;
+	}
+
+	public EstadoPedido getEstadoPedido() {
+		return estadoPedido;
+	}
+
+	public void setEstadoPedido(EstadoPedido estadoPedido) {
+		this.estadoPedido = estadoPedido;
 	}
 }

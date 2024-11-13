@@ -216,11 +216,19 @@
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/wow.min.js}"></script>
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/carrito.js}"></script>
 
 <script th:inline="javascript">
 
     let currentPage = 0;
     let objetivoIdGlobal = [[${objetivoId}]];
+
+    let dataUsuario = [[${session.usuario}]]
+    let selectedVariants = [];
+    let producto = "";
+    let variacionesParams;
+    let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
+
 
     $(document).ready(function() {
         mostrarProductoNuevo(objetivoIdGlobal,currentPage);
@@ -279,6 +287,27 @@
                         )
                     );
 
+                    let modalItem = $("<div>").addClass("list-product-btn absolute-2").append(
+                        $("<a>").attr({"href": "#quick_add", "data-bs-toggle": "modal"}).data("producto", element).addClass("box-icon bg_white quick-add tf-btn-loading btn-show-detail").append(
+                            $("<span>").addClass("icon icon-bag"),
+                            $("<span>").addClass("tooltip").text("Quick Add")
+                        ),
+                        $("<a>").attr("href", "javascript:void(0);").addClass("box-icon bg_white wishlist btn-icon-action").append(
+                            $("<span>").addClass("icon icon-heart"),
+                            $("<span>").addClass("tooltip").text("Add to Wishlist"),
+                            $("<span>").addClass("icon icon-delete")
+                        ),
+                        $("<a>").addClass("box-icon bg_white compare btn-icon-action btn-add-cart").data("producto", element).append(
+                            $("<span>").addClass("icon icon-compare"),
+                            $("<span>").addClass("tooltip").text("Add to Compare"),
+                            $("<span>").addClass("icon icon-check")
+                        ),
+                        $("<a>").attr({"href": "#quick_view", "data-bs-toggle": "modal"}).addClass("box-icon bg_white quickview tf-btn-loading").append(
+                            $("<span>").addClass("icon icon-view"),
+                            $("<span>").addClass("tooltip").text("Quick View")
+                        )
+                    );
+
                     let cardInfo = $("<div>").addClass("card-product-info").append(
                         $("<a>").addClass("title link text-center").text(element.nombre)
                     );
@@ -289,16 +318,30 @@
                         );
                     });
 
+                    const preciosPorRol = {
+                        "Cliente": { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" },
+                        "Team": { regular: element.precio, especial: element.precioTeam, labelEspecial: "Precio Team:" },
+                        "Team Vip": { regular: element.precio , especial: element.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                        "Familiar": { regular: element.precio , especial: element.precioFamiliar, labelEspecial: "Precio Familiar:" }
+                    };
+
+                    // Definir los precios por defecto
+                    const preciosDefecto = { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" };
+
+                    // Obtener los precios basados en el rol del usuario o usar los precios por defecto si el rol es null
+                    const precio = dataUsuario && dataUsuario.nombreRolPerfil  ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto
+
                     let priceProduct = $("<div>").addClass("d-flex flex-row justify-content-evenly").append(
                         $("<p>").addClass("d-flex flex-column").text("Precio Regular:").append(
-                            $("<span>").addClass("price").text(parseFloat(element.precio).toFixed(2))
+                            $("<span>").addClass("price").text(parseFloat(precio.regular).toFixed(2))
                         ),
-                        $("<p>").addClass("d-flex flex-column").text("Precio Reducido:").append(
-                            $("<span>").addClass("price").text(parseFloat(element.precioReducido).toFixed(2))
+                        $("<p>").addClass("d-flex flex-column").text(precio.labelEspecial).append(
+                            $("<span>").addClass("price").text(parseFloat(precio.especial).toFixed(2))
                         )
                     )
+
                     cardInfo.append(priceProduct);
-                    productoCard.append(cardWrapper).append(cardInfo);
+                    productoCard.append(cardWrapper, modalItem).append(cardInfo);
                     $("#contenedor-producto").append(productoCard);
                 })
                 crearPaginacion(response);

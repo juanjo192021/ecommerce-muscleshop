@@ -1727,6 +1727,7 @@
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/wow.min.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
+    <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/carrito.js}"></script>
 
     <script type="module" th:src="@{/public/resources/site/general/static/assets/js/model-viewer.min.js}"></script>
     <script type="module" th:src="@{/public/resources/site/general/static/assets/js/zoom.js}"></script>
@@ -1735,7 +1736,14 @@
         let auxiliar = [[${auxiliar}]];
         let productoUrl = [[${productoUrl}]];
         let atributos = [];
+
+
+        let dataUsuario = [[${session.usuario}]]
         let selectedVariants = [];
+        let producto = "";
+        let variacionesParams;
+        let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
+
 
         $(document).ready(function () {
 
@@ -1818,6 +1826,9 @@
                 data:{ productoId: parseInt(productoId), variaciones:variacionesStr},
                 success: function (response) {
                     console.log({response});
+
+                    const preciosDefecto = { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" };
+                    const precio = dataUsuario && dataUsuario.nombreRolPerfil  ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto
 
                     // Actualizar el HTML con los nuevos precios
                     $('.price-on-sale').text(`S/${response.precioReducido}`);
