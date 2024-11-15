@@ -51,30 +51,22 @@ public class Security {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-/*		http.authorizeHttpRequests((auth) -> auth
-						.requestMatchers("/index/**", "usuario/carrito/finalizarCompra", "/ejemplo/**", "usuario/pago","usuario/validation",
-								"usuario/boleta", "/registrar", "usuario/listaRegion", "/usuario/listaProvincia",
-								"usuario/listaDistrito", "/cambiar-contrasena").permitAll()
-						.requestMatchers("/index/porProducto").hasAnyAuthority("ROLE_CLIENTE", "ROLE_ADMIN").anyRequest().authenticated())
-				.formLogin((login) -> login.loginPage("/login").permitAll().defaultSuccessUrl("/index/inicio", true)
-						.failureUrl("/login?error=true"))
-				.logout((logout) -> logout.logoutUrl("/logout").permitAll().logoutSuccessUrl("/index/inicio"));
-
-		return http.build();*/
 
         //Quitarle acceso al método login del LoginController "/login"
         http.authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/","/**", "/usuario/**","/menuSub/**","/productoCategoria/**", "/producto/**", "/productoPropiedadesDetalles/**", "/ejemplo/**").permitAll()
+                        .requestMatchers("/","/**", "/auth/**","/usuario/**","/menuSub/**","/productoCategoria/**", "/producto/**", "/productoPropiedadesDetalles/**", "/ejemplo/**").permitAll()
                         .requestMatchers("/porProducto").hasAnyAuthority("ROLE_CLIENTE", "ROLE_ADMIN")
                         // Permitir acceso a archivos estáticos (favicon, CSS, JS, etc.)
-                        .requestMatchers("/favicon.ico", "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**").permitAll()
                         // Rutas restantes requieren autenticación
                         .anyRequest().authenticated())
                 .formLogin((login) -> login
-                        //Pero aquí llamarlo
-                        .loginPage("/")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/", true)
+                        .successHandler((request, response, authentication) -> {
+                            // Obtén la URL previa de la petición
+                            String prevURL = request.getHeader("Referer");
+                            String redirectUrl = (prevURL != null) ? prevURL : "/";
+                            response.sendRedirect(redirectUrl);
+                        })
                         .failureUrl("/?error=true")
                         .permitAll())
                 .logout((logout) -> logout
@@ -87,12 +79,38 @@ public class Security {
                         .accessDeniedPage("/403"))
                 .oauth2Login(oauth2 -> oauth2
                         .authorizationEndpoint(authorization -> authorization
-                                .authorizationRequestResolver(customAuthorizationRequestResolver()) // Usamos la versión personalizada
-                        )
-                        .defaultSuccessUrl("/", true)
+                                .baseUri("/oauth2/authorization"))  // Configura el URI de autorización si es necesario
+                        .redirectionEndpoint(redirection -> redirection
+                                .baseUri("/login/oauth2/code/*"))  // Callback URI para OAuth2
+                        .successHandler((request, response, authentication) -> {
+                            // Obtén la URL previa de la petición
+                            String prevURL = request.getHeader("Referer");
+                            String redirectUrl = (prevURL != null) ? prevURL : "/";
+                            response.sendRedirect(redirectUrl);
+                        })
                 );
         return http.build();
     }
+
+    //Pero aquí llamarlo
+    //.loginPage("/")
+    //.loginProcessingUrl("/login")
+
+    /*.authorizationEndpoint(authorization -> authorization
+                                .authorizationRequestResolver(customAuthorizationRequestResolver()) // Usamos la versión personalizada
+                        )*/
+    /*.successHandler((request, response, authentication) -> {
+                            // Obtener la URL actual de la solicitud
+                            String referer = request.getHeader("Referer");
+
+                            // Si la URL de referencia es válida, redirigir a ella
+                            if (referer != null && referer.startsWith(request.getContextPath())) {
+                                response.sendRedirect(referer);
+                            } else {
+                                // Si no hay URL de referencia válida, redirigir a una página por defecto
+                                response.sendRedirect(request.getContextPath() + "/");
+                            }
+                        })*/
 
     @Bean
     public OAuth2AuthorizationRequestResolver customAuthorizationRequestResolver() {
@@ -150,29 +168,6 @@ public class Security {
                 .redirectUri("http://localhost:8080/login/oauth2/code/google")
                 .build();
     }
-/*	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return  http
-				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/index/**", "/login").permitAll();
-					auth.requestMatchers("/index/porProducto").hasAnyAuthority("ROLE_CLIENTE", "ROLE_ADMIN").anyRequest().authenticated();
-				})
-				.oauth2Login(oauth2login ->{
-					oauth2login
-							.loginPage("/login")
-							.successHandler((request, response, authentication) -> response.sendRedirect("/index/inicio"));
-				})
-				.formLogin((login) -> login.loginPage("/login").permitAll().defaultSuccessUrl("/index/inicio", true)
-						.failureUrl("/login?error=true"))
-				.logout((logout) -> logout.logoutUrl("/logout").permitAll().logoutSuccessUrl("/index/inicio"))
-				.build();
-	}*/
-
-/*    @Bean
-    WebSecurityCustomizer webCus() {
-		*//*"/assets/**", "/css/**", "/js/**", "/images/**"*//*
-        return (web) -> web.ignoring().requestMatchers("/public/**");
-    }*/
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {

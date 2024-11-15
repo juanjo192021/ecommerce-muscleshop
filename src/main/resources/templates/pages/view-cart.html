@@ -39,7 +39,7 @@
     <!-- page-title -->
     <div class="tf-page-title">
         <div class="container-full">
-            <div class="heading text-center">Shopping Cart</div>
+            <div class="heading text-center">Carrito de Compras</div>
         </div>
     </div>
     <!-- /page-title -->
@@ -52,7 +52,7 @@
                 <p class="mb_24">You may check out all the available products and buy some in the shop</p>
                 <a href="shop-default.html" class="tf-btn btn-sm radius-3 btn-fill btn-icon animate-hover-btn">Return to shop<i class="icon icon-arrow1-top-left"></i></a>
             </div> -->
-            <div class="tf-cart-countdown">
+            <!--<div class="tf-cart-countdown">
                 <div class="title-left">
                     <svg class="d-inline-block" xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="rgb(219 18 21)">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0899 24C11.3119 22.1928 11.4245 20.2409 10.4277 18.1443C10.1505 19.2691 9.64344 19.9518 8.90645 20.1924C9.59084 18.2379 9.01896 16.1263 7.19079 13.8576C7.15133 16.2007 6.58824 17.9076 5.50148 18.9782C4.00436 20.4517 4.02197 22.1146 5.55428 23.9669C-0.806588 20.5819 -1.70399 16.0418 2.86196 10.347C3.14516 11.7228 3.83141 12.5674 4.92082 12.8809C3.73335 7.84186 4.98274 3.54821 8.66895 0C8.6916 7.87426 11.1062 8.57414 14.1592 12.089C17.4554 16.3071 15.5184 21.1748 10.0899 24Z"></path>
@@ -60,22 +60,22 @@
                     <p>These products are limited, checkout within </p>
                 </div>
                 <div class="js-countdown timer-count" data-timer="600" data-labels="d:,h:,m:,s"></div>
-            </div>
+            </div>-->
             <div class="tf-page-cart-wrap">
                 <div class="tf-page-cart-item">
                     <form>
                         <table class="tf-table-page-cart">
                             <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
                                 <th>Total</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr class="tf-cart-item file-delete">
-                                <td class="tf-cart-item_product">
+                            <tbody id="contenedor-producto-view-cart">
+                            <!--<tr>-->
+                                <!--<td class="tf-cart-item_product">
                                     <a href="product-detail.html" class="img-box">
                                         <img src="https://themesflat.co/html/ecomus/images/products/white-2.jpg" alt="img-product">
                                     </a>
@@ -103,9 +103,9 @@
                                 </td>
                                 <td class="tf-cart-item_total" cart-data-title="Total">
                                     <div class="cart-total">$18.00</div>
-                                </td>
-                            </tr>
-                            <tr class="tf-cart-item file-delete">
+                                </td>-->
+                            <!--</tr>-->
+                            <!--<tr class="tf-cart-item file-delete">
                                 <td class="tf-cart-item_product">
                                     <a href="product-detail.html" class="img-box">
                                         <img src="https://themesflat.co/html/ecomus/images/products/orange-1.jpg" alt="img-product">
@@ -166,18 +166,18 @@
                                 <td class="tf-cart-item_total" cart-data-title="Total">
                                     <div class="cart-total">$18.00</div>
                                 </td>
-                            </tr>
+                            </tr>-->
                             </tbody>
                         </table>
-                        <div class="tf-page-cart-note">
+                        <!--<div class="tf-page-cart-note">
                             <label for="cart-note">Add Order Note</label>
                             <textarea name="note" id="cart-note" placeholder="How can we help you?"></textarea>
-                        </div>
+                        </div>-->
                     </form>
                 </div>
                 <div class="tf-page-cart-footer">
                     <div class="tf-cart-footer-inner">
-                        <div class="tf-free-shipping-bar">
+                        <!--<div class="tf-free-shipping-bar">
                             <div class="tf-progress-bar">
                                     <span style="width: 50%;">
                                         <div class="progress-car">
@@ -190,7 +190,7 @@
                             <div class="tf-progress-msg">
                                 Buy <span class="price fw-6">$75.00</span> more to enjoy <span class="fw-6">Free Shipping</span>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="tf-page-cart-checkout">
                             <div class="shipping-calculator">
                                 <summary class="accordion-shipping-header d-flex justify-content-between align-items-center collapsed" data-bs-target="#shipping" data-bs-toggle="collapse" aria-controls="shipping">
@@ -244,27 +244,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="cart-checkbox">
+                            <!--<div class="cart-checkbox">
                                 <input type="checkbox" class="tf-check" id="cart-gift-checkbox">
                                 <label for="cart-gift-checkbox" class="fw-4">
                                     <span>Do you want a gift wrap?</span> Only <span class="fw-5">$5.00</span>
                                 </label>
-                            </div>
+                            </div>-->
                             <div class="tf-cart-totals-discounts">
                                 <h3>Subtotal</h3>
                                 <span class="total-value">$18.00 USD</span>
                             </div>
-                            <p class="tf-cart-tax">
+                            <!--<p class="tf-cart-tax">
                                 Taxes and <a href="shipping-delivery.html">shipping</a>  calculated at checkout
-                            </p>
-                            <div class="cart-checkbox">
+                            </p>-->
+                            <!--<div class="cart-checkbox">
                                 <input type="checkbox" class="tf-check" id="check-agree">
                                 <label for="check-agree" class="fw-4">
                                     I agree with the <a href="terms-conditions.html">terms and conditions</a>
                                 </label>
-                            </div>
+                            </div>-->
                             <div class="cart-checkout-btn">
-                                <a th:href="@{/index/checkout}"
+                                <a th:href="@{/checkout}"
                                    class="tf-btn w-100 btn-fill animate-hover-btn radius-3 justify-content-center">
                                     <span class="text-white">Check out</span>
                                 </a>
@@ -299,7 +299,7 @@
     <!-- page-cart -->
 
     <!-- Testimonial -->
-    <section class="flat-spacing-17 pt_0 flat-testimonial">
+    <!--<section class="flat-spacing-17 pt_0 flat-testimonial">
         <div class="container">
             <div class="flat-title">
                 <span class="title">Happy Clients</span>
@@ -446,11 +446,11 @@
                 <div class="sw-dots style-2 sw-pagination-testimonial justify-content-center"></div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!-- /Testimonial -->
 
     <!-- product -->
-    <section class="flat-spacing-17 pt_0">
+    <!--<section class="flat-spacing-17 pt_0">
         <div class="container">
             <div class="flat-title">
                 <span class="title">You may also like</span>
@@ -799,7 +799,7 @@
                 <div class="sw-dots style-2 sw-pagination-product justify-content-center"></div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!-- /product -->
 
     <!-- Footer -->
@@ -839,6 +839,103 @@
     let producto = "";
     let variacionesParams;
     let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
+
+    $(document).ready(function () {
+        cargaProductosCarrito();
+    })
+
+    function cargaProductosCarrito() {
+        $("#contenedor-producto-view-cart").html("");  // Limpiamos el contenedor
+
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        let subtotal = 0;
+
+        carrito.forEach((item, index) => {
+            // Obtener precios según el rol de usuario
+            const preciosDefecto = {
+                regular: item.producto.precio,
+                especial: item.producto.precioReducido,
+                labelEspecial: "Precio Reducido:"
+            };
+
+            const preciosPorRol = {
+                "Cliente": { regular: item.producto.precio, especial: item.producto.precioReducido, labelEspecial: "Precio Reducido:" },
+                "Team": { regular: item.producto.precio, especial: item.producto.precioTeam, labelEspecial: "Precio Team:" },
+                "Team Vip": { regular: item.producto.precio, especial: item.producto.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                "Familiar": { regular: item.producto.precio, especial: item.producto.precioFamiliar, labelEspecial: "Precio Familiar:" }
+            };
+
+            const precio = (dataUsuario && dataUsuario.nombreRolPerfil) ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto;
+
+            let variacionesParams = item.producto.variaciones.map(function (v, i) {
+                return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
+            }).join('&');
+
+            // Estructura HTML en jQuery
+            let productTd = $("<td>").addClass("tf-cart-item_product")
+                .append(
+                    $("<a>").attr({
+                        "href": "/"+item.producto.urlMenu+"/" + item.producto.urlMenuSub+ "/" + item.producto.urlCategoria+"/"+
+                            item.producto.urlProducto+"?"+variacionesParams,
+                    }).addClass("img-box")
+                        .append(
+                            $("<img>").attr("src", urlImagenesProductos + item.producto.imagen).attr("alt", item.producto.nombre)
+                        ),
+                    $("<div>").addClass("cart-info")
+                        .append(
+                            $("<a>").attr({
+                                "href": "/"+item.producto.urlMenu+"/" + item.producto.urlMenuSub+ "/" + item.producto.urlCategoria+"/"+
+                                    item.producto.urlProducto+"?"+variacionesParams,
+                            }).addClass("cart-title link").text(item.producto.nombre),
+                            $("<div>").addClass("cart-meta-variant").text(item.producto.variacion),
+                            $("<span>").addClass("remove-cart link remove").text("Remove").data("index", index)
+                        )
+                );
+
+            let priceTd = $("<td>").addClass("tf-cart-item_price").attr("cart-data-title", "Price")
+                .append(
+                    $("<div>").addClass("cart-price").text(`S/. ${parseFloat(precio.especial).toFixed(2)}`)
+                );
+
+            let quantityTd = $("<td>").addClass("tf-cart-item_quantity").attr("cart-data-title", "Quantity")
+                .append(
+                    $("<div>").addClass("cart-quantity")
+                        .append(
+                            $("<div>").addClass("wg-quantity")
+                                .append(
+                                    $("<span>").addClass("btn-quantity minus-btn").data("ppd-id", item.producto.productoPropiedadDetalleId).html("-"),
+                                    $("<input>").attr({ "type": "text", "name": "number", "value": item.cantidad }),
+                                    $("<span>").addClass("btn-quantity plus-btn").data("ppd-id", item.producto.productoPropiedadDetalleId).html("+")
+                                )
+                        )
+                );
+
+            let totalTd = $("<td>").addClass("tf-cart-item_total").attr("cart-data-title", "Total")
+                .append(
+                    $("<div>").addClass(`cart-total-${index}`).text(`S/. ${(precio.especial * item.cantidad).toFixed(2)}`)
+                );
+
+            // Sumar al subtotal
+            subtotal += precio.especial * item.cantidad;
+
+            // Crear la fila y agregar al contenedor
+            let row = $("<tr>").addClass("tf-cart-item file-delete").append(productTd, priceTd, quantityTd, totalTd);
+            $("#contenedor-producto-view-cart").append(row);
+        });
+
+        // Actualizar subtotal
+        $(".total-value").text(`S/. ${subtotal.toFixed(2)}`);
+
+        // Eventos para remover producto del carrito
+        $(".remove-cart").on("click", function () {
+            let index = $(this).data("index");
+            carrito.splice(index, 1);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            cantidadCarrito();
+            cargaProductosCarrito();
+        });
+    }
+
 </script>
 
 

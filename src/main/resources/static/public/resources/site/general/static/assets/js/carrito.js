@@ -3,6 +3,12 @@ $(document).ready(function () {
     cantidadCarrito();
     mostrarCarrito();
 
+    $("#login").on("show.bs.modal", function() {
+        // Guarda la URL actual en localStorage
+        localStorage.setItem("prevURL", window.location.href);
+    });
+
+
     // Usar delegación de eventos para elementos generados dinámicamente
     $(document).on("click", ".minus-btn", function (e) {
         e.preventDefault();
@@ -202,8 +208,9 @@ function updateSelectedVariants() {
 function actualizarCantidadProducto(productoPropiedadDetalleId, nuevaCantidad) {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     let subtotal = 0;
-    carrito = carrito.map(item => {
+    carrito = carrito.map((item,index) => {
 
+        let calculo = 0;
         if (item.producto.productoPropiedadDetalleId === productoPropiedadDetalleId) {
             item.cantidad = nuevaCantidad;
         }
@@ -216,15 +223,18 @@ function actualizarCantidadProducto(productoPropiedadDetalleId, nuevaCantidad) {
             "Familiar": { regular: item.producto.precio, especial: item.producto.precioFamiliar }
         };
         const precioSeleccionado = dataUsuario && dataUsuario.nombreRolPerfil ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto;
+        calculo = precioSeleccionado.especial * item.cantidad;
+
+        $(`.cart-total-${index}`).text(`S/. ${calculo.toFixed(2)}`);
 
         // Calcular el subtotal de este producto y añadirlo al total
-        subtotal += precioSeleccionado.especial * item.cantidad;
+        subtotal += calculo;
 
         return item;
     });
 
     localStorage.setItem("carrito", JSON.stringify(carrito));
-    $(".tf-totals-total-value").text(`S/. ${subtotal.toFixed(2)}`);
+    $(".total-value").text(`S/. ${subtotal.toFixed(2)}`);
 }
 
 function mostrarCarrito(){

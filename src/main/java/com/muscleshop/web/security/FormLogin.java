@@ -41,17 +41,16 @@ public class FormLogin implements UserDetailsService {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = attr.getRequest().getSession(true);
-		session.setAttribute("usuario", username);
+		session.setAttribute("usuario", usuar);
+		authorities.add(new SimpleGrantedAuthority(usuar.getNombreRolPerfil()));
 
 		/*for (Roles ro : usuar.getRoles()) {
 			authorities.add(new SimpleGrantedAuthority(ro.getNombre()));
 		}*/
 
-		if (authorities.isEmpty()) {
-			throw new UsernameNotFoundException("No tiene los permisos necesarios para ingresar");
-		}
-
-		return new User(usuar.getCorreo(), "dasdasdasdasdasd", authorities);
+        return new User(usuar.getCorreo(),
+				"$2a$10$MJWApri4BHTAuo/jxbBL9uTnvi8KtGJtsNigE5i7OnRWTUDAa8EpW",
+				authorities);
 	}
 
 }
