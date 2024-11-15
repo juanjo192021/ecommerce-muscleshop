@@ -686,7 +686,7 @@
         function mostrarProductosPorForma(formaId){
             $.ajax({
                 type: "GET",
-                url: '/producto/obtenerProductoPorForma',
+                url: '/qaweb/producto/obtenerProductoPorForma',
                 dataType: "json",
                 data: { formaId },
                 success: function (response) {
@@ -706,7 +706,7 @@
                             }).append(
                                 $("<div>").addClass("card-product-wrapper border-line").append(
                                     $("<a>").addClass("product-img product-link").attr({
-                                        "href": "/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                        "href": "/qaweb/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
                                             element.urlProducto+"?"+variacionesParams,
                                     }).append(
                                         $("<img>").addClass("lazyload img-product").attr({
@@ -743,10 +743,10 @@
                                 ),
                                 $("<div>").addClass("card-product-info").append(
                                     $("<a>").addClass("title link text-center").text(element.nombreMarca).attr({
-                                        "href": "/por-marcas/" + element.urlMarca
+                                        "href": "/qaweb/por-marcas/" + element.urlMarca
                                     }),
                                     $("<a>").addClass("title link text-center").text(element.nombre).attr({
-                                        "href": "/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                        "href": "/qaweb/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
                                             element.urlProducto+"?"+variacionesParams,
                                     })
                                 )

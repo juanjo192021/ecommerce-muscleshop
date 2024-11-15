@@ -1801,7 +1801,7 @@
         function buscarProductoPorUrl(productoUrl){
             $.ajax({
                 type: "GET",
-                url: '/producto/buscarPorUrlProducto',
+                url: '/qaweb/producto/buscarPorUrlProducto',
                 dataType: "json",
                 data: { productoUrl: productoUrl},
                 success: function (response) {
@@ -1821,18 +1821,27 @@
             let variacionesStr = variaciones.join(',');
             $.ajax({
                 type: "GET",
-                url: '/productoPropiedadesDetalles/buscarPorProductoIdAndVariaciones',
+                url: '/qaweb/productoPropiedadesDetalles/buscarPorProductoIdAndVariaciones',
                 dataType: "json",
                 data:{ productoId: parseInt(productoId), variaciones:variacionesStr},
                 success: function (response) {
                     console.log({response});
+                    const preciosPorRol = {
+                        "Cliente": { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" },
+                        "Team": { regular: element.precio, especial: element.precioTeam, labelEspecial: "Precio Team:" },
+                        "Team Vip": { regular: element.precio , especial: element.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                        "Familiar": { regular: element.precio , especial: element.precioFamiliar, labelEspecial: "Precio Familiar:" }
+                    };
 
+                    // Definir los precios por defecto
                     const preciosDefecto = { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" };
+
+                    // Obtener los precios basados en el rol del usuario o usar los precios por defecto si el rol es null
                     const precio = dataUsuario && dataUsuario.nombreRolPerfil  ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto
 
                     // Actualizar el HTML con los nuevos precios
-                    $('.price-on-sale').text(`S/${response.precioReducido}`);
-                    $('.compare-at-price').text(`S/${response.precio}`);
+                    $('.price-on-sale').text(`S/${precio.regular}`);
+                    $('.compare-at-price').text(`S/${precio.especial}`);
                     //mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
                     buscarImagenesPresentacionPorProductoPropiedadesDetallesId(response.id)
                 },
@@ -1845,7 +1854,7 @@
         function buscarImagenesPresentacionPorProductoPropiedadesDetallesId(productoPropiedadesDetallesId){
             $.ajax({
                 type: "GET",
-                url: '/propiedadDetalleImagen/buscarPropiedadDetalleImagenesPorProductoPropiedadesDetallesId',
+                url: '/qaweb/propiedadDetalleImagen/buscarPropiedadDetalleImagenesPorProductoPropiedadesDetallesId',
                 dataType: "json",
                 data:{ productoPropiedadesDetallesId: parseInt(productoPropiedadesDetallesId)},
                 success: function (response) {

@@ -247,7 +247,7 @@
 
         $.ajax({
             type: "GET",
-            url: '/producto/obtenerProductosPorObjetivoId',
+            url: '/qaweb/producto/obtenerProductosPorObjetivoId',
             dataType: "json",
             data: {
                 objetivoId: parseInt(objetivoId),
@@ -271,7 +271,7 @@
 
                     let cardWrapper = $("<div>").addClass("card-product-wrapper").append(
                         $("<a>").addClass("product-img product-link").attr({
-                            "href": "/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                            "href": "/qaweb/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
                                 element.urlProducto+"?"+variacionesParams,
                         }).append(
                             $("<img>").addClass("lazyload img-product").attr({

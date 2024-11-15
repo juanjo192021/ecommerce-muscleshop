@@ -111,7 +111,7 @@
                             <div id="categories" class="collapse show">
                                 <ul class="list-categoris current-scrollbar mb_36">
                                     <li class="cate-item" th:each="categoria : ${categorias}">
-                                        <a th:href="@{'/index/'+ ${categoria.urlMenu}+ '/'+ ${categoria.urlMenuSub} + '/' +${categoria.urlCategoria}}">
+                                        <a th:href="@{'/'+ ${categoria.urlMenu}+ '/'+ ${categoria.urlMenuSub} + '/' +${categoria.urlCategoria}}">
                                             <span th:text="${categoria.nombreCategoria}">Dress</span>
                                         </a>
                                     </li>
@@ -127,7 +127,7 @@
                             <div id="otras-categorias" class="collapse show">
                                 <ul class="list-categoris current-scrollbar mb_36">
                                     <li class="cate-item" th:each="otraCategoria : ${otrasCategorias}">
-                                        <a th:href="@{'/index/'+ ${otraCategoria.urlMenu}+ '/'+ ${otraCategoria.urlMenuSub}}">
+                                        <a th:href="@{'/'+ ${otraCategoria.urlMenu}+ '/'+ ${otraCategoria.urlMenuSub}}">
                                             <span th:text="${otraCategoria.nombreMenuSub}">Dress</span>
                                         </a>
                                     </li>
@@ -291,7 +291,7 @@
 
             $.ajax({
                 type: "GET",
-                url: '/productoCategoria/obtenerCategoriaPorUrlAndMenuSubId',
+                url: '/qaweb/productoCategoria/obtenerCategoriaPorUrlAndMenuSubId',
                 dataType: "json",
                 data: { categoriaUrl: categoriaUrl, menuSubId: parseInt(menuSubId) },
                 success: function (response) {
@@ -314,7 +314,7 @@
 
             $.ajax({
                 type: "GET",
-                url: '/producto/obtenerProductosPorCategoriaId',
+                url: '/qaweb/producto/obtenerProductosPorCategoriaId',
                 dataType: "json",
                 data: {
                     categoriaId: parseInt(categoriaId),
@@ -339,7 +339,7 @@
 
                         let cardWrapper = $("<div>").addClass("card-product-wrapper").append(
                             $("<a>").addClass("product-img product-link").attr({
-                                "href": "/"+menuUrl+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                "href": "/qaweb/"+menuUrl+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
                                     element.urlProducto+"?"+variacionesParams,
                             }).append(
                                 $("<img>").addClass("lazyload img-product").attr({

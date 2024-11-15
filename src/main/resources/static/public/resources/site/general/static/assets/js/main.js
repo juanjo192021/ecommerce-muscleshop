@@ -95,7 +95,7 @@
 
     $.ajax({
       type: "GET",
-      url: '/producto/obtenerProductosPorNombreProducto',
+      url: '/qaweb/producto/obtenerProductosPorNombreProducto',
       dataType: "json",
       data: {
         productoNombre: productoNombre,

@@ -247,7 +247,7 @@
 
             $.ajax({
                 type: "GET",
-                url: '/producto/obtenerProductosPorMarcaId',
+                url: '/qaweb/producto/obtenerProductosPorMarcaId',
                 dataType: "json",
                 data: {
                     marcaId: parseInt(marcaId),
@@ -271,7 +271,7 @@
 
                         let cardWrapper = $("<div>").addClass("card-product-wrapper").append(
                             $("<a>").addClass("product-img product-link").attr({
-                                "href": "/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                "href": "/qaweb/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
                                     element.urlProducto+"?"+variacionesParams,
                             }).append(
                                 $("<img>").addClass("lazyload img-product").attr({
@@ -317,8 +317,17 @@
                                 $("<a>").addClass("title link text-center").text(variacion)
                             );
                         });
+                        const preciosPorRol = {
+                            "Cliente": { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" },
+                            "Team": { regular: element.precio, especial: element.precioTeam, labelEspecial: "Precio Team:" },
+                            "Team Vip": { regular: element.precio , especial: element.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                            "Familiar": { regular: element.precio , especial: element.precioFamiliar, labelEspecial: "Precio Familiar:" }
+                        };
 
+                        // Definir los precios por defecto
                         const preciosDefecto = { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" };
+
+                        // Obtener los precios basados en el rol del usuario o usar los precios por defecto si el rol es null
                         const precio = dataUsuario && dataUsuario.nombreRolPerfil  ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto
 
                         let priceProduct = $("<div>").addClass("d-flex flex-row justify-content-evenly").append(

@@ -66,7 +66,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "GET",
-            url: '/producto/obtenerVariaciones',
+            url: '/qaweb/producto/obtenerVariaciones',
             dataType: "json",
             data: { productoId: producto.id },
             success: function (response) {
@@ -144,7 +144,7 @@ function buscarPresentacionPorProductoIdAndValorVariaciones(productoId, variacio
     let variacionesStr = variaciones.join(',');
     $.ajax({
         type: "GET",
-        url: '/productoPropiedadesDetalles/buscarPorProductoIdAndVariaciones',
+        url: '/qaweb/productoPropiedadesDetalles/buscarPorProductoIdAndVariaciones',
         dataType: "json",
         data: { productoId: parseInt(productoId), variaciones: variacionesStr },
         success: function (response) {
@@ -234,6 +234,7 @@ function actualizarCantidadProducto(productoPropiedadDetalleId, nuevaCantidad) {
     });
 
     localStorage.setItem("carrito", JSON.stringify(carrito));
+    $(".tf-totals-total-value").text(`S/. ${subtotal.toFixed(2)}`);
     $(".total-value").text(`S/. ${subtotal.toFixed(2)}`);
 }
 

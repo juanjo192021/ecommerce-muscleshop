@@ -101,7 +101,7 @@ public class ProductoService implements IProductoService {
 				productoDTO.setId(productoMenuSub.getProducto().getId());
 				productoDTO.setNombre(productoMenuSub.getProducto().getNombre());
 				productoDTO.setUrlProducto(productoMenuSub.getProducto().getUrl());
-				productoDTO.setImagen(productoMenuSub.getProducto().getImagen());
+				productoDTO.setImagen(detalle.getImagen());
 				productoDTO.setNombreCategoria(categoria.getNombre());
 				productoDTO.setUrlCategoria(categoria.getUrl());
 				productoDTO.setNombreMenuSub(categoria.getMenuSub().getNombre());
@@ -150,7 +150,7 @@ public class ProductoService implements IProductoService {
 				productoDTO.setId(productoMenuSub.getProducto().getId());
 				productoDTO.setNombre(productoMenuSub.getProducto().getNombre());
 				productoDTO.setUrlProducto(productoMenuSub.getProducto().getUrl());
-				productoDTO.setImagen(productoMenuSub.getProducto().getImagen());
+				productoDTO.setImagen(detalle.getImagen());
 				productoDTO.setNombreCategoria(categoria.getNombre());
 				productoDTO.setUrlCategoria(categoria.getUrl());
 				productoDTO.setNombreMenuSub(categoria.getMenuSub().getNombre());
@@ -200,7 +200,7 @@ public class ProductoService implements IProductoService {
 				productoDTO.setId(productoMenuSub.getProducto().getId());
 				productoDTO.setNombre(productoMenuSub.getProducto().getNombre());
 				productoDTO.setUrlProducto(productoMenuSub.getProducto().getUrl());
-				productoDTO.setImagen(productoMenuSub.getProducto().getImagen());
+				productoDTO.setImagen(detalle.getImagen());
 				productoDTO.setNombreCategoria(categoria.getNombre());
 				productoDTO.setUrlCategoria(categoria.getUrl());
 				productoDTO.setNombreMenuSub(categoria.getMenuSub().getNombre());
