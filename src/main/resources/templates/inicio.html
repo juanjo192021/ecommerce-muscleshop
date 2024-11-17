@@ -65,7 +65,7 @@
                                 <div class="swiper-slide" lazy="true" th:each=" menuSub: ${subMenus}">
                                     <div class="collection-item style-left hover-img">
                                         <div class="collection-inner">
-                                            <a th:href="@{/index/product-menu}" class="collection-image img-style">
+                                            <a th:href="@{'/por-objetivos/'+${menuSub.urlMenuSub}}" class="collection-image img-style">
                                                 <!-- th:data-src="@{/images/collections/phonecase-1.jpg}" -->
                                                 <img class="lazyload"
                                                      th:data-scr="'http://104.218.48.244:8080/apirest/api/menuSub/images/'+${menuSub.imagenMenuSub}"
@@ -73,7 +73,7 @@
                                                      th:alt="'img-'+${menuSub.nombreMenuSub}">
                                             </a>
                                             <div class="collection-content">
-                                                <a href="shop-default.html" class="tf-btn collection-title hover-icon fs-15">
+                                                <a th:href="@{'/por-objetivos/'+${menuSub.urlMenuSub}}" class="tf-btn collection-title hover-icon fs-15">
                                                     <span th:text="${menuSub.nombreMenuSub}">Phone Cases</span><i class="icon icon-arrow1-top-left"></i>
                                                 </a>
                                             </div>
@@ -86,7 +86,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-4">
                         <div class="discovery-new-item">
                             <h5>Descubre todos tus objetivos</h5>
-                            <a href="shop-collection-list.html"><i class="icon-arrow1-top-left"></i></a>
+                            <a><i class="icon-arrow1-top-left"></i></a>
                         </div>
                     </div>
                 </div>
@@ -227,9 +227,9 @@
                              alt="collection-img">
                     </div>
                     <div class="tf-content-wrap wow fadeInUp" data-wow-delay="0s">
-                        <div class="heading">Classic <br> Collection</div>
-                        <p class="description text_black-2">Ultra-protective cases engineered for your boldest behavior. Dual- layer protection a 3mm raised front lip.</p>
-                        <a href="shop-collection-list.html" class="tf-btn btn-outline-dark radius-3 link justify-content-center wow fadeInUp" data-wow-delay="0s">Shop Collection</a>
+                        <div class="heading">Colección <br> Clásica</div>
+                        <p class="description text_black-2">Fundas ultraprotectoras diseñadas para tu comportamiento más audaz. Protección de doble capa y borde frontal elevado de 3 mm.</p>
+                        <a class="tf-btn btn-outline-dark radius-3 link justify-content-center wow fadeInUp" data-wow-delay="0s">Colección de tienda</a>
                     </div>
                 </div>
             </div>
@@ -257,7 +257,7 @@
                                     </div>
                                     <div class="heading" th:text="${pedidoProductoComentario.comentario}">Best Online Fashion Site</div>
                                     <div class="text">
-                                        “ I always find something stylish and affordable on this web fashion site ”
+                                        “ Siempre encuentro algo elegante y asequible en este sitio web de moda ”
                                     </div>
                                     <div class="author">
                                         <div class="name" th:text="${pedidoProductoComentario.pedidoProducto.pedido.usuario.usuarioPerfil.nombres} + ' ' + ${pedidoProductoComentario.pedidoProducto.pedido.usuario.usuarioPerfil.apellidos}">
@@ -267,7 +267,7 @@
                                     </div>
                                     <div class="product">
                                         <div class="image">
-                                            <a href="product-detail.html">
+                                            <a>
                                                 <img class="lazyload"
                                                      th:src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${pedidoProductoComentario.pedidoProducto.producto.imagen}"
                                                      th:data-src="'http://104.218.48.244:8080/apirest/api/productos/images/'+${pedidoProductoComentario.pedidoProducto.producto.imagen}"
@@ -276,14 +276,13 @@
                                         </div>
                                         <div class="content-wrap">
                                             <div class="product-title">
-                                                <a href="product-detail.html"
-                                                   th:text="${pedidoProductoComentario.pedidoProducto.producto.nombre}">
+                                                <a th:text="${pedidoProductoComentario.pedidoProducto.producto.nombre}">
                                                     Jersey thong body
                                                 </a>
                                             </div>
-                                            <div class="price">$105.95</div>
+                                            <!--<div class="price">$105.95</div>-->
                                         </div>
-                                        <a href="product-detail.html" class=""><i class="icon-arrow1-top-left"></i></a>
+                                        <!--<a><i class="icon-arrow1-top-left"></i></a>-->
                                     </div>
                                 </div>
                             </div>
@@ -387,9 +386,10 @@
                                     <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
-                                            Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
-                                            Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
+                                        <p style="text-align: justify">
+                                            En un rincón del bosque, entre los susurros del viento y las sombras de los árboles, se alzaba una pequeña cabaña de madera. Era el hogar de un viejo sabio que, según contaban las leyendas, poseía el don de hablar con los animales y de descifrar los secretos del universo. Cada amanecer, mientras la bruma se levantaba de los ríos y el canto de los pájaros resonaba, el sabio salía a recoger plantas y frutos que solo él conocía.
+
+                                            Las gentes del pueblo cercano se acercaban de vez en cuando, en busca de consejos y remedios para el cuerpo y el alma. Él los recibía con una sonrisa serena, escuchaba sus historias y, tras un breve silencio, les ofrecía respuestas enigmáticas que cada uno interpretaba a su manera. Para algunos, era solo un excéntrico ermitaño; para otros, un guardián de la sabiduría ancestral
                                         </p>
                                     </div>
                                 </div>
@@ -407,10 +407,10 @@
                                     <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
-                                            Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
-                                            Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
-                                        </p>
+                                        <p style="text-align: justify">
+                                            En un rincón del bosque, entre los susurros del viento y las sombras de los árboles, se alzaba una pequeña cabaña de madera. Era el hogar de un viejo sabio que, según contaban las leyendas, poseía el don de hablar con los animales y de descifrar los secretos del universo. Cada amanecer, mientras la bruma se levantaba de los ríos y el canto de los pájaros resonaba, el sabio salía a recoger plantas y frutos que solo él conocía.
+
+                                            Las gentes del pueblo cercano se acercaban de vez en cuando, en busca de consejos y remedios para el cuerpo y el alma. Él los recibía con una sonrisa serena, escuchaba sus historias y, tras un breve silencio, les ofrecía respuestas enigmáticas que cada uno interpretaba a su manera. Para algunos, era solo un excéntrico ermitaño; para otros, un guardián de la sabiduría ancestral                                        </p>
                                     </div>
                                 </div>
                                 <div class="store-img">
@@ -426,10 +426,10 @@
                                     <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
-                                            Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
-                                            Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
-                                        </p>
+                                        <p style="text-align: justify">
+                                            En un rincón del bosque, entre los susurros del viento y las sombras de los árboles, se alzaba una pequeña cabaña de madera. Era el hogar de un viejo sabio que, según contaban las leyendas, poseía el don de hablar con los animales y de descifrar los secretos del universo. Cada amanecer, mientras la bruma se levantaba de los ríos y el canto de los pájaros resonaba, el sabio salía a recoger plantas y frutos que solo él conocía.
+
+                                            Las gentes del pueblo cercano se acercaban de vez en cuando, en busca de consejos y remedios para el cuerpo y el alma. Él los recibía con una sonrisa serena, escuchaba sus historias y, tras un breve silencio, les ofrecía respuestas enigmáticas que cada uno interpretaba a su manera. Para algunos, era solo un excéntrico ermitaño; para otros, un guardián de la sabiduría ancestral                                        </p>
                                     </div>
                                 </div>
                                 <div class="store-img">
@@ -445,10 +445,10 @@
                                     <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
-                                            Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
-                                            Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
-                                        </p>
+                                        <p style="text-align: justify">
+                                            En un rincón del bosque, entre los susurros del viento y las sombras de los árboles, se alzaba una pequeña cabaña de madera. Era el hogar de un viejo sabio que, según contaban las leyendas, poseía el don de hablar con los animales y de descifrar los secretos del universo. Cada amanecer, mientras la bruma se levantaba de los ríos y el canto de los pájaros resonaba, el sabio salía a recoger plantas y frutos que solo él conocía.
+
+                                            Las gentes del pueblo cercano se acercaban de vez en cuando, en busca de consejos y remedios para el cuerpo y el alma. Él los recibía con una sonrisa serena, escuchaba sus historias y, tras un breve silencio, les ofrecía respuestas enigmáticas que cada uno interpretaba a su manera. Para algunos, era solo un excéntrico ermitaño; para otros, un guardián de la sabiduría ancestral                                        </p>
                                     </div>
                                 </div>
                                 <div class="store-img">
@@ -464,10 +464,10 @@
                                     <h5 class="store-heading text-center">#APPLYOURSELF</h5>
                                     <div class="description">
                                         <!--<p>301 Front St WToronto,<br>Ecomus@support.com <br>(08) 8942 1299</p>-->
-                                        <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus est ut felis egestas mattis.
-                                            Quisque blandit vel est sed eleifend. Phasellus urna tellus, placerat in risus a, finibus semper purus.
-                                            Donec aliquet massa arcu, non porta odio pharetra quis. Morbi vitae lobortis dolor.
-                                        </p>
+                                        <p style="text-align: justify">
+                                            En un rincón del bosque, entre los susurros del viento y las sombras de los árboles, se alzaba una pequeña cabaña de madera. Era el hogar de un viejo sabio que, según contaban las leyendas, poseía el don de hablar con los animales y de descifrar los secretos del universo. Cada amanecer, mientras la bruma se levantaba de los ríos y el canto de los pájaros resonaba, el sabio salía a recoger plantas y frutos que solo él conocía.
+
+                                            Las gentes del pueblo cercano se acercaban de vez en cuando, en busca de consejos y remedios para el cuerpo y el alma. Él los recibía con una sonrisa serena, escuchaba sus historias y, tras un breve silencio, les ofrecía respuestas enigmáticas que cada uno interpretaba a su manera. Para algunos, era solo un excéntrico ermitaño; para otros, un guardián de la sabiduría ancestral                                        </p>
                                     </div>
                                 </div>
                                 <div class="store-img">
@@ -491,139 +491,29 @@
                     <h5 class="">Related Articles</h5>
                 </div>-->
                 <div class="flat-title wow fadeInUp" data-wow-delay="0s">
-                    <span class="title">NUESTRO BLOG</span>
+                    <span class="title">NUESTROS BLOGS</span>
                 </div>
                 <div class="hover-sw-nav view-default hover-sw-5">
                     <div class="swiper tf-sw-recent" data-preview="3" data-tablet="2" data-mobile="1" data-space-lg="30" data-space-md="30" data-space="15" data-pagination="1" data-pagination-md="1" data-pagination-lg="1">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" lazy="true">
+                            <div class="swiper-slide" lazy="true" th:each=" articulo : ${articulos}">
                                 <div class="blog-article-item">
                                     <div class="article-thumb radius-10">
-                                        <a th:href="@{/index/blog-detail}">
+                                        <a th:href="@{'/blogs/'+${articulo.url}}">
                                             <img class="lazyload"
                                                  data-src="https://themesflat.co/html/ecomus/images/blog/blog-1.jpg"
                                                  src="https://themesflat.co/html/ecomus/images/blog/blog-1.jpg" alt="img-blog">
                                         </a>
-                                        <div class="article-label">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn style-2 btn-fill radius-3 animate-hover-btn">Shop collection</a>
-                                        </div>
+                                       <!-- <div class="article-label">
+                                            <a th:href="@{'/blogs/'+${articulo.url}}" class="tf-btn style-2 btn-fill radius-3 animate-hover-btn">Shop collection</a>
+                                        </div>-->
                                     </div>
                                     <div class="article-content">
                                         <div class="article-title">
-                                            <a th:href="@{/index/blog-detail}" class="">Pop-punk is back in fashion</a>
+                                            <a th:href="@{'/blogs/'+${articulo.url}}" th:text="${articulo.titulo}"></a>
                                         </div>
                                         <div class="article-btn">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" lazy="true">
-                                <div class="blog-article-item">
-                                    <div class="article-thumb radius-10">
-                                        <a th:href="@{/index/blog-detail}">
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/blog/blog-2.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/blog/blog-2.jpg" alt="img-blog">
-                                        </a>
-                                        <div class="article-label">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn style-2 btn-fill radius-3 animate-hover-btn">Shop collection</a>
-                                        </div>
-                                    </div>
-                                    <div class="article-content">
-                                        <div class="article-title">
-                                            <a th:href="@{/index/blog-detail}" class="">The next generation of leather alternatives</a>
-                                        </div>
-                                        <div class="article-btn">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" lazy="true">
-                                <div class="blog-article-item">
-                                    <div class="article-thumb radius-10">
-                                        <a th:href="@{/index/blog-detail}">
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/blog/blog-3.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/blog/blog-3.jpg" alt="img-blog">
-                                        </a>
-                                        <div class="article-label">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn style-2 btn-fill radius-3 animate-hover-btn">Shop collection</a>
-                                        </div>
-                                    </div>
-                                    <div class="article-content">
-                                        <div class="article-title">
-                                            <a th:href="@{/index/blog-detail}" class="">An Exclusive Clothing Collaboration</a>
-                                        </div>
-                                        <div class="article-btn">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" lazy="true">
-                                <div class="blog-article-item">
-                                    <div class="article-thumb radius-10">
-                                        <a th:href="@{/index/blog-detail}">
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/blog/blog-4.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/blog/blog-4.jpg" alt="img-blog">
-                                        </a>
-                                        <div class="article-label">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn style-2 btn-fill radius-3 animate-hover-btn">Shop collection</a>
-                                        </div>
-                                    </div>
-                                    <div class="article-content">
-                                        <div class="article-title">
-                                            <a th:href="@{/index/blog-detail}" class="">The next generation of leather alternatives</a>
-                                        </div>
-                                        <div class="article-btn">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" lazy="true">
-                                <div class="blog-article-item">
-                                    <div class="article-thumb radius-10">
-                                        <a th:href="@{/index/blog-detail}">
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/blog/blog-5.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/blog/blog-5.jpg" alt="img-blog">
-                                        </a>
-                                        <div class="article-label">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn style-2 btn-fill radius-3 animate-hover-btn">Shop collection</a>
-                                        </div>
-                                    </div>
-                                    <div class="article-content">
-                                        <div class="article-title">
-                                            <a th:href="@{/index/blog-detail}" class="">The next generation of leather alternatives</a>
-                                        </div>
-                                        <div class="article-btn">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" lazy="true">
-                                <div class="blog-article-item">
-                                    <div class="article-thumb radius-10">
-                                        <a th:href="@{/index/blog-detail}">
-                                            <img class="lazyload"
-                                                 data-src="https://themesflat.co/html/ecomus/images/blog/blog-6.jpg"
-                                                 src="https://themesflat.co/html/ecomus/images/blog/blog-6.jpg" alt="img-blog">
-                                        </a>
-                                        <div class="article-label">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn style-2 btn-fill radius-3 animate-hover-btn">Shop collection</a>
-                                        </div>
-                                    </div>
-                                    <div class="article-content">
-                                        <div class="article-title">
-                                            <a th:href="@{/index/blog-detail}" class="">The next generation of leather alternatives</a>
-                                        </div>
-                                        <div class="article-btn">
-                                            <a th:href="@{/index/blog-detail}" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
+                                            <a th:href="@{'/blogs/'+${articulo.url}}" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -724,9 +614,9 @@
                                 $("<div>").addClass("list-product-btn absolute-2").append(
                                     $("<a>").attr({"href": "#quick_add", "data-bs-toggle": "modal"}).data("producto", element).addClass("box-icon bg_white quick-add tf-btn-loading btn-show-detail").append(
                                         $("<span>").addClass("icon icon-bag"),
-                                        $("<span>").addClass("tooltip").text("Quick Add")
+                                        $("<span>").addClass("tooltip").text("Agregar rápido")
                                     ),
-                                    $("<a>").attr("href", "javascript:void(0);").addClass("box-icon bg_white wishlist btn-icon-action").append(
+                                    /*$("<a>").attr("href", "javascript:void(0);").addClass("box-icon bg_white wishlist btn-icon-action").append(
                                         $("<span>").addClass("icon icon-heart"),
                                         $("<span>").addClass("tooltip").text("Add to Wishlist"),
                                         $("<span>").addClass("icon icon-delete")
@@ -739,11 +629,11 @@
                                     $("<a>").attr({"href": "#quick_view", "data-bs-toggle": "modal"}).addClass("box-icon bg_white quickview tf-btn-loading").append(
                                         $("<span>").addClass("icon icon-view"),
                                         $("<span>").addClass("tooltip").text("Quick View")
-                                    )
+                                    )*/
                                 ),
                                 $("<div>").addClass("card-product-info").append(
                                     $("<a>").addClass("title link text-center").text(element.nombreMarca).attr({
-                                        "href": "/qaweb/por-marcas/" + element.urlMarca
+                                        "href": "/por-marcas/" + element.urlMarca
                                     }),
                                     $("<a>").addClass("title link text-center").text(element.nombre).attr({
                                         "href": "/qaweb/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+

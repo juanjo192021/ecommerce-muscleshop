@@ -38,13 +38,35 @@
     <!-- Header -->
     <div th:replace="~{shared/components/header :: header}"></div>
     <!-- /Header -->
+    <!--Slider-->
+    <section class="tf-slideshow slider-effect-fade slider-home-5 position-relative">
+        <div class="swiper tf-sw-slideshow">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"
+                     lazy="true">
+                    <div class="wrap-slider">
+                        <img class="lazyload"
+                             th:data-src="'http://104.218.48.244:8080/apirest/api/menu/images/'+${menu.imagen}"
+                             th:src="'http://104.218.48.244:8080/apirest/api/menu/images/'+${menu.imagen}"
+                             alt="phonecase-01">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrap-pagination">
+            <div class="sw-dots style-2 dots-white sw-pagination-slider justify-content-center"></div>
+        </div>
+    </section>
+    <!--/Slider-->
+
     <!-- page-title -->
     <div class="tf-page-title">
         <div class="container-full">
             <div class="row">
                 <div class="col-12">
-                    <div class="heading text-center">Blog Grid</div>
-                    <ul class="breadcrumbs d-flex align-items-center justify-content-center">
+                    <div class="heading text-center" th:text="${menu.nombre}"></div>
+                    <p class="text-center text-2 text_black-2 mt_5" th:text="${menu.descripcion}">Shop through our latest selection of Fashion</p>
+                    <!--<ul class="breadcrumbs d-flex align-items-center justify-content-center">
                         <li>
                             <a href="index.html">Home</a>
                         </li>
@@ -54,7 +76,7 @@
                         <li>
                             Fashion
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
         </div>
@@ -65,198 +87,34 @@
     <div class="blog-grid-main">
         <div class="container">
             <div class="row">
-                <!--
-                private Integer idMenuSub;
-                private String nombreMenuSub;
-                private String urlMenuSub;
-                private String imagenMenuSub;
-                private Integer idMenu;
-                private String nombreMenu;
-                private String urlMenu;
-                private String nombreEstadoMenuSub;
-                -->
-                <div class="col-xl-4 col-md-6 col-12" th:each="menuSub: ${menuSubs}">
+                <div class="col-lg-4 col-sm-6 col-12" th:each="menuSub: ${menuSubs}">
                     <div class="blog-article-item">
                         <div class="article-thumb">
                             <a th:href="@{'/'+${menuSub.urlMenu}+'/'+${menuSub.urlMenuSub}}">
                                 <img class="lazyload"
-                                     th:data-src="'http://104.218.48.244:8080/apirest/api/articulos/images/'+${menuSub.imagenMenuSub}"
-                                     th:src="'http://104.218.48.244:8080/apirest/api/articulos/images/'+${menuSub.imagenMenuSub}" th:alt="'img '+${menuSub.nombreMenuSub}">
+                                     th:data-src="'http://104.218.48.244:8080/apirest/api/menuSub/images/'+${menuSub.imagenMenuSub}"
+                                     th:src="'http://104.218.48.244:8080/apirest/api/menuSub/images/'+${menuSub.imagenMenuSub}" th:alt="'img '+${menuSub.nombreMenuSub}">
                             </a>
                             <!--<div class="article-label">
                                 <a href="blog-detail.html" class="tf-btn btn-sm radius-3 btn-fill animate-hover-btn">Accessories</a>
                             </div>-->
                         </div>
                         <div class="article-content">
-                            <div class="article-title">
+                            <div class="article-title text-center">
                                 <a th:href="@{'/'+${menuSub.urlMenu}+'/'+${menuSub.urlMenuSub}}"
                                    class="" th:text="${menuSub.nombreMenuSub}">
                                     The next generation of leather alternatives
                                 </a>
                             </div>
-                            <div class="article-btn">
+                            <!--<div class="article-btn">
                                 <a th:href="@{'/'+${menuSub.urlMenu}+'/'+${menuSub.urlMenuSub}}"
                                    class="tf-btn btn-line fw-6">
                                     Leer más<i class="icon icon-arrow1-top-left"></i>
                                 </a>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
-                <!--                <div class="col-xl-4 col-md-6 col-12">
-                                    <div class="blog-article-item">
-                                        <div class="article-thumb">
-                                            <a th:href="@{/index/blog-detail}">
-                                                <img class="lazyload"
-                                                     data-src="https://themesflat.co/html/ecomus/images/blog/blog-3.jpg"
-                                                     src="https://themesflat.co/html/ecomus/images/blog/blog-3.jpg" alt="img-blog">
-                                            </a>
-                                            <div class="article-label">
-                                                <a href="blog-detail.html" class="tf-btn btn-sm radius-3 btn-fill animate-hover-btn">Accessories</a>
-                                            </div>
-                                        </div>
-                                        <div class="article-content">
-                                            <div class="article-title">
-                                                <a href="blog-detail.html" class="">An Exclusive Clothing Collaboration</a>
-                                            </div>
-                                            <div class="article-btn">
-                                                <a href="blog-detail.html" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-12">
-                                    <div class="blog-article-item">
-                                        <div class="article-thumb">
-                                            <a href="blog-detail.html">
-                                                <img class="lazyload"
-                                                     data-src="https://themesflat.co/html/ecomus/images/blog/blog-4.jpg"
-                                                     src="https://themesflat.co/html/ecomus/images/blog/blog-4.jpg" alt="img-blog">
-                                            </a>
-                                            <div class="article-label">
-                                                <a href="blog-detail.html" class="tf-btn btn-sm radius-3 btn-fill animate-hover-btn">Accessories</a>
-                                            </div>
-                                        </div>
-                                        <div class="article-content">
-                                            <div class="article-title">
-                                                <a href="blog-detail.html" class="">Hello Fashion by Colombian-American</a>
-                                            </div>
-                                            <div class="article-btn">
-                                                <a href="blog-detail.html" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-12">
-                                    <div class="blog-article-item">
-                                        <div class="article-thumb">
-                                            <a th:href="@{/index/blog-detail}">
-                                                <img class="lazyload"
-                                                     data-src="https://themesflat.co/html/ecomus/images/blog/blog-5.jpg"
-                                                     src="https://themesflat.co/html/ecomus/images/blog/blog-5.jpg" alt="img-blog">
-                                            </a>
-                                            <div class="article-label">
-                                                <a href="blog-detail.html" class="tf-btn btn-sm radius-3 btn-fill animate-hover-btn">Accessories</a>
-                                            </div>
-                                        </div>
-                                        <div class="article-content">
-                                            <div class="article-title">
-                                                <a href="blog-detail.html" class="">Christine Is A True Style Icon</a>
-                                            </div>
-                                            <div class="article-btn">
-                                                <a href="blog-detail.html" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-12">
-                                    <div class="blog-article-item">
-                                        <div class="article-thumb">
-                                            <a th:href="@{/index/blog-detail}">
-                                                <img class="lazyload"
-                                                     data-src="https://themesflat.co/html/ecomus/images/blog/blog-6.jpg"
-                                                     src="https://themesflat.co/html/ecomus/images/blog/blog-6.jpg" alt="img-blog">
-                                            </a>
-                                            <div class="article-label">
-                                                <a href="blog-detail.html" class="tf-btn btn-sm radius-3 btn-fill animate-hover-btn">Design</a>
-                                            </div>
-                                        </div>
-                                        <div class="article-content">
-                                            <div class="article-title">
-                                                <a href="blog-detail.html" class="">Effortlessly Blends The Carefree Style</a>
-                                            </div>
-                                            <div class="article-btn">
-                                                <a href="blog-detail.html" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-12">
-                                    <div class="blog-article-item">
-                                        <div class="article-thumb">
-                                            <a th:href="@{/index/blog-detail}">
-                                                <img class="lazyload"
-                                                     data-src="https://themesflat.co/html/ecomus/images/blog/blog-7.jpg"
-                                                     src="https://themesflat.co/html/ecomus/images/blog/blog-7.jpg" alt="">
-                                            </a>
-                                            <div class="article-label">
-                                                <a href="blog-detail.html" class="tf-btn btn-sm radius-3 btn-fill animate-hover-btn">Accessories</a>
-                                            </div>
-                                        </div>
-                                        <div class="article-content">
-                                            <div class="article-title">
-                                                <a href="blog-detail.html" class="">The Variety Of Styles And Prices Are Endless</a>
-                                            </div>
-                                            <div class="article-btn">
-                                                <a href="blog-detail.html" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-12">
-                                    <div class="blog-article-item">
-                                        <div class="article-thumb">
-                                            <a th:href="@{/index/blog-detail}">
-                                                <img class="lazyload"
-                                                     data-src="https://themesflat.co/html/ecomus/images/blog/blog-8.jpg"
-                                                     src="https://themesflat.co/html/ecomus/images/blog/blog-8.jpg" alt="">
-                                            </a>
-                                            <div class="article-label">
-                                                <a href="blog-detail.html" class="tf-btn btn-sm radius-3 btn-fill animate-hover-btn">Design</a>
-                                            </div>
-                                        </div>
-                                        <div class="article-content">
-                                            <div class="article-title">
-                                                <a href="blog-detail.html" class="">Something About This Style Of Jeans</a>
-                                            </div>
-                                            <div class="article-btn">
-                                                <a href="blog-detail.html" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 col-12">
-                                    <div class="blog-article-item">
-                                        <div class="article-thumb">
-                                            <a th:href="@{/index/blog-detail}">
-                                                <img class="lazyload"
-                                                     data-src="https://themesflat.co/html/ecomus/images/blog/blog-9.jpg"
-                                                     src="https://themesflat.co/html/ecomus/images/blog/blog-9.jpg" alt="">
-                                            </a>
-                                            <div class="article-label">
-                                                <a href="blog-detail.html" class="tf-btn btn-sm radius-3 btn-fill animate-hover-btn">Tech</a>
-                                            </div>
-                                        </div>
-                                        <div class="article-content">
-                                            <div class="article-title">
-                                                <a href="blog-detail.html" class="">One Of The Most Iconic Fashion Bloggers</a>
-                                            </div>
-                                            <div class="article-btn">
-                                                <a href="blog-detail.html" class="tf-btn btn-line fw-6">Leer más<i class="icon icon-arrow1-top-left"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>-->
             </div>
         </div>
     </div>
@@ -301,28 +159,6 @@
     let variacionesParams;
     let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
 
-
-    $(document).ready(function () {
-
-        $.ajax({
-            type: "GET",
-            url: '/qaweb/producto/obtenerProductosPorMarcaId',
-            dataType: "json",
-            data: {
-                marcaId: parseInt('1'),
-                minPrecio: parseFloat('0'),
-                maxPrecio:parseFloat('1000'),
-                page: parseInt('0')
-            },
-            success: function (response) {
-                console.log({productos: response});
-            },
-            error: function() {
-                console.log('Error al obtener el productos');
-            }
-        });
-
-    })
 </script>
 
 </body>

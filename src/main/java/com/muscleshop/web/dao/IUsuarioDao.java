@@ -15,8 +15,11 @@ public interface IUsuarioDao extends JpaRepository<Usuario, Integer> {
 			"AND up.usuario.estado.nombre='Activo'")
 	UsuarioDto findByEmail(@Param("correo") String correo);
 
-	/*@Query("SELECT u FROM Usuario u WHERE u.correo =:correo")
-	Usuario findByEmail(@Param("correo") String correo);*/
+	@Query("SELECT u " +
+			"FROM Usuario u " +
+			"WHERE u.correo = :correo " +
+			"AND u.estado.nombre='Activo'")
+	Usuario findByEmailV2(@Param("correo") String correo);
 
 
 }

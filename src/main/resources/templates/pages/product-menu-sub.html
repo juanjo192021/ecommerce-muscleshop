@@ -42,8 +42,8 @@
             <div class="container-full">
                 <div class="row">
                     <div class="col-12">
-                        <div class="heading text-center">New Arrival</div>
-                        <p class="text-center text-2 text_black-2 mt_5">Shop through our latest selection of Fashion</p>
+                        <div class="heading text-center" th:text="${nombreMenuSub}">New Arrival</div>
+                        <!--<p class="text-center text-2 text_black-2 mt_5">Shop through our latest selection of Fashion</p>-->
                     </div>
                 </div>
             </div>
@@ -64,9 +64,8 @@
                         <li class="tf-view-layout-switch sw-layout-4" data-value-grid="grid-4">
                             <div class="item"><span class="icon icon-grid-4"></span></div>
                         </li>
-
                     </ul>
-                    <div class="tf-control-sorting d-flex justify-content-end">
+                    <!--<div class="tf-control-sorting d-flex justify-content-end">
                         <div class="tf-dropdown-sort" data-bs-toggle="dropdown">
                             <div class="btn-select">
                                 <span class="text-sort-value">Featured</span>
@@ -99,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="tf-row-flex">
                     <div class="tf-shop-sidebar wrap-sidebar-mobile">
@@ -426,7 +425,6 @@
 
     <script th:inline="javascript">
 
-        let menuUrl = [[${menuUrl}]];
         let menuSubUrl = [[${menuSubUrl}]];
         let currentPage = 0;
         let menuSubIdGlobal;
@@ -500,7 +498,7 @@
 
                         let cardWrapper = $("<div>").addClass("card-product-wrapper").append(
                             $("<a>").addClass("product-img product-link").attr({
-                                "href": "/qaweb/"+menuUrl+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                "href": "/qaweb/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
                                     element.urlProducto+"?"+variacionesParams,
                             }).append(
                                 $("<img>").addClass("lazyload img-product").attr({
@@ -519,9 +517,9 @@
                         let modalItem = $("<div>").addClass("list-product-btn absolute-2").append(
                                 $("<a>").attr({"href": "#quick_add", "data-bs-toggle": "modal"}).data("producto", element).addClass("box-icon bg_white quick-add tf-btn-loading btn-show-detail").append(
                                     $("<span>").addClass("icon icon-bag"),
-                                    $("<span>").addClass("tooltip").text("Quick Add")
+                                    $("<span>").addClass("tooltip").text("Añadir Rápido")
                                 ),
-                                $("<a>").attr("href", "javascript:void(0);").addClass("box-icon bg_white wishlist btn-icon-action").append(
+                                /*$("<a>").attr("href", "javascript:void(0);").addClass("box-icon bg_white wishlist btn-icon-action").append(
                                     $("<span>").addClass("icon icon-heart"),
                                     $("<span>").addClass("tooltip").text("Add to Wishlist"),
                                     $("<span>").addClass("icon icon-delete")
@@ -534,11 +532,17 @@
                                 $("<a>").attr({"href": "#quick_view", "data-bs-toggle": "modal"}).addClass("box-icon bg_white quickview tf-btn-loading").append(
                                     $("<span>").addClass("icon icon-view"),
                                     $("<span>").addClass("tooltip").text("Quick View")
-                                )
+                                )*/
                             )
 
                         let cardInfo = $("<div>").addClass("card-product-info").append(
-                            $("<a>").addClass("title link text-center").text(element.nombre)
+                            $("<a>").attr({
+                                "href": "/por-marcas/"+element.urlMarca
+                            }).addClass("title link text-center").text(element.nombreMarca),
+                            $("<a>").attr({
+                                "href": "/qaweb/"+element.urlMenu+"/" + element.urlMenuSub+ "/" + element.urlCategoria+"/"+
+                                    element.urlProducto+"?"+variacionesParams,
+                            }).addClass("title link text-center").text(element.nombre)
                         );
 
                         $.each(element.variaciones, function (j, variacion) {

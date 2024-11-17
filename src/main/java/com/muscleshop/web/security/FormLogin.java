@@ -30,26 +30,23 @@ public class FormLogin implements UserDetailsService {
 
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
 
-		UsuarioDto usuar = usuarioService.obtenerUsuarioPorCorreo(username);
+		UsuarioDto usuarioDto = usuarioService.obtenerUsuarioPorCorreo(correo);
+		Usuario usuario = usuarioService.obtenerUsuarioPorCorreoV2(correo);
 
-		if (usuar == null) {
+		if (usuarioDto == null) {
 			throw new UsernameNotFoundException("No existe el Usuario");
 		}
 
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = attr.getRequest().getSession(true);
-		session.setAttribute("usuario", usuar);
-		authorities.add(new SimpleGrantedAuthority(usuar.getNombreRolPerfil()));
+		session.setAttribute("usuario", usuarioDto);
+		authorities.add(new SimpleGrantedAuthority(usuarioDto.getNombreRolPerfil()));
 
-		/*for (Roles ro : usuar.getRoles()) {
-			authorities.add(new SimpleGrantedAuthority(ro.getNombre()));
-		}*/
-
-        return new User(usuar.getCorreo(),
-				"$2a$10$MJWApri4BHTAuo/jxbBL9uTnvi8KtGJtsNigE5i7OnRWTUDAa8EpW",
+        return new User(usuario.getCorreo(),
+				usuario.getPassword(),
 				authorities);
 	}
 

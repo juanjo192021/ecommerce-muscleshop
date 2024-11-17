@@ -30,4 +30,8 @@ public class UsuarioService {
 	public UsuarioDto obtenerUsuarioPorCorreo(String correo) {
 		return usuarioDao.findByEmail(correo);
 	}
+
+	public Usuario obtenerUsuarioPorCorreoV2(String correo) {
+		return usuarioDao.findByEmailV2(correo);
+	}
 }

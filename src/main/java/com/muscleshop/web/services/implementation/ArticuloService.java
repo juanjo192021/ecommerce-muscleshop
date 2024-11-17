@@ -29,6 +29,6 @@ public class ArticuloService implements IArticuloService {
 		// Crear un Pageable con el tamaño deseado
 		PageRequest pageable = PageRequest.of(0, cantidadArticulos);
 		// Llamar al repositorio con el estado deseado y el Pageable
-		return  articuloDao.findAllByEstado_IdOrderByIdDesc(estadoId, pageable);
+		return  articuloDao.findAllByEstado_NombreOrderByIdDesc("Activo", pageable);
 	}
 }

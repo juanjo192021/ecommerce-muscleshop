@@ -38,7 +38,7 @@
         <!-- /Header -->
 
         <!-- breadcrumb -->
-        <div class="tf-breadcrumb">
+        <div class="tf-breadcrumb d-none">
             <div class="container">
                 <div class="tf-breadcrumb-wrap d-flex justify-content-between flex-wrap align-items-center">
                     <div class="tf-breadcrumb-list">
@@ -112,7 +112,13 @@
                                         <h5 th:text="${presentacion.nombreProducto}">Cotton jersey top</h5>
                                     </div>
                                     <div class="tf-product-info-price">
-                                        <div class="price-on-sale" th:text="${presentacion.precioReducido}">S/8.00</div>
+                                        <div class="price-on-sale"
+                                             th:text="${session.usuario == null ? presentacion.precioReducido
+                                                       : (session.usuario.nombreRolPerfil == 'Cliente' ? presentacion.precioReducido
+                                                       : (session.usuario.nombreRolPerfil == 'Team' ? presentacion.precioTeam
+                                                       : (session.usuario.nombreRolPerfil == 'Team Vip' ? presentacion.precioTeamVip
+                                                       : (session.usuario.nombreRolPerfil == 'Familiar' ? presentacion.precioFamiliar
+                                                       : presentacion.precio))))}">S/8.00</div>
                                         <div class="compare-at-price" th:text="${presentacion.precio}">S/10.00</div>
                                         <!--<div class="badges-on-sale"><span>20</span>% OFF</div>-->
                                     </div>
@@ -190,7 +196,7 @@
                                                 <span>Añadir al carrito</span>
                                                 <!--<span class="tf-qty-price">$8.00</span>-->
                                             </a>
-                                            <a href="javascript:void(0);" class="tf-product-btn-wishlist hover-tooltip box-icon bg_white wishlist btn-icon-action">
+                                            <!--<a href="javascript:void(0);" class="tf-product-btn-wishlist hover-tooltip box-icon bg_white wishlist btn-icon-action">
                                                 <span class="icon icon-heart"></span>
                                                 <span class="tooltip">Add to Wishlist</span>
                                                 <span class="icon icon-delete"></span>
@@ -199,14 +205,14 @@
                                                 <span class="icon icon-compare"></span>
                                                 <span class="tooltip">Add to Compare</span>
                                                 <span class="icon icon-check"></span>
-                                            </a>
-                                            <div class="w-100">
+                                            </a>-->
+                                            <!--<div class="w-100">
                                                 <a href="#" class="btns-full">Buy with <img src="https://themesflat.co/html/ecomus/images/payments/paypal.png" alt=""></a>
                                                 <a href="#" class="payment-more-option">More payment options</a>
-                                            </div>
+                                            </div>-->
                                         </form>
                                     </div>
-                                    <div class="tf-product-info-extra-link">
+                                    <!--<div class="tf-product-info-extra-link">
                                         <a href="#compare_color" data-bs-toggle="modal" class="tf-product-extra-icon">
                                             <div class="icon">
                                                 <img src="https://themesflat.co/html/ecomus/images/item/compare.svg" alt="">
@@ -231,7 +237,7 @@
                                             </div>
                                             <div class="text fw-6">Share</div>
                                         </a>
-                                    </div>
+                                    </div>-->
                                     <div class="tf-product-info-delivery-return">
                                         <div class="row">
                                             <div class="col-xl-6 col-12">
@@ -239,7 +245,7 @@
                                                     <div class="icon">
                                                         <i class="icon-delivery-time"></i>
                                                     </div>
-                                                    <p>Estimate delivery times: <span class="fw-7">12-26 days</span> (International), <span class="fw-7">3-6 days</span> (United States).</p>
+                                                    <p>Tiempos de entrega estimados: <span class="fw-7">12-26 días</span> (Internacional), <span class="fw-7">3-6 días</span> (Estados Unidos).</p>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-12">
@@ -247,7 +253,7 @@
                                                     <div class="icon">
                                                         <i class="icon-return-order"></i>
                                                     </div>
-                                                    <p>Return within <span class="fw-7">30 days</span> of purchase. Duties & taxes are non-refundable.</p>
+                                                    <p>Devolución en un plazo de <span class="fw-7">30 días</span> desde la compra. Los aranceles e impuestos no son reembolsables.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -255,7 +261,7 @@
                                     <div class="tf-product-info-trust-seal">
                                         <div class="tf-product-trust-mess">
                                             <i class="icon-safe"></i>
-                                            <p class="fw-6">Guarantee Safe <br> Checkout</p>
+                                            <p class="fw-6">Garantía de pago<br> seguro</p>
                                         </div>
                                         <div class="tf-payment">
                                             <img src="https://themesflat.co/html/ecomus/images/payments/visa.png" alt="">
@@ -271,7 +277,8 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <!--More Productcs-->
+            <div class="container d-none">
                 <div class="tf-product-fbt-wrap">
                     <div class="title">Frequently Bought Together</div>
                     <form class="tf-product-form-fbt">
@@ -433,6 +440,7 @@
                     </form>
                 </div>
             </div>
+            <!--/More Productcs-->
 
             <!--Nav product-->
             <!--<div class="tf-sticky-btn-atc">
@@ -660,7 +668,7 @@
         </section>
         <!-- /tabs -->
         <!-- product -->
-        <section class="flat-spacing-1 pt_0">
+        <section class="flat-spacing-1 pt_0 d-none">
             <div class="container">
                 <div class="flat-title">
                     <span class="title">People Also Bought</span>
@@ -1070,7 +1078,7 @@
         </section>
         <!-- /product -->
         <!-- recent -->
-        <section class="flat-spacing-4 pt_0">
+        <section class="flat-spacing-4 pt_0 d-none">
             <div class="container">
                 <div class="flat-title">
                     <span class="title">Recently Viewed</span>
@@ -1827,21 +1835,22 @@
                 success: function (response) {
                     console.log({response});
                     const preciosPorRol = {
-                        "Cliente": { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" },
-                        "Team": { regular: element.precio, especial: element.precioTeam, labelEspecial: "Precio Team:" },
-                        "Team Vip": { regular: element.precio , especial: element.precioTeamVip, labelEspecial: "Precio VIP Team:" },
-                        "Familiar": { regular: element.precio , especial: element.precioFamiliar, labelEspecial: "Precio Familiar:" }
+                        "Cliente": { regular: response.precio, especial: response.precioReducido, labelEspecial: "Precio Reducido:" },
+                        "Team": { regular: response.precio, especial: response.precioTeam, labelEspecial: "Precio Team:" },
+                        "Team Vip": { regular: response.precio , especial: response.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                        "Familiar": { regular: response.precio , especial: response.precioFamiliar, labelEspecial: "Precio Familiar:" }
                     };
 
                     // Definir los precios por defecto
-                    const preciosDefecto = { regular: element.precio, especial: element.precioReducido, labelEspecial: "Precio Reducido:" };
+                    const preciosDefecto = { regular: response.precio, especial: response.precioReducido, labelEspecial: "Precio Reducido:" };
 
+                    console.log(dataUsuario)
                     // Obtener los precios basados en el rol del usuario o usar los precios por defecto si el rol es null
                     const precio = dataUsuario && dataUsuario.nombreRolPerfil  ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto
 
                     // Actualizar el HTML con los nuevos precios
-                    $('.price-on-sale').text(`S/${precio.regular}`);
-                    $('.compare-at-price').text(`S/${precio.especial}`);
+                    $('.price-on-sale').text(`S/${precio.especial}`);
+                    $('.compare-at-price').text(`S/${precio.regular}`);
                     //mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
                     buscarImagenesPresentacionPorProductoPropiedadesDetallesId(response.id)
                 },

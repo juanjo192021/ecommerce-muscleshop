@@ -178,7 +178,7 @@ function buscarPresentacionPorProductoIdAndValorVariaciones(productoId, variacio
             const precio = (dataUsuario && dataUsuario.nombreRolPerfil) ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto
 
             $("#quick_add .image img").attr({"src" :urlImagenesProductos +response.imagen});
-            $("#quick_add .content a").attr("href", "/"+producto.urlMenu+"/"+producto.urlMenuSub+"/"+producto.urlCategoria+"/"+producto.urlProducto + "?" + variacionesParams);
+            $("#quick_add .content a").attr("href", "/qaweb/"+producto.urlMenu+"/"+producto.urlMenuSub+"/"+producto.urlCategoria+"/"+producto.urlProducto + "?" + variacionesParams);
             $('#quick_add .tf-product-info-price .price-on-sale').text(`S/. ${parseFloat(precio.especial).toFixed(2)}`);
             $('#quick_add .tf-product-info-price .compare-at-price').text(`S/. ${parseFloat(precio.regular).toFixed(2)}`);
 
@@ -244,10 +244,17 @@ function mostrarCarrito(){
     let subtotal = 0;
     carrito.forEach((item,index) => {
 
+        variacionesParams = item.producto.variaciones.map(function (v, i) {
+            return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
+        }).join('&');
+
         let cartItem = $("<div>").addClass("tf-mini-cart-item");
 
         let cartImage = $("<div>").addClass("tf-mini-cart-image").append(
-            $("<a>").attr("href", `/${item.producto.urlProducto}`).append(
+            $("<a>").attr({
+                "href": "/qaweb/"+item.producto.urlMenu+"/" + item.producto.urlMenuSub+ "/" + item.producto.urlCategoria+"/"+
+                    item.producto.urlProducto+"?"+variacionesParams,
+            }).append(
                 $("<img>").attr({"src": urlImagenesProductos + item.producto.imagen}).attr("alt", item.producto.nombre)
             )
         );
@@ -266,7 +273,10 @@ function mostrarCarrito(){
 
         let cartInfo = $("<div>").addClass("tf-mini-cart-info")
             .append(
-                $("<a>").addClass("title link").attr("href", `/${item.producto.urlProducto}`).text(item.producto.nombre),
+                $("<a>").addClass("title link").attr({
+                    "href": "/qaweb/"+item.producto.urlMenu+"/" + item.producto.urlMenuSub+ "/" + item.producto.urlCategoria+"/"+
+                        item.producto.urlProducto+"?"+variacionesParams,
+                }).text(item.producto.nombre),
                 $("<div>").addClass("meta-variant").text(item.producto.variacion),
                 $("<div>").addClass("price fw-6").text(`S/. ${parseFloat(precio.especial).toFixed(2)}`)
             );
@@ -278,7 +288,7 @@ function mostrarCarrito(){
                 $("<span>").addClass("btn-quantity plus-btn").data("ppd-id", item.producto.productoPropiedadDetalleId).text("+")
             );
 
-        let removeButton = $("<div>").addClass("tf-mini-cart-remove").text("Remove").data("index", index);
+        let removeButton = $("<div>").addClass("tf-mini-cart-remove").text("Eliminar").data("index", index);
         let cartBtns = $("<div>").addClass("tf-mini-cart-btns").append(quantityControl, removeButton);
 
         cartInfo.append(cartBtns);
