@@ -94,8 +94,8 @@
                                         </div>
                                     </fieldset>
                                     <fieldset class="fieldset">
-                                        <label for="numero-documento">Número de Documento</label>
-                                        <input type="text" id="numero-documento" placeholder="Ingrese su Número de Documento" required>
+                                        <label for="nro-documento">Número de Documento</label>
+                                        <input type="text" id="nro-documento" placeholder="Ingrese su Número de Documento" required>
                                     </fieldset>
                                 </div>
                                 <div class="box grid-2">
@@ -171,43 +171,28 @@
                                         <input type="text" id="first-name" placeholder="Ingrese su Referencia">
                                     </fieldset>
                                     <fieldset class="box fieldset mb-0">
-                                        <label for="country">Departamento</label>
+                                        <label for="id_region">Departamento</label>
                                         <div class="select-custom">
-                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
-                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
-                                                <option value="Boleta"
-                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
-                                                    Boleta
-                                                </option>
-                                                <option value="Factura" data-provinces="[]">Factura</option>
+                                            <select class="tf-select w-100" id="id_region">
+                                                <option disabled selected>Seleccionar</option>
                                             </select>
                                         </div>
                                     </fieldset>
                                 </div>
                                 <div class="box grid-2">
                                     <fieldset class="box fieldset mb-0">
-                                        <label for="country">Provincia</label>
+                                        <label for="id_provincia">Provincia</label>
                                         <div class="select-custom">
-                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
-                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
-                                                <option value="Boleta"
-                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
-                                                    Boleta
-                                                </option>
-                                                <option value="Factura" data-provinces="[]">Factura</option>
+                                            <select class="tf-select w-100" id="id_provincia">
+                                                <option disabled selected>Seleccionar</option>
                                             </select>
                                         </div>
                                     </fieldset>
                                     <fieldset class="box fieldset mb-0">
-                                        <label for="country">Distrito</label>
+                                        <label for="id_distrito">Distrito</label>
                                         <div class="select-custom">
-                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
-                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
-                                                <option value="Boleta"
-                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
-                                                    Boleta
-                                                </option>
-                                                <option value="Factura" data-provinces="[]">Factura</option>
+                                            <select class="tf-select w-100" id="id_distrito" name="address[country]" data-default="">
+                                                <option disabled selected>Seleccionar</option>
                                             </select>
                                         </div>
                                     </fieldset>
@@ -373,15 +358,75 @@
                 $('.fieldset-ruc').addClass('d-none');
             }
         });
+
+        $.getJSON("/usuario/listaRegion", function (data) {
+            $.each(data, function (i, item) {
+                $("#id_region").append("<option value='" + item + "'>" + item + "</option>");
+            });
+        });
+        $("#id_region").change(function () {
+            var var_reg = $("#id_region").val();
+            $("#id_provincia").empty();
+            $("#id_provincia").append("<option value=''>Selecciona una provincia </option>");
+
+            $("#id_distrito").empty();
+            $("#id_distrito").append("<option value=''>Selecciona un distrito </option>");
+
+            $.getJSON("/usuario/listaProvincia", {"region": var_reg}, function (data) {
+                $.each(data, function (i, item) {
+                    $("#id_provincia").append("<option value='" + item + "'>" + item + "</option>");
+                });
+            });
+        });
+
+        $("#id_provincia").change(function () {
+            var var_reg = $("#id_region").val();
+            var var_pro = $("#id_provincia").val();
+            $("#id_distrito").empty();
+            $("#id_distrito").append("<option value=''>Selecciona un distrito </option>");
+
+            $.getJSON("/usuario/listaDistrito", {"region": var_reg, "provincia": var_pro}, function (data) {
+                $.each(data, function (i, item) {
+                    $("#id_distrito").append("<option value='" + item.id + "'>" + item.distrito + "</option>");
+                });
+            });
+        });
+        $("#id_distrito").change(function () {
+            var var_reg = $("#id_region").val();
+            var var_pro = $("#id_provincia").val();
+            var var_dis = $("#id_distrito").val();
+            $("#ubigeo_id").val(var_dis);
+
+            $.getJSON("/usuario/listaDistrito", {"region": var_reg, "provincia": var_pro}, function (data) {
+                var costoEnvio;
+                $.each(data, function (i, item) {
+                    if (item.id == var_dis) {
+                        costoEnvio = parseFloat(item.costo);
+                        console.log({costoEnvio})
+                        return false;
+                    }
+                });
+                /*$("#envio-cost").text("S/." + costoEnvio.toFixed(2));
+                var subtotalText = $("#subtotal-price").text().replace('S/.', '').trim();
+                var subtotal = parseFloat(subtotalText);
+                var nuevoTotal = subtotal + costoEnvio;
+
+                $("#total-price").text("S/." + nuevoTotal.toFixed(2));*/
+            });
+
+        });
     })
 
     function autocompletarInformacion(){
         console.log({dataUsuario});
         if(dataUsuario){
-            $('#nombres-usuario').val(dataUsuario.nombres);
-            $('#apellidos-usuario').val(dataUsuario.apellidos);
-            $('#correo-usuario').val(dataUsuario.correo);
-            $('#celular-usuario').val(dataUsuario.telefono);
+            $('#nombres').val(dataUsuario.nombres);
+            $('#apellidos').val(dataUsuario.apellidos);
+            $('#correo').val(dataUsuario.correo);
+            $('#celular').val(dataUsuario.telefono);
+            $('#tipo-documento').val(dataUsuario.tipoDocumento)
+            $('#nro-documento').val(dataUsuario.nroDocumento)
+            $('#fecha-nacimiento').val(dataUsuario.fechaNacimiento)
         }
     }
 

@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface IUsuarioDao extends JpaRepository<Usuario, Integer> {
 
-	@Query("SELECT new com.muscleshop.web.models.dto.UsuarioDto(up.usuario.id, up.nombres, up.apellidos, up.usuario.correo, up.usuario.estado.nombre, up.usuario.fecha, up.usuario.ultimoAcceso, up.usuario.rolPerfil.nombre, up.usuario.usuarioPerfil.telefono) " +
+	@Query("SELECT new com.muscleshop.web.models.dto.UsuarioDto(up.usuario.id, up.nombres, up.apellidos, up.usuario.correo, up.tipoDocumento, up.nroDocumento, up.usuario.estado.nombre,up.fechaNacimiento, up.usuario.fecha, up.usuario.ultimoAcceso, up.usuario.rolPerfil.nombre, up.usuario.usuarioPerfil.telefono) " +
 			"FROM UsuarioPerfil up " +
 			"WHERE up.usuario.correo =:correo " +
 			"AND up.usuario.estado.nombre='Activo'")

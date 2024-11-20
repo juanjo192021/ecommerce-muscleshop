@@ -10,7 +10,7 @@ import com.muscleshop.web.models.ComprobantePago;
 
 
 @Service
-public class ComprobantePagoService {
+public class ComprobantePagoService implements IComprobantePagoService {
 
 	@Autowired
 	private IComprobantePagoDao comprobanteDao;

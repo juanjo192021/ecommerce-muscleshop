@@ -9,6 +9,4 @@ import com.muscleshop.web.models.ComprobantePago;
 public interface IComprobantePagoDao extends JpaRepository<ComprobantePago, Integer>{
 
 	List<ComprobantePago> findByNombre(String nombre);
-
-	
 }

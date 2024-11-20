@@ -8,7 +8,10 @@ public class UsuarioDto {
     private String nombres;
     private String apellidos;
     private String correo;
+    private String tipoDocumento;
+    private String nroDocumento;
     private String estadoNombre;
+    private LocalDate fechaNacimiento;
     private LocalDate fechaCreacion;
     private LocalDate ultimoAcceso;
     private String nombreRolPerfil;
@@ -16,12 +19,15 @@ public class UsuarioDto {
 
     public UsuarioDto() {}
 
-    public UsuarioDto(Integer id,String nombres, String apellidos, String correo, String estadoNombre, LocalDate fechaCreacion, LocalDate ultimoAcceso, String nombreRolPerfil, String telefono) {
+    public UsuarioDto(Integer id, String nombres, String apellidos, String correo, String tipoDocumento, String nroDocumento, String estadoNombre, LocalDate fechaNacimiento, LocalDate fechaCreacion, LocalDate ultimoAcceso, String nombreRolPerfil, String telefono) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.correo = correo;
+        this.tipoDocumento = tipoDocumento;
+        this.nroDocumento = nroDocumento;
         this.estadoNombre = estadoNombre;
+        this.fechaNacimiento = fechaNacimiento;
         this.fechaCreacion = fechaCreacion;
         this.ultimoAcceso = ultimoAcceso;
         this.nombreRolPerfil = nombreRolPerfil;
@@ -58,6 +64,30 @@ public class UsuarioDto {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public String getNroDocumento() {
+        return nroDocumento;
+    }
+
+    public void setNroDocumento(String nroDocumento) {
+        this.nroDocumento = nroDocumento;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getEstadoNombre() {
