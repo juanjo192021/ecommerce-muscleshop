@@ -12,6 +12,8 @@
     <!-- Icons -->
     <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/fonts/font-icons.css}">
     <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/drift-basic.min.css}">
+    <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/photoswipe.css}">
     <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/swiper-bundle.min.css}">
     <link rel="stylesheet" th:href="@{/public/resources/site/general/static/assets/css/animate.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/public/resources/site/general/static/assets/css/styles.css}"/>
@@ -74,13 +76,13 @@
                                     <div class="swiper tf-product-media-main" id="gallery-swiper-started">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide" th:each="propiedadDetalleImagen: ${propiedadDetalleImagenes}">
-                                                <a th:href="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                <a th:href="'http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
                                                    target="_blank"
                                                    class="item"
                                                    data-pswp-width="770px" data-pswp-height="1075px">
                                                     <img class="lazyload"
-                                                         th:data-src="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
-                                                         th:src="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                         th:data-src="'http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                         th:src="'http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
                                                          th:alt="${propiedadDetalleImagen.nombre}">
                                                 </a>
                                             </div>
@@ -94,8 +96,8 @@
                                             <div class="swiper-slide stagger-item" th:each="propiedadDetalleImagen: ${propiedadDetalleImagenes}">
                                                 <div class="item">
                                                     <img class="lazyload"
-                                                         th:data-src="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
-                                                         th:src="'http://104.218.48.244:8080/devadmin/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                         th:data-src="'http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
+                                                         th:src="'http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/'+${propiedadDetalleImagen.nombre}"
                                                          th:alt="'product-'+${propiedadDetalleImagen.nombre}">
                                                 </div>
                                             </div>
@@ -1725,6 +1727,9 @@
     <!-- /all-modals -->
 
     <!-- Javascript -->
+    <script type="module" th:src="@{/public/resources/site/general/static/assets/js/model-viewer.min.js}"></script>
+    <script type="module" th:src="@{/public/resources/site/general/static/assets/js/zoom.js}"></script>
+
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/swiper-bundle.min.js}"></script>
@@ -1737,8 +1742,6 @@
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
     <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/carrito.js}"></script>
 
-    <script type="module" th:src="@{/public/resources/site/general/static/assets/js/model-viewer.min.js}"></script>
-    <script type="module" th:src="@{/public/resources/site/general/static/assets/js/zoom.js}"></script>
     <script th:inline="javascript">
 
         let auxiliar = [[${auxiliar}]];
@@ -1815,7 +1818,7 @@
                 success: function (response) {
                     console.log({response});
                     //mostrarProductoNuevo(response.id, precioMinimo, precioMaximo);
-                    console.log({atributos});
+                    //console.log({atributos});
                     //buscarPresentacionPorProductoIdAndValorVariaciones(response.id,atributos)
                     buscarPresentacionPorProductoIdAndValorVariaciones(response.id,selectedVariants)
                 },

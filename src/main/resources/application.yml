@@ -3,7 +3,7 @@ spring:
     name: MuscleShop1
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/musclesh_dev_web
+    url: jdbc:mysql://localhost/musclesh_aclopation
     username: root
     password: 123456789
   jpa:

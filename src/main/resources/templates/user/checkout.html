@@ -40,7 +40,7 @@
     <!-- page-title -->
     <div class="tf-page-title">
         <div class="container-full">
-            <div class="heading text-center">Check Out</div>
+            <div class="heading text-center">Finalizar compra</div>
         </div>
     </div>
     <!-- /page-title -->
@@ -63,49 +63,45 @@
                             <form class="form-checkout">
                                 <div class="box grid-2">
                                     <fieldset class="fieldset">
-                                        <label for="first-name">Nombres</label>
-                                        <input type="text" id="first-name" placeholder="Ingrese sus Nombres">
+                                        <label for="nombres">Nombres</label>
+                                        <input type="text" id="nombres" name="nombres" placeholder="Ingrese sus Nombres" required>
                                     </fieldset>
                                     <fieldset class="fieldset">
-                                        <label for="last-name">Apellidos</label>
-                                        <input type="text" id="last-name" placeholder="Ingrese sus Apellidos">
+                                        <label for="apellidos">Apellidos</label>
+                                        <input type="text" id="apellidos" name="apellidos" placeholder="Ingrese sus Apellidos" required>
                                     </fieldset>
                                 </div>
                                 <div class="box grid-2">
                                     <fieldset class="fieldset">
-                                        <label for="first-name">Correo Electrónico</label>
-                                        <input type="email" id="first-name" placeholder="Ingrese su Correo Electrónico">
+                                        <label for="correo">Correo Electrónico</label>
+                                        <input type="email" id="correo" name="correo" placeholder="Ingrese su Correo Electrónico" required>
                                     </fieldset>
                                     <fieldset class="box fieldset">
-                                        <label for="phone">Celular</label>
-                                        <input type="tel" id="phone">
+                                        <label for="celular">Celular</label>
+                                        <input type="tel" id="celular" name="celular" required>
                                     </fieldset>
                                 </div>
                                 <div class="box grid-2">
                                     <fieldset class="box fieldset mb-0">
-                                        <label for="country">Tipo de Documento</label>
+                                        <label for="tipo-documento">Tipo de Documento</label>
                                         <div class="select-custom">
-                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
-                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
-                                                <option value="DNI"
-                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
-                                                    DNI
-                                                </option>
-                                                <option value="RUC" data-provinces="[]">RUC</option>
-                                                <option value="CE" data-provinces="[]">CE</option>
-                                                <option value="Canada" data-provinces="[['Alberta','Alberta'],['British Columbia','British Columbia'],['Manitoba','Manitoba'],['New Brunswick','New Brunswick'],['Newfoundland and Labrador','Newfoundland and Labrador'],['Northwest Territories','Northwest Territories'],['Nova Scotia','Nova Scotia'],['Nunavut','Nunavut'],['Ontario','Ontario'],['Prince Edward Island','Prince Edward Island'],['Quebec','Quebec'],['Saskatchewan','Saskatchewan'],['Yukon','Yukon']]">Canada</option>
+                                            <select class="tf-select w-100" id="tipo-documento" name="tipo-documento" required>
+                                                <option disabled selected>Seleccionar</option>
+                                                <option value="DNI">DNI</option>
+                                                <option value="CE">CE</option>
+                                                <option value="Pasaporte">Pasaporte</option>
                                             </select>
                                         </div>
                                     </fieldset>
                                     <fieldset class="fieldset">
-                                        <label for="first-name">Número de Documento</label>
-                                        <input type="text" id="first-name" placeholder="Ingrese su Número de Documento">
+                                        <label for="numero-documento">Número de Documento</label>
+                                        <input type="text" id="numero-documento" placeholder="Ingrese su Número de Documento" required>
                                     </fieldset>
                                 </div>
                                 <div class="box grid-2">
                                     <fieldset class="fieldset">
-                                        <label for="first-name">Fecha de Nacimiento</label>
-                                        <input type="date" id="first-name">
+                                        <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+                                        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
                                     </fieldset>
                                 </div>
                             </form>
@@ -122,29 +118,26 @@
                             <form class="form-checkout">
                                 <div class="box grid-2">
                                     <fieldset class="box fieldset mb-0">
-                                        <label for="country">Comprobante de Pago</label>
+                                        <label for="tipo-comprobante">Comprobante de Pago</label>
                                         <div class="select-custom">
-                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
-                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
-                                                <option value="Boleta"
-                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
-                                                    Boleta
-                                                </option>
-                                                <option value="Factura" data-provinces="[]">Factura</option>
+                                            <select class="tf-select w-100" id="tipo-comprobante" name="tipo-comprobante">
+                                                <option disabled >Seleccionar</option>
+                                                <option value="Boleta" name="boleta" selected>Boleta</option>
+                                                <option value="Factura" name="factura" >Factura</option>
                                             </select>
                                         </div>
                                     </fieldset>
-                                    <fieldset class="fieldset">
-                                        <label for="first-name">Razón Social</label>
-                                        <input type="text" id="first-name" placeholder="Ingrese su Razón Social">
+                                    <fieldset class="fieldset fieldset-ruc  d-none">
+                                        <label for="razon-social">Razón Social</label>
+                                        <input type="text" id="razon-social" placeholder="Ingrese su Razón Social">
                                     </fieldset>
                                 </div>
                                 <div class="box grid-2">
-                                    <fieldset class="fieldset">
-                                        <label for="first-name">RUC</label>
-                                        <input type="text" id="first-name" placeholder="Ingrese su RUC">
+                                    <fieldset class="fieldset fieldset-ruc d-none">
+                                        <label for="ruc">RUC</label>
+                                        <input type="text" id="ruc" placeholder="Ingrese su RUC">
                                     </fieldset>
-                                    <fieldset class="fieldset">
+                                    <fieldset class="fieldset fieldset-ruc d-none">
                                         <label for="last-name">Dirección de Facturación</label>
                                         <input type="text" id="last-name" placeholder="Ingrese su Dirección de Facturación">
                                     </fieldset>
@@ -253,14 +246,14 @@
                                 </div>
                             </div>
                             <form class="form-checkout">
-                                <fieldset class="box fieldset">
+                                <!--<fieldset class="box fieldset">
                                     <label for="city" class="d-none visually-hidden">Town/City</label>
                                     <input type="text" id="city" placeholder="Utiliza un cupón de regalo">
-                                </fieldset>
+                                </fieldset>-->
                                 <div class="box">
                                     <div class="btn-group w-100 pb-3">
-                                       <a href="#" class="btn btn-danger active" aria-current="page">Tarjeta de Crédito</a>
-                                       <a href="#" class="btn btn-white text-secondary border border-black border-opacity-25">Tarjeta de Débito</a>
+                                       <a href="#" class="btn btn-danger active" aria-current="page">Tarjeta de Crédito o Débito</a>
+                                       <a href="#" class="btn btn-white text-secondary border border-black border-opacity-25">Cuentas bancarias</a>
                                        <a href="#" class="btn btn-white text-secondary border border-black border-opacity-25">Yape / Plin</a>
                                    </div>
                                     <div class="footer-bottom-wrap d-flex gap-20 flex-wrap justify-content-end align-items-center">
@@ -273,112 +266,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <fieldset class="box fieldset">
-                                    <label for="city">Número</label>
-                                    <input type="text" id="city">
-                                </fieldset>
-                                <div class="box grid-2">
-                                    <fieldset class="box fieldset mb-0">
-                                        <label for="country">Cuotas Disponibles</label>
-                                        <div class="select-custom">
-                                            <select class="tf-select w-100" id="country" name="address[country]" data-default="">
-                                                <option value="---" data-provinces="[]" disabled selected>Seleccionar</option>
-                                                <option value="1"
-                                                        data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
-                                                    01
-                                                </option>
-                                                <option value="2" data-provinces="[]">02</option>
-                                                <option value="3" data-provinces="[]">03</option>
-                                                <option value="4" data-provinces="[]">04</option>
-                                                <option value="5" data-provinces="[]">05</option>
-                                                <option value="6" data-provinces="[]">06</option>
-                                                <option value="7" data-provinces="[]">07</option>
-                                                <option value="8" data-provinces="[]">08</option>
-                                                <option value="9" data-provinces="[]">09</option>
-                                                <option value="10" data-provinces="[]">10</option>
-                                                <option value="11" data-provinces="[]">11</option>
-                                                <option value="12" data-provinces="[]">12</option>
-                                            </select>
-                                        </div>
-                                    </fieldset>
+                                <div>
+                                    <a class="btn btn-primary"> Finalizar compra en Mercado Pago</a>
                                 </div>
-                                <fieldset class="box fieldset">
-                                    <label for="city">Nombres y Apellidos como figura en la tarjeta</label>
-                                    <input type="text" id="city">
-                                </fieldset>
-                                <div class="box grid-2">
-                                    <fieldset class="box fieldset mb-0">
-                                        <label for="country">Fecha de Vencimiento</label>
-                                        <div class="d-flex align-items-center column-gap-3">
-                                            <div class="select-custom" style="width: min-content;">
-                                                <select class="tf-select" id="country" name="address[country]" data-default="">
-                                                    <option value="---" data-provinces="[]" disabled selected>MM</option>
-                                                    <option value="1"
-                                                            data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
-                                                        01
-                                                    </option>
-                                                    <option value="2" data-provinces="[]">02</option>
-                                                    <option value="3" data-provinces="[]">03</option>
-                                                    <option value="4" data-provinces="[]">04</option>
-                                                    <option value="5" data-provinces="[]">05</option>
-                                                    <option value="6" data-provinces="[]">06</option>
-                                                    <option value="7" data-provinces="[]">07</option>
-                                                    <option value="8" data-provinces="[]">08</option>
-                                                    <option value="9" data-provinces="[]">09</option>
-                                                    <option value="10" data-provinces="[]">10</option>
-                                                    <option value="11" data-provinces="[]">11</option>
-                                                    <option value="12" data-provinces="[]">12</option>
-                                                </select>
-                                            </div>
-                                            <div>/</div>
-                                            <div class="select-custom" style="width: min-content;">
-                                                <select class="tf-select" id="country" name="address[country]" data-default="">
-                                                    <option value="---" data-provinces="[]" disabled selected>AA</option>
-                                                    <option value="1"
-                                                            data-provinces="[['Australian Capital Territory','Australian Capital Territory'],['New South Wales','New South Wales'],['Northern Territory','Northern Territory'],['Queensland','Queensland'],['South Australia','South Australia'],['Tasmania','Tasmania'],['Victoria','Victoria'],['Western Australia','Western Australia']]">
-                                                        01
-                                                    </option>
-                                                    <option value="2" data-provinces="[]">02</option>
-                                                    <option value="3" data-provinces="[]">03</option>
-                                                    <option value="4" data-provinces="[]">04</option>
-                                                    <option value="5" data-provinces="[]">05</option>
-                                                    <option value="6" data-provinces="[]">06</option>
-                                                    <option value="7" data-provinces="[]">07</option>
-                                                    <option value="8" data-provinces="[]">08</option>
-                                                    <option value="9" data-provinces="[]">09</option>
-                                                    <option value="10" data-provinces="[]">10</option>
-                                                    <option value="11" data-provinces="[]">11</option>
-                                                    <option value="12" data-provinces="[]">12</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset class="box fieldset mb-0">
-                                        <label for="country">Codigo de Seguridad</label>
-                                        <input type="text" id="city">
-                                    </fieldset>
-                                </div>
-                                <!--<div class="box widget-wrap-checkout">
-                                    <div class="wd-check-payment">
-                                        <div class="fieldset-radio mb_20">
-                                            <input type="radio" name="payment" id="bank" class="tf-check">
-                                            <label for="bank" class="mb-0">
-                                                La dirección de la factura de la tarjeta es
-                                                <strong>Jorge Chavez 631</strong>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>-->
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="tf-page-cart-footer">
                     <div class="tf-cart-footer-inner">
-                        <h5 class="fw-5 mb_20">Your order</h5>
+                        <h5 class="fw-5 mb_20">Tu orden</h5>
                         <form class="tf-page-cart-checkout widget-wrap-checkout">
-                            <ul class="wrap-checkout-product">
-                                <li class="checkout-product-item">
+                            <ul class="wrap-checkout-product" id="contenedor-productos-checkout">
+                                <!--<li class="checkout-product-item">
                                     <figure class="img-product">
                                         <img src="https://themesflat.co/html/ecomus/images/products/brown.jpg" alt="product">
                                         <span class="quantity">1</span>
@@ -390,55 +290,17 @@
                                         </div>
                                         <span class="price">$25.00</span>
                                     </div>
-                                </li>
-                                <li class="checkout-product-item">
-                                    <figure class="img-product">
-                                        <img src="https://themesflat.co/html/ecomus/images/products/kid-12.jpg" alt="product">
-                                        <span class="quantity">1</span>
-                                    </figure>
-                                    <div class="content">
-                                        <div class="info">
-                                            <p class="name">Vanilla White</p>
-                                        </div>
-                                        <span class="price">$35.00</span>
-                                    </div>
-                                </li>
-                                <li class="checkout-product-item">
-                                    <figure class="img-product">
-                                        <img src="https://themesflat.co/html/ecomus/images/products/beige-2.jpg" alt="product">
-                                        <span class="quantity">1</span>
-                                    </figure>
-                                    <div class="content">
-                                        <div class="info">
-                                            <p class="name">Cotton jersey top</p>
-                                            <span class="variant">Beige / S</span>
-                                        </div>
-                                        <span class="price">$8.00</span>
-                                    </div>
-                                </li>
-                                <li class="checkout-product-item">
-                                    <figure class="img-product">
-                                        <img src="https://themesflat.co/html/ecomus/images/products/orange-1.jpg" alt="product">
-                                        <span class="quantity">3</span>
-                                    </figure>
-                                    <div class="content">
-                                        <div class="info">
-                                            <p class="name">Ribbed Tank Top</p>
-                                            <span class="variant">Orange / S</span>
-                                        </div>
-                                        <span class="price">$54.00</span>
-                                    </div>
-                                </li>
+                                </li>-->
                             </ul>
                             <div class="coupon-box">
-                                <input type="text" placeholder="Discount code">
-                                <a href="#" class="tf-btn btn-sm radius-3 btn-fill btn-icon animate-hover-btn">Apply</a>
+                                <input type="text" placeholder="Código de Descuento">
+                                <a href="#" class="tf-btn btn-sm radius-3 btn-fill btn-icon animate-hover-btn">Aplicar</a>
                             </div>
                             <div class="d-flex justify-content-between line pb_20">
                                 <h6 class="fw-5">Total</h6>
                                 <h6 class="total fw-5">$122.00</h6>
                             </div>
-                            <div class="wd-check-payment">
+                            <!--<div class="wd-check-payment">
                                 <div class="fieldset-radio mb_20">
                                     <input type="radio" name="payment" id="bank" class="tf-check" checked>
                                     <label for="bank">Direct bank transfer</label>
@@ -453,7 +315,7 @@
                                     <label for="check-agree" class="text_black-2">I have read and agree to the website <a href="terms-conditions.html" class="text-decoration-underline">terms and conditions</a>.</label>
                                 </div>
                             </div>
-                            <button class="tf-btn radius-3 btn-fill btn-icon animate-hover-btn justify-content-center">Place order</button>
+                            <button class="tf-btn radius-3 btn-fill btn-icon animate-hover-btn justify-content-center">Place order</button>-->
                         </form>
                     </div>
                 </div>
@@ -498,6 +360,87 @@
     let producto = "";
     let variacionesParams;
     let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
+
+    $(document).ready(function () {
+        autocompletarInformacion();
+        mostrarCheckout();
+        $('#tipo-comprobante').on('change', function () {
+            if ($(this).val() === 'Factura') {
+                // Mostrar campos para Factura
+                $('.fieldset-ruc').removeClass('d-none');
+            } else if ($(this).val() === 'Boleta') {
+                // Ocultar campos para Boleta
+                $('.fieldset-ruc').addClass('d-none');
+            }
+        });
+    })
+
+    function autocompletarInformacion(){
+        console.log({dataUsuario});
+        if(dataUsuario){
+            $('#nombres-usuario').val(dataUsuario.nombres);
+            $('#apellidos-usuario').val(dataUsuario.apellidos);
+            $('#correo-usuario').val(dataUsuario.correo);
+            $('#celular-usuario').val(dataUsuario.telefono);
+        }
+    }
+
+    function mostrarCheckout(){
+
+        $("#contenedor-productos-checkout").html("");
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        let subtotal = 0;
+
+        console.log({carrito});
+        carrito.forEach((item,index) => {
+
+            variacionesParams = item.producto.variaciones.map(function (v, i) {
+                return 'variacion' + (i + 1) + '=' + encodeURIComponent(v.trim());
+            }).join('&');
+
+            let cartItem = $("<div>").addClass("checkout-product-item");
+
+            let cartImage = $("<figure>").addClass("img-product").append(
+                $("<a>").attr({
+                    "href": "/qaweb/"+item.producto.urlMenu+"/" + item.producto.urlMenuSub+ "/" + item.producto.urlCategoria+"/"+
+                        item.producto.urlProducto+"?"+variacionesParams,
+                }).append(
+                    $("<img>").attr({"src": urlImagenesProductos + item.producto.imagen}).attr("alt", item.producto.nombre),
+                    $("<span>").addClass("quantity").text(item.cantidad)
+                )
+            );
+
+            const preciosDefecto = { regular: item.producto.precio, especial: item.producto.precioReducido, labelEspecial: "Precio Reducido:" };
+
+            const preciosPorRol = {
+                "Cliente": { regular: item.producto.precio, especial: item.producto.precioReducido, labelEspecial: "Precio Reducido:" },
+                "Team": { regular: item.producto.precio, especial: item.producto.precioTeam, labelEspecial: "Precio Team:" },
+                "Team Vip": { regular: item.producto.precio, especial: item.producto.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                "Familiar": { regular: item.producto.precio, especial: item.producto.precioFamiliar, labelEspecial: "Precio VIP Team:" }
+            };
+
+            const precio = (dataUsuario && dataUsuario.nombreRolPerfil) ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto;
+            subtotal += precio.especial * item.cantidad;
+
+            let cartInfo = $("<div>").addClass("content")
+                .append(
+                    $("<div>").addClass("info").append(
+                        $("<a>").addClass("title link").attr({
+                            "href": "/qaweb/"+item.producto.urlMenu+"/" + item.producto.urlMenuSub+ "/" + item.producto.urlCategoria+"/"+
+                                item.producto.urlProducto+"?"+variacionesParams,
+                        }).append(
+                            $("<p>").addClass("name").text(item.producto.nombre),
+                            $("<span>").addClass("variant").text(item.producto.variacion),
+                        ),
+                    ),
+                    $("<span>").addClass("price").text(`S/. ${parseFloat(precio.especial).toFixed(2)}`)
+                );
+            cartItem.append(cartImage, cartInfo);
+            $("#contenedor-productos-checkout").append(cartItem);
+        })
+
+        $(".total").text(`S/. ${subtotal.toFixed(2)}`);
+    }
 </script>
 </body>
 </html>
