@@ -1,7 +1,8 @@
-package com.muscleshop.web.services;
+package com.muscleshop.web.services.implementation;
 
 import java.util.List;
 
+import com.muscleshop.web.services.IUbigeoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import com.muscleshop.web.dao.IUbigeoDao;
 import com.muscleshop.web.models.Ubigeo;
 
 @Service
-public class UbigeoServiceImpl implements UbigeoService{
+public class UbigeoService implements IUbigeoService {
 
 	@Autowired
 	private IUbigeoDao ubigeoDao;

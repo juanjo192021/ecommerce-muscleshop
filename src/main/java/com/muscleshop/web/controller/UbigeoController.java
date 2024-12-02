@@ -9,36 +9,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.muscleshop.web.models.Ubigeo;
-import com.muscleshop.web.services.UbigeoService;
+import com.muscleshop.web.services.IUbigeoService;
 
 @Controller
-@RequestMapping("/ejemplo")
+@RequestMapping("/ubigeo/")
 public class UbigeoController {
 	
 	@Autowired
-	UbigeoService ubigeoService;
-	
-	@GetMapping("/index")
-	public String ver() {
-		return "ejemplo";
-	}
-	
-	@GetMapping("/listaRegion")
+	IUbigeoService IUbigeoService;
+
+	@GetMapping("listaRegion")
 	@ResponseBody
 	public List<String> verRegion(){
-		return ubigeoService.listaRegion();
+		return IUbigeoService.listaRegion();
 	}
 	
-	@GetMapping("/listaProvincia")
+	@GetMapping("listaProvincia")
 	@ResponseBody
 	public List<String> verProvincia(String region){
-		return ubigeoService.listaProvincia(region);
+		return IUbigeoService.listaProvincia(region);
 	}
 
-	@GetMapping("/listaDistrito")
+	@GetMapping("listaDistrito")
 	@ResponseBody
 	public List<Ubigeo> verDistrito(String region, String provincia){
-	    List<Ubigeo> distritos = ubigeoService.listaDistrito(region, provincia);
+	    List<Ubigeo> distritos = IUbigeoService.listaDistrito(region, provincia);
 	    return distritos;
 	}
 

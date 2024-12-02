@@ -1,7 +1,8 @@
-package com.muscleshop.web.services;
+package com.muscleshop.web.services.implementation;
 
 import java.util.List;
 
+import com.muscleshop.web.services.IComprobantePagoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

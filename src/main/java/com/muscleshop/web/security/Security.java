@@ -54,7 +54,7 @@ public class Security {
 
         //Quitarle acceso al método login del LoginController "/login"
         http.authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/","/**", "/auth/**","/usuario/**","/menuSub/**","/productoCategoria/**", "/producto/**", "/productoPropiedadesDetalles/**", "/ejemplo/**").permitAll()
+                        .requestMatchers("/","/**", "/auth/**","/usuario/**","/menuSub/**","/productoCategoria/**", "/producto/**", "/productoPropiedadesDetalles/**", "/ubigeo/**", "/pedidos/**").permitAll()
                         .requestMatchers("/porProducto").hasAnyAuthority("ROLE_CLIENTE", "ROLE_ADMIN")
                         // Permitir acceso a archivos estáticos (favicon, CSS, JS, etc.)
                         .requestMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**").permitAll()
@@ -172,7 +172,8 @@ public class Security {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080/", "http://104.218.48.244:8080/"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080/", "http://104.218.48.244:8080/"
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));

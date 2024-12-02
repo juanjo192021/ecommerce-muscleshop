@@ -10,7 +10,7 @@ import com.muscleshop.web.models.Pedidos;
 import com.muscleshop.web.models.Usuario;
 
 @Service
-public class PedidoService {
+public class PedidoService implements IPedidosService {
 
 	@Autowired
 	private IPedidoDao pedidoDao;

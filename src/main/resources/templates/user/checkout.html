@@ -78,7 +78,7 @@
                                     </fieldset>
                                     <fieldset class="box fieldset">
                                         <label for="celular">Celular</label>
-                                        <input type="tel" id="celular" name="celular" required>
+                                        <input type="tel" id="celular" name="celular" placeholder="Ingrese su Celular" required>
                                     </fieldset>
                                 </div>
                                 <div class="box grid-2">
@@ -98,12 +98,12 @@
                                         <input type="text" id="nro-documento" placeholder="Ingrese su Número de Documento" required>
                                     </fieldset>
                                 </div>
-                                <div class="box grid-2">
+                                <!--<div class="box grid-2">
                                     <fieldset class="fieldset">
                                         <label for="fecha-nacimiento">Fecha de Nacimiento</label>
                                         <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
                                     </fieldset>
-                                </div>
+                                </div>-->
                             </form>
                         </div>
                         <div class="rounded border border-black border-opacity-25 py-3">
@@ -122,8 +122,7 @@
                                         <div class="select-custom">
                                             <select class="tf-select w-100" id="tipo-comprobante" name="tipo-comprobante">
                                                 <option disabled >Seleccionar</option>
-                                                <option value="Boleta" name="boleta" selected>Boleta</option>
-                                                <option value="Factura" name="factura" >Factura</option>
+                                                <option th:value="${comprobante.id}" name="boleta" th:each=" comprobante : ${comprobantes}" th:text="${comprobante.nombre}">Boleta</option>
                                             </select>
                                         </div>
                                     </fieldset>
@@ -138,8 +137,8 @@
                                         <input type="text" id="ruc" placeholder="Ingrese su RUC">
                                     </fieldset>
                                     <fieldset class="fieldset fieldset-ruc d-none">
-                                        <label for="last-name">Dirección de Facturación</label>
-                                        <input type="text" id="last-name" placeholder="Ingrese su Dirección de Facturación">
+                                        <label for="direccion-facturacion">Dirección de Facturación</label>
+                                        <input type="text" id="direccion-facturacion" placeholder="Ingrese su Dirección de Facturación">
                                     </fieldset>
                                 </div>
                             </form>
@@ -154,27 +153,26 @@
                                 </div>
                             </div>
                             <form class="form-checkout">
-
                                 <div class="box grid-2">
                                     <fieldset class="fieldset">
-                                        <label for="first-name">Dirección</label>
-                                        <input type="text" id="first-name" placeholder="Ingrese su Dirección">
+                                        <label for="direccion">Dirección</label>
+                                        <input type="text" id="direccion" placeholder="Ingrese su Dirección">
                                     </fieldset>
                                     <fieldset class="fieldset">
-                                        <label for="first-name">Número</label>
-                                        <input type="text" id="first-name" placeholder="Dpto. / Interior / Piso / Lote / Bloque (opcional)">
+                                        <label for="numero">Número</label>
+                                        <input type="text" id="numero" placeholder="Dpto. / Interior / Piso / Lote / Bloque (opcional)">
                                     </fieldset>
                                 </div>
                                 <div class="box grid-2">
                                     <fieldset class="fieldset">
-                                        <label for="first-name">Referencia</label>
-                                        <input type="text" id="first-name" placeholder="Ingrese su Referencia">
+                                        <label for="referencia">Referencia</label>
+                                        <input type="text" id="referencia" placeholder="Ingrese su Referencia">
                                     </fieldset>
                                     <fieldset class="box fieldset mb-0">
                                         <label for="id_region">Departamento</label>
                                         <div class="select-custom">
                                             <select class="tf-select w-100" id="id_region">
-                                                <option disabled selected>Seleccionar</option>
+                                                <option disabled selected>Selecciona un departamento</option>
                                             </select>
                                         </div>
                                     </fieldset>
@@ -220,7 +218,6 @@
                                 </div>
                             </form>
                         </div>
-
                         <div class="rounded border border-black border-opacity-25 py-3">
                             <div class="row mx-0 p-0 mb_20">
                                 <div class="col-1 rounded-circle bg-danger p-0" style="width: 40px;">
@@ -237,9 +234,9 @@
                                 </fieldset>-->
                                 <div class="box">
                                     <div class="btn-group w-100 pb-3">
-                                       <a href="#" class="btn btn-danger active" aria-current="page">Tarjeta de Crédito o Débito</a>
-                                       <a href="#" class="btn btn-white text-secondary border border-black border-opacity-25">Cuentas bancarias</a>
-                                       <a href="#" class="btn btn-white text-secondary border border-black border-opacity-25">Yape / Plin</a>
+                                       <a id="btn-pedido-tarjeta-credito-debito" class="btn btn-danger active" aria-current="page">Tarjeta de Crédito o Débito</a>
+                                       <a id="btn-pedido-cuenta-bancaria" class="btn btn-white text-secondary border border-black border-opacity-25">Cuentas bancarias</a>
+                                       <a id="btn-pedido-yape-plin" class="btn btn-white text-secondary border border-black border-opacity-25">Yape / Plin</a>
                                    </div>
                                     <div class="footer-bottom-wrap d-flex gap-20 flex-wrap justify-content-end align-items-center">
                                         <div class="tf-payment">
@@ -252,7 +249,21 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <a class="btn btn-primary"> Finalizar compra en Mercado Pago</a>
+                                    <div class="d-block" id="contenedor-tarjeta-credito-debito">
+                                        <a class="btn btn-primary"> Finalizar compra en Mercado Pago</a>
+                                    </div>
+                                    <div class="d-none" id="contenedor-cuentas-bancarias">
+                                        <h4>Cuentas bancarias:</h4>
+                                        <p>BBVA: 1434664-1646446-646464</p>
+                                        <p>BCP: 1434664-1646446-646464</p>
+                                        <p>Scotiabank: 1434664-1646446-646464</p>
+                                        <a class="btn btn-primary">Ver mi historial de compras</a>
+                                    </div>
+                                    <div class="d-none" id="contenedor-yape-plin">
+                                        <h4>QRS:</h4>
+                                        <img class="d-block" th:src="@{/public/resources/site/general/static/assets/images/logo/qr_prueba.png}" alt="qr" style="height: 250px;">
+                                        <a class="btn btn-primary">Ver mi historial de compras</a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -277,13 +288,13 @@
                                     </div>
                                 </li>-->
                             </ul>
-                            <div class="coupon-box">
+                            <!--<div class="coupon-box">
                                 <input type="text" placeholder="Código de Descuento">
-                                <a href="#" class="tf-btn btn-sm radius-3 btn-fill btn-icon animate-hover-btn">Aplicar</a>
-                            </div>
+                                <a class="tf-btn btn-sm radius-3 btn-fill btn-icon animate-hover-btn">Aplicar</a>
+                            </div>-->
                             <div class="d-flex justify-content-between line pb_20">
                                 <h6 class="fw-5">Total</h6>
-                                <h6 class="total fw-5">$122.00</h6>
+                                <h6 class="total fw-5">S/. <span class="price">122.00</span></h6>
                             </div>
                             <!--<div class="wd-check-payment">
                                 <div class="fieldset-radio mb_20">
@@ -339,6 +350,8 @@
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/multiple-modal.js}"></script>
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/main.js}"></script>
 <script type="text/javascript" th:src="@{/public/resources/site/general/static/assets/js/carrito.js}"></script>
+
+
 <script th:inline="javascript">
     let dataUsuario = [[${session.usuario}]]
     let selectedVariants = [];
@@ -346,33 +359,63 @@
     let variacionesParams;
     let urlImagenesProductos='http://104.218.48.244:8080/apirest/api/productos/images-propiedad-detalle/';
 
+
     $(document).ready(function () {
         autocompletarInformacion();
         mostrarCheckout();
         $('#tipo-comprobante').on('change', function () {
-            if ($(this).val() === 'Factura') {
+            console.log($(this).val());
+            if (parseInt($(this).val()) === 2) {
                 // Mostrar campos para Factura
                 $('.fieldset-ruc').removeClass('d-none');
-            } else if ($(this).val() === 'Boleta') {
+            } else if (parseInt($(this).val()) === 1) {
                 // Ocultar campos para Boleta
                 $('.fieldset-ruc').addClass('d-none');
             }
         });
 
-        $.getJSON("/usuario/listaRegion", function (data) {
+        const formData = { id : 1, nombre : "Comprobante" }
+
+        $('.btn-icon').on('click', function () {
+            $.ajax({
+                type: 'POST', // Método HTTP
+                contentType: "application/json", // Tipo de datos que se envían
+                url: '/qaweb/pedidos/pruebaPost', // Endpoint del servidor
+                data: JSON.stringify({
+                    id : 1,
+                    nombre : "Comprobante"
+                }),
+                dataType: 'text',
+                cache: false,
+                timeout: 600000,// Convertir el objeto a JSON
+                success: function (response) {
+                    console.log({response})
+                    // Manejar la respuesta exitosa
+                    //$('#respuesta').html('<p style="color: green;">Datos enviados con éxito: ' + response.message + '</p>');
+                },
+                error: function (xhr, status, error) {
+                    // Manejar errores
+                    console.log({error})
+                    //$('#respuesta').html('<p style="color: red;">Error al enviar los datos: ' + error + '</p>');
+                }
+            });
+        })
+
+        $.getJSON("/qaweb/ubigeo/listaRegion", function (data) {
             $.each(data, function (i, item) {
                 $("#id_region").append("<option value='" + item + "'>" + item + "</option>");
             });
         });
+
         $("#id_region").change(function () {
             var var_reg = $("#id_region").val();
             $("#id_provincia").empty();
-            $("#id_provincia").append("<option value=''>Selecciona una provincia </option>");
+            $("#id_provincia").append("<option value='' disabled selected>Seleccionar una provincia</option>");
 
             $("#id_distrito").empty();
-            $("#id_distrito").append("<option value=''>Selecciona un distrito </option>");
+            $("#id_distrito").append("<option value='' disabled selected>Selecciona un distrito </option>");
 
-            $.getJSON("/usuario/listaProvincia", {"region": var_reg}, function (data) {
+            $.getJSON("/qaweb/ubigeo/listaProvincia", {"region": var_reg}, function (data) {
                 $.each(data, function (i, item) {
                     $("#id_provincia").append("<option value='" + item + "'>" + item + "</option>");
                 });
@@ -385,7 +428,7 @@
             $("#id_distrito").empty();
             $("#id_distrito").append("<option value=''>Selecciona un distrito </option>");
 
-            $.getJSON("/usuario/listaDistrito", {"region": var_reg, "provincia": var_pro}, function (data) {
+            $.getJSON("/qaweb/ubigeo/listaDistrito", {"region": var_reg, "provincia": var_pro}, function (data) {
                 $.each(data, function (i, item) {
                     $("#id_distrito").append("<option value='" + item.id + "'>" + item.distrito + "</option>");
                 });
@@ -397,7 +440,7 @@
             var var_dis = $("#id_distrito").val();
             $("#ubigeo_id").val(var_dis);
 
-            $.getJSON("/usuario/listaDistrito", {"region": var_reg, "provincia": var_pro}, function (data) {
+            $.getJSON("/qaweb/ubigeo/listaDistrito", {"region": var_reg, "provincia": var_pro}, function (data) {
                 var costoEnvio;
                 $.each(data, function (i, item) {
                     if (item.id == var_dis) {
@@ -415,7 +458,123 @@
             });
 
         });
+
+
+        $('.btn-group a').on('click', function() {
+            // Eliminar la clase 'active' de todos los botones
+            $('.btn-group a').removeClass('btn-danger active').addClass('btn-white text-secondary border border-black border-opacity-25');
+
+            // Agregar la clase 'active' al botón que se hizo clic
+            $(this).addClass('btn-danger active').removeClass('btn-white text-secondary border border-black border-opacity-25');
+        });
     })
+    let usuario;
+    let usuarioDireccion;
+    let ubigeo;
+    let cupon;
+    let pedidos;
+    let express;
+    let pedidosProductos = [];
+
+    $('#btn-pedido-tarjeta-credito-debito').on('click', function () {
+        $('#contenedor-cuentas-bancarias').removeClass('d-block').addClass('d-none')
+        $('#contenedor-yape-plin').removeClass('d-block').addClass('d-none')
+        $('#contenedor-tarjeta-credito-debito').addClass('d-block').removeClass('d-none')
+        pedidosProductos=[];
+    })
+    $('#btn-pedido-cuenta-bancaria').on('click', function () {
+        pedidosProductos=[];
+        finalizarCompra();
+        $('#contenedor-tarjeta-credito-debito').removeClass('d-block').addClass('d-none')
+        $('#contenedor-yape-plin').removeClass('d-block').addClass('d-none')
+        $('#contenedor-cuentas-bancarias').addClass('d-block').removeClass('d-none')
+    })
+    $('#btn-pedido-yape-plin').on('click', function () {
+        pedidosProductos = []
+        finalizarCompra();
+        $('#contenedor-tarjeta-credito-debito').removeClass('d-block').addClass('d-none')
+        $('#contenedor-cuentas-bancarias').removeClass('d-block').addClass('d-none')
+        $('#contenedor-yape-plin').addClass('d-block').removeClass('d-none')
+    })
+
+    function finalizarCompra() {
+        if(!dataUsuario){
+            return
+        }
+
+        usuario= {
+            id : dataUsuario.id
+        }
+        usuarioDireccion={
+            direccion: $('#direccion').val(),
+            referencia:$('#referencia').val(),
+            numero: $('#numero').val(),
+            mapa:"https://maps.example.com/location"
+        }
+        ubigeo = {
+            id: parseInt($('#id_distrito').val()),
+        }
+        cupon = {
+            id: 1
+        }
+        pedidos = {
+            totalCosto: parseFloat($(".total .price").text()),
+            razonSocial: $('#razon-social').val() ? $('#razon-social').val() : null,
+            ruc: $('#ruc').val() ? $('#ruc').val() : null,
+            direccionFacturacion: $('#direccion-facturacion').val() ? $('#direccion-facturacion').val() : null,
+            estado: {
+                id: 1
+            },
+            metodoPago: {
+                id: 1
+            },
+            comprobantePago: {
+                id: parseInt($('#tipo-comprobante').val())
+            }
+        }
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        let aux;
+        carrito.forEach((item,index) => {
+            const preciosDefecto = { regular: item.producto.precio, especial: item.producto.precioReducido, labelEspecial: "Precio Reducido:" };
+
+            const preciosPorRol = {
+                "Cliente": { regular: item.producto.precio, especial: item.producto.precioReducido, labelEspecial: "Precio Reducido:" },
+                "Team": { regular: item.producto.precio, especial: item.producto.precioTeam, labelEspecial: "Precio Team:" },
+                "Team Vip": { regular: item.producto.precio, especial: item.producto.precioTeamVip, labelEspecial: "Precio VIP Team:" },
+                "Familiar": { regular: item.producto.precio, especial: item.producto.precioFamiliar, labelEspecial: "Precio VIP Team:" }
+            };
+
+            const precio = (dataUsuario && dataUsuario.nombreRolPerfil) ? preciosPorRol[dataUsuario.nombreRolPerfil] : preciosDefecto;
+            aux={
+                producto: {
+                    id: item.producto.productoPropiedadDetalleId
+                },
+                cantidad: item.cantidad,
+                subTotal:precio.especial * item.cantidad,
+                precioUnitarioHistorico:precio.especial
+            }
+
+            pedidosProductos.push(aux);
+        })
+
+        express ="si"
+
+        console.log({usuario, usuarioDireccion, ubigeo,cupon, pedidos, pedidosProductos, express})
+
+        $.ajax({
+            url: "http://104.218.48.244:8080/apirest/api/pedidos/procesar-json",
+            type: "POST",
+            contentType: "application/json", // Especifica que los datos se envían como JSON
+            data: JSON.stringify({usuario, usuarioDireccion, ubigeo, cupon, pedidos, pedidosProductos}), // Convierte el objeto a una cadena JSON
+            success: function (response) {
+                console.log("Respuesta del servidor:", response);
+            },
+            error: function () {
+                console.error("Error en la solicitud");
+            }
+        });
+    }
 
     function autocompletarInformacion(){
         console.log({dataUsuario});
@@ -426,7 +585,7 @@
             $('#celular').val(dataUsuario.telefono);
             $('#tipo-documento').val(dataUsuario.tipoDocumento)
             $('#nro-documento').val(dataUsuario.nroDocumento)
-            $('#fecha-nacimiento').val(dataUsuario.fechaNacimiento)
+            //$('#fecha-nacimiento').val(dataUsuario.fechaNacimiento)
         }
     }
 
@@ -484,7 +643,7 @@
             $("#contenedor-productos-checkout").append(cartItem);
         })
 
-        $(".total").text(`S/. ${subtotal.toFixed(2)}`);
+        $(".total .price").text(`${subtotal.toFixed(2)}`);
     }
 </script>
 </body>

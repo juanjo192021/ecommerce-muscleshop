@@ -30,6 +30,9 @@ public class HomeController {
 	ProductoService productoService;
 
 	@Autowired
+	IComprobantePagoService comprobantePagoService;
+
+	@Autowired
 	IBannerService bannerService;
 
 	@Autowired
@@ -381,6 +384,7 @@ public class HomeController {
 		model.addAttribute("propiedadDetalleImagenes", propiedadDetalleImagenes);
 		model.addAttribute("variaciones", variacionDtos);
 		model.addAttribute("presentacion", presentacionDto);
+		model.addAttribute("productoInformacion", producto.getProductoInformacion());
 		return "pages/product-detail";
 	}
 
@@ -410,6 +414,9 @@ public class HomeController {
 	}
 	@GetMapping("/checkout")
 	public String Checkout(Model model, HttpSession session) {
+
+		List<ComprobantePago> comprobantePagos = comprobantePagoService.listarComprobante();
+		model.addAttribute("comprobantes", comprobantePagos);
 		return "user/checkout";
 	}
 

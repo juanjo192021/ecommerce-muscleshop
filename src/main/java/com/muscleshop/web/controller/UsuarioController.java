@@ -18,6 +18,7 @@ import com.muscleshop.web.models.*;
 import com.muscleshop.web.models.dto.PedidoProductoDto;
 import com.muscleshop.web.models.dto.UsuarioDto;
 import com.muscleshop.web.services.*;
+import com.muscleshop.web.services.implementation.ComprobantePagoService;
 import com.muscleshop.web.services.implementation.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -71,7 +72,7 @@ public class UsuarioController {
 	EstadoService estadoService;
 	
 	@Autowired
-	UbigeoService ubigeoService;
+    IUbigeoService IUbigeoService;
 	
 	@Autowired
 	FooterService footerService;
@@ -612,24 +613,6 @@ public class UsuarioController {
 	public String cargaConfirmacion(Model model) {
 		model.addAttribute("detalleProducto", model.getAttribute("detalleProducto"));
 		return "usuario/boleta";
-	}
-	
-	@GetMapping("/listaRegion")
-	@ResponseBody
-	public List<String> verRegion(){
-		return ubigeoService.listaRegion();
-	}
-	
-	@GetMapping("/listaProvincia")
-	@ResponseBody
-	public List<String> verProvincia(String region){
-		return ubigeoService.listaProvincia(region);
-	}
-
-	@GetMapping("/listaDistrito")
-	@ResponseBody
-	public List<Ubigeo> verDistrito(String region, String provincia){
-		return ubigeoService.listaDistrito(region, provincia);
 	}
 	
 	
